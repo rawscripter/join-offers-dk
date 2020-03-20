@@ -1,29 +1,35 @@
 <template>
     <div>
-        <app-header></app-header>
-        <div class="container-fluid page-body-wrapper">
-            <app-sidebar></app-sidebar>
-            <div class="main-panel">
-                <app-body></app-body>
-                <app-footer></app-footer>
+        <AppMobileHeader></AppMobileHeader>
+        <div class="kt-grid kt-grid--hor kt-grid--root">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+                <AppNavSideBar></AppNavSideBar>
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+                    <AppBody></AppBody>
+                    <!-- begin:: Footer -->
+                    <AppFooter></AppFooter>
+                    <!-- end:: Footer -->
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Header from "../Header/Header";
-    import NavSideBar from "../Header/NavSideBar";
-    import FooterBar from "../footer/FooterBar";
+    import AppTopHeader from "../Header/AppTopHeader";
     import AppBody from "../BodyComponents/AppBody";
+    import AppNavSideBar from "../SideBar/AppNavSideBar";
+    import AppMobileHeader from "../Header/AppMobileHeader";
+    import AppFooter from "../footer/AppFooter";
 
     export default {
         name: "Layout",
         components: {
-            'app-sidebar': NavSideBar,
-            'app-header': Header,
-            'app-footer': FooterBar,
-            'app-body': AppBody
+            AppTopHeader,
+            AppBody,
+            AppNavSideBar,
+            AppMobileHeader,
+            AppFooter
         }
     }
 </script>
