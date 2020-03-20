@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="" />
+    <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/all.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Router/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/AppHome.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/AppHome.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/BodyComponents/AppBody.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/AppBody.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/BodyComponents/BodyParts/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/BodyComponents/BodyParts/User/UserIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/User/UserIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Header/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/Header/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Header/NavSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/Header/NavSideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/footer/FooterBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/footer/FooterBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/layout/Layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/layout/Layout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +40,9 @@
         <option value="Vue Single File Component" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -121,13 +144,18 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1ZMIyCwhnehuxct2rdlqYxkzyhm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -140,11 +168,11 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\shuvo\Desktop\projects\Demo\resources\js\components\Admin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\shuvo\Desktop\projects\Demo\public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\shuvo\Desktop\projects\Demo\resources\js\components\Admin" />
     </key>
   </component>
   <component name="RunManager">
@@ -164,12 +192,16 @@
       <option name="presentableId" value="Default" />
       <updated>1584642789056</updated>
       <workItem from="1584642794408" duration="132000" />
-      <workItem from="1584642964209" duration="6415000" />
+      <workItem from="1584642964209" duration="9108000" />
+      <workItem from="1584733201691" duration="172000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2560" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584642837773">
@@ -180,22 +212,22 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584644396935" />
-    <state width="1877" height="374" key="GridCell.Tab.0.bottom" timestamp="1584643237706">
+    <state width="1877" height="374" key="GridCell.Tab.0.bottom" timestamp="1584652342801">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584643237706" />
-    <state width="1877" height="374" key="GridCell.Tab.0.center" timestamp="1584643237706">
+    <state width="1877" height="374" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584652342801" />
+    <state width="1877" height="374" key="GridCell.Tab.0.center" timestamp="1584652342801">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584643237706" />
-    <state width="1877" height="374" key="GridCell.Tab.0.left" timestamp="1584643237705">
+    <state width="1877" height="374" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584652342801" />
+    <state width="1877" height="374" key="GridCell.Tab.0.left" timestamp="1584652342801">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584643237705" />
-    <state width="1877" height="374" key="GridCell.Tab.0.right" timestamp="1584643237706">
+    <state width="1877" height="374" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584652342801" />
+    <state width="1877" height="374" key="GridCell.Tab.0.right" timestamp="1584652342801">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584643237706" />
+    <state width="1877" height="374" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584652342801" />
     <state x="794" y="459" key="NewPhpFileDialog" timestamp="1584644667308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -204,13 +236,13 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584644727908" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1584648300983">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1584651308455">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584648300983" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1584648061638">
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584651308455" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1584649995271">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584648061638" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584649995271" />
   </component>
 </project>

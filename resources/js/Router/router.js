@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //importing components
-import Index from "../components/BodyComponents/BodyParts/Index";
-import UserIndex from "../components/BodyComponents/BodyParts/User/UserIndex";
+import Index from "../components/Admin/BodyComponents/BodyParts/Index";
+import UserIndex from "../components/Admin/BodyComponents/BodyParts/User/UserIndex";
 
 Vue.use(VueRouter);
 
