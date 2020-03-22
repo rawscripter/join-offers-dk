@@ -3,7 +3,7 @@
         <AppTopSubHeader :header="headerTitle"></AppTopSubHeader>
         <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
             <!-- body contents goes here -->
-            <h1>Hello world</h1>
+            <h1>Hello world 1</h1>
             <!-- body contents ends here -->
         </div>
     </div>

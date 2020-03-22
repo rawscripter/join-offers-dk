@@ -1,16 +1,24 @@
 <template>
     <div>
-        <Layout></Layout>
+        <Layout v-if="userLoggedIn"></Layout>
+        <AppLogin v-if="!userLoggedIn"></AppLogin>
     </div>
 </template>
 
 <script>
     import Layout from "./layout/Layout";
+    import AppLogin from "./Auth/AppLogin";
 
     export default {
         name: "AppHome",
+        data() {
+            return {
+                userLoggedIn: User.loggedIn()
+            }
+        },
         components: {
             Layout,
+            AppLogin
         }
     }
 </script>

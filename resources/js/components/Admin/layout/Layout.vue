@@ -5,7 +5,10 @@
             <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
                 <AppNavSideBar></AppNavSideBar>
                 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
-                    <AppBody></AppBody>
+                    <AppTopHeader></AppTopHeader>
+                    <router-view>
+
+                    </router-view>
                     <!-- begin:: Footer -->
                     <AppFooter></AppFooter>
                     <!-- end:: Footer -->
@@ -21,15 +24,22 @@
     import AppNavSideBar from "../SideBar/AppNavSideBar";
     import AppMobileHeader from "../Header/AppMobileHeader";
     import AppFooter from "../footer/AppFooter";
+    import AppLogin from "../Auth/AppLogin";
 
     export default {
         name: "Layout",
+        data() {
+            return {
+                userLoggedIn: false
+            }
+        },
         components: {
             AppTopHeader,
             AppBody,
             AppNavSideBar,
             AppMobileHeader,
-            AppFooter
+            AppFooter,
+            AppLogin
         }
     }
 </script>

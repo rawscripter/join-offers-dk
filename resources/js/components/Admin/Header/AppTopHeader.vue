@@ -33,10 +33,12 @@
 
 
                                 <li class="kt-menu__item " aria-haspopup="true">
-                                    <a href="javascript:;" class="kt-menu__link ">
-                                        <span class="kt-menu__link-icon">
+                                    <router-link class="kt-menu__link" to="/logout">
+                                     <span class="kt-menu__link-icon">
                                     <i class="kt-menu__ver-arrow la la-angle-right"></i>
-                                    </span><span class="kt-menu__link-text">Logout</span></a>
+                                    </span><span class="kt-menu__link-text">Logout</span>
+                                    </router-link>
+
                                 </li>
 
                             </ul>

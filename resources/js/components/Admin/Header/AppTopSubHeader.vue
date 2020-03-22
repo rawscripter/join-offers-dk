@@ -44,27 +44,23 @@
                     <li class="kt-menu__item  kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here kt-menu__item--active"
                         data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;"
                                                                                    class="kt-menu__link kt-menu__toggle"><span
-                        class="kt-menu__link-text">Profile</span></a>
+                        class="kt-menu__link-text btn btn text-white p-2 btn-custom btn-bold btn-upper btn-font-sm  btn-success">
+                        <i class="fa fa-user-alt"></i> Shuvo Goswami
+                        </span></a>
                         <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
                             <ul class="kt-menu__subnav">
                                 <li class="kt-menu__item " aria-haspopup="true">
                                     <a href="javascript:;" class="kt-menu__link ">
                                         <span class="kt-menu__link-icon">
-                                    <i class="kt-menu__ver-arrow la la-angle-right"></i>
-                                    </span><span class="kt-menu__link-text">Profile</span></a>
+                                    <i class="fa fa-user-alt"></i>
+                                    </span>
+                                        <span class="kt-menu__link-text">Profile</span></a>
                                 </li>
 
                                 <li class="kt-menu__item " aria-haspopup="true">
                                     <a href="javascript:;" class="kt-menu__link ">
                                         <span class="kt-menu__link-icon">
-                                    <i class="kt-menu__ver-arrow la la-angle-right"></i>
-                                    </span><span class="kt-menu__link-text">Account</span></a>
-                                </li>
-
-                                <li class="kt-menu__item " aria-haspopup="true">
-                                    <a href="javascript:;" class="kt-menu__link ">
-                                        <span class="kt-menu__link-icon">
-                                    <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                        <i class="fas fa-sliders-h"></i>
                                     </span><span class="kt-menu__link-text">Settings</span></a>
                                 </li>
 
@@ -72,7 +68,7 @@
                                 <li class="kt-menu__item " aria-haspopup="true">
                                     <a href="javascript:;" class="kt-menu__link ">
                                         <span class="kt-menu__link-icon">
-                                    <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                  <i class="fas fa-sign-out-alt"></i>
                                     </span><span class="kt-menu__link-text">Logout</span></a>
                                 </li>
 
@@ -101,7 +97,8 @@
     }
 
     .kt-header-menu .kt-menu__nav .kt-menu__item.kt-menu__item--hover .kt-menu__submenu {
-        left: -205px;
+        left: -40px;
+        width: 200px;
     }
 
     .kt-menu__ver-arrow {
