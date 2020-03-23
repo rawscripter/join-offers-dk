@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function user(Request $request)
+    {
+        return response(new UserResource($request->user()));
+    }
+
     public function login(Request $request)
     {
-
         $http = new \GuzzleHttp\Client;
         try {
             $response = $http->post(env('PASSPORT_AUTH_URL'), [
@@ -35,5 +40,13 @@ class AuthController extends Controller
 
             return response()->json('Something went wrong. Please try after sometime.', $e->getCode());
         }
+    }
+
+    public function logout()
+    {
+        \auth()->user()->tokens()->each(function ($token, $key) {
+            $token->delete();
+        });
+        return json_encode('Logged Out Successfully.');
     }
 }

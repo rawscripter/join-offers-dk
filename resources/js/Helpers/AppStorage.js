@@ -9,8 +9,8 @@ class AppStorage {
 
     clear() {
         localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('user');
+        localStorage.removeItem('rui');
+        localStorage.removeItem('run');
     }
 
     getToken() {
@@ -26,21 +26,21 @@ class AppStorage {
     }
 
     storeUserId(Id) {
-        localStorage.setItem('id', Id);
+        localStorage.setItem('rui', Id);
     }
 
 
     getUserId() {
-       return  localStorage.getItem('id');
+        return atob(localStorage.getItem('rui'));
     }
 
     storeUserName(user) {
-        localStorage.setItem('user', user);
+        localStorage.setItem('run', user);
     }
 
 
     getUserName() {
-        return localStorage.getItem('user');
+        return atob(localStorage.getItem('run'));
     }
 
 }

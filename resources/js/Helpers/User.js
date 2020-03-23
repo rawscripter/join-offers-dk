@@ -13,8 +13,6 @@ class User {
             .catch(error => {
                 console.error(error);
             })
-
-
     }
 
     responseAfterLogin(response) {
@@ -54,7 +52,15 @@ class User {
     }
 
     logOut() {
-        AppStorage.clear();
+        axios.post('http://laravu.test/api/logout')
+            .then(response => {
+                AppStorage.clear();
+                window.location = '/login';
+            })
+            .catch(error => {
+                console.error(error);
+            })
+
     }
 
     own(id) {

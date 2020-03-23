@@ -19,6 +19,9 @@
         components: {
             Layout,
             AppLogin
+        },
+        created() {
+
         }
     }
 </script>

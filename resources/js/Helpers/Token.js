@@ -4,8 +4,8 @@ class Token {
     isValid(token) {
         axios.get('http://laravu.test/api/user')
             .then(response => {
-                if (response.data.id) {
-                    AppStorage.storeUser(response.data.id, response.data.name);
+                if (response.data.rui) {
+                    AppStorage.storeUser(response.data.rui, response.data.run);
                 }
                 return true;
             })
@@ -15,6 +15,7 @@ class Token {
         if (AppStorage.getUserId())
             return true;
     }
+
 }
 
 export default Token = new Token();

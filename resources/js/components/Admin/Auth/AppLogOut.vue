@@ -7,7 +7,6 @@
         name: "AppLogOut",
         created() {
             User.logOut();
-            window.location.reload();
         }
     }
 </script>

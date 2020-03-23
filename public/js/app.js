@@ -1929,7 +1929,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Layout: _layout_Layout__WEBPACK_IMPORTED_MODULE_0__["default"],
     AppLogin: _Auth_AppLogin__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -1951,7 +1952,6 @@ __webpack_require__.r(__webpack_exports__);
   name: "AppLogOut",
   created: function created() {
     User.logOut();
-    window.location.reload();
   }
 });
 
@@ -2603,11 +2603,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Layout",
-  data: function data() {
-    return {
-      userLoggedIn: false
-    };
-  },
+  data: function data() {},
   components: {
     AppTopHeader: _Header_AppTopHeader__WEBPACK_IMPORTED_MODULE_0__["default"],
     AppBody: _BodyComponents_AppBody__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -55577,8 +55573,8 @@ var AppStorage = /*#__PURE__*/function () {
     key: "clear",
     value: function clear() {
       localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('user');
+      localStorage.removeItem('rui');
+      localStorage.removeItem('run');
     }
   }, {
     key: "getToken",
@@ -55595,22 +55591,22 @@ var AppStorage = /*#__PURE__*/function () {
   }, {
     key: "storeUserId",
     value: function storeUserId(Id) {
-      localStorage.setItem('id', Id);
+      localStorage.setItem('rui', Id);
     }
   }, {
     key: "getUserId",
     value: function getUserId() {
-      return localStorage.getItem('id');
+      return atob(localStorage.getItem('rui'));
     }
   }, {
     key: "storeUserName",
     value: function storeUserName(user) {
-      localStorage.setItem('user', user);
+      localStorage.setItem('run', user);
     }
   }, {
     key: "getUserName",
     value: function getUserName() {
-      return localStorage.getItem('user');
+      return atob(localStorage.getItem('run'));
     }
   }]);
 
@@ -55648,8 +55644,8 @@ var Token = /*#__PURE__*/function () {
     key: "isValid",
     value: function isValid(token) {
       axios.get('http://laravu.test/api/user').then(function (response) {
-        if (response.data.id) {
-          _AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].storeUser(response.data.id, response.data.name);
+        if (response.data.rui) {
+          _AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].storeUser(response.data.rui, response.data.run);
         }
 
         return true;
@@ -55751,7 +55747,12 @@ var User = /*#__PURE__*/function () {
   }, {
     key: "logOut",
     value: function logOut() {
-      _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
+      axios.post('http://laravu.test/api/logout').then(function (response) {
+        _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
+        window.location = '/login';
+      })["catch"](function (error) {
+        console.error(error);
+      });
     }
   }, {
     key: "own",

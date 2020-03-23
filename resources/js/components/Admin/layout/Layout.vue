@@ -29,9 +29,7 @@
     export default {
         name: "Layout",
         data() {
-            return {
-                userLoggedIn: false
-            }
+
         },
         components: {
             AppTopHeader,
@@ -40,7 +38,7 @@
             AppMobileHeader,
             AppFooter,
             AppLogin
-        }
+        },
     }
 </script>
 
