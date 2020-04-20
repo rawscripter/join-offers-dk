@@ -12,16 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Auth::routes();
+Auth::routes();
 
-Route::get('/', function () {
+// to load admin dashboard
+Route::get('/admin', function () {
     return view('admin.index');
 });
 
+// to load main site
+Route::get('/', function () {
+    return view('site.index');
+});
 
 
-Route::view('/{any}','admin.index');
-Route::view('/{any}/{any1}','admin.index');
-Route::view('/{any}/{any1}/{any2}','admin.index');
-Route::view('/{any}/{any1}/{any2}/{any3}','admin.index');
+Route::view('/{any}', 'admin.index');
+Route::view('/{any}/{any1}', 'admin.index');
+Route::view('/{any}/{any1}/{any2}', 'admin.index');
+Route::view('/{any}/{any1}/{any2}/{any3}', 'admin.index');
 

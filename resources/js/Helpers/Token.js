@@ -2,7 +2,7 @@ import AppStorage from './AppStorage'
 
 class Token {
     isValid(token) {
-        axios.get('http://laravu.test/api/user')
+        axios.get(`${APP_URL}/api/user`)
             .then(response => {
                 if (response.data.rui) {
                     AppStorage.storeUser(response.data.rui, response.data.run);

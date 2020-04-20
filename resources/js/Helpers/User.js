@@ -3,24 +3,15 @@ import AppStorage from "./AppStorage";
 
 
 class User {
-    login(formData) {
-        axios.post('http://laravu.test/api/login', formData)
-            .then(response => {
-                this.responseAfterLogin(response);
-                this.hasToken();
-                window.location = '/'
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }
 
     responseAfterLogin(response) {
+
         const access_token = response.data.access_token;
 
         if (access_token) {
             AppStorage.store(access_token);
         }
+        window.location = '/'
     }
 
     hasToken() {
@@ -52,7 +43,7 @@ class User {
     }
 
     logOut() {
-        axios.post('http://laravu.test/api/logout')
+        axios.post(`${APP_URL}/api/logout`)
             .then(response => {
                 AppStorage.clear();
                 window.location = '/login';

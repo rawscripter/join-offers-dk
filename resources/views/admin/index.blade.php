@@ -7,6 +7,7 @@
     <title>Admin | Dashboard</title>
     <meta name="description" content="Updates and statistics">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/pages/login/login-4.css" rel="stylesheet" type="text/css"/>
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
@@ -19,7 +20,7 @@
 <body
     class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
 <div id="app">
-    <app-home></app-home>
+    <app-admin-home></app-admin-home>
 </div>
 
 

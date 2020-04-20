@@ -17,5 +17,7 @@
 </script>
 
 <style scoped>
-
+#kt_footer{
+    display: none;
+}
 </style>

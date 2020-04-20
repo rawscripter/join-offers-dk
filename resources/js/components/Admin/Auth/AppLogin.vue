@@ -15,15 +15,29 @@
                             <div class="kt-login__head">
                                 <h3 class="kt-login__title">Sign In To Admin</h3>
                             </div>
+
+                            <div v-if="formErrors.text" class="text-center error invalid-feedback">
+                                <b>{{formErrors.text}}</b>
+                            </div>
+
+
                             <form class="kt-form" method="post" v-on:submit.prevent>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" v-model="form.username" placeholder="Email"
+                                    <input class="form-control" type="text" v-model="form.username"
+                                           placeholder="Email"
                                            name="email"
                                            autocomplete="off">
+                                    <div v-if="formErrors.username" id="email-error" class="error invalid-feedback">
+                                        Please enter a valid email address.
+                                    </div>
                                 </div>
                                 <div class="input-group">
                                     <input class="form-control" type="password" v-model="form.password"
                                            placeholder="Password" name="password">
+                                    <div v-if="formErrors.password" id="password-error" class="error invalid-feedback">
+                                        This
+                                        field is required.
+                                    </div>
                                 </div>
                                 <div class="row kt-login__extra">
                                     <div class="col">
@@ -58,7 +72,8 @@
                                            autocomplete="off">
                                 </div>
                                 <div class="input-group">
-                                    <input class="form-control" type="password" placeholder="Password" name="password">
+                                    <input class="form-control" type="password" placeholder="Password"
+                                           name="password">
                                 </div>
                                 <div class="input-group">
                                     <input class="form-control" type="password" placeholder="Confirm Password"
@@ -128,12 +143,47 @@
                 form: {
                     username: null,
                     password: null
-                }
+                },
+                formErrors: {
+                    username: false,
+                    password: false,
+                    text: ''
+                },
             }
         },
         methods: {
             submitLoginForm() {
-                User.login(this.form)
+                if (this.validateForm()) {
+                    axios.post(`${APP_URL}/api/login`, this.form)
+                        .then(response => {
+                            if (response.status === 200) {
+                                User.responseAfterLogin(response);
+
+                            }
+                            if (response.status === 400) {
+                                this.formErrors.text = response.data
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                }
+
+            },
+            validateForm() {
+                if (this.form.username && this.form.password) {
+                    this.formErrors.username = false;
+                    this.formErrors.password = false;
+                    return true;
+                }
+                this.errors = [];
+                if (!this.form.username) {
+                    this.formErrors.username = true;
+                }
+                if (!this.form.password) {
+                    this.formErrors.password = true;
+                }
+                return false;
             }
         }
     }
@@ -142,5 +192,11 @@
 <style scoped>
     #loginBackground {
         height: 100vh;
+    }
+
+    .invalid-feedback {
+        display: block;
+        font-size: 15px;
+        margin-left: 10px;
     }
 </style>

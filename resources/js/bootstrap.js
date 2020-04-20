@@ -21,6 +21,11 @@ try {
  */
 
 window.axios = require('axios');
+axios.defaults.validateStatus = function () {
+    return true;
+};
+
+
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

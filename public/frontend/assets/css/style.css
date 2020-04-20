@@ -1,0 +1,433 @@
+/* ==== Header CSS Start ==== */
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.row {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header-top-nav {
+    margin: 0;
+    padding: 0;
+}
+
+.header-searcha-area {
+    /* background: #e0dfdf; */
+    padding: 10px 0;
+}
+
+.header-top-nav ul {
+    list-style: none;
+}
+
+.header-top-nav ul li {
+    float: left;
+}
+
+.header-top-nav ul li a {
+    padding: 8px 15px;
+    text-decoration: none;
+    font-size: 12px;
+    display: block;
+}
+
+.header-top-nav ul li a span {
+    color: #003a00;
+}
+
+.header-top-nav ul li a i {
+    color: #7744a0;
+    font-weight: normal;
+}
+
+.wishlist a,
+.login a {
+    color: #ff7c3b;
+}
+
+.hide-desktop {
+    display: none !important;
+}
+
+.wishlist i,
+.login i {
+    font-size: 30px;
+}
+
+/* sidebar css  */
+.main-sidebar {
+    padding-top: 20px;
+}
+
+.main-content {
+    padding-top: 30px;
+}
+
+.subcategory-list {
+    margin-top: -20px;
+}
+
+.category_name h4 {
+    font-weight: bold;
+    margin-top: 17px;
+}
+
+.subcategory-list a:first-child {
+    padding-left: 0;
+}
+
+.subcategory-list a {
+    color: rgb(255, 124, 59) !important;
+    margin-left: 30px;
+}
+
+.subcategory-list ul {
+    margin: 0;
+    padding: 0;
+}
+
+.subcategory-list ul li {
+    list-style: none;
+    float: left;
+    padding: 0 20px;
+}
+
+/* .subcategory-list ul li a {} */
+.subcategory-list ul li a:hover {
+    border-bottom: 1px solid #078223;
+}
+
+.product-area {
+    background: #fafafa;
+    padding: 5px;
+}
+
+.prodcut-signle {
+    background: #ffffff;
+    /* padding: 20px; */
+    margin: 5px;
+}
+
+.product_title a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.product_title:hover a {
+    color: green;
+}
+
+.short-description p {
+    font-size: 15px;
+}
+
+.prodcut-signle product_image img {
+    width: 100%;
+}
+
+.p_category_and_love {
+    padding: 5px 0;
+}
+
+#closeMobileSidebar {
+    font-size: 25px;
+    color: red;
+    display: none;
+}
+
+.pricing-section {
+    overflow: hidden;
+}
+
+.pricing-section .pricing-left {
+    width: 70%;
+    margin-right: 2%;
+}
+
+.pricing-section .pricing-left h6 {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.pricing-section .pricing-right {
+    width: 30%;
+}
+
+.pricing-section .pricing-right h6 {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.sidebar-action {
+    padding: 20px 0;
+}
+
+.sidebar-action p {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-action p i {
+    color: rgb(255, 124, 59) !important;
+}
+
+.sidebar-social a {
+    font-size: 40px;
+    margin-left: 6px;
+    color: rgb(255, 124, 59) !important;
+}
+
+/* clock area  */
+.clock {
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.col-md-12 {
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.top-pane {
+    margin-bottom: 0px;
+    background-color: #ffffff;
+    border: 0px;
+    text-align: center;
+}
+
+.bottom-pane {
+    margin-top: 0px;
+    border-radius: 5px;
+    background-color: #E0DFDF;
+    padding: 10px;
+    border: 0px;
+    text-align: center;
+}
+
+.num {
+    font-size: 29px;
+    color: #000;
+}
+
+.text {
+    font-size: 16px;
+    color: #000;
+}
+
+
+/* checkout page css  */
+.checkout-payment-icon {
+    color: #4646c4;
+    font-size: 16px;
+}
+
+/* end of checkout page css  */
+
+/*footer area */
+
+.footer-area {
+    background: #F8F9FA;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-area p {
+    margin: 0;
+    color: #000;
+}
+
+.footer-area a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+
+/*end footer area */
+
+.checkbox_container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 9px;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox_container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    border: 1px solid #ff7c3b;
+    border-radius: 50%;
+}
+
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox_container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox_container input:checked ~ .checkmark {
+    background-color: #ff7c3b;
+}
+
+.prodcut-signle {
+    margin: 10px 5px;
+}
+
+.show {
+    overflow: hidden;
+    width: 100%;
+    /* height: 400px; */
+    z-index: 99;
+
+}
+
+.small-img {
+    width: 350px;
+    height: 70px;
+    position: relative;
+    margin: 20px auto !important;
+}
+
+.small-img .icon-left, .small-img .icon-right {
+    width: 12px;
+    height: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.small-img .icon-left {
+    transform: rotate(180deg)
+}
+
+.small-img .icon-right {
+    right: 0;
+}
+
+.small-img .icon-left:hover, .small-img .icon-right:hover {
+    opacity: .5;
+}
+
+.small-container {
+    width: 310px;
+    height: 70px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.small-container div {
+    width: 800%;
+    position: relative;
+}
+
+.small-container .show-small-img {
+    width: 70px;
+    height: 70px;
+    margin-right: 6px;
+    cursor: pointer;
+    float: left;
+}
+
+.small-container .show-small-img:last-of-type {
+    margin-right: 0;
+}
+
+.title {
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.discription p {
+    text-align: justify;
+}
+
+.btn.btn-success {
+    background-color: rgb(255, 124, 59) !important;
+    border-color: rgb(255, 175, 128) !important;
+    background-image: linear-gradient(to right, #ff5f2c, #ff9e3b);
+}
+
+.shadow {
+    box-shadow: 1px 5px 7px 6px rgb(230, 230, 230);
+    padding: 15px 20px;
+}
+
+.container {
+    max-width: 1350px;
+}
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border: 1px solid #ff8d37 !important;
+    background: #ff9939 !important;
+    font-weight: normal;
+    color: #ff9e3b !important;
+}
+
+.ui-widget-header {
+    background: #ff7130;
+}
+
+small {
+    font-size: 14px;
+}
+
+div#app {
+    min-height: 88vh !important;
+}
+
+footer.footer-area.mt-5 {
+    max-height: 10vh !important;
+}
+
+
+nav {
+    background: rgb(248, 249, 250);
+    box-shadow: -6px 9px 6px 0px rgb(237, 237, 237);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.main-content {
+    padding-top: 0px;
+}
+

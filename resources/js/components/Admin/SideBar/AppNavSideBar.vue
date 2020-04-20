@@ -74,7 +74,10 @@
                         <h4 class="kt-menu__section-text">Custom</h4>
                         <i class="kt-menu__section-icon flaticon-more-v2"></i>
                     </li>
-                    <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
+
+                    <!--routes for categories-->
+                    <li v-for="menusItem in menuItems" class="kt-menu__item  kt-menu__item--submenu"
+                        aria-haspopup="true"
                         data-ktmenu-submenu-toggle="hover"><a href="javascript:;"
                                                               class="kt-menu__link kt-menu__toggle"><span
                         class="kt-menu__link-icon"><svg
@@ -88,43 +91,24 @@
                                                     d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
                                                     fill="#000000" opacity="0.3"/>
                                             </g>
-                                        </svg></span><span class="kt-menu__link-text">Users</span><i
+                                        </svg></span><span class="kt-menu__link-text">{{menusItem.title}}</span><i
                         class="kt-menu__ver-arrow la la-angle-right"></i></a>
                         <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
                             <ul class="kt-menu__subnav">
-                                <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span
-                                    class="kt-menu__link"><span
-                                    class="kt-menu__link-text">Users</span></span></li>
-                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
+                                <li v-for="submenu in menusItem.menus" class="kt-menu__item  kt-menu__item--submenu"
+                                    aria-haspopup="true"
                                     data-ktmenu-submenu-toggle="hover">
-
-                                    <router-link class="kt-menu__link" to="/user/create">
+                                    <router-link class="kt-menu__link" :to="submenu.link">
                                         <i
                                             class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i>
                                         <span
-                                            class="kt-menu__link-text">Add User</span> <i
+                                            class="kt-menu__link-text">{{submenu.name}}</span> <i
                                         class="kt-menu__ver-arrow la la-angle-right"></i>
                                     </router-link>
-
                                 </li>
-
-                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
-                                    data-ktmenu-submenu-toggle="hover">
-                                    <router-link class="kt-menu__link" to="/users">
-                                        <i
-                                            class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i>
-                                        <span
-                                            class="kt-menu__link-text">All Users</span> <i
-                                        class="kt-menu__ver-arrow la la-angle-right"></i>
-                                    </router-link>
-
-                                </li>
-
                             </ul>
                         </div>
                     </li>
-
-
                 </ul>
             </div>
         </div>
@@ -133,7 +117,51 @@
 
 <script>
     export default {
-        name: "AppNavSideBar"
+        name: "AppNavSideBar",
+        data() {
+            return {
+                menuItems: [
+                    {
+                        title: 'Manage Categories',
+                        menus: [
+                            {
+                                name: 'All Categories',
+                                link: '/admin/category'
+                            }, {
+                                name: 'All Sub Categories',
+                                link: '/admin/sub-category'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Manage Products',
+                        menus: [
+                            {
+                                name: 'All Products',
+                                link: '/admin/products'
+                            },
+                            {
+                                name: 'Create New Product',
+                                link: '/admin/product/create'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Manage Users',
+                        menus: [
+                            {
+                                name: 'All Users',
+                                link: '/admin/users'
+                            },
+                            {
+                                name: 'Create User',
+                                link: '/admin/user/create'
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
     }
 </script>
 
