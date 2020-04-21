@@ -14,9 +14,18 @@ import Notification from './Helpers/Notification';
 
 import {ServerTable} from 'vue-tables-2';
 import VueSweetalert2 from 'vue-sweetalert2';
+import vueAwesomeCountdown from 'vue-awesome-countdown'
+
+
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 Vue.use(ServerTable);
 Vue.use(VueSweetalert2);
+Vue.use(vueAwesomeCountdown, 'vac');
+Vue.component('Loading',Loading);
+Vue.component('InfiniteLoading', require('vue-infinite-loading'));
+
 
 
 window.User = User;

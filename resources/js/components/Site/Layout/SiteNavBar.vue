@@ -55,6 +55,6 @@
 
 <style scoped>
     a.nav-link.router-link-exact-active.router-link-active {
-        color: rgba(0, 0, 0, .9);
+        color: rgb(255, 100, 45);
     }
 </style>

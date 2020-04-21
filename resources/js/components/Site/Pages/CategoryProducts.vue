@@ -1,9 +1,7 @@
 <template>
     <div class="page-wrapper">
         <div class="container">
-            <loading :active.sync="isLoading"
-                     :is-full-page="fullPage"></loading>
-            <div v-if="!isLoading" class="row">
+            <div class="row">
                 <div class="col-md-2 col-lg-3">
                     <ProductFilter></ProductFilter>
                 </div>
@@ -11,9 +9,10 @@
                     <div class="main-content">
                         <SubCategoryMenuBar :categorySlug="categorySlug"
                                             :subCategories="subCategories"></SubCategoryMenuBar>
-
                         <div class="product-area" v-if="totalProducts">
                             <div class="row">
+                                <loading :active.sync="isLoading"
+                                         :is-full-page="false"></loading>
                                 <div v-for="product in products" :key="product.id"
                                      class="col-md-4 col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
                                     <!-- product single  -->
@@ -43,8 +42,6 @@
     import ProductFilter from "../SideBar/ProductFilter";
     import SubCategoryMenuBar from "../Layout/SubCategoryMenuBar";
     import SingleProduct from "../Layout/Product/Loop/SingleProduct";
-    import Loading from 'vue-loading-overlay';
-    import 'vue-loading-overlay/dist/vue-loading.css';
 
     export default {
         name: "CategoryProducts",
@@ -52,12 +49,10 @@
             ProductFilter,
             SubCategoryMenuBar,
             SingleProduct,
-            Loading
         },
         data() {
             return {
                 isLoading: false,
-                fullPage: true,
                 products: [],
                 subCategories: [],
                 categorySlug: null
@@ -86,7 +81,6 @@
             getSubCategories(categorySlug) {
                 axios.get(`${APP_URL}/api/category/${categorySlug}/sub-categories`)
                     .then(res => {
-                        this.isLoading = false;
                         this.subCategories = res.data.subCategories;
                     }).catch(error => {
                     console.error(error)
@@ -99,7 +93,7 @@
             }
         },
         created() {
-            // this.isLoading = true;
+
             this.categorySlug = this.$route.params.category;
             this.getSubCategories(this.$route.params.category);
 
@@ -109,6 +103,7 @@
             if (this.$route.params.subCategory) {
                 this.getSubCategoryProducts(this.$route.params.subCategory);
             }
+            this.isLoading = true;
         }
     }
 </script>

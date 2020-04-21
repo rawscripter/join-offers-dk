@@ -2,163 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/SubCategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/CategoryResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/SubCategoryResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/SubCategory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_12_085049_create_categories_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_14_095251_create_sub_categories_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/css/animate.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/css/default.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/css/fontawesome.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/css/fontawesome.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/css/responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/Segoe UI Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/Segoe UI.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-brands-400.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-brands-400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-brands-400.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-brands-400.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-brands-400.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-light-300.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-light-300.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-light-300.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-light-300.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-light-300.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-regular-400.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-regular-400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-regular-400.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-regular-400.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-regular-400.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-solid-900.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-solid-900.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-solid-900.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-solid-900.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fa-solid-900.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/fonts.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/foods.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/footer-top-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/home-hero-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/hookah-smoking-new.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/hookah-smoking.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/inner-page-bg08.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/insidemind-logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/master-card.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/modal-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/product/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/product/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/product/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/product/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/product/next-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/site.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/user-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/visa_PNG3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/img/welcome-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/Popper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/ajax_req.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/clock.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/mixitup.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/product_view_main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/wow.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/zoom-image.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-brands-400.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-brands-400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-brands-400.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-brands-400.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-brands-400.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-light-300.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-light-300.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-light-300.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-light-300.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-light-300.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-regular-400.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-regular-400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-regular-400.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-regular-400.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-regular-400.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-solid-900.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-solid-900.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-solid-900.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-solid-900.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/frontend/assets/webfonts/fa-solid-900.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/573550a0-8272-11ea-aed5-35fb771d17d9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/5983d930-8272-11ea-8d2f-d5f1c67a5070.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/6520f660-82fa-11ea-9410-d9abef6ff83e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/7881ea60-8267-11ea-b680-9b35769b2e9f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/ee17b6c0-82e3-11ea-8a58-3f670e165742.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/573550a0-8272-11ea-aed5-35fb771d17d9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/5983d930-8272-11ea-8d2f-d5f1c67a5070.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/6520f660-82fa-11ea-9410-d9abef6ff83e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/7881ea60-8267-11ea-b680-9b35769b2e9f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/ee17b6c0-82e3-11ea-8a58-3f670e165742.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/573550a0-8272-11ea-aed5-35fb771d17d9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/5983d930-8272-11ea-8d2f-d5f1c67a5070.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/6520f660-82fa-11ea-9410-d9abef6ff83e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/7881ea60-8267-11ea-b680-9b35769b2e9f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/ee17b6c0-82e3-11ea-8a58-3f670e165742.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Helpers/Notification.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Category/CategoryIndex.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductsIndex.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/SubCategory/SubCategoryIndex.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/AppHomeForSite.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteLayout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteNavBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteTopHeader.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SubCategoryMenuBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/CategoryProducts.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/ProductDetailsPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductFilter.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductOfferInfoSidebar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/RelatedProductsSidebar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/site/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/frontend/assets/js/owl.carousel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_16_063451_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_16_063451_create_products_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/pages/components/utils/idle-timer.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/pages/components/utils/idle-timer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/assets/js/clock.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/assets/js/clock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Helpers/Token.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Helpers/Token.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Helpers/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Helpers/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Router/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/Auth/AppLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/Auth/AppLogin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/SideBar/AppNavSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/SideBar/AppNavSideBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/footer/AppFooter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/footer/AppFooter.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/layout/Layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/layout/Layout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/AppHomeForSite.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/AppHomeForSite.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteNavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteNavBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SubCategoryMenuBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SubCategoryMenuBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/CategoryProducts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/CategoryProducts.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/ProductDetailsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/ProductDetailsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/site/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -323,6 +185,11 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.3.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravu.dev\public\frontend\assets\js" />
+      <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
+      <recent name="C:\Users\shuvo\Desktop\projects\Demo\resources\js\components\Admin" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Site\Pages" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\frontend" />
@@ -330,17 +197,13 @@
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Product" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\SubCategory" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
-      <recent name="C:\Users\shuvo\Desktop\projects\Demo\resources\js\components\Admin" />
-    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="open surveybii" />
       <command value="open C:\xampp\htdocs\projects\soundiocloud" />
-      <command value="open gowinmii" />
       <command value="open C:\Users\shuvo\Desktop\projects\lesan\rainer" />
+      <command value="open gowinmii" />
     </option>
   </component>
   <component name="RunManager">
@@ -390,7 +253,10 @@
       <workItem from="1587307331595" duration="15702000" />
       <workItem from="1587367947726" duration="73000" />
       <workItem from="1587368034259" duration="19234000" />
-      <workItem from="1587392344840" duration="3429000" />
+      <workItem from="1587392344840" duration="7303000" />
+      <workItem from="1587409306690" duration="56000" />
+      <workItem from="1587458836491" duration="6964000" />
+      <workItem from="1587476988536" duration="626000" />
     </task>
     <servers />
   </component>
@@ -447,11 +313,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586956085588" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1587394905349">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1587465116188">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376623973" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587394905349" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587465116188" />
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587379698101" />
     <state x="767" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587377418355">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -463,10 +329,10 @@
     </state>
     <state x="0" y="0" width="1479" height="1061" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587376442442" />
     <state x="0" y="0" width="1479" height="1061" maximized="true" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587375848087" />
-    <state x="646" y="256" width="627" height="568" key="find.popup" timestamp="1587378264469">
+    <state x="646" y="256" width="627" height="568" key="find.popup" timestamp="1587464696683">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="646" y="256" width="627" height="568" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587378264469" />
+    <state x="646" y="256" width="627" height="568" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587464696683" />
     <state x="2566" y="256" width="627" height="568" key="find.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587317995523" />
     <state x="744" y="190" key="ftp.server.browser" timestamp="1586955990898">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -480,16 +346,16 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="601" y="265" width="700" height="530" key="recent.locations.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584734962034" />
-    <state x="2536" y="250" width="672" height="677" key="run.anything.popup" timestamp="1587289491053">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="616" y="250" width="672" height="677" key="run.anything.popup" timestamp="1587409361585">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587101471455" />
+    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587409361585" />
     <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587289491053" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1587394718596">
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1587465784280">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376572360" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587394718596" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587465784280" />
     <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587380290454" />
   </component>
 </project>

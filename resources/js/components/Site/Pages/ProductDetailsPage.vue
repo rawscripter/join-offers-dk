@@ -3,7 +3,6 @@
         <div class="container">
             <loading :active.sync="isLoading"
                      :is-full-page="fullPage"></loading>
-
             <div class="row" v-if="!isLoading">
                 <div class="col-md-3 col-lg-3">
                     <ProductOfferInfoSidebar :product="product"></ProductOfferInfoSidebar>
@@ -12,7 +11,10 @@
                     <SingleProductDetailsLayout :product="product"></SingleProductDetailsLayout>
                 </div>
                 <div class="col-md-4 col-lg-3">
+
                     <RelatedProductsSidebar :products="relatedProducts"></RelatedProductsSidebar>
+
+
                 </div>
             </div>
         </div>
@@ -24,8 +26,6 @@
     import RelatedProductsSidebar from "../SideBar/RelatedProductsSidebar";
     import SingleProductDetailsLayout from "../Layout/Product/SingleProductDetailsLayout";
 
-    import Loading from 'vue-loading-overlay';
-    import 'vue-loading-overlay/dist/vue-loading.css';
 
     export default {
 
@@ -34,7 +34,6 @@
             ProductOfferInfoSidebar,
             RelatedProductsSidebar,
             SingleProductDetailsLayout,
-            Loading
         },
         data() {
             return {

@@ -18,7 +18,6 @@
         components: {
             SiteLayout,
         }
-
     }
 </script>
 

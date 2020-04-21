@@ -25,8 +25,8 @@ Route::get('/', function () {
 });
 
 
-Route::view('/{any}', 'admin.index');
-Route::view('/{any}/{any1}', 'admin.index');
-Route::view('/{any}/{any1}/{any2}', 'admin.index');
-Route::view('/{any}/{any1}/{any2}/{any3}', 'admin.index');
+Route::view('/{any}', 'site.index');
+Route::view('/{any}/{any1}', 'site.index');
+Route::view('/{any}/{any1}/{any2}', 'site.index');
+Route::view('/{any}/{any1}/{any2}/{any3}', 'site.index');
 

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="totalSubCategories" class="product-subcategory mt-2">
+    <div class="product-subcategory mt-2">
         <div class="row">
             <div class="col-md-12 p-0">
                 <div class="subcategory-list text-center">

@@ -36,7 +36,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{asset('frontend/assets/js/zoom-image.js')}}"></script>
 <script src="{{asset('frontend/assets/js/product_view_main.js')}}"></script>
-<script src="{{asset('frontend/assets/js/clock.js')}}"></script>
+<script src="{{asset('frontend/assets/js/owl.carousel.js')}}"></script>
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
-
+<script !src="">
+    new WOW().init();
+</script>
 </html>

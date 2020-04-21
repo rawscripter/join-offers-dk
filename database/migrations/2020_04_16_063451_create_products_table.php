@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->string('slug')->nullable();
-            $table->string('short_des')->nullable();
-            $table->string('full_des')->nullable();
+            $table->text('short_des')->nullable();
+            $table->text('full_des')->nullable();
             $table->string('total_favourites')->default(0);
             $table->bigInteger('sub_category_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();

@@ -20,43 +20,53 @@
             </div>
             <img src="frontend/assets/img/product/next-icon.png" class="icon-right" alt="" id="next-img">
         </div>
-        <div class="timer-area d-flex justify-content-center mt-3 mb-3">
-            <div class="clock">
-                <div class="well top-pane">
-                    <div id="days-text" class="text">Dage</div>
-                </div>
-                <div class="well bottom-pane">
-                    <div id="days" class="num">{{timer.days}}</div>
-                </div>
-            </div>
-            <div class="clock">
-                <div class="well top-pane">
-                    <div id="hours-text" class="text">Timer</div>
-                </div>
-                <div class="well bottom-pane">
-                    <div id="hours" class="num">{{timer.hours}}</div>
-                </div>
-            </div>
-            <div class="clock">
-                <div class="well top-pane">
-                    <div id="mins-text" class="text">Min.</div>
 
-                </div>
-                <div class="well bottom-pane">
-                    <div id="mins" class="num">{{timer.minutes}}</div>
-                </div>
-            </div>
+        <div class="timer text-center mt-2 mb-2">
+            <vac :end-time="new Date(product.expire_date)">
+                <div
+                    class="timer-area d-flex justify-content-center mt-3 mb-3"
+                    slot="process"
+                    slot-scope="{ timeObj }">
+                    <div class="clock">
+                        <div class="well top-pane">
+                            <div id="days-text" class="text">Dage</div>
+                        </div>
+                        <div class="well bottom-pane">
+                            <div id="days" class="num">{{timeObj.d}}</div>
+                        </div>
+                    </div>
 
-            <div class="clock">
-                <div class="well top-pane">
-                    <div id="secs-text" class="text">Sek</div>
+                    <div class="clock">
+                        <div class="well top-pane">
+                            <div id="hours-text" class="text">Timer</div>
+                        </div>
+                        <div class="well bottom-pane">
+                            <div id="hours" class="num">{{timeObj.h}}</div>
+                        </div>
+                    </div>
+                    <div class="clock">
+                        <div class="well top-pane">
+                            <div id="mins-text" class="text">Min.</div>
+
+                        </div>
+                        <div class="well bottom-pane">
+                            <div id="mins" class="num">{{timeObj.m}}</div>
+                        </div>
+                    </div>
+
+                    <div class="clock">
+                        <div class="well top-pane">
+                            <div id="secs-text" class="text">Sek</div>
+                        </div>
+                        <div class="well bottom-pane">
+                            <div id="secs" class="num">{{timeObj.s}}</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="well bottom-pane">
-                    <div id="secs" class="num">{{timer.seconds}}</div>
-                </div>
-            </div>
-            <!-- <div id="info" class="small"></div> -->
+                <span slot="finish" class="expired">Offer Expired!</span>
+            </vac>
         </div>
+
         <h3 class="title mt-2 text-center">
             {{product.name}}
         </h3>
@@ -71,43 +81,35 @@
     export default {
         name: "SingleProductDetailsLayout",
         props: ['product'],
-        data() {
-            return {
-                timer: {
-                    days: 0,
-                    hours: 0,
-                    minutes: 0,
-                    seconds: 0,
-                }
-            }
-        },
-        created() {
-            this.setProductTimer()
-        },
-        methods: {
-            setProductTimer() {
-                let dateFuture = new Date(this.product.expire_date);
-                let dateNow = new Date();
-
-                let seconds = Math.floor((dateFuture - (dateNow)) / 1000);
-                let minutes = Math.floor(seconds / 60);
-                let hours = Math.floor(minutes / 60);
-                let days = Math.floor(hours / 24);
-
-                this.timer.days = days;
-                this.timer.hours = hours - (days * 24);
-                this.timer.minutes = minutes - (days * 24 * 60) - (hours * 60);
-                this.timer.seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
-
-            }
-        }
     }
-
-
 </script>
 
 <style scoped>
     img#show-img {
         max-width: 100%;
+    }
+
+    .clock {
+        width: 65px;
+    }
+
+    .bottom-pane {
+        background-color: rgb(255, 124, 59) !important;
+        border-color: rgb(255, 175, 128) !important;
+        background-image: linear-gradient(to right, #ff3e00, #ffa74d);
+        color: #fff !important;
+    }
+
+    .num {
+        font-size: 25px;
+        color: #fff;
+        font-weight: bold;
+    }
+    span.expired {
+        font-weight: bold;
+        font-size: 30px;
+        text-align: center;
+        margin: 50px !important;
+        color: #ff2525;
     }
 </style>

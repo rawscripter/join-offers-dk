@@ -33,7 +33,7 @@ const routes = [
 
     // routes for site
     {path: '/', component: SiteIndex},
-    {path: '/:slug', name: 'product-details', component: ProductDetailsPage},
+    {path: '/product/:slug', name: 'product-details', component: ProductDetailsPage},
     {path: '/category/:category', name: 'category-product', component: CategoryProducts},
     {path: '/products/:category/:subCategory', name: 'sub-category-product', component: CategoryProducts},
 ];
@@ -41,7 +41,7 @@ const routes = [
 
 const router = new VueRouter({
     routes,
-    // mode: 'history',
+    mode: 'hash',
     hashbang: false
 });
 

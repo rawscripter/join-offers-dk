@@ -41,8 +41,10 @@ class ProductController extends Controller
     {
         $res['status'] = 200;
         $res['message'] = 'All Categories';
-        $products = Product::orderBy('created_at', 'desc')->limit(6)->get();
+        $products = Product::orderBy('created_at', 'desc')->paginate(6);
         $res['products'] = ProductResource::collection($products);
+        $res['products'] = ProductResource::collection($products);
+        $res['lastPage'] = $res['products']->lastPage();
         return response()->json($res);
     }
 
