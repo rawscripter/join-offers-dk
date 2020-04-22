@@ -26,7 +26,7 @@
                                     <div class="header-logo" style="margin-top:0px ">
                                         <h4>
                                             <router-link to="/">
-                                                <img src="frontend/assets/img/site.png"
+                                                <img src="/frontend/assets/img/site.png"
                                                      id="logo" alt="">
                                             </router-link>
                                         </h4>
@@ -36,11 +36,12 @@
                                 <div class="col-md-6 col-lg-8 mt-4">
                                     <div class="main_search mt-0 mb-2"
                                          style="border: 1px solid #ced4da;border-radius: 5px;">
-                                        <form action="#" method="get">
+                                        <form @submit.prevent="searchFrom">
                                             <div class="input-group">
                                                 <button type="button" class="btn btn-light rounded-0 pl-3 pr-3"><i
                                                     class="fas fa-search"></i></button>
-                                                <input type="text" class="form-control rounded-0" name="query"
+                                                <input type="text" v-model="search" class="form-control rounded-0"
+                                                       name="query"
                                                        style="border: 1px solid transparent; !important"
                                                        placeholder="Busca algo..." value="">
                                                 <span class="input-group-btn">
@@ -83,7 +84,23 @@
 
 <script>
     export default {
-        name: "SiteTopHeader"
+        name: "SiteTopHeader",
+        data() {
+            return {
+                search: null,
+                tempSearch: null,
+            }
+        },
+        methods: {
+            searchFrom() {
+                this.tempSearch = this.search.toLowerCase().trim();
+                this.tempSearch = this.search.toLowerCase().trim().replace(' ', '-');
+                this.search = null;
+                if (this.tempSearch != null) {
+                    this.$router.push({name: 'search-products', params: {search: this.tempSearch}})
+                }
+            }
+        }
     }
 </script>
 
@@ -93,6 +110,7 @@
         justify-content: center;
         margin: 0px;
     }
+
     img#logo {
         width: 100px;
     }

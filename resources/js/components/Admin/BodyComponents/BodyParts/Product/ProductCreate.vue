@@ -8,7 +8,7 @@
 				<i class="kt-font-brand flaticon2-line-chart"></i>
 			</span>
                         <h3 class="kt-portlet__head-title">
-                            Add New Prodcut
+                            Add New Product
                         </h3>
                     </div>
                 </div>
@@ -18,13 +18,14 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label class="col-form-label">Category Name:</label>
-                                <input v-model="formData.name" class="form-control" for="category_name"
+                                <label class="col-form-label">Product Name:</label>
+                                <input required v-model="formData.name" class="form-control" for="category_name"
                                        type="text">
                             </div>
                             <div class="col-md-6">
                                 <label for="categories" class="col-form-label">Select Category:</label>
-                                <select v-on:change="getSubCategories" v-model="formData.category_id" id="categories"
+                                <select required v-on:change="getSubCategories" v-model="formData.category_id"
+                                        id="categories"
                                         class="form-control">
                                     <option>Select Category</option>
                                     <option v-for="category in categories" v-bind:value="category.id">
@@ -34,7 +35,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="subCategories" class="col-form-label">Select Sub Category:</label>
-                                <select v-model="formData.sub_category_id" id="subCategories" class="form-control">
+                                <select required v-model="formData.sub_category_id" id="subCategories"
+                                        class="form-control">
                                     <option>Select Category</option>
                                     <option v-for="subCategory in subCategories" v-bind:value="subCategory.id">
                                         {{subCategory.name}}
@@ -44,7 +46,7 @@
 
                             <div class="col-md-12">
                                 <label for="short_des" class="col-form-label">Short Description:</label>
-                                <textarea v-model="formData.short_des" rows="5" cols="5" class="form-control"
+                                <textarea required v-model="formData.short_des" rows="5" cols="5" class="form-control"
                                           id="short_des"
                                           type="text"></textarea>
                             </div>
@@ -52,34 +54,34 @@
 
                             <div class="col-md-12">
                                 <label for="full_des" class="col-form-label">Full Description:</label>
-                                <textarea v-model="formData.full_des" rows="5" cols="5" class="form-control"
-                                          id="full_des"
-                                          type="text"></textarea>
+
+                                <ckeditor :editor="editor" v-model="formData.full_des"
+                                          :config="editorConfig"></ckeditor>
                             </div>
 
 
                             <div class="col-md-4">
                                 <label for="market_price" class="col-form-label">Market Price:</label>
-                                <input
-                                    v-model="formData.market_price" class="form-control" id="market_price"
-                                    type="text" step="2">
+                                <input required
+                                       v-model="formData.market_price" class="form-control" id="market_price"
+                                       type="text" step="2">
                             </div>
                             <div class="col-md-4">
                                 <label for="offer_price" class="col-form-label">Offer Price:</label>
-                                <input v-model="formData.offer_price" class="form-control" id="offer_price"
+                                <input required v-model="formData.offer_price" class="form-control" id="offer_price"
                                        type="text">
                             </div>
 
                             <div class="col-md-4">
                                 <label for="last_price" class="col-form-label">Last Price:</label>
-                                <input v-model="formData.last_price" class="form-control" id="last_price"
+                                <input required v-model="formData.last_price" class="form-control" id="last_price"
                                        type="text">
                             </div>
 
 
                             <div class="col-md-4">
                                 <label for="total_spots" class="col-form-label">Total Spots:</label>
-                                <input v-model="formData.total_offer_spots" class="form-control"
+                                <input required v-model="formData.total_offer_spots" class="form-control"
                                        id="total_spots"
                                        type="text">
                             </div>
@@ -87,7 +89,7 @@
 
                             <div class="col-md-4">
                                 <label for="minus_price_user_price" class="col-form-label">Minus Per User:</label>
-                                <input v-model="formData.minus_price_user_price" class="form-control"
+                                <input required v-model="formData.minus_price_user_price" class="form-control"
                                        id="minus_price_user_price"
                                        type="text">
                             </div>
@@ -95,7 +97,7 @@
                             <div class="col-md-4">
                                 <label for="expire_date" class="col-form-label">Expire
                                     Date:</label>
-                                <input v-model="formData.expire_date" class="form-control" id="expire_date"
+                                <input required v-model="formData.expire_date" class="form-control" id="expire_date"
                                        type="datetime-local">
                             </div>
 
@@ -105,7 +107,7 @@
                                     <img :src="formData.product_image" class="img-responsive" width="250px">
                                 </div>
 
-                                <input v-on:change="onImageChange" class="form-control" id="product_image"
+                                <input required v-on:change="onImageChange" class="form-control" id="product_image"
                                        type="file">
                             </div>
                         </div>
@@ -133,10 +135,17 @@
 </template>
 
 <script>
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
     export default {
         name: "ProductCreate",
+
         data() {
             return {
+                editor: ClassicEditor,
+                editorConfig: {
+                    // The configuration of the rich-text editor.
+                },
                 categories: [],
                 subCategories: [],
                 formData: {

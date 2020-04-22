@@ -158,7 +158,6 @@
                         .then(response => {
                             if (response.status === 200) {
                                 User.responseAfterLogin(response);
-
                             }
                             if (response.status === 400) {
                                 this.formErrors.text = response.data

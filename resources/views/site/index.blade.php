@@ -8,6 +8,7 @@
     <meta name="description" content="Updates and statistics">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/fontawesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.min.css')}}">
@@ -28,7 +29,7 @@
         <p>Copyright &copy; Joinoffers</p>
     </div>
 </footer>
-<script src="js/app.js"></script>
+<script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('frontend/assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('frontend/assets/js/Popper.js')}}"></script>
 <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>

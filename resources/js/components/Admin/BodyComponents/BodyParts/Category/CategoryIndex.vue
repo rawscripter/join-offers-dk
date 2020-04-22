@@ -1,6 +1,6 @@
 <template>
     <div class="row mt-5 pl-2 pr-2 m-0 no-margin">
-        <div class="col-6">
+        <div class="col-12 col-md-5">
 
             <div class="kt-portlet kt-portlet--mobile">
                 <div class="kt-portlet__head kt-portlet__head--lg">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-7">
             <div class="kt-portlet kt-portlet--mobile">
                 <div class="kt-portlet__head kt-portlet__head--lg">
                     <div class="kt-portlet__head-label">

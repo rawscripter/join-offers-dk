@@ -22,6 +22,7 @@ class ProductResource extends JsonResource
             'thumbImage' => $this->mainImage(),
             'featureImage' => $this->mainImage(),
             'fullImage' => $this->mainImage(),
+            'productImages' => ProductImageResource::collection($this->productImages),
             'total_favourites' => $this->total_favourites,
             'short_des' => $this->short_des,
             'full_des' => $this->full_des,
@@ -36,7 +37,7 @@ class ProductResource extends JsonResource
             'minus_price_user_price' => $this->minus_price_user_price,
             'user' => $this->user->name,
             'expire_date' => Carbon::parse($this->expire_date)->format('d F Y H:i:s'),
-            'expire_date_timestamp' => strtotime($this->expire_date),
+            'expire_date_timestamp' => Carbon::parse($this->expire_date)->format('Y-m-d\TH:i'),
             'created_at' => Carbon::parse($this->created_at)->format('d F Y'),
         ];
     }

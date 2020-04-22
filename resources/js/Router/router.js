@@ -13,6 +13,8 @@ import ProductCreate from "../components/Admin/BodyComponents/BodyParts/Product/
 import SiteIndex from "../components/Site/Pages/SiteIndex";
 import ProductDetailsPage from "../components/Site/Pages/ProductDetailsPage";
 import CategoryProducts from "../components/Site/Pages/CategoryProducts";
+import ProductEdit from "../components/Admin/BodyComponents/BodyParts/Product/ProductEdit";
+import SearchPage from "../components/Site/Pages/SearchPage";
 
 //importing components
 
@@ -22,7 +24,7 @@ Vue.use(VueRouter);
 const routes = [
     // routes for admin dashboard
     {path: '/admin', component: AppBody},
-    {path: '/admin/login', component: AppLogin},
+    {path: '/login', component: AppLogin},
     {path: '/logout', component: AppLogOut},
     {path: '/admin/users', component: UserIndex},
     {path: '/admin/user/create', component: UserCreate},
@@ -30,19 +32,53 @@ const routes = [
     {path: '/admin/sub-category', component: SubCategoryIndex},
     {path: '/admin/products', name: 'products', component: ProductsIndex},
     {path: '/admin/product/create', name: 'product.create', component: ProductCreate},
+    {path: '/admin/product/:product/edit', name: 'product.edit', component: ProductEdit},
 
     // routes for site
-    {path: '/', component: SiteIndex},
-    {path: '/product/:slug', name: 'product-details', component: ProductDetailsPage},
-    {path: '/category/:category', name: 'category-product', component: CategoryProducts},
-    {path: '/products/:category/:subCategory', name: 'sub-category-product', component: CategoryProducts},
+    {
+        path: '/',
+        component: SiteIndex,
+        meta: {
+            title: 'Welcome to Join Offer!'
+        }
+    },
+    {
+        path: '/product/:slug',
+        name: 'product-details',
+        component: ProductDetailsPage,
+        meta: {
+            title: 'Welcome to Join Offer!'
+        }
+    },
+    {
+        path: '/category/:category', name: 'category-product', component: CategoryProducts,
+        meta: {
+            title: 'Check Category Products!'
+        }
+    },
+    {
+        path: '/products/:category/:subCategory',
+        name: 'sub-category-product',
+        component: CategoryProducts,
+        meta: {
+            title: 'Check Sub Category Products!'
+        }
+    },
+    {
+        path: '/search/query/:search',
+        name: 'search-products',
+        component: SearchPage,
+        meta: {
+            title: 'Search Products!'
+        }
+    },
 ];
 
 
 const router = new VueRouter({
     routes,
-    mode: 'hash',
-    hashbang: false
+    mode: 'history',
+    hashbang: true
 });
 
 export default router;

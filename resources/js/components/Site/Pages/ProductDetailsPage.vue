@@ -4,17 +4,14 @@
             <loading :active.sync="isLoading"
                      :is-full-page="fullPage"></loading>
             <div class="row" v-if="!isLoading">
-                <div class="col-md-3 col-lg-3">
+                <div class="col-md-3 col-lg-3 wow bounceInLeft">
                     <ProductOfferInfoSidebar :product="product"></ProductOfferInfoSidebar>
                 </div>
-                <div class="col-md-5 col-lg-6">
+                <div class="col-md-5 col-lg-6 wow bounceInUp">
                     <SingleProductDetailsLayout :product="product"></SingleProductDetailsLayout>
                 </div>
-                <div class="col-md-4 col-lg-3">
-
+                <div class="col-md-4 col-lg-3 wow bounceInRight">
                     <RelatedProductsSidebar :products="relatedProducts"></RelatedProductsSidebar>
-
-
                 </div>
             </div>
         </div>
@@ -51,6 +48,7 @@
                     .then(res => {
                         this.isLoading = false;
                         this.product = res.data.product;
+                        document.title = this.product.name;
                     }).catch(error => {
                     console.error(error)
                 })
@@ -68,6 +66,7 @@
             this.isLoading = true;
             this.getProduct(this.$route.params.slug);
             this.getRelatedProducts(this.$route.params.slug);
+
         },
     }
 </script>

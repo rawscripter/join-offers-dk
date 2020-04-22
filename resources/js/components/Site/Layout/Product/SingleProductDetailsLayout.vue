@@ -2,23 +2,19 @@
     <div class="product_view_main ">
         <!-- Primary carousel image -->
 
-        <div class="show" href="1.jpg">
-            <img :src="product.featureImage" id="show-img">
+        <div class="show">
+            <img :src="displayProductImage" id="mainImage">
         </div>
-
         <!-- Secondary carousel image thumbnail gallery -->
+        <div v-if="hasImages" class="small-img">
+            <div class="image-container">
 
-        <div class="small-img">
-            <img src="frontend/assets/img/product/next-icon.png" class="icon-left" alt="" id="prev-img">
-            <div class="small-container">
-                <div id="small-img-roll">
-                    <img src="frontend/assets/img/product/1.png" class="show-small-img" alt="">
-                    <img src="frontend/assets/img/product/2.png" class="show-small-img" alt="">
-                    <img src="frontend/assets/img/product/3.png" class="show-small-img" alt="">
-                    <img src="frontend/assets/img/product/4.png" class="show-small-img" alt="">
-                </div>
+                <img v-for="(image,index) in product.productImages"
+                     :src="image.thumbImage"
+                     @click="changeMainImage(index)"
+                     :class="{active : active_img === index}"
+                     class="show-small-img" alt="">
             </div>
-            <img src="frontend/assets/img/product/next-icon.png" class="icon-right" alt="" id="next-img">
         </div>
 
         <div class="timer text-center mt-2 mb-2">
@@ -71,8 +67,7 @@
             {{product.name}}
         </h3>
         <!-- discription div  -->
-        <div class="discription">
-            <p>{{product.full_des}}</p>
+        <div class="discription" v-html="product.full_des">
         </div>
     </div>
 </template>
@@ -81,11 +76,28 @@
     export default {
         name: "SingleProductDetailsLayout",
         props: ['product'],
+        data() {
+            return {
+                displayProductImage: this.product.featureImage,
+                active_img: null
+            }
+        },
+        methods: {
+            changeMainImage(index) {
+                this.active_img = index;
+                this.displayProductImage = this.product.productImages[index].featureImage;
+            },
+        },
+        computed: {
+            hasImages() {
+                return this.product.productImages.length > 0;
+            }
+        }
     }
 </script>
 
 <style scoped>
-    img#show-img {
+    img#mainImage {
         max-width: 100%;
     }
 
@@ -105,11 +117,31 @@
         color: #fff;
         font-weight: bold;
     }
+
     span.expired {
         font-weight: bold;
         font-size: 30px;
         text-align: center;
         margin: 50px !important;
         color: #ff2525;
+    }
+
+    .image-container img {
+        max-width: 65px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .discription {
+        white-space: pre-wrap;
+    }
+
+    img.show-small-img.active {
+        border: 2px solid #ff500d;
     }
 </style>

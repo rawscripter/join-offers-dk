@@ -87,7 +87,7 @@
         methods: {
             edit(categoryID) {
                 // this.resetFormAction();
-                alert(categoryID)
+                this.$router.push({name: 'product.edit', params: {product: categoryID}})
             },
             // to delete a category
             deleteCategory(categoryID) {

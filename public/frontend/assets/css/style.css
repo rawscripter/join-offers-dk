@@ -7,6 +7,13 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow-x: hidden;
+
+}
+
 .row {
     margin: 0;
     padding: 0;
@@ -431,3 +438,36 @@ nav {
     padding-top: 0px;
 }
 
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 124, 59);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 10px;
+    background: rgba(255, 124, 59, 1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgb(255, 124, 59) !important;
+}
+
+.product_view_main .small-img {
+    width: 100% !important;
+    overflow: hidden;
+    height: 100px;
+}
+
+.col-md-4.bounceInUp.wow.col-lg-4.col-sm-6.shadow-sm.ml-0.pl-0.mr-0.pr-0 {
+    visibility: visible !important;
+}

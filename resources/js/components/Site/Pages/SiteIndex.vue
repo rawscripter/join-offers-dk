@@ -1,15 +1,14 @@
 <template>
-    <div class="page-wrapper">
+    <div class="page-wrapper wow">
         <div class="container">
             <div class="row">
-                <div class="col-md-2 col-lg-3">
+                <div class="col-md-2 col-lg-3 ">
                     <ProductFilter></ProductFilter>
                 </div>
                 <div class="col-md-10 col-lg-9">
-
                     <div class="main-content">
                         <div class="product-area">
-                            <div class="row wow">
+                            <div class="row">
                                 <loading :active.sync="isLoading"
                                          :is-full-page="false"></loading>
 
@@ -92,5 +91,9 @@
         background: #fafafa;
         padding: 5px;
         min-height: 50vh;
+    }
+
+    .page-wrapper.wow {
+        overflow: hidden;
     }
 </style>

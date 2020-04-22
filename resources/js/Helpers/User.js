@@ -11,7 +11,7 @@ class User {
         if (access_token) {
             AppStorage.store(access_token);
         }
-        window.location = '/'
+        window.location = '/admin'
     }
 
     hasToken() {

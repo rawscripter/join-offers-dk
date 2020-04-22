@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use App\ProductImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -37,11 +38,17 @@ class ProductController extends Controller
         return response()->json($res);
     }
 
-    public function productsForSite()
+    public function productsForSite(Request $request)
     {
         $res['status'] = 200;
         $res['message'] = 'All Categories';
-        $products = Product::orderBy('created_at', 'desc')->paginate(6);
+
+        if ($request['query']) {
+            $products = Product::where('name', 'like', '%' . $request['query'] . '%')->paginate(6);
+        } else {
+            $products = Product::orderBy('created_at', 'desc')->paginate(6);
+        }
+
         $res['products'] = ProductResource::collection($products);
         $res['products'] = ProductResource::collection($products);
         $res['lastPage'] = $res['products']->lastPage();
@@ -93,12 +100,19 @@ class ProductController extends Controller
         $data['minus_price_user_price'] = $request->minus_price_user_price;
         $data['user_id'] = auth()->user()->id;
         $data['expire_date'] = Carbon::parse($request->expire_date)->format('Y-m-d H:s:i');
-
-        // to upload product image
         if ($request->product_image)
             $data['image'] = ImageController::uploadImage($request->product_image);
-
         $product = Product::create($data);
+        // to upload product image
+        if ($request->product_image) {
+            $product->productImages()->create(
+                [
+                    'user_id' => auth()->user()->id,
+                    'image' => $data['image'],
+                ]
+            );
+        }
+
         if ($product) {
             $res['status'] = 200;
             $res['message'] = 'Product Created Successfully.';
@@ -221,6 +235,17 @@ class ProductController extends Controller
         if ($request->product_image)
             $data['image'] = ImageController::uploadImage($request->product_image);
 
+
+        if ($request->product_image) {
+            $product->productImages()->create(
+                [
+                    'user_id' => auth()->user()->id,
+                    'image' => $data['image'],
+                ]
+            );
+        }
+
+
         if ($product->update($data)) {
             $res['status'] = 200;
             $res['message'] = 'Product Updated Successfully.';
@@ -248,5 +273,32 @@ class ProductController extends Controller
             $res['message'] = 'No Category Found';
         }
         return response()->json($res);
+    }
+
+    public function deleteProductImage($image)
+    {
+        $productImage = ProductImage::find($image);
+        if ($productImage) {
+            $productImage->delete();
+            $res['status'] = 200;
+            $res['message'] = 'Product Image Deleted Successfully.';
+        } else {
+            $res['status'] = 201;
+            $res['message'] = 'No Image Found';
+        }
+        return response()->json($res);
+    }
+
+    public function uploadProductImages(Product $product, Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $image = ImageController::uploadImage($request->file);
+            $product->productImages()->create(
+                [
+                    'image' => $image,
+                    'user_id' => auth()->user()->id
+                ]
+            );
+        }
     }
 }

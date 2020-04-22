@@ -20,6 +20,10 @@ import vueAwesomeCountdown from 'vue-awesome-countdown'
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
+import CKEditor from '@ckeditor/ckeditor5-vue';
+
+Vue.use( CKEditor );
+
 Vue.use(ServerTable);
 Vue.use(VueSweetalert2);
 Vue.use(vueAwesomeCountdown, 'vac');
@@ -30,8 +34,8 @@ Vue.component('InfiniteLoading', require('vue-infinite-loading'));
 
 window.User = User;
 window.Alert = Notification;
-window.APP_URL = 'http://laravu.test';
-// window.APP_URL = 'http://offer.danpanel.dk';
+// window.APP_URL = 'http://laravu.test';
+window.APP_URL = 'http://offer.danpanel.dk';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

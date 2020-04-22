@@ -14,7 +14,7 @@
                                 <loading :active.sync="isLoading"
                                          :is-full-page="false"></loading>
                                 <div v-for="product in products" :key="product.id"
-                                     class="col-md-4 col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
+                                     class="col-md-4 wow bounceInUp col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
                                     <!-- product single  -->
                                     <SingleProduct :product="product"></SingleProduct>
                                     <!-- end of product single  -->
@@ -23,7 +23,7 @@
                         </div>
                         <div v-else>
                             <div class="text-center mt-5">
-                                <h3>
+                                <h3 class="big-error-font">
                                     <strong>
                                         No Product Found
                                     </strong>
@@ -109,5 +109,15 @@
 </script>
 
 <style scoped>
+    .product-area {
+        min-height: 50vh;
+        overflow: hidden;
+    }
 
+
+    .big-error-font {
+        font-size: 48px;
+        color: #3939396b;
+        margin-top: 150px !important;
+    }
 </style>

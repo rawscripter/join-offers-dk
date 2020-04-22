@@ -51,7 +51,7 @@
                 <ul class="kt-menu__nav ">
                     <li class="kt-menu__item  kt-menu__item--active" aria-haspopup="true">
 
-                        <router-link class="kt-menu__link " to="/">
+                        <router-link class="kt-menu__link " to="/admin">
                              <span
                                  class="kt-menu__link-icon"><svg
                                  xmlns="http://www.w3.org/2000/svg"

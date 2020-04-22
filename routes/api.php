@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
     Route::resource('/category', 'CategoryController');
     Route::get('/category/{category}/sub-categories', 'CategoryController@subCategories');
     Route::resource('/product', 'ProductController');
+    Route::post('/product/{product}/upload/images', 'ProductController@uploadProductImages');
+    Route::post('/product-image/{imageId}/delete', 'ProductController@deleteProductImage');
     Route::resource('/sub-category', 'SubCategoryController');
 });
 
