@@ -11,7 +11,7 @@ class User {
         if (access_token) {
             AppStorage.store(access_token);
         }
-        window.location = '/admin'
+        window.location = '/'
     }
 
     hasToken() {
@@ -23,11 +23,7 @@ class User {
     }
 
     loggedIn() {
-
-        if (this.hasToken()) {
-            return true;
-        }
-        return false;
+        return this.hasToken();
     }
 
     name() {
@@ -51,7 +47,6 @@ class User {
             .catch(error => {
                 console.error(error);
             })
-
     }
 
     own(id) {

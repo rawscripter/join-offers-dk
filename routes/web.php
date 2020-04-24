@@ -33,6 +33,11 @@ Route::get('/', function () {
     return view('site.index');
 });
 
+// to load main site
+Route::get('/login', function () {
+    return view('site.index');
+});
+
 Route::get('/{any}', function () {
     return view('site.index');
 });

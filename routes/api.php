@@ -38,6 +38,12 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
 Route::get('/categories', 'CategoryController@index');
 Route::get('/products', 'ProductController@productsForSite');
 Route::get('/product/{slug}', 'ProductController@showProductForSite');
+
+// favourite list
+Route::get('/product/{slug}/favourite/add', 'ProductController@addToFavourite');
+Route::get('/product/{slug}/favourite/remove', 'ProductController@removeFromFavourite');
+
+
 Route::get('/product/{slug}/related-products', 'ProductController@showRelatedForSite');
 Route::get('/category/{categorySlug}/products', 'CategoryController@products');
 Route::get('/sub-category/{categorySlug}/products', 'SubCategoryController@products');

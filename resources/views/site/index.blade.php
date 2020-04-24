@@ -30,7 +30,7 @@
     </div>
 </footer>
 <script src="{{asset('js/app.js')}}"></script>
-<script src="{{asset('frontend/assets/js/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="{{asset('frontend/assets/js/Popper.js')}}"></script>
 <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>

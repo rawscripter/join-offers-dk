@@ -22,14 +22,13 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
-Vue.use( CKEditor );
+Vue.use(CKEditor);
 
 Vue.use(ServerTable);
 Vue.use(VueSweetalert2);
 Vue.use(vueAwesomeCountdown, 'vac');
-Vue.component('Loading',Loading);
+Vue.component('Loading', Loading);
 Vue.component('InfiniteLoading', require('vue-infinite-loading'));
-
 
 
 window.User = User;

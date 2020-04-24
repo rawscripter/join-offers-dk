@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+
 
 class Product extends Model
 {
@@ -32,4 +34,23 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function isAuthUserLikedPost()
+    {
+        if (Auth::guard('api')->user()) {
+            $userID = Auth::guard('api')->user()->id;
+            $like = $this->likes()->where('user_id', $userID)->get();
+            if ($like->isEmpty()) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

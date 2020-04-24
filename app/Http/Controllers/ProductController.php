@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
+use App\Like;
 use App\Product;
 use App\ProductImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -300,5 +302,61 @@ class ProductController extends Controller
                 ]
             );
         }
+    }
+
+    public function addToFavourite($slug)
+    {
+        $user = Auth::guard('api')->user();
+        if ($user) {
+            $product = Product::where('slug', $slug)->first();
+            if (!empty($product)) {
+                if (!$product->isAuthUserLikedPost()) {
+                    $res['status'] = 200;
+                    $res['message'] = 'Product added to favourite list.';
+                    $product->total_favourites = $product->total_favourites + 1;
+                    $product->save();
+                    Like::create([
+                        'user_id' => $user->id,
+                        'product_id' => $product->id
+                    ]);
+                    $res['product'] = (new ProductResource($product));
+                }
+
+            } else {
+                $res['status'] = 201;
+                $res['message'] = 'No Product Found';
+            }
+        } else {
+            $res['status'] = 201;
+            $res['message'] = 'Please login first.';
+        }
+        return response()->json($res);
+    }
+
+    public function removeFromFavourite($slug)
+    {
+        $user = Auth::guard('api')->user();
+        if ($user) {
+            $product = Product::where('slug', $slug)->first();
+            if (!empty($product)) {
+                if ($product->isAuthUserLikedPost()) {
+                    $res['status'] = 200;
+                    $res['message'] = 'Product removed to favourite list.';
+                    $product->total_favourites = $product->total_favourites - 1;
+                    $product->save();
+                    Like::where('user_id', $user->id)->where('product_id', $product->id)->delete();
+                    $res['product'] = (new ProductResource($product));
+                }
+
+            } else {
+                $res['status'] = 201;
+                $res['message'] = 'No Category Found';
+            }
+        } else {
+            $res['status'] = 201;
+            $res['message'] = 'Please login first.';
+        }
+        return response()->json($res);
+
     }
 }

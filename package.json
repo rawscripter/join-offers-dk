@@ -27,6 +27,7 @@
         "@ckeditor/ckeditor5-build-classic": "^18.0.0",
         "@ckeditor/ckeditor5-vue": "^1.0.1",
         "vue-awesome-countdown": "^1.0.25",
+        "vue-clickaway": "^2.2.2",
         "vue-infinite-loading": "^2.4.5",
         "vue-loading-overlay": "^3.3.2",
         "vue-router": "^3.1.6",

@@ -17,9 +17,13 @@
             <!--            total save-->
             <button class="btn btn-success">Du sprarer 20%</button>
             <div class="love-section mt-2">
-                <!--                total favourites-->
                 <button class="btn btn-success">deltag</button>
-                <button class="btn btn-success"> {{product.total_favourites}} <i class="far fa-heart"></i></button>
+
+                <button v-if="product.isLikedByCurrentUser" @click="removeProductToFavouriteList(product.slug)"
+                        class="btn btn-success"> {{product.total_favourites}} <i class="fas fa-heart" style="color:red"></i></button>
+                <button v-else @click="addProductToFavouriteList(product.slug)" class="btn btn-success">
+                    {{product.total_favourites}} <i class="far fa-heart"></i></button>
+
                 <br>
             </div>
         </div>
@@ -41,33 +45,24 @@
         name: "ProductOfferInfoSidebar",
         props: ['product'],
         data() {
-            return {
-                timer: {
-                    days: 0,
-                    hours: 0,
-                    minutes: 0,
-                    seconds: 0,
-                }
-            }
-        },
-        created() {
-            this.setProductTimer()
+            return {}
         },
         methods: {
-            setProductTimer() {
-                let dateFuture = new Date(this.product.expire_date);
-                let dateNow = new Date();
-
-                let seconds = Math.floor((dateFuture - (dateNow)) / 1000);
-                let minutes = Math.floor(seconds / 60);
-                let hours = Math.floor(minutes / 60);
-                let days = Math.floor(hours / 24);
-
-                this.timer.days = days;
-                this.timer.hours = hours - (days * 24);
-                this.timer.minutes = minutes - (days * 24 * 60) - (hours * 60);
-                this.timer.seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
-
+            addProductToFavouriteList(slug) {
+                axios.get(`/api/product/${slug}/favourite/add`)
+                    .then(res => {
+                        if (res.data.status === 200) {
+                            this.product = res.data.product;
+                        }
+                    }).catch(err => console.log(err));
+            },
+            removeProductToFavouriteList(slug) {
+                axios.get(`/api/product/${slug}/favourite/remove`)
+                    .then(res => {
+                        if (res.data.status === 200) {
+                            this.product = res.data.product;
+                        }
+                    }).catch(err => console.log(err));
             }
         }
     }

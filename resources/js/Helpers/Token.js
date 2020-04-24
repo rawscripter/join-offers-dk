@@ -1,4 +1,5 @@
 import AppStorage from './AppStorage'
+import User from "./User";
 
 class Token {
     isValid(token) {
@@ -6,8 +7,9 @@ class Token {
             .then(response => {
                 if (response.data.rui) {
                     AppStorage.storeUser(response.data.rui, response.data.run);
+                } else {
+                    User.logOut();
                 }
-                return true;
             })
             .catch(error => {
                 return true;

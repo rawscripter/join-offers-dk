@@ -2,88 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/ProductImageResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ProductImage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_21_152439_create_product_images_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/22bf1350-83e4-11ea-9e6a-1d16d6ecf51e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/26412260-83e5-11ea-a8e8-9b9a7b5cd779.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/28b42f50-83f8-11ea-8c5a-279b33193c9c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/316c4420-83f8-11ea-a043-1daf38b1039a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/316f9040-83f8-11ea-935f-07b4129cbf6f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/32144050-83f8-11ea-91a2-d3bffedd9be0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/3e4418b0-83f8-11ea-a35e-9713f848e4a9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/3e454d90-83f8-11ea-8c65-f1e8d6aaf1c7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/3f0b3af0-83f8-11ea-b7ff-5f98a87a849e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/3f1d11a0-83f8-11ea-a34f-e1d969c0188f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/43a15a60-83e5-11ea-9ca9-9da598733a09.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/91554b40-83f6-11ea-b005-554aa05f6e5b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/e0f12d20-83ec-11ea-b5b8-2f727832c496.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/e535af40-83ec-11ea-bc85-1be7dc5b5cf1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/22bf1350-83e4-11ea-9e6a-1d16d6ecf51e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/26412260-83e5-11ea-a8e8-9b9a7b5cd779.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/28b42f50-83f8-11ea-8c5a-279b33193c9c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/316c4420-83f8-11ea-a043-1daf38b1039a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/316f9040-83f8-11ea-935f-07b4129cbf6f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/32144050-83f8-11ea-91a2-d3bffedd9be0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/3e4418b0-83f8-11ea-a35e-9713f848e4a9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/3e454d90-83f8-11ea-8c65-f1e8d6aaf1c7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/3f0b3af0-83f8-11ea-b7ff-5f98a87a849e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/3f1d11a0-83f8-11ea-a34f-e1d969c0188f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/43a15a60-83e5-11ea-9ca9-9da598733a09.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/91554b40-83f6-11ea-b005-554aa05f6e5b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/e0f12d20-83ec-11ea-b5b8-2f727832c496.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/e535af40-83ec-11ea-bc85-1be7dc5b5cf1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/feature/f8161160-83e0-11ea-bd3f-7bf5fb9857a8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/22bf1350-83e4-11ea-9e6a-1d16d6ecf51e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/26412260-83e5-11ea-a8e8-9b9a7b5cd779.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/28b42f50-83f8-11ea-8c5a-279b33193c9c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/316c4420-83f8-11ea-a043-1daf38b1039a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/316f9040-83f8-11ea-935f-07b4129cbf6f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/32144050-83f8-11ea-91a2-d3bffedd9be0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/3e4418b0-83f8-11ea-a35e-9713f848e4a9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/3e454d90-83f8-11ea-8c65-f1e8d6aaf1c7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/3f0b3af0-83f8-11ea-b7ff-5f98a87a849e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/3f1d11a0-83f8-11ea-a34f-e1d969c0188f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/43a15a60-83e5-11ea-9ca9-9da598733a09.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/91554b40-83f6-11ea-b005-554aa05f6e5b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/e0f12d20-83ec-11ea-b5b8-2f727832c496.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/e535af40-83ec-11ea-bc85-1be7dc5b5cf1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/f8161160-83e0-11ea-bd3f-7bf5fb9857a8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductEdit.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SearchPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Like.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_23_145350_create_likes_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/UserLogin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/product/573550a0-8272-11ea-aed5-35fb771d17d9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/product/5983d930-8272-11ea-8d2f-d5f1c67a5070.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/product/6520f660-82fa-11ea-9410-d9abef6ff83e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/product/7881ea60-8267-11ea-b680-9b35769b2e9f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/product/ee17b6c0-82e3-11ea-8a58-3f670e165742.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Helpers/Token.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Helpers/Token.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Helpers/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Helpers/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Router/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/Auth/AppLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/Auth/AppLogin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Category/CategoryIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Category/CategoryIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductsIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductsIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/SubCategory/SubCategoryIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/SubCategory/SubCategoryIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/SideBar/AppNavSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/SideBar/AppNavSideBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/AppHomeForSite.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/AppHomeForSite.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteTopHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteTopHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/CategoryProducts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/CategoryProducts.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/ProductDetailsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/ProductDetailsPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductOfferInfoSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductOfferInfoSidebar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/site/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
@@ -250,17 +187,17 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.3.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\laravu.dev\public\frontend\assets\js" />
-      <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
-      <recent name="C:\Users\shuvo\Desktop\projects\Demo\resources\js\components\Admin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Site\Pages" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Product" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\frontend" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Site" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\SubCategory" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravu.dev\public\frontend\assets\js" />
+      <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
+      <recent name="C:\Users\shuvo\Desktop\projects\Demo\resources\js\components\Admin" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -269,6 +206,7 @@
       <command value="open C:\Users\shuvo\Desktop\projects\lesan\rainer" />
       <command value="open gowinmii" />
       <command value="open C:\xampp\htdocs\projects\soundiocloud" />
+      <command value="open quezbii" />
     </option>
   </component>
   <component name="RunManager">
@@ -326,6 +264,11 @@
       <workItem from="1587498442706" duration="5952000" />
       <workItem from="1587546174181" duration="3919000" />
       <workItem from="1587562540987" duration="10000" />
+      <workItem from="1587564912911" duration="756000" />
+      <workItem from="1587573255766" duration="762000" />
+      <workItem from="1587635517073" duration="9070000" />
+      <workItem from="1587656949795" duration="9000" />
+      <workItem from="1587714640939" duration="1257000" />
     </task>
     <servers />
   </component>
@@ -336,6 +279,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="198" key="#Notifications" timestamp="1587635537096">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="552" y="198" key="#Notifications/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587635537096" />
     <state x="640" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587483169128">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -345,11 +292,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584735574781" />
-    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587392096059">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587656229351">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587392096059" />
-    <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587302475163" />
+    <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587656229351" />
     <state x="583" y="43" key="CommitChangelistDialog2" timestamp="1586937646740">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -383,12 +330,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586956085588" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1587549255337">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1587715788200">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376623973" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587549255337" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587504397739" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587715788200" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587656480927" />
     <state x="767" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587377418355">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -416,16 +363,16 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="601" y="265" width="700" height="530" key="recent.locations.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584734962034" />
-    <state x="2536" y="250" width="672" height="677" key="run.anything.popup" timestamp="1587562548688">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="616" y="250" width="672" height="677" key="run.anything.popup" timestamp="1587656957899">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587492499069" />
+    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587656957899" />
     <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587562548688" />
-    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1587562544959">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1587715758651">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376572360" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587549040694" />
-    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587562544959" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587715758651" />
+    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587564924865" />
   </component>
 </project>

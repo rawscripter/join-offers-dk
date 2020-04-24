@@ -15,6 +15,7 @@ import ProductDetailsPage from "../components/Site/Pages/ProductDetailsPage";
 import CategoryProducts from "../components/Site/Pages/CategoryProducts";
 import ProductEdit from "../components/Admin/BodyComponents/BodyParts/Product/ProductEdit";
 import SearchPage from "../components/Site/Pages/SearchPage";
+import UserLogin from "../components/Site/Pages/UserLogin";
 
 //importing components
 
@@ -24,7 +25,7 @@ Vue.use(VueRouter);
 const routes = [
     // routes for admin dashboard
     {path: '/admin', component: AppBody},
-    {path: '/login', component: AppLogin},
+    {path: '/admin/login', component: AppLogin},
     {path: '/logout', component: AppLogOut},
     {path: '/admin/users', component: UserIndex},
     {path: '/admin/user/create', component: UserCreate},
@@ -40,6 +41,13 @@ const routes = [
         component: SiteIndex,
         meta: {
             title: 'Welcome to Join Offer!'
+        }
+    },
+    {
+        path: '/login',
+        component: UserLogin,
+        meta: {
+            title: 'Login!'
         }
     },
     {

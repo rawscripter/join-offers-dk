@@ -60,19 +60,38 @@
                                     <a href="#">
                                         <i class="far fa-heart"></i>
                                         <br>
-                                        <label for="wishlist">Favourite</label>
+                                        <label>Favourite</label>
                                     </a>
                                 </div>
                                 <div class="login ml-4 text-center">
-                                    <a href="#">
-                                        <i class="fas fa-sign-out-alt" id="login"></i>
-                                        <br>
-                                        <label for="login">Login</label></a>
-                                </div>
+                                    <div v-if="userLoggedIn">
+                                        <div class="user-login" v-on-clickaway="close"
+                                             @click="showUserMenu = !showUserMenu">
+                                            <i class="fas fa-user"></i>
+                                            <br>
+                                            {{userName}}
+                                        </div>
+                                        <div class="dropdown-menu wow bounceIn" v-if="showUserMenu">
+                                            <a class="dropdown-item" href="#">Profile</a>
+                                            <a class="dropdown-item" href="#">Dashboard</a>
+                                            <a class="dropdown-item" href="#">Orders</a>
+                                            <div class="dropdown-divider"></div>
+                                            <router-link class="dropdown-item" to="/logout">
+                                                Logout
+                                            </router-link>
 
+                                        </div>
+                                    </div>
+                                    <div class="user-login" v-if="!userLoggedIn">
+                                        <router-link to="/login">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            <br>
+                                            Login
+                                        </router-link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -83,12 +102,18 @@
 </template>
 
 <script>
+    import {mixin as clickaway} from 'vue-clickaway';
+
     export default {
         name: "SiteTopHeader",
+        mixins: [clickaway],
         data() {
             return {
+                showUserMenu: false,
                 search: null,
                 tempSearch: null,
+                userLoggedIn: User.loggedIn(),
+                userName: User.name()
             }
         },
         methods: {
@@ -99,6 +124,9 @@
                 if (this.tempSearch != null) {
                     this.$router.push({name: 'search-products', params: {search: this.tempSearch}})
                 }
+            },
+            close() {
+                this.showUserMenu = false;
             }
         }
     }
@@ -113,5 +141,20 @@
 
     img#logo {
         width: 100px;
+    }
+
+    .user-profile a:hover {
+        text-decoration: none;
+    }
+
+    .user-profile, .user-login {
+        cursor: pointer !important;
+        color: #ff7c3b !important;
+    }
+
+    .dropdown-menu {
+        display: block !important;
+        left: 50px;
+        min-width: 180px;
     }
 </style>
