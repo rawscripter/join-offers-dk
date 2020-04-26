@@ -56,23 +56,23 @@
                         </div>
                         <div class="col-md-3 col-lg-3 mt-3">
                             <div class="header_top_button d-flex justify-content-center">
-                                <div class="wishlist text-center">
+                                <router-link tag="div" to="/favourites" class="wishlist text-center">
                                     <a href="#">
                                         <i class="far fa-heart"></i>
                                         <br>
                                         <label>Favourite</label>
                                     </a>
-                                </div>
+                                </router-link>
                                 <div class="login ml-4 text-center">
                                     <div v-if="userLoggedIn">
                                         <div class="user-login" v-on-clickaway="close"
                                              @click="showUserMenu = !showUserMenu">
                                             <i class="fas fa-user"></i>
                                             <br>
-                                            {{userName}}
+                                            Profile
                                         </div>
                                         <div class="dropdown-menu wow bounceIn" v-if="showUserMenu">
-                                            <a class="dropdown-item" href="#">Profile</a>
+                                            <a class="dropdown-item" href="#">Favourites</a>
                                             <a class="dropdown-item" href="#">Dashboard</a>
                                             <a class="dropdown-item" href="#">Orders</a>
                                             <div class="dropdown-divider"></div>

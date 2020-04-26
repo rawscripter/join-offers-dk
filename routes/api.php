@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
 // apis for site
 Route::get('/categories', 'CategoryController@index');
 Route::get('/products', 'ProductController@productsForSite');
+Route::get('/favourites', 'ProductController@userFavouriteProductsForSite');
 Route::get('/product/{slug}', 'ProductController@showProductForSite');
 
 // favourite list
@@ -51,3 +52,4 @@ Route::get('/category/{categorySlug}/sub-categories', 'CategoryController@subCat
 
 
 Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthController@register');

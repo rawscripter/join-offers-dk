@@ -117,7 +117,13 @@
                                        type="datetime-local">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label for="xxxx" class="col-form-label">Product Type:</label>
+                                <select v-model="formData.product_type" name="" class="form-control" id="xxxx">
+                                    <option v-for="type in productTypes" :value="type">{{type}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
                                 <label for="product_image" class="col-form-label">Product Image:</label>
                                 <div class="text-center m-2" v-if="formData.product_image">
                                     <img :src="formData.product_image" class="img-responsive" width="250px">
@@ -162,6 +168,12 @@
         },
         data() {
             return {
+                productTypes: [
+                    'All',
+                    'Men',
+                    'Women',
+                    'Kids',
+                ],
                 editor: ClassicEditor,
                 editorConfig: {
                     // The configuration of the rich-text editor.
@@ -175,6 +187,7 @@
                 categories: [],
                 subCategories: [],
                 formData: {
+                    product_type: null,
                     product_id: null,
                     name: null,
                     category_id: null,

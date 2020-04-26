@@ -11,6 +11,7 @@ use App\ProductImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -44,16 +45,59 @@ class ProductController extends Controller
     {
         $res['status'] = 200;
         $res['message'] = 'All Categories';
+        if ($request['gender'] || $request['short'] || $request['minPrice'] || $request['maxPrice']) {
+            $gender = $_GET['gender'];
+            $short = $_GET['short'];
+            $minPrice = $_GET['minPrice'];
+            $maxPrice = $_GET['maxPrice'];
+            $products = Product::query();
+            // to filter the gender
+            if (strtolower($gender) != 'all') {
+                $products->where('product_type', $gender);
+            }
+            // to filter the price
+            $products->whereBetween('offer_price', [$minPrice, $maxPrice]);
+            // to order the product
+            if (strtolower($short) === 'new') {
+                $products->orderByDesc('created_at');
+            }
 
-        if ($request['query']) {
-            $products = Product::where('name', 'like', '%' . $request['query'] . '%')->paginate(6);
+            if (strtolower($short) === 'popular') {
+                $products->orderByDesc('total_clicks');
+            }
+
+            if (strtolower($short) === 'old') {
+                $products->where('expire_date', '>', Carbon::now());
+                $products->where('expire_date', '<', Carbon::now()->addDays(1));
+            }
+
+            $products = $products->paginate(6);
+
         } else {
             $products = Product::orderBy('created_at', 'desc')->paginate(6);
         }
-
-        $res['products'] = ProductResource::collection($products);
         $res['products'] = ProductResource::collection($products);
         $res['lastPage'] = $res['products']->lastPage();
+        return response()->json($res);
+    }
+
+    public function userFavouriteProductsForSite(Request $request)
+    {
+
+        $user = Auth::guard('api')->user();
+
+        if ($user) {
+            $res['status'] = 200;
+            $res['message'] = 'All Categories';
+            $products = $user->likedProducts;
+            $res['products'] = ProductResource::collection($products);
+            $res['lastPage'] = 1;
+        } else {
+            $res['status'] = 201;
+            $res['message'] = 'Please login first.';
+        }
+
+
         return response()->json($res);
     }
 
@@ -87,6 +131,7 @@ class ProductController extends Controller
             'total_offer_spots' => 'required',
             'minus_price_user_price' => 'required',
             'expire_date' => 'required',
+            'product_type' => 'required',
         ]);
 
         $data['name'] = $request->name;
@@ -98,6 +143,7 @@ class ProductController extends Controller
         $data['market_price'] = $request->market_price;
         $data['offer_price'] = $request->offer_price;
         $data['last_price'] = $request->last_price;
+        $data['product_type'] = $request->product_type;
         $data['total_offer_spots'] = $request->total_offer_spots;
         $data['minus_price_user_price'] = $request->minus_price_user_price;
         $data['user_id'] = auth()->user()->id;
@@ -154,7 +200,10 @@ class ProductController extends Controller
     public function showProductForSite($slug)
     {
         $product = Product::where('slug', $slug)->first();
+
         if (!empty($product)) {
+            // increment product click
+            $product->increment('total_clicks');
             $res['status'] = 200;
             $res['message'] = 'Product Found Successfully.';
             $res['product'] = (new ProductResource($product));
@@ -217,6 +266,7 @@ class ProductController extends Controller
             'total_offer_spots' => 'required',
             'minus_price_user_price' => 'required',
             'expire_date' => 'required',
+            'product_type' => 'required'
         ]);
 
         $data['name'] = $request->name;
@@ -228,6 +278,7 @@ class ProductController extends Controller
         $data['market_price'] = $request->market_price;
         $data['offer_price'] = $request->offer_price;
         $data['last_price'] = $request->last_price;
+        $data['product_type'] = $request->product_type;
         $data['total_offer_spots'] = $request->total_offer_spots;
         $data['minus_price_user_price'] = $request->minus_price_user_price;
         $data['user_id'] = auth()->user()->id;
@@ -346,8 +397,10 @@ class ProductController extends Controller
                     $product->save();
                     Like::where('user_id', $user->id)->where('product_id', $product->id)->delete();
                     $res['product'] = (new ProductResource($product));
+                } else {
+                    $res['status'] = 201;
+                    $res['message'] = 'Not Liked Yet';
                 }
-
             } else {
                 $res['status'] = 201;
                 $res['message'] = 'No Category Found';
@@ -357,6 +410,5 @@ class ProductController extends Controller
             $res['message'] = 'Please login first.';
         }
         return response()->json($res);
-
     }
 }

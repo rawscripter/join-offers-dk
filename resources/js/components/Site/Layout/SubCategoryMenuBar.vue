@@ -4,13 +4,11 @@
             <div class="col-md-12 p-0">
                 <div class="subcategory-list text-center">
                     <ul>
-                        <li v-for="category in subCategories" :key="category.id">
-                            <router-link tag="button" class="btn btn-success"
-                                         :to='{name:"sub-category-product",params:{subCategory:category.slug,category:categorySlug}}'>
-                                <div class="sub-cat-item text-center">
-                                    <label>{{category.name}}</label>
-                                </div>
-                            </router-link>
+                        <li v-for="(category,index) in subCategories" :key="category.id">
+                            <button class="btn btn-theme" @click="selectedSubCategory(index)">
+                                <label>{{category.name}}</label>
+                            </button>
+
                         </li>
                     </ul>
                 </div>
@@ -26,6 +24,11 @@
         props: ['subCategories', 'categorySlug'],
         data() {
             return {}
+        },
+        methods: {
+            selectedSubCategory(subIndex) {
+                this.$emit('selectedSubCategory', subIndex)
+            }
         },
         computed: {
             totalSubCategories() {

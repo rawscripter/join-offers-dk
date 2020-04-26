@@ -16,6 +16,8 @@ import CategoryProducts from "../components/Site/Pages/CategoryProducts";
 import ProductEdit from "../components/Admin/BodyComponents/BodyParts/Product/ProductEdit";
 import SearchPage from "../components/Site/Pages/SearchPage";
 import UserLogin from "../components/Site/Pages/UserLogin";
+import UserRegister from "../components/Site/Pages/UserRegister";
+import FavouriteProudctsPage from "../components/Site/Pages/FavouriteProudctsPage";
 
 //importing components
 
@@ -51,11 +53,25 @@ const routes = [
         }
     },
     {
+        path: '/register',
+        component: UserRegister,
+        meta: {
+            title: 'Register Now!'
+        }
+    },
+    {
         path: '/product/:slug',
         name: 'product-details',
         component: ProductDetailsPage,
         meta: {
             title: 'Welcome to Join Offer!'
+        }
+    }, {
+        path: '/favourites',
+        name: 'favourites',
+        component: FavouriteProudctsPage,
+        meta: {
+            title: 'Favourite Products'
         }
     },
     {

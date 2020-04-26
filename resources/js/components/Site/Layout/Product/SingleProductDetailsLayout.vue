@@ -83,22 +83,6 @@
             }
         },
         methods: {
-            addProductToFavouriteList(slug) {
-                axios.get(`/api/product/${slug}/favourite/add`)
-                    .then(res => {
-                        if (res.data.status === 200) {
-                            this.product = res.data.product;
-                        }
-                    }).catch(err => console.log(err));
-            },
-            removeProductToFavouriteList(slug) {
-                axios.get(`/api/product/${slug}/favourite/remove`)
-                    .then(res => {
-                        if (res.data.status === 200) {
-                            this.product = res.data.product;
-                        }
-                    }).catch(err => console.log(err));
-            },
             changeMainImage(index) {
                 this.active_img = index;
                 this.displayProductImage = this.product.productImages[index].featureImage;

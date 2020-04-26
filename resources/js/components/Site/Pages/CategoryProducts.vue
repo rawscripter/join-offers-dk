@@ -3,18 +3,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-lg-3">
-                    <ProductFilter></ProductFilter>
+                    <ProductFilter @filterFromResetCompleted="filterFromResetCompleted"
+                                   :callResetFilterFunction="resetFilter" @filterProduct="eventHandler"></ProductFilter>
                 </div>
                 <div class="col-md-10 col-lg-9" style="background:#fff">
                     <div class="main-content">
                         <SubCategoryMenuBar :categorySlug="categorySlug"
-                                            :subCategories="subCategories"></SubCategoryMenuBar>
+                                            :subCategories="subCategories"
+                                            @selectedSubCategory="selectedSubCategory"
+                        ></SubCategoryMenuBar>
                         <div class="product-area" v-if="totalProducts">
                             <div class="row">
                                 <loading :active.sync="isLoading"
                                          :is-full-page="false"></loading>
                                 <div v-for="product in products" :key="product.id"
-                                     class="col-md-4 wow bounceInUp col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
+                                     class="col-md-4 wow bounceIn col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
                                     <!-- product single  -->
                                     <SingleProduct :product="product"></SingleProduct>
                                     <!-- end of product single  -->
@@ -31,6 +34,10 @@
                             </div>
                         </div>
                     </div>
+
+                    <infinite-loading :identifier="infiniteId" v-if="hasMorePages" @distance="1"
+                                      @infinite="infiniteHandler"></infinite-loading>
+
                 </div>
             </div>
         </div>
@@ -55,27 +62,66 @@
                 isLoading: false,
                 products: [],
                 subCategories: [],
-                categorySlug: null
+                categorySlug: null,
+                page: 1,
+                lastPage: 2,
+                infiniteId: +new Date(),
+                resetFilter: false,
+                query: {
+                    gender: 'All',
+                    short: 'New',
+                    minPrice: 0,
+                    maxPrice: 99999,
+                    subCategoryId: null,
+                }
             }
         },
         methods: {
-            getCategoryProducts(categorySlug) {
-                axios.get(`${APP_URL}/api/category/${categorySlug}/products`)
-                    .then(res => {
-                        this.isLoading = false;
-                        this.products = res.data.products;
-                    }).catch(error => {
-                    console.error(error)
-                })
+            filterFromResetCompleted() {
+                this.resetFilter = false;
             },
-            getSubCategoryProducts(subCategorySlug) {
-                axios.get(`${APP_URL}/api/sub-category/${subCategorySlug}/products`)
-                    .then(res => {
-                        this.isLoading = false;
-                        this.products = res.data.products;
-                    }).catch(error => {
-                    console.error(error)
-                })
+            selectedSubCategory(selectedSubIndex) {
+                this.resetFilter = true;
+                this.query.subCategoryId = this.subCategories[selectedSubIndex].id;
+            },
+            eventHandler(data) {
+                this.query.gender = data.gender;
+                this.query.short = data.short;
+                this.query.minPrice = data.priceRange[0];
+                this.query.maxPrice = data.priceRange[1];
+                this.resetState();
+            },
+            resetState() {
+                this.page = 1;
+                this.lastPage = 1;
+                this.products = [];
+                this.infiniteId += new Date();
+            },
+
+            infiniteHandler($state) {
+                let vm = this;
+                let query = this.query;
+                let categorySlug = this.categorySlug;
+                if (this.lastPage >= this.page) {
+                    axios.get(`${APP_URL}/api/category/${categorySlug}/products?page=` + this.page, {
+                        params: {
+                            gender: vm.query.gender,
+                            short: vm.query.short,
+                            minPrice: vm.query.minPrice,
+                            maxPrice: vm.query.maxPrice,
+                            subCategory: vm.query.subCategoryId,
+                        }
+                    })
+                        .then(response => {
+                            this.isLoading = false;
+                            this.lastPage = response.data.lastPage;
+                            $.each(response.data.products, function (key, value) {
+                                vm.products.push(value);
+                            });
+                            $state.loaded();
+                        });
+                }
+                this.page = this.page + 1;
             },
 
             getSubCategories(categorySlug) {
@@ -90,19 +136,14 @@
         computed: {
             totalProducts() {
                 return this.products.length > 0;
-            }
+            },
+            hasMorePages() {
+                return this.lastPage >= this.page;
+            },
         },
         created() {
-
             this.categorySlug = this.$route.params.category;
             this.getSubCategories(this.$route.params.category);
-
-            if (this.$route.params.category && !this.$route.params.subCategory) {
-                this.getCategoryProducts(this.$route.params.category);
-            }
-            if (this.$route.params.subCategory) {
-                this.getSubCategoryProducts(this.$route.params.subCategory);
-            }
             this.isLoading = true;
         }
     }

@@ -20,7 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('slug')->nullable();
             $table->text('short_des')->nullable();
             $table->text('full_des')->nullable();
-            $table->string('total_favourites')->default(0);
+            $table->integer('total_favourites')->default(0);
+            $table->string('product_type')->nullable();
+            $table->integer('total_clicks')->default(0);
             $table->bigInteger('sub_category_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
             $table->float('market_price')->nullable();

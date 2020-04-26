@@ -52,7 +52,8 @@
                 axios.get(`/api/product/${slug}/favourite/add`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            this.product = res.data.product;
+                            this.product.isLikedByCurrentUser = true;
+                            this.product.total_favourites++;
                         }
                     }).catch(err => console.log(err));
             },
@@ -60,10 +61,19 @@
                 axios.get(`/api/product/${slug}/favourite/remove`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            this.product = res.data.product;
+                            this.product.isLikedByCurrentUser = false;
+                            this.product.total_favourites--;
                         }
                     }).catch(err => console.log(err));
             }
+        },
+        computed: {
+            isLiked() {
+                return this.product.isLikedByCurrentUser;
+            },
+            totalLiked() {
+                return this.product.total_favourites;
+            },
         }
     }
 </script>

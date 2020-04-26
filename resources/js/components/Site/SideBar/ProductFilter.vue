@@ -6,86 +6,139 @@
         <div class="sidebar-header d-flex justify-content-between">
             <i class="fas fa-times mt-2" id="closeMobileSidebar"></i>
         </div>
-        <div class="till_filter">
-            <h5><b>Till :</b></h5>
-            <form action="#" id="tillFilter">
+        <form>
+            <div class="till_filter">
+                <h5><b>Till :</b></h5>
                 <!-- checkbox single  -->
                 <label class="checkbox_container">alle
-                    <input type="checkbox">
+                    <input v-model="filter.gender" value="All" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
                 <label class="checkbox_container">Maend
-                    <input type="checkbox">
+                    <input v-model="filter.gender" value="Men" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
                 <label class="checkbox_container">Kvinder
-                    <input type="checkbox">
+                    <input v-model="filter.gender" value="Women" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
                 <label class="checkbox_container">Born
-                    <input type="checkbox">
+                    <input v-model="filter.gender" value="kids" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
-            </form>
-        </div>
-        <div class="shoter_filter mt-3">
-            <h5><b>Shorter efter</b></h5>
-            <form action="#" id="shorterFilter">
+
+            </div>
+            <div class="shoter_filter mt-3">
+                <h5><b>Shorter efter</b></h5>
+                <label class="checkbox_container">Ny
+                    <input v-model="filter.short" value="new" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
                 <label class="checkbox_container">Popular
-                    <input type="checkbox">
+                    <input v-model="filter.short" value="popular" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
-                <label class="checkbox_container">Ny
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
                 <label class="checkbox_container">sidste chance
-                    <input type="checkbox">
+                    <input v-model="filter.short" value="old" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
-                <!-- checkbox single  -->
-                <label class="checkbox_container">Kommer snart
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <!-- end of checkbox single  -->
-            </form>
-        </div>
-        <div class="price_filter">
-            <!-- <label for="amount">Price range:</label> -->
-            <form action="#">
-                <div id="slider-range"></div>
-                <p style="margin-top:10px;">
-                    <input type="text" id="amount" readonly
-                           style="border:0; color:#f6931f; font-weight:bold;width:55%;">
-                </p>
-                <p style="margin-top:10px;">
-                    <button class="btn btn-block btn-success btn-sm rounded-0">Filter</button>
-                </p>
-            </form>
-        </div>
+            </div>
+            <div class="price_filter">
+                <br>
+                <!-- <label for="amount">Price range:</label> -->
+                <vue-range-slider @change="signalChange" :min="10" :max="10000"
+                                  v-model="range"></vue-range-slider>
+                <div class="price-range-text">
+                    {{range[0]}} - {{range[1]}}
+                </div>
+            </div>
+            <br>
+            <div class="submit">
+                <input type="button" @click="signalChange" value="Filter Product" class="btn btn-block btn-theme">
+            </div>
+            <br>
+            <p class="small reset-btn text-center" @click="resetFilter">
+                Reset Filter
+            </p>
+        </form>
     </div>
 </template>
 
 <script>
+    import 'vue-range-component/dist/vue-range-slider.css'
+    import VueRangeSlider from 'vue-range-component'
+
     export default {
-        name: "ProductFilter"
+        name: "ProductFilter",
+        components: {
+            VueRangeSlider
+        },
+        props: ['callResetFilterFunction'],
+        data() {
+            return {
+                range: [10, 10000],
+                filter: {
+                    gender: 'All',
+                    short: 'new',
+                    priceRange: null,
+                }
+            }
+        },
+        methods: {
+            resetFilter() {
+                this.filter.gender = 'All';
+                this.filter.short = 'new';
+                this.filter.priceRange = null;
+                this.range = [10, 10000];
+                this.signalChange();
+
+            },
+            signalChange() {
+                this.filter.priceRange = this.range;
+                this.$emit('filterProduct', this.filter)
+            }
+        },
+        watch: {
+            callResetFilterFunction(val) {
+                if (val) {
+                    this.resetFilter();
+                    this.$emit('filterFromResetCompleted')
+                }
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style>
+    .vue-range-slider.slider-component .slider-tooltip-wrap .slider-tooltip {
+        display: none !important;
+    }
 
+    .vue-range-slider.slider-component .slider .slider-process {
+        background-color: #ff622d !important;
+    }
+
+    .price-range-text {
+        text-align: center;
+        font-weight: bold;
+        color: #ff652e;
+        font-size: 20px;
+    }
+
+    .reset-btn {
+        cursor: pointer;
+    }
 </style>

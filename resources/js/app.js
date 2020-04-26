@@ -28,8 +28,9 @@ Vue.use(ServerTable);
 Vue.use(VueSweetalert2);
 Vue.use(vueAwesomeCountdown, 'vac');
 Vue.component('Loading', Loading);
-Vue.component('InfiniteLoading', require('vue-infinite-loading'));
-
+import InfiniteLoading from 'vue-infinite-loading';
+// Vue.component('', require('vue-infinite-loading'));
+Vue.use(InfiniteLoading);
 
 window.User = User;
 window.Alert = Notification;

@@ -19,14 +19,6 @@ Route::get('/admin', function () {
     return view('admin.index');
 });
 
-// to load admin dashboard
-Route::get('/admin/{any}', function () {
-    return view('admin.index');
-});
-// to load admin dashboard
-Route::get('/admin/{any}/{any1}', function () {
-    return view('admin.index');
-});
 
 // to load main site
 Route::get('/', function () {
@@ -38,24 +30,38 @@ Route::get('/login', function () {
     return view('site.index');
 });
 
-Route::get('/{any}', function () {
+// to load main site
+Route::get('/register', function () {
     return view('site.index');
 });
 
-Route::get('/{any}/{any1}', function () {
+Route::get('/{any}', function (\Illuminate\Http\Request $request) {
+    if ($request->is('admin/*')) {
+     return   view('admin.index');
+    }
     return view('site.index');
 });
 
-Route::get('/{any}/{any1}/{any2}', function () {
+
+Route::get('/{any}/{any1}', function (\Illuminate\Http\Request $request) {
+    if ($request->is('admin/*')) {
+        return view('admin.index');
+    }
     return view('site.index');
 });
 
-Route::get('/{any}/{any1}/{any2}/{any4}', function () {
+Route::get('/{any}/{any1}/{any2}', function (\Illuminate\Http\Request $request) {
+    if ($request->is('admin/*')) {
+        return view('admin.index');
+    }
     return view('site.index');
 });
 
-//Route::view('/{any}', 'site.index');
-//Route::view('/{any}/{any1}', 'site.index');
-//Route::view('/{any}/{any1}/{any2}', 'site.index');
-//Route::view('/{any}/{any1}/{any2}/{any3}', 'site.index');
+Route::get('/{any}/{any1}/{any2}/{any3}', function (\Illuminate\Http\Request $request) {
+    if ($request->is('admin/*')) {
+        return view('admin.index');
+    }
+    return view('site.index');
+});
+
 

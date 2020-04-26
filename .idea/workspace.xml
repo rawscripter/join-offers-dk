@@ -2,26 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Like.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_23_145350_create_likes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/UserLogin.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/product/69b8ac40-864b-11ea-ad3e-75d58cbedf83.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/product/feature/69b8ac40-864b-11ea-ad3e-75d58cbedf83.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/product/thumb/69b8ac40-864b-11ea-ad3e-75d58cbedf83.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/FavouriteProudctsPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/FilterPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SubCategoryProducts.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/UserRegister.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_16_063451_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_16_063451_create_products_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Helpers/Token.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Helpers/Token.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Helpers/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Helpers/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Router/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/Auth/AppLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/Auth/AppLogin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductEdit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductEdit.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteTopHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteTopHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SubCategoryMenuBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SubCategoryMenuBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/CategoryProducts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/CategoryProducts.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/UserLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/UserLogin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductFilter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductFilter.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductOfferInfoSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductOfferInfoSidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -202,11 +213,11 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="open C:\xampp\htdocs\projects\soundiocloud" />
+      <command value="open quezbii" />
       <command value="open surveybii" />
       <command value="open C:\Users\shuvo\Desktop\projects\lesan\rainer" />
       <command value="open gowinmii" />
-      <command value="open C:\xampp\htdocs\projects\soundiocloud" />
-      <command value="open quezbii" />
     </option>
   </component>
   <component name="RunManager">
@@ -268,7 +279,12 @@
       <workItem from="1587573255766" duration="762000" />
       <workItem from="1587635517073" duration="9070000" />
       <workItem from="1587656949795" duration="9000" />
-      <workItem from="1587714640939" duration="1257000" />
+      <workItem from="1587714640939" duration="3047000" />
+      <workItem from="1587724951289" duration="644000" />
+      <workItem from="1587740886863" duration="9404000" />
+      <workItem from="1587760668119" duration="1159000" />
+      <workItem from="1587914406067" duration="136000" />
+      <workItem from="1587931563814" duration="12716000" />
     </task>
     <servers />
   </component>
@@ -277,30 +293,31 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" key="#Notifications" timestamp="1587635537096">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="552" y="198" key="#Notifications/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587635537096" />
-    <state x="640" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587483169128">
+    <state x="640" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587743760143">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="640" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587483169128" />
+    <state x="640" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587743760143" />
     <state x="2560" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1584642837773" />
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584735574781">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584735574781" />
-    <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587656229351">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587392096059" />
-    <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587656229351" />
-    <state x="583" y="43" key="CommitChangelistDialog2" timestamp="1586937646740">
+    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587942166060">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="583" y="43" key="CommitChangelistDialog2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586937646740" />
+    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587942166060" />
+    <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587656229351" />
+    <state x="583" y="43" key="CommitChangelistDialog2" timestamp="1587940309876">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="583" y="43" key="CommitChangelistDialog2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587940309876" />
     <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1586941371619">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -330,21 +347,21 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586956085588" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1587715788200">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1587943873441">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376623973" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587715788200" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587656480927" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587943873441" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587761337917" />
     <state x="767" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587377418355">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="767" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587377418355" />
     <state x="2687" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587289498626" />
-    <state x="0" y="0" width="1479" height="1061" key="dock-window-1" timestamp="1587376442442">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="1920" y="0" width="1893" height="1087" key="dock-window-1" timestamp="1587941794779">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="0" y="0" width="1479" height="1061" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587376442442" />
+    <state x="1920" y="0" width="1893" height="1087" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587941794779" />
     <state x="0" y="0" width="1479" height="1061" maximized="true" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587375848087" />
     <state x="646" y="256" width="627" height="568" key="find.popup" timestamp="1587464696683">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -363,16 +380,16 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="601" y="265" width="700" height="530" key="recent.locations.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584734962034" />
-    <state x="616" y="250" width="672" height="677" key="run.anything.popup" timestamp="1587656957899">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="2536" y="250" width="672" height="677" key="run.anything.popup" timestamp="1587914542985">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587656957899" />
-    <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587562548688" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1587715758651">
+    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587753596733" />
+    <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587914542985" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1587944577148">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376572360" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587715758651" />
-    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587564924865" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587944577148" />
+    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587931713231" />
   </component>
 </project>

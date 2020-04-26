@@ -2,18 +2,15 @@
     <div class="page-wrapper wow">
         <div class="container">
             <div class="row">
-                <div class="col-md-2 col-lg-3 ">
-                    <ProductFilter @filterProduct="eventHandler"></ProductFilter>
-                </div>
-                <div class="col-md-10 col-lg-9">
+                <div class="col-md-10 col-lg-10 m-auto">
                     <div class="main-content">
-                        <div v-if="totalProducts" class="product-area">
+                        <div class="product-area" v-if="hasProducts">
                             <div class="row">
                                 <loading :active.sync="isLoading"
                                          :is-full-page="false"></loading>
 
                                 <div v-for="product in products" :key="product.id"
-                                     class="col-md-4 bounceIn wow col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
+                                     class="col-md-4 bounceInUp wow col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
                                     <!-- product single  -->
                                     <SingleProduct :product="product"></SingleProduct>
                                     <!-- end of product single  -->
@@ -22,16 +19,22 @@
                             </div>
                         </div>
                         <div v-else>
-                            <div class="text-center mt-5">
-                                <h3 class="big-error-font">
+                            <div class="text-center m-100 mt-5">
+                                <h3 class="mt-6 big-error-font">
                                     <strong>
-                                        No Product Found
+                                        No Search Result
                                     </strong>
+                                    <br>
+                                    <router-link class="back-to-home" tag="a" to="/">
+                                        Back To Home
+                                    </router-link>
+
                                 </h3>
                             </div>
                         </div>
                     </div>
-                    <infinite-loading :identifier="infiniteId" v-if="hasMorePages" @distance="1"
+
+                    <infinite-loading v-if="hasMorePages" @distance="1"
                                       @infinite="infiniteHandler"></infinite-loading>
                 </div>
             </div>
@@ -39,59 +42,27 @@
     </div>
 </template>
 <script>
-
-    import ProductFilter from "../SideBar/ProductFilter";
     import SubCategoryMenuBar from "../Layout/SubCategoryMenuBar";
     import SingleProduct from "../Layout/Product/Loop/SingleProduct";
 
     export default {
-        name: "SiteIndex",
+        name: "FavouriteProudctsPage",
         components: {
-            ProductFilter,
             SubCategoryMenuBar,
             SingleProduct
         },
         data() {
             return {
                 isLoading: false,
-                products: [],
                 page: 1,
+                products: [],
                 lastPage: 2,
-                infiniteId: +new Date(),
-                query: {
-                    gender: 'All',
-                    short: 'New',
-                    minPrice: 0,
-                    maxPrice: 99999,
-                }
             }
         },
         methods: {
-            eventHandler(data) {
-                this.query.gender = data.gender;
-                this.query.short = data.short;
-                this.query.minPrice = data.priceRange[0];
-                this.query.maxPrice = data.priceRange[1];
-                this.resetState();
-            },
-            resetState() {
-                this.page = 1;
-                this.lastPage = 1;
-                this.products = [];
-                this.infiniteId += new Date();
-            },
             infiniteHandler($state) {
                 let vm = this;
-                let query = this.query;
-                if (this.lastPage >= this.page) {
-                    axios.get(`${APP_URL}/api/products?page=` + this.page, {
-                        params: {
-                            gender: vm.query.gender,
-                            short: vm.query.short,
-                            minPrice: vm.query.minPrice,
-                            maxPrice: vm.query.maxPrice,
-                        }
-                    })
+                    axios.get(`${APP_URL}/api/favourites`)
                         .then(response => {
                             this.isLoading = false;
                             this.lastPage = response.data.lastPage;
@@ -100,24 +71,20 @@
                             });
                             $state.loaded();
                         });
-                }
                 this.page = this.page + 1;
             },
-
         },
         created() {
             this.isLoading = true;
-            // this.getProducts();
         },
         computed: {
             hasMorePages() {
                 return this.lastPage >= this.page;
             },
-            totalProducts() {
+            hasProducts() {
                 return this.products.length > 0;
             }
-        },
-
+        }
     }
 </script>
 
@@ -129,13 +96,29 @@
     .product-area {
         background: #fafafa;
         padding: 5px;
-        min-height: 70vh;
+        min-height: 50vh;
     }
-
 
     .big-error-font {
         font-size: 48px;
         color: #3939396b;
         margin-top: 150px !important;
+    }
+
+    .page-wrapper.wow {
+        overflow: hidden;
+    }
+
+    .back-to-home {
+        font-size: 19px;
+        font-weight: bold;
+        text-decoration: underline;
+        color: #3939396b;
+        transition: 0.3s;
+        font-family: 'Dosis', sans-serif;
+    }
+
+    .back-to-home:hover {
+        color: #ea782a;
     }
 </style>
