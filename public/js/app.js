@@ -5115,7 +5115,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -5159,7 +5158,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var vm = this;
-      var query = this.query;
 
       if (this.lastPage >= this.page) {
         axios.get("".concat(APP_URL, "/api/products?page=") + this.page, {
@@ -12916,7 +12914,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.padding-top-30[data-v-34533723] {\n    padding-top: 30px;\n}\n.product-area[data-v-34533723] {\n    background: #fafafa;\n    padding: 5px;\n    min-height: 70vh;\n}\n.big-error-font[data-v-34533723] {\n    font-size: 48px;\n    color: #3939396b;\n    margin-top: 150px !important;\n}\n", ""]);
+exports.push([module.i, "\n.product-area[data-v-34533723] {\n    background: #fafafa;\n    padding: 5px;\n    min-height: 70vh;\n}\n.big-error-font[data-v-34533723] {\n    font-size: 48px;\n    color: #3939396b;\n    margin-top: 150px !important;\n}\n", ""]);
 
 // exports
 
@@ -54264,25 +54262,24 @@ var render = function() {
           "div",
           { staticClass: "col-md-10 col-lg-9" },
           [
-            _c("div", { staticClass: "main-content" }, [
-              _vm.totalProducts
-                ? _c("div", { staticClass: "product-area" }, [
-                    _c(
-                      "div",
-                      { staticClass: "row" },
-                      [
-                        _c("loading", {
-                          attrs: {
-                            active: _vm.isLoading,
-                            "is-full-page": false
-                          },
-                          on: {
-                            "update:active": function($event) {
-                              _vm.isLoading = $event
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "main-content" },
+              [
+                _c("loading", {
+                  attrs: { active: _vm.isLoading, "is-full-page": true },
+                  on: {
+                    "update:active": function($event) {
+                      _vm.isLoading = $event
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.totalProducts
+                  ? _c("div", { staticClass: "product-area" }, [
+                      _c(
+                        "div",
+                        { staticClass: "row" },
                         _vm._l(_vm.products, function(product) {
                           return _c(
                             "div",
@@ -54298,13 +54295,14 @@ var render = function() {
                             ],
                             1
                           )
-                        })
-                      ],
-                      2
-                    )
-                  ])
-                : _c("div", [_vm._m(0)])
-            ]),
+                        }),
+                        0
+                      )
+                    ])
+                  : _c("div", [_vm._m(0)])
+              ],
+              1
+            ),
             _vm._v(" "),
             _vm.hasMorePages
               ? _c("infinite-loading", {

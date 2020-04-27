@@ -7,11 +7,10 @@
                 </div>
                 <div class="col-md-10 col-lg-9">
                     <div class="main-content">
+                        <loading :active.sync="isLoading"
+                                 :is-full-page="true"></loading>
                         <div v-if="totalProducts" class="product-area">
                             <div class="row">
-                                <loading :active.sync="isLoading"
-                                         :is-full-page="false"></loading>
-
                                 <div v-for="product in products" :key="product.id"
                                      class="col-md-4 bounceIn wow col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
                                     <!-- product single  -->
@@ -82,7 +81,6 @@
             },
             infiniteHandler($state) {
                 let vm = this;
-                let query = this.query;
                 if (this.lastPage >= this.page) {
                     axios.get(`${APP_URL}/api/products?page=` + this.page, {
                         params: {
@@ -122,9 +120,6 @@
 </script>
 
 <style scoped>
-    .padding-top-30 {
-        padding-top: 30px;
-    }
 
     .product-area {
         background: #fafafa;
