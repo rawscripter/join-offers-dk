@@ -42,4 +42,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Product::class, 'likes');
     }
+
+    public function info()
+    {
+        return $this->hasOne(UserInfo::class);
+    }
+
+
 }

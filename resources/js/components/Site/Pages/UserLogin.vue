@@ -42,14 +42,14 @@
                                     <input type="checkbox">
                                     <span class="checkmark"></span>
                                 </label>
-<!--                                <a href="#">Forget password ?</a>-->
+                                <!--                                <a href="#">Forget password ?</a>-->
                             </div>
                             <br>
                             <div class="register text-left">
                                 <p>Don't have an account?
-                                    <router-link to="/register" class="theme-color">
+                                    <a href="javascript:void(0)" class="theme-color" @click="goToRegister">
                                         Register Now
-                                    </router-link>
+                                    </a>
                                 </p>
                             </div>
                         </form>
@@ -75,9 +75,17 @@
                     password: false,
                     text: ''
                 },
+                redirectUrl: '/',
             }
         },
         methods: {
+            goToRegister() {
+                if (this.redirectUrl !== '/') {
+                    this.$router.push({name: 'register', query: {redirect: this.redirectUrl}});
+                } else {
+                    this.$router.push({name: 'register'});
+                }
+            },
             submitLoginForm() {
                 this.isLoading = true;
                 if (this.validateForm()) {
@@ -85,7 +93,7 @@
                         .then(response => {
                             this.isLoading = false;
                             if (response.status === 200) {
-                                User.responseAfterLogin(response);
+                                User.responseAfterLogin(response, this.redirectUrl);
                             }
                             if (response.status === 400) {
                                 this.formErrors.text = response.data;
@@ -111,6 +119,9 @@
                 }
                 return false;
             }
+        },
+        created() {
+            this.redirectUrl = this.$route.query.redirect;
         },
         computed: {
             hasFormError() {

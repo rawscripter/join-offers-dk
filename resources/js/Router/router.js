@@ -18,6 +18,7 @@ import SearchPage from "../components/Site/Pages/SearchPage";
 import UserLogin from "../components/Site/Pages/UserLogin";
 import UserRegister from "../components/Site/Pages/UserRegister";
 import FavouriteProudctsPage from "../components/Site/Pages/FavouriteProudctsPage";
+import CheckoutPage from "../components/Site/Pages/CheckoutPage";
 
 //importing components
 
@@ -48,6 +49,7 @@ const routes = [
     {
         path: '/login',
         component: UserLogin,
+        name: 'login',
         meta: {
             title: 'Login!'
         }
@@ -55,6 +57,7 @@ const routes = [
     {
         path: '/register',
         component: UserRegister,
+        name: 'register',
         meta: {
             title: 'Register Now!'
         }
@@ -65,6 +68,14 @@ const routes = [
         component: ProductDetailsPage,
         meta: {
             title: 'Welcome to Join Offer!'
+        }
+    },
+    {
+        path: '/checkout/:slug',
+        name: 'checkout',
+        component: CheckoutPage,
+        meta: {
+            title: 'Checkout Now!'
         }
     }, {
         path: '/favourites',

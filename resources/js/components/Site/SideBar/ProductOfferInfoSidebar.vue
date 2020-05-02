@@ -15,28 +15,32 @@
             <h6><small>Din Pris</small></h6>
             <h6>{{product.last_price}}</h6>
             <!--            total save-->
-            <button class="btn btn-success">Du sprarer 20%</button>
-            <div class="love-section mt-2">
-                <button class="btn btn-success">deltag</button>
-
+            <div class="love-section">
                 <button v-if="product.isLikedByCurrentUser" @click="removeProductToFavouriteList(product.slug)"
-                        class="btn btn-success"> {{product.total_favourites}} <i class="fas fa-heart" style="color:red"></i></button>
+                        class="btn btn-success"> {{product.total_favourites}} <i class="fas fa-heart"
+                                                                                 style="color:red"></i></button>
                 <button v-else @click="addProductToFavouriteList(product.slug)" class="btn btn-success">
                     {{product.total_favourites}} <i class="far fa-heart"></i></button>
-
-                <br>
             </div>
+            <button class="btn mt-1 btn-success">Du sprarer {{product.saving_percentage}}%</button>
         </div>
+        <div class="checkout mt-3 mb-3">
+            <router-link class="btn btn-theme btn-block" tag="div" :to="{name: 'checkout', params:{slug:product.slug}}">
+                Order Now
+            </router-link>
+        </div>
+
         <div class="sidebar-action">
             <p><i class="far fa-heart"></i> Gem till favouriter</p>
             <p><i class="fas fa-sync"></i> Pamind mig</p>
             <p><i class="fas fa-sync"></i> Del pa</p>
+            <div class="sidebar-social mt-2 d-flex justify-content-around">
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
-        <div class="sidebar-social">
-            <a href="#"><i class="fab fa-facebook-square"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-        </div>
+
     </div>
 </template>
 

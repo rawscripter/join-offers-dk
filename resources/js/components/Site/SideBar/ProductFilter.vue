@@ -59,10 +59,15 @@
             <div class="price_filter">
                 <br>
                 <!-- <label for="amount">Price range:</label> -->
-                <vue-range-slider @change="signalChange" :min="10" :max="10000"
-                                  v-model="range"></vue-range-slider>
-                <div class="price-range-text">
-                    {{range[0]}} - {{range[1]}}
+                <!--                <vue-range-slider @change="signalChange" :min="10" :max="10000"-->
+                <!--                                  v-model="range"></vue-range-slider>-->
+
+                <vue-slider :max="10000" v-model="range"></vue-slider>
+
+                <div class="price-range-text mt-2">
+                    <input type="number" v-model="range[0]">
+                    -
+                    <input type="number" max v-model="range[1]">
                 </div>
             </div>
             <br>
@@ -78,18 +83,20 @@
 </template>
 
 <script>
-    import 'vue-range-component/dist/vue-range-slider.css'
-    import VueRangeSlider from 'vue-range-component'
+
+    import VueSlider from 'vue-slider-component'
+    import 'vue-slider-component/theme/default.css'
+
 
     export default {
         name: "ProductFilter",
         components: {
-            VueRangeSlider
+            VueSlider
         },
         props: ['callResetFilterFunction'],
         data() {
             return {
-                range: [10, 10000],
+                range: [0, 10000],
                 filter: {
                     gender: 'All',
                     short: 'new',
@@ -102,7 +109,7 @@
                 this.filter.gender = 'All';
                 this.filter.short = 'new';
                 this.filter.priceRange = null;
-                this.range = [10, 10000];
+                this.range = [0, 10000];
                 this.signalChange();
 
             },
@@ -123,14 +130,6 @@
 </script>
 
 <style>
-    .vue-range-slider.slider-component .slider-tooltip-wrap .slider-tooltip {
-        display: none !important;
-    }
-
-    .vue-range-slider.slider-component .slider .slider-process {
-        background-color: #ff622d !important;
-    }
-
     .price-range-text {
         text-align: center;
         font-weight: bold;
@@ -140,5 +139,26 @@
 
     .reset-btn {
         cursor: pointer;
+    }
+
+    .vue-slider-process {
+        background-color: #ff632d !important;
+        border-radius: 15px;
+    }
+
+    .vue-slider-dot-tooltip-inner {
+        border-color: #ff622c !important;
+        background-color: #ff652d !important;
+    }
+
+    input[type="number"] {
+        width: 100px;
+        text-align: center;
+        /* border-color: #aaaaaa; */
+        border: 1px solid #eaeaea;
+        padding: 5px 10px;
+        font-size: 16px;
+        color: #858585;
+        border-radius: 4px;
     }
 </style>

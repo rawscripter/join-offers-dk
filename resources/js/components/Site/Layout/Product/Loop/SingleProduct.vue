@@ -40,13 +40,13 @@
                     <del>{{product.offer_price}},-</del>
                 </h6>
                 <h6>Du sprarer </h6>
-                <button class="btn btn-success btn-sm">20%</button>
+                <button class="btn btn-success btn-sm">{{product.saving_percentage}}%</button>
             </div>
             <div class="pricing-right">
                 <h6><small>Deltagend</small></h6>
                 <h6>{{product.total_offer_spots}}</h6>
                 <h6><small>Din Pris</small></h6>
-                <h6>{{product.last_price}}</h6>
+                <h6>{{product.current_price}}</h6>
             </div>
         </div>
         <router-link class="btn btn-success btn-block mt-3" tag="button"

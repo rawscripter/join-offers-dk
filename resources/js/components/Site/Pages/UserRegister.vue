@@ -44,9 +44,7 @@
                             </div>
                             <div class="register text-left">
                                 <p>Already have an account?
-                                    <router-link to="/login" class="theme-color">
-                                        Login Now
-                                    </router-link>
+                                    <a href="javascript:void(0)" class="theme-color" @click="goToLogin"> Login Now</a>
                                 </p>
                             </div>
                         </form>
@@ -63,6 +61,7 @@
         data() {
             return {
                 isLoading: false,
+                redirectUrl: '/',
                 form: {
                     name: null,
                     username: null,
@@ -76,6 +75,14 @@
             }
         },
         methods: {
+            goToLogin() {
+                if (this.redirectUrl !== '/') {
+                    this.$router.push({name: 'login', query: {redirect: this.redirectUrl}});
+                } else {
+                    this.$router.push({name: 'login'});
+                }
+            },
+
             submitLoginForm() {
                 this.isLoading = true;
                 if (this.validateForm()) {
@@ -83,7 +90,7 @@
                         .then(response => {
                             this.isLoading = false;
                             if (response.status === 200) {
-                                User.responseAfterLogin(response);
+                                User.responseAfterLogin(response,this.redirectUrl);
                             }
                             if (response.status === 400) {
                                 this.formErrors.text = response.data;
@@ -114,6 +121,9 @@
             hasFormError() {
                 return this.formErrors.text !== '';
             }
+        },
+        created() {
+            this.redirectUrl = this.$route.query.redirect;
         }
     }
 </script>

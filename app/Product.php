@@ -40,6 +40,21 @@ class Product extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function savingPercentage()
+    {
+        return ceil(100 - (($this->current_price / $this->market_price) * 100));
+    }
+
+    public function paymentPercentage()
+    {
+        if ($this->join_price > 0) {
+            return ceil((($this->join_price / $this->offer_price) * 100));
+        } else {
+            return 0;
+        }
+
+    }
+
     public function isAuthUserLikedPost()
     {
         if (Auth::guard('api')->user()) {

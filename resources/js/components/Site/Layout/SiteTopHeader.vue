@@ -41,7 +41,7 @@
                                                 <button type="button" class="btn btn-light rounded-0 pl-3 pr-3"><i
                                                     class="fas fa-search"></i></button>
                                                 <input type="text" v-model="search" class="form-control rounded-0"
-                                                       name="query"
+                                                       id="searchForm"
                                                        style="border: 1px solid transparent; !important"
                                                        placeholder="Busca algo..." value="">
                                                 <span class="input-group-btn">

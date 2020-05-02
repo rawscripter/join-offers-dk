@@ -73,6 +73,8 @@ class ProductController extends Controller
 
             $products = $products->paginate(6);
 
+        } else if (isset($request['query']) && !empty($request['query'])) {
+            $products = Product::where('name', 'like', '%' . $request['query'] . '%')->orderBy('created_at', 'desc')->paginate(6);
         } else {
             $products = Product::orderBy('created_at', 'desc')->paginate(6);
         }

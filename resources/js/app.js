@@ -34,8 +34,8 @@ Vue.use(InfiniteLoading);
 
 window.User = User;
 window.Alert = Notification;
-// window.APP_URL = 'http://laravu.test';
-window.APP_URL = 'http://offer.danpanel.dk';
+window.APP_URL = 'http://laravu.test';
+// window.APP_URL = 'http://offer.danpanel.dk';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

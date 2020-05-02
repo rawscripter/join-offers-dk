@@ -603,3 +603,11 @@ nav {
 .checkbox_container .checkmark:after {
     border-color: #ff6b2f !important;
 }
+
+.col-md-4.bounceIn.wow.col-lg-4 {
+    visibility: visible !important;
+}
+
+.btn {
+    cursor: pointer;
+}

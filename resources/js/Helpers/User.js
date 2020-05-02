@@ -4,14 +4,14 @@ import AppStorage from "./AppStorage";
 
 class User {
 
-    responseAfterLogin(response) {
+    responseAfterLogin(response, nextUrl = '/') {
 
         const access_token = response.data.access_token;
 
         if (access_token) {
             AppStorage.store(access_token);
         }
-        window.location = '/'
+        window.location = nextUrl
     }
 
     hasToken() {

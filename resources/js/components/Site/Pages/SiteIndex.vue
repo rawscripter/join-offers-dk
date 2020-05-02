@@ -3,16 +3,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-lg-3 ">
-                    <ProductFilter @filterProduct="eventHandler"></ProductFilter>
+                    <ProductFilter @filterProduct="eventHandler" :callResetFilterFunction="false"></ProductFilter>
                 </div>
                 <div class="col-md-10 col-lg-9">
                     <div class="main-content">
-                        <loading :active.sync="isLoading"
-                                 :is-full-page="true"></loading>
+<!--                        <loading :active.sync="isLoading"-->
+<!--                                 :is-full-page="true"></loading>-->
                         <div v-if="totalProducts" class="product-area">
                             <div class="row">
                                 <div v-for="product in products" :key="product.id"
-                                     class="col-md-4 bounceIn wow col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
+                                     class="col-md-4 bounceInUp wow col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
                                     <!-- product single  -->
                                     <SingleProduct :product="product"></SingleProduct>
                                     <!-- end of product single  -->
@@ -105,7 +105,6 @@
         },
         created() {
             this.isLoading = true;
-            // this.getProducts();
         },
         computed: {
             hasMorePages() {

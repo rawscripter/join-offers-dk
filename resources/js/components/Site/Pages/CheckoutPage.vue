@@ -1,0 +1,256 @@
+<template>
+    <div class="page-wrapper">
+        <div class="container">
+            <loading :active.sync="isLoading"
+                     :is-full-page="true"></loading>
+            <!-- start checkout product info area  -->
+            <div v-if="!isLoading">
+                <div class="product-info-area mt-4 shadow-sm p-4">
+                    <div class="table-responsive">
+                        <table class="table text-center">
+                            <thead>
+                            <tr>
+                                <th>si</th>
+                                <th>photo</th>
+                                <th>Begivenheds</th>
+                                <th>Deltagelsespris <br>
+                                    (del 1 of two betalinger)
+                                </th>
+                                <th>Antal</th>
+                                <th>Note</th>
+                                <th>| alt</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <img :src="product.thumbImage" :alt="product.name" style="width:50px">
+                                </td>
+                                <td>
+                                    <router-link class="text-default"
+                                                 :to="{name: 'product-details', params:{slug:product.slug}}">
+                                        {{product.name}}
+                                    </router-link>
+                                </td>
+                                <td>
+                                    {{ product.join_price}} <br>
+                                    {{ product.join_payment_percentage }} % of
+                                    {{product.offer_price}}
+                                </td>
+                                <td>
+                                    <button type="button" @click="decreaseOrderQuantity"
+                                            class="btn btn-success btn-sm rounded mr-0"><i
+                                        class="fas fa-arrows-alt-h"></i></button>
+                                    <input type="number" id="oqty" min="1" v-model="orderDetails.quantity"
+                                           style="width:70px;text-align:center">
+                                    <button type="button" @click="increaseOrderQuantity" class="btn btn-success btn-sm">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                                <td style="width:25%">
+                                    <p class="m-0 p-0">1. Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                </td>
+                                <td>
+                                    {{orderDetails.totalPrice}} <br>
+                                    Heraf moms : xxs
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end checkout product info area  -->
+                <UserLoginRegisterButton v-if="!isUserLoggedIn" product-slug="productSlug"></UserLoginRegisterButton>
+
+                <!-- start checkout billing area  -->
+                <div class="checkout-billing-area  mt-4" v-if="isUserLoggedIn">
+                    <div class="row">
+                        <div class="col-12  col-lg-8">
+                            <div id="dibs-complete-checkout"></div>
+                        </div>
+                           
+                        <div class="ml-auto col-12 col-lg-4">
+                            <div class="checkout-customer-info">
+                                <div class="cards shadow">
+                                    <div class="card-header-title">
+                                        <h5 class="text-center"><strong>Order Details</strong></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="checkout-table table table-hover" style="width:100%">
+                                            <tr>
+                                                <td><strong>Product Name:</strong></td>
+                                                <td>{{product.name}} dk</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><strong>Product Price:</strong></td>
+                                                <td>{{product.offer_price}} dk</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Your Payment:</strong></td>
+                                                <td> {{ product.join_price}} ({{ product.join_payment_percentage }} % of
+                                                    {{product.offer_price}})
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Quantity</strong>:</td>
+                                                <td>{{orderDetails.quantity}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total</strong>:</td>
+                                                <td>{{orderDetails.totalPrice}} dk</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2" colspan="2">
+                                                    <button @click="createPaymentId" class="btn btn-block mt-3 btn-success">Order Now</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- start checkout billing area  -->
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import UserLoginRegisterButton from "../Layout/UserLoginRegisterButton";
+
+    export default {
+        name: "CheckoutPage",
+        components: {
+            UserLoginRegisterButton
+        },
+        data() {
+            return {
+                isLoading: false,
+                product: null,
+                productSlug: null,
+                isUserLoggedIn: User.loggedIn(),
+                orderDetails: {
+                    productId: null,
+                    quantity: 1,
+                    totalPrice: 0,
+                    unitPrice: 0,
+                }
+            }
+        },
+        watch: {
+            'orderDetails.quantity'(val) {
+                this.orderDetails.totalPrice = this.orderDetails.unitPrice * val
+            }
+        },
+        methods: {
+            increaseOrderQuantity() {
+                this.orderDetails.quantity++;
+            },
+            decreaseOrderQuantity() {
+                if (this.orderDetails.quantity > 1) {
+                    this.orderDetails.quantity--;
+                } else {
+                    alert('Minimum order Quantity is 1');
+                }
+            },
+            getProduct(slug) {
+                axios.get(`${APP_URL}/api/product/${slug}`)
+                    .then(res => {
+                        this.isLoading = false;
+                        this.product = res.data.product;
+                        this.orderDetails.totalPrice = res.data.product.join_price;
+                        this.orderDetails.unitPrice = res.data.product.join_price;
+                    }).catch(error => {
+                    console.error(error)
+                })
+            },
+
+            createPaymentId() {
+                let config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'test-secret-key-545225c85d254ef296283fcba54bd26c'
+                    }
+                }
+
+                axios.post('https://test.api.dibspayment.eu/v1/payments', config,)
+                    .then(res => {
+                        console.log(res)
+                    })
+                    .catch(res => console.log(res))
+            }
+        },
+        created() {
+            this.isLoading = true;
+            this.productSlug = this.$route.params.slug;
+            this.getProduct(this.productSlug);
+        },
+    }
+</script>
+
+<style scoped>
+    .form-group {
+        margin-bottom: 0rem;
+    }
+
+    .form-group {
+        margin-bottom: 0rem;
+    }
+
+    /* .form-control {
+        height: calc(1.5em + .75rem + 15px);
+    } */
+    .paymethode-area {
+        margin-top: 10px;
+    }
+
+    .paymethode-area p {
+        color: #989191;
+        font-size: 14px;
+        margin-top: 4px;
+        text-transform: uppercase;
+    }
+
+    .paymethode-area img {
+        width: 30px;
+        height: 22px;
+        margin: 2px;
+    }
+
+    .terms-condition-single input {
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+
+    input.form-control.form-control-sm.rounded-0 {
+        margin-bottom: 8px;
+        height: 40px;
+        border-radius: 5px !important;
+        border-color: #e8e8e8;
+    }
+
+    #oqty {
+        width: 100px;
+        text-align: center;
+        /* border-color: #aaaaaa; */
+        border: 1px solid #eaeaea;
+        padding: 5px 10px;
+        font-size: 16px;
+        color: #858585;
+        border-radius: 4px;
+    }
+
+    .text-default {
+        color: #000 !important;
+    }
+
+    .checkout-table tr {
+        margin-top: 10px;
+    }
+</style>

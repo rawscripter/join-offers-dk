@@ -39,6 +39,7 @@
 <script src="{{asset('frontend/assets/js/product_view_main.js')}}"></script>
 <script src="{{asset('frontend/assets/js/owl.carousel.js')}}"></script>
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+<script src="https://test.checkout.dibspayment.eu/v1/checkout.js?v=1"></script>
 <script !src="">
     new WOW().init();
 </script>
