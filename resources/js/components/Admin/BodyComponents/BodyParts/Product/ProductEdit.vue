@@ -93,7 +93,11 @@
                                 <input required v-model="formData.last_price" class="form-control" id="last_price"
                                        type="text">
                             </div>
-
+                            <div class="col-md-4">
+                                <label for="Join_price" class="col-form-label">Join Price:</label>
+                                <input required v-model="formData.join_price" class="form-control" id="Join_price"
+                                       type="text">
+                            </div>
 
                             <div class="col-md-4">
                                 <label for="total_spots" class="col-form-label">Total Spots:</label>
@@ -111,13 +115,21 @@
                             </div>
 
                             <div class="col-md-4">
+                                <label for="max_unit_per_user" class="col-form-label">Maximum Order Unit Per
+                                    User:</label>
+                                <input required v-model="formData.max_unit_per_user" class="form-control"
+                                       id="max_unit_per_user"
+                                       type="text">
+                            </div>
+
+                            <div class="col-md-4">
                                 <label for="expire_date" class="col-form-label">Expire
                                     Date:</label>
                                 <input v-model="formData.expire_date" class="form-control" id="expire_date"
                                        type="datetime-local">
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="xxxx" class="col-form-label">Product Type:</label>
                                 <select v-model="formData.product_type" name="" class="form-control" id="xxxx">
                                     <option v-for="type in productTypes" :value="type">{{type}}</option>
@@ -197,7 +209,9 @@
                     productImages: null,
                     market_price: null,
                     offer_price: null,
+                    max_unit_per_user: null,
                     last_price: null,
+                    join_price: null,
                     total_offer_spots: null,
                     minus_price_user_price: null,
                     expire_date: null,

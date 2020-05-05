@@ -10,9 +10,19 @@ class Product extends Model
 {
     protected $guarded = [];
 
-    public function mainImage()
+    public function thumbImage()
+    {
+        return env('APP_URL') . '/' . 'images/product/thumb/' . $this->image;
+    }
+
+    public function featureImage()
     {
         return env('APP_URL') . '/' . 'images/product/feature/' . $this->image;
+    }
+
+    public function mainImage()
+    {
+        return env('APP_URL') . '/' . 'images/product/' . $this->image;
     }
 
     public function category()

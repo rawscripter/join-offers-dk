@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('custom_order_id')->nullable();
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->integer('quantity')->unsigned();
@@ -22,6 +23,13 @@ class CreateOrdersTable extends Migration
             $table->float('current_price')->unsigned();
             $table->float('total_price')->unsigned();
             $table->boolean('is_join_payment_enable');
+            $table->boolean('is_join_offer_paid');
+
+            $table->foreign('product_id')
+                ->references('id')->on('products');
+            $table->foreign('user_id')
+                ->references('id')->on('users');
+
             $table->timestamps();
         });
     }

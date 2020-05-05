@@ -11,7 +11,6 @@
                             >
                                 <label>{{category.name}}</label>
                             </button>
-
                         </li>
                     </ul>
                 </div>
@@ -48,16 +47,13 @@
     .subcategory-list {
         margin: 0px;
     }
-
     .subcategory-list a {
         padding: 0;
         margin: 0;
     }
-
     button {
         cursor: pointer;
     }
-
     .subcategory-list label {
         color: #767676;
         margin: 0px;
@@ -66,20 +62,16 @@
         font-weight: bold;
         letter-spacing: 1px;
     }
-
     .subcategory-list ul li {
         padding: 0px;
         margin-right: 10px;
     }
-
-
     .btn-theme {
         background-color: #edeaea !important;
         border-color: #edeaea !important;
         background-image: linear-gradient(to right, #edeaea, #edeaea);
         color: #030303 !important;
     }
-
 
     .btn-theme.active label {
         color: #000 !important;

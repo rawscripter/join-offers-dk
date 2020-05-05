@@ -72,9 +72,19 @@
                                             Profile
                                         </div>
                                         <div class="dropdown-menu wow bounceIn" v-if="showUserMenu">
-                                            <a class="dropdown-item" href="#">Favourites</a>
+
+                                            <router-link tag="a" class="dropdown-item" :to="{name:'favourites'}">
+                                                Favourites
+                                            </router-link>
+
                                             <a class="dropdown-item" href="#">Dashboard</a>
-                                            <a class="dropdown-item" href="#">Orders</a>
+
+                                            <router-link tag="a" class="dropdown-item" :to="{name:'customer-profile'}">
+                                                Profile
+                                            </router-link>
+                                            <router-link tag="a" class="dropdown-item" :to="{name:'customer-orders'}">
+                                                Orders
+                                            </router-link>
                                             <div class="dropdown-divider"></div>
                                             <router-link class="dropdown-item" to="/logout">
                                                 Logout

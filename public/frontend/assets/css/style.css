@@ -511,74 +511,6 @@ nav {
     margin-bottom: 30px;
 }
 
-/*.checkbox_container {*/
-/*    display: block;*/
-/*    position: relative;*/
-/*    padding-left: 30px;*/
-/*    margin-bottom: 12px;*/
-/*    cursor: pointer;*/
-/*    font-size: 15px;*/
-/*    -webkit-user-select: none;*/
-/*    -moz-user-select: none;*/
-/*    -ms-user-select: none;*/
-/*    user-select: none;*/
-/*    font-family: Roboto, sans-serif;*/
-/*}*/
-
-/*!* Hide the browser's default checkbox *!*/
-/*.checkbox_container input {*/
-/*    position: absolute;*/
-/*    opacity: 0;*/
-/*    cursor: pointer;*/
-/*    height: 0;*/
-/*    width: 0;*/
-/*}*/
-
-/*!* Create a custom checkbox *!*/
-/*.checkmark {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    height: 20px;*/
-/*    width: 20px;*/
-/*    background-color: #fff;*/
-/*    border: 1px solid #28a745;*/
-/*}*/
-
-/*!* On mouse-over, add a grey background color *!*/
-/*.checkbox_container:hover input ~ .checkmark {*/
-/*    background-color: #fff;*/
-/*}*/
-
-/*!* When the checkbox is checked, add a blue background *!*/
-/*.checkbox_container input:checked ~ .checkmark {*/
-/*    background-color: #fff;*/
-/*}*/
-
-/*!* Create the checkmark/indicator (hidden when not checked) *!*/
-/*.checkmark:after {*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    display: none;*/
-/*}*/
-
-/*!* Show the checkmark when checked *!*/
-/*.checkbox_container input:checked ~ .checkmark:after {*/
-/*    display: block;*/
-/*}*/
-
-/* Style the checkmark/indicator */
-/*.checkbox_container .checkmark:after {*/
-/*    left: 7px;*/
-/*    top: 3px;*/
-/*    width: 5px;*/
-/*    height: 10px;*/
-/*    border: solid #28a745;*/
-/*    border-width: 0 3px 3px 0;*/
-/*    -webkit-transform: rotate(45deg);*/
-/*    -ms-transform: rotate(45deg);*/
-/*    transform: rotate(45deg);*/
-/*}*/
 
 .invalid-feedback {
     display: block !important;
@@ -610,4 +542,53 @@ nav {
 
 .btn {
     cursor: pointer;
+}
+
+.profile-meu {
+    padding:40px 0;
+}
+.profile-meu ul {
+    margin:0;
+    padding:0;
+    padding:0 0 0 20px;
+}
+.profile-meu ul li {
+    list-style:none;
+}
+
+.profile-meu ul li a {
+    text-decoration: none;
+    color: #000;
+    text-shadow: 2px 3px 3px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    padding: 4px 33px;
+    display: block;
+    font-size: 18px;
+    transition:.25s;
+}
+.profile-meu ul li a:hover {
+    color: #FF8B37;
+}
+.profile-meu {
+    padding:40px 0;
+}
+.profile-meu ul {
+    margin:0;
+    padding:0;
+    padding:0 0 0 20px;
+}
+.profile-meu ul li {
+    list-style:none;
+}
+
+.profile-meu ul li a {
+    text-decoration: none;
+    color: #000;
+    text-shadow: 2px 3px 3px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    padding: 4px 33px;
+    display: block;
+    font-size: 18px;
+    transition:.25s;
+}
+.profile-meu ul li a:hover {
+    color: #FF8B37;
 }

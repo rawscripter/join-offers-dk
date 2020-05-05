@@ -26,6 +26,44 @@
                 <br>
             </router-link>
         </h5>
+
+        <div class="timer text-center mt-2 mb-2">
+            <vac :end-time="new Date(product.expire_date)">
+                <div
+                    class="timer-area d-flex justify-content-center mt-3 mb-3"
+                    slot="process"
+                    slot-scope="{ timeObj }">
+                    <div class="clock">
+
+                        <div class="well bottom-pane">
+                            <div id="days" class="num">{{timeObj.d}}</div>
+                        </div>
+                    </div>
+
+                    <div class="clock">
+
+                        <div class="well bottom-pane">
+                            <div id="hours" class="num">{{timeObj.h}}</div>
+                        </div>
+                    </div>
+                    <div class="clock">
+
+                        <div class="well bottom-pane">
+                            <div id="mins" class="num">{{timeObj.m}}</div>
+                        </div>
+                    </div>
+
+                    <div class="clock">
+
+                        <div class="well bottom-pane">
+                            <div id="secs" class="num">{{timeObj.s}}</div>
+                        </div>
+                    </div>
+                </div>
+                <span slot="finish" class="expired">Offer Expired!</span>
+            </vac>
+        </div>
+
         <div class="short-description">
             <p class="text-center">{{product.short_des}} </p>
         </div>
@@ -94,5 +132,27 @@
 <style scoped>
     .love {
         cursor: pointer;
+    }
+
+    .bottom-pane {
+        margin-top: 0px;
+        border-radius: 5px;
+        background-color: #eaeaea;
+        padding: 5px;
+        border: 0px;
+        text-align: center;
+        width: 35px;
+    }
+
+    .num {
+        font-size: 16px;
+        color: #000;
+        font-weight: bold;
+    }
+
+    span.expired {
+        font-weight: bold;
+        color: red;
+        font-size: 18px;
     }
 </style>

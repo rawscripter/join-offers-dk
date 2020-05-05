@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductImage extends Model
 {
-    protected $fillable = ['image', 'user_id', 'product_id'];
+     protected $fillable = ['image', 'user_id', 'product_id'];
+//    protected $guarded = [];
 
     public function productThumbImage()
     {

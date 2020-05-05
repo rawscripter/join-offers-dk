@@ -5,7 +5,7 @@
                      :is-full-page="true"></loading>
             <!-- start checkout product info area  -->
             <div v-if="!isLoading">
-                <div class="product-info-area mt-4 shadow-sm p-4">
+                <div class="product-info-area mt-4 shadow-sm p-4" v-if="!hideOrderDetailsForm">
                     <div class="table-responsive">
                         <table class="table text-center">
                             <thead>
@@ -62,16 +62,18 @@
                     </div>
                 </div>
                 <!-- end checkout product info area  -->
-                <UserLoginRegisterButton v-if="!isUserLoggedIn" product-slug="productSlug"></UserLoginRegisterButton>
+                <UserLoginRegisterButton v-if="!isUserLoggedIn" :productSlug="productSlug"></UserLoginRegisterButton>
 
                 <!-- start checkout billing area  -->
-                <div class="checkout-billing-area  mt-4" v-if="isUserLoggedIn">
+                <div class="checkout-billing-area mt-4" v-if="isUserLoggedIn">
                     <div class="row">
-                        <div class="col-12  col-lg-8">
+                        <div class="col-12  col-lg-12">
                             <div id="dibs-complete-checkout"></div>
                         </div>
                            
-                        <div class="ml-auto col-12 col-lg-4">
+                        <div class="ml-auto col-12 col-lg-4" v-if="!hideOrderDetailsForm">
+                            <loading :active.sync="isPaymentLoading"
+                                     :is-full-page="false"></loading>
                             <div class="checkout-customer-info">
                                 <div class="cards shadow">
                                     <div class="card-header-title">
@@ -104,7 +106,9 @@
                                             </tr>
                                             <tr>
                                                 <td rowspan="2" colspan="2">
-                                                    <button @click="createPaymentId" class="btn btn-block mt-3 btn-success">Order Now</button>
+                                                    <button @click="createOrder"
+                                                            class="btn btn-block mt-3 btn-success">Order Now
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -130,7 +134,9 @@
         },
         data() {
             return {
+                hideOrderDetailsForm: false,
                 isLoading: false,
+                isPaymentLoading: false,
                 product: null,
                 productSlug: null,
                 isUserLoggedIn: User.loggedIn(),
@@ -163,6 +169,7 @@
                     .then(res => {
                         this.isLoading = false;
                         this.product = res.data.product;
+                        this.orderDetails.productId = res.data.product.id;
                         this.orderDetails.totalPrice = res.data.product.join_price;
                         this.orderDetails.unitPrice = res.data.product.join_price;
                     }).catch(error => {
@@ -170,20 +177,50 @@
                 })
             },
 
-            createPaymentId() {
-                let config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': 'test-secret-key-545225c85d254ef296283fcba54bd26c'
+            createOrder() {
+                this.isPaymentLoading = true;
+                axios.post(`${APP_URL}/api/order/create`, this.orderDetails)
+                    .then(res => {
+                        this.initCheckout(res.data.paymentId)
+                        this.hideOrderDetailsForm = true;
+
+                    }).catch(error => {
+                    console.error(error)
+                })
+            },
+            initCheckout(paymentID) {
+                this.isPaymentLoading = false;
+                var checkoutOptions = {
+                    checkoutKey: "test-checkout-key-500b92cc5d264cf88f5653ddc7a362d0", // for live [Required] Test or Live GUID with dashes
+                    paymentId: paymentID, //[required] GUID without dashes
+                    partnerMerchantNumber: "123456789", //[optional] Number
+                    containerId: "dibs-complete-checkout", //[optional] defaultValue: dibs-checkout-content
+                    language: "da-DK", //[optional] defaultValue: en-GB
+                    theme: { // [optional] - will change defaults in the checkout
+                        textColor: "blue", // any valid css color
+                        linkColor: "#bada55", // any valid css color
+                        panelTextColor: "rgb(125, 125, 125)", // any valid css color
+                        panelLinkColor: "#0094cf", // any valid css color
+                        primaryColor: "#0094cf", // any valid css color
+                        buttonRadius: "50px", // pixel or percentage value
+                        buttonTextColor: "#fff", // any valid css color
+                        backgroundColor: "#fafafa", // any valid css color
+                        panelColor: "#fff", // any valid css color
+                        outlineColor: "#444", // any valid css color
+                        primaryOutlineColor: "#444", // any valid css color   }
                     }
                 }
+                var checkout = new Dibs.Checkout(checkoutOptions);
 
-                axios.post('https://test.api.dibspayment.eu/v1/payments', config,)
-                    .then(res => {
-                        console.log(res)
-                    })
-                    .catch(res => console.log(res))
+                //this is the event that the merchant should listen to redirect to the “payment-is-ok” page
+
+                checkout.on('payment-completed', function (response) {
+                    /*
+                                Response:
+                                paymentId: string (GUID without dashes)
+                                */
+                    window.location = '/checkout?paymentId=' + response.paymentId;
+                });
             }
         },
         created() {

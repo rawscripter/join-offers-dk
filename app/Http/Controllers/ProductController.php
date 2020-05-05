@@ -145,6 +145,8 @@ class ProductController extends Controller
         $data['market_price'] = $request->market_price;
         $data['offer_price'] = $request->offer_price;
         $data['last_price'] = $request->last_price;
+        $data['current_price'] = $request->offer_price;
+        $data['join_price'] = $request->join_price;
         $data['product_type'] = $request->product_type;
         $data['total_offer_spots'] = $request->total_offer_spots;
         $data['minus_price_user_price'] = $request->minus_price_user_price;
@@ -280,6 +282,7 @@ class ProductController extends Controller
         $data['market_price'] = $request->market_price;
         $data['offer_price'] = $request->offer_price;
         $data['last_price'] = $request->last_price;
+        $data['join_price'] = $request->join_price;
         $data['product_type'] = $request->product_type;
         $data['total_offer_spots'] = $request->total_offer_spots;
         $data['minus_price_user_price'] = $request->minus_price_user_price;

@@ -13,7 +13,7 @@
             <h6><small>Deltagend</small></h6>
             <h6>{{product.total_offer_spots}}</h6>
             <h6><small>Din Pris</small></h6>
-            <h6>{{product.last_price}}</h6>
+            <h6>{{product.current_price}}</h6>
             <!--            total save-->
             <div class="love-section">
                 <button v-if="product.isLikedByCurrentUser" @click="removeProductToFavouriteList(product.slug)"
@@ -25,7 +25,8 @@
             <button class="btn mt-1 btn-success">Du sprarer {{product.saving_percentage}}%</button>
         </div>
         <div class="checkout mt-3 mb-3">
-            <router-link class="btn btn-theme btn-block" tag="div" :to="{name: 'checkout', params:{slug:product.slug}}">
+            <router-link v-if="!isExpired" class="btn btn-theme btn-block" tag="div"
+                         :to="{name: 'checkout', params:{slug:product.slug}}">
                 Order Now
             </router-link>
         </div>
@@ -72,6 +73,11 @@
             }
         },
         computed: {
+            isExpired() {
+                let now = new Date();
+                let expire = new Date(this.product.expire_date);
+                return now > expire;
+            },
             isLiked() {
                 return this.product.isLikedByCurrentUser;
             },

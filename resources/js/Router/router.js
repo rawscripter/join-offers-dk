@@ -19,6 +19,9 @@ import UserLogin from "../components/Site/Pages/UserLogin";
 import UserRegister from "../components/Site/Pages/UserRegister";
 import FavouriteProudctsPage from "../components/Site/Pages/FavouriteProudctsPage";
 import CheckoutPage from "../components/Site/Pages/CheckoutPage";
+import CheckoutStatusPage from "../components/Site/Pages/CheckoutStatusPage";
+import CustomerProfile from "../components/Site/Pages/Customer/CustomerProfile";
+import CustomerOrders from "../components/Site/Pages/Customer/CustomerOrders";
 
 //importing components
 
@@ -77,7 +80,16 @@ const routes = [
         meta: {
             title: 'Checkout Now!'
         }
-    }, {
+    },
+    {
+        path: '/checkout/payment/status',
+        name: 'order-payment-status',
+        component: CheckoutStatusPage,
+        meta: {
+            title: 'Order Details!'
+        }
+    },
+    {
         path: '/favourites',
         name: 'favourites',
         component: FavouriteProudctsPage,
@@ -107,6 +119,23 @@ const routes = [
             title: 'Search Products!'
         }
     },
+    {
+        path: '/customer/profile',
+        name: 'customer-profile',
+        component: CustomerProfile,
+        meta: {
+            title: 'Customer Profile! '
+        }
+    },
+    {
+        path: '/customer/orders',
+        name: 'customer-orders',
+        component: CustomerOrders,
+        meta: {
+            title: 'Customer Orders! '
+        }
+    },
+
 ];
 
 

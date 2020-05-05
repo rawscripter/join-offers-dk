@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,11 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
     Route::resource('/sub-category', 'SubCategoryController');
 });
 
+// apis for customer
+Route::group(['middleware' => ['auth:api'], 'prefix' => 'customer'], function () {
+    Route::get('/orders', 'OrderController@customerOrders');
+});
+
 // apis for site
 Route::get('/categories', 'CategoryController@index');
 Route::get('/products', 'ProductController@productsForSite');
@@ -49,6 +55,13 @@ Route::get('/product/{slug}/related-products', 'ProductController@showRelatedFor
 Route::get('/category/{categorySlug}/products', 'CategoryController@products');
 Route::get('/sub-category/{categorySlug}/products', 'SubCategoryController@products');
 Route::get('/category/{categorySlug}/sub-categories', 'CategoryController@subCategoriesForSite');
+
+
+// api for create new order
+Route::post('/order/create', 'OrderController@createNewOrder');
+
+
+Route::get('/order/payment/{paymentId}/status', 'PaymentController@paymentDetails');
 
 
 Route::post('/login', 'AuthController@login');

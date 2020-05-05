@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "symfony/translation": "^5.0",
-        "webpatser/laravel-uuid": "^3.0"
+        "webpatser/laravel-uuid": "^3.0",
+      "ext-curl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
