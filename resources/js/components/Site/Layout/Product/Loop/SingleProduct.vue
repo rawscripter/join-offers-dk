@@ -1,11 +1,15 @@
 <template>
     <div class="prodcut-signle p-2">
         <div class="product_image">
-            <img :src="product.featureImage" alt="" style="width:100%">
+            <router-link :to="{name: 'product-details', params:{slug:product.slug}}">
+                <img :src="product.featureImage" alt="" style="width:100%">
+            </router-link>
         </div>
         <div class="p_category_and_love d-flex justify-content-between">
             <div class="category">
-                {{product.categoryData.name}}
+                <router-link :to="{name:'category-product',params:{category:product.categoryData.slug}}">
+                    {{product.categoryData.name}}
+                </router-link>
             </div>
             <div class="love" v-if="isLiked" @click="removeProductToFavouriteList(product.slug)">
                 <i class="fas fa-heart"
@@ -70,21 +74,21 @@
         <div class="pricing-section d-flex justify-content-start">
             <div class="pricing-left">
                 <h6><small>Gennemsnitlig markedsprice</small></h6>
-                <h6>
+                <h5>
                     <del>{{product.market_price}},-</del>
-                </h6>
+                </h5>
                 <h6>Strtpris </h6>
-                <h6>
+                <h5>
                     <del>{{product.offer_price}},-</del>
-                </h6>
+                </h5>
                 <h6>Du sprarer </h6>
                 <button class="btn btn-success btn-sm">{{product.saving_percentage}}%</button>
             </div>
             <div class="pricing-right">
                 <h6><small>Deltagend</small></h6>
-                <h6>{{product.total_offer_spots}}</h6>
+                <h5>{{product.totalOrders}}</h5>
                 <h6><small>Din Pris</small></h6>
-                <h6>{{product.current_price}}</h6>
+                <h5>{{product.current_price}}</h5>
             </div>
         </div>
         <router-link class="btn btn-success btn-block mt-3" tag="button"
@@ -154,5 +158,15 @@
         font-weight: bold;
         color: red;
         font-size: 18px;
+    }
+
+    h5 {
+        font-weight: 700;
+        font-size: 17px;
+    }
+
+    .category a {
+        text-decoration: none;
+        color: unset;
     }
 </style>

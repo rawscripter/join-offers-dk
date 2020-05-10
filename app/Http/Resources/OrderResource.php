@@ -23,8 +23,16 @@ class OrderResource extends JsonResource
             'join_price' => $this->join_price,
             'total_price' => $this->total_price,
             'is_join_payment_enable' => $this->is_join_payment_enable,
-            'is_join_offer_paid' => $this->is_join_offer_paid,
+            'is_join_price_paid' => $this->is_join_price_paid,
+            'first_payment' => new OrderPaymentResource($this->firstPayment()),
+            'customer' => (new CustomerResource($this->user)),
+            'is_full_price_paid' => $this->is_full_price_paid ? true : false,
+            'second_payment' => new OrderPaymentResource($this->secondPayment()),
+            'order_status' => $this->order_status ? true : false,
+            'is_canceled' => $this->is_canceled ? true : false,
             'created_at' => Carbon::parse($this->created_at)->format('d F Y'),
         ];
     }
+
+
 }

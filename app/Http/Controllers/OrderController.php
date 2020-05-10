@@ -2,17 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderPaymentResource;
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\ProductResource;
 use App\Order;
 use App\OrderShippingInfo;
 use App\Product;
+use App\TemporaryOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function GuzzleHttp\Psr7\str;
 
 class OrderController extends Controller
 {
-    public function createNewOrder(Request $request)
+    public function orders(Request $request)
+    {
+        $res['status'] = 200;
+        $res['message'] = 'All Categories';
+        $orders = Order::query();
+        // all running orders
+        if ($request->status == 'running') {
+            $orders->where('order_status', 0);
+        }
+        // all complete orders
+        if ($request->status == 'complete') {
+            $orders->where('order_status', 1);
+        }
+        // all complete orders
+        if ($request->status == 'canceled') {
+            $orders->where('is_canceled', 1);
+        } else {
+            $orders->where('is_canceled', 0);
+        }
+
+        // to filter
+        if ($request['query']) {
+            $orders->where('custom_order_id', 'like', '%' . $request['query'] . '%');
+            $total = $orders->where('custom_order_id', 'like', '%' . $request['query'] . '%')->get();
+        } else {
+            $total = $orders->get();
+        }
+
+        $orders = $orders->paginate($request->limit ? $request->limit : 20);
+
+        $res['total'] = $total->count();
+        $res['orders'] = OrderResource::collection($orders);
+        return response()->json($res);
+    }
+
+    public function createTemporaryOrder(Request $request)
     {
         $user = $user = Auth::guard('api')->user();
         $product = Product::find($request->productId);
@@ -21,7 +59,7 @@ class OrderController extends Controller
         $serialNum = !empty($totalOrder) ? $totalOrder + 1 : 1;
         $newCustomerId = strtoupper($productCategory[0]) . '-00200' . +$serialNum;
 
-        $newOrder = Order::create(
+        $newOrder = TemporaryOrder::create(
             [
                 'custom_order_id' => $newCustomerId,
                 'product_id' => $product->id,
@@ -34,22 +72,68 @@ class OrderController extends Controller
             ]
         );
 
-        OrderShippingInfo::create([
-            'order_id' => $newOrder->id,
-        ]);
-
         echo PaymentController::createPaymentId($newOrder);
 
     }
 
-    public function customerOrders()
+    public static function createNewOrder(TemporaryOrder $order)
+    {
+        $newOrder = Order::create(
+            [
+                'custom_order_id' => $order->custom_order_id,
+                'product_id' => $order->product_id,
+                'user_id' => $order->user_id,
+                'quantity' => $order->quantity,
+                'join_price' => $order->join_price,
+                'current_price' => $order->current_price,
+                'is_join_payment_enable' => $order->is_join_payment_enable,
+                'total_price' => $order->total_price,
+            ]
+        );
+
+        OrderShippingInfo::create([
+            'order_id' => $newOrder->id,
+        ]);
+
+        return $newOrder;
+    }
+
+    public function customerOrders(Request $request)
     {
         $user = Auth::guard('api')->user();
 
+        if ($request->status == 'running') {
+            $orders = $user->runningOrders;
+        }
+
+
+        if ($request->status == 'completed') {
+            $orders = $user->completedOrders;
+        }
+
+        if ($request->status == 'canceled') {
+            $orders = $user->canceledOrders;
+        }
         $res['status'] = 200;
         $res['message'] = 'User Order Fetched Successfully.';
-        $res['orders'] = OrderResource::collection($user->orders);
+        $res['orders'] = OrderResource::collection($orders);
 
+        return response()->json($res);
+    }
+
+    public function orderDetails($orderId)
+    {
+        $order = Order::where('custom_order_id', $orderId)->first();
+        if ($order) {
+            $res['status'] = 200;
+            $res['message'] = 'Payment Successful';
+            $res['payment']['isPaid'] = true;
+            $res['order'] = new OrderResource($order);
+        } else {
+            $res['status'] = 201;
+            $res['payment']['isPaid'] = false;
+            $res['message'] = 'No Record Found.';
+        }
         return response()->json($res);
     }
 }

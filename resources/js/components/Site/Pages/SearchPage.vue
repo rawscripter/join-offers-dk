@@ -33,9 +33,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <infinite-loading v-if="hasMorePages" @distance="1"
-                                      @infinite="infiniteHandler"></infinite-loading>
                 </div>
             </div>
         </div>
@@ -64,20 +61,24 @@
             }
         },
         methods: {
-            infiniteHandler($state) {
+            loadMore() {
+                this.isLoading = true;
                 let vm = this;
-                if (this.lastPage >= this.page && this.query != null) {
+                setTimeout(e => {
                     axios.get(`${APP_URL}/api/products?page=${this.page}&query=${this.query}`)
                         .then(response => {
-                            this.isLoading = false;
-                            this.lastPage = response.data.lastPage;
+                            vm.isLoading = false;
+                            vm.lastPage = response.data.lastPage;
                             $.each(response.data.products, function (key, value) {
                                 vm.products.push(value);
                             });
-                            $state.loaded();
+                            vm.page += 1;
                         });
-                }
-                this.page = this.page + 1;
+
+                    this.isLoading = false;
+                }, 500);
+                /**************************************/
+
             },
 
         },
@@ -95,7 +96,18 @@
             hasProducts() {
                 return this.products.length > 0;
             }
-        }
+        },
+        mounted() {
+            // Detect when scrolled to bottom.
+            const listElm = document.querySelector('body');
+            listElm.addEventListener('scroll', e => {
+                if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+                    this.loadMore();
+                }
+            });
+            // Initially load some items.
+            this.loadMore();
+        },
     }
 </script>
 

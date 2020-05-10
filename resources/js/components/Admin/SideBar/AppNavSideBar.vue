@@ -140,22 +140,43 @@
                                 name: 'All Products',
                                 link: '/admin/products'
                             },
+
                             {
                                 name: 'Create New Product',
                                 link: '/admin/product/create'
-                            }
+                            }, {
+                                name: 'Archive Products',
+                                link: '/admin/products/archive'
+                            },
                         ]
                     },
                     {
-                        title: 'Manage Users',
+                        title: 'Manage Orders',
                         menus: [
                             {
-                                name: 'All Users',
-                                link: '/admin/users'
+                                name: 'All Orders',
+                                link: '/admin/orders?status=all'
                             },
                             {
-                                name: 'Create User',
-                                link: '/admin/user/create'
+                                name: 'Running Orders',
+                                link: '/admin/orders?status=running'
+                            },
+                            {
+                                name: 'Completed Orders',
+                                link: '/admin/orders?status=complete'
+                            },
+                            {
+                                name: 'Canceled Orders',
+                                link: '/admin/orders?status=canceled'
+                            },
+                        ]
+                    },
+                    {
+                        title: 'Manage Customers',
+                        menus: [
+                            {
+                                name: 'All Customers',
+                                link: '/admin/customers'
                             }
                         ]
                     }

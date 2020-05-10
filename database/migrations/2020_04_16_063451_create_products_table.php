@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('event_id')->nullable();
             $table->string('image')->nullable();
             $table->string('slug')->nullable();
             $table->text('short_des')->nullable();
@@ -32,6 +33,7 @@ class CreateProductsTable extends Migration
             $table->float('minus_price_user_price')->nullable();
             $table->timestamp('expire_date')->nullable();
             $table->bigInteger('user_id')->unsigned();
+            $table->tinyInteger('is_archive')->default(0);
             $table->timestamps();
 
             $table->foreign('category_id')

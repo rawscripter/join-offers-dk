@@ -2,12 +2,12 @@
     <div class="main-sidebar shadow p-2" id="main_sidebar">
         <div class="profile-meu">
             <ul>
-<!--                <li><a href="#">Dashboard</a> </li>-->
-<!--                <li><a href="#">Profile</a> </li>-->
-<!--                <li><a href="#">Orders</a> </li>-->
-<!--                <li><a href="#">Favorites</a>  </li>-->
+                <!--                <li><a href="#">Dashboard</a> </li>-->
+                <!--                <li><a href="#">Profile</a> </li>-->
+                <!--                <li><a href="#">Orders</a> </li>-->
+                <!--                <li><a href="#">Favorites</a>  </li>-->
 
-<!--                <router-link tag="a" class="dropdown-item"  :to="{name:'favourites'}">-->
+                <!--                <router-link tag="a" class="dropdown-item"  :to="{name:'favourites'}">-->
                 <!--                    Favourites-->
                 <!--                </router-link>-->
 
@@ -16,19 +16,29 @@
                 <router-link tag="a" class="dropdown-item" :to="{name:'customer-profile'}">
                     Profile
                 </router-link>
-                <router-link tag="a" class="dropdown-item" :to="{name:'customer-orders'}">
-                    Orders
+                <router-link tag="a" class="dropdown-item" exact :to="{name:'customer-orders',query:{type:'running'}}">
+                    Running Orders
                 </router-link>
+
+                <router-link tag="a" class="dropdown-item" exact
+                             :to="{name:'customer-completed-orders',query:{type:'completed'}}">
+                    Completed Orders
+                </router-link>
+
+                <router-link tag="a" class="dropdown-item" exact
+                             :to="{name:'customer-canceled-orders',query:{type:'canceled'}}">
+                    Canceled Orders
+                </router-link>
+
+
                 <div class="dropdown-divider"></div>
                 <router-link class="dropdown-item" to="/logout">
                     Logout
                 </router-link>
 
 
-
             </ul>
         </div>
-
 
 
     </div>
@@ -44,7 +54,8 @@
     div#main_sidebar {
         padding: 0px !important;
     }
-    .profile-meu ul{
+
+    .profile-meu ul {
         padding: 0px !important;
     }
 
@@ -52,7 +63,7 @@
         background: #efefef;
     }
 
-    .dropdown-item{
+    .dropdown-item {
         padding: 16px 20px;
     }
 

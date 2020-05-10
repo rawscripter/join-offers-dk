@@ -1,20 +1,20 @@
 <template>
     <div class="product_view_sidebar shadow">
         <div class="pricing-left">
-            <h6><small>Gennemsnitlig markedsprice</small></h6>
-            <h6>
+            <h6>Gennemsnitlig markedsprice</h6>
+            <h5>
                 <del>{{product.market_price}},-</del>
-            </h6>
+            </h5>
             <h6>Strtpris </h6>
-            <h6>
+            <h5>
                 <del>{{product.offer_price}},-</del>
-            </h6>
-
-            <h6><small>Deltagend</small></h6>
-            <h6>{{product.total_offer_spots}}</h6>
-            <h6><small>Din Pris</small></h6>
-            <h6>{{product.current_price}}</h6>
+            </h5>
+            <h6>Deltagend</h6>
+            <h5>{{product.totalOrders}}</h5>
+            <h6>Din Pris</h6>
+            <h5>{{product.current_price}}</h5>
             <!--            total save-->
+            <br>
             <div class="love-section">
                 <button v-if="product.isLikedByCurrentUser" @click="removeProductToFavouriteList(product.slug)"
                         class="btn btn-success"> {{product.total_favourites}} <i class="fas fa-heart"
@@ -93,5 +93,10 @@
         font-size: 16px;
         font-weight: bold;
         letter-spacing: 1px;
+    }
+
+    h5 {
+        font-weight: 700;
+        font-size: 17px;
     }
 </style>

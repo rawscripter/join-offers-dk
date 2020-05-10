@@ -23,8 +23,8 @@
                                         :options="options">
                             <span slot="actions" slot-scope="{row}">
                                 <button class="btn btn-sm btn-primary" v-on:click="edit(row.id)">Edit</button>
-                                <button class="btn btn-sm btn-danger"
-                                        v-on:click="deleteCategory(row.id)">Archive</button>
+                                <button class="btn btn-sm btn-warning"
+                                        v-on:click="restoreProduct(row.id)">Restore</button>
                             </span>
 
                         </v-server-table>
@@ -40,7 +40,7 @@
 
 
     export default {
-        name: "ProductIndex",
+        name: "ArchiveProductIndex",
         data() {
             return {
                 columns: ['id', 'name',
@@ -71,7 +71,7 @@
                     filterable: ['name'],
                     requestFunction: function (data) {
                         let self = this;
-                        return axios.get(`${APP_URL}/api/admin/product`, {params: data}).catch(function (e) {
+                        return axios.get(`${APP_URL}/api/admin/products/archive`, {params: data}).catch(function (e) {
                             self.dispatch('error', e);
                         }.bind(this));
                     },
@@ -90,22 +90,22 @@
                 this.$router.push({name: 'product.edit', params: {product: categoryID}})
             },
             // to delete a category
-            deleteCategory(categoryID) {
+            restoreProduct(productId) {
                 this.$swal({
-                    title: "Delete this record?",
-                    text: "Are you sure? You won't be able to revert this!",
+                    title: "Restore this record?",
+                    text: "Are you sure?",
                     type: "warning",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: "Yes, Delete it!"
                 }).then((result) => { // <--
                     if (result.value) { // <-- if confirmed
-                        this.deleteConfirmation(categoryID);
+                        this.deleteConfirmation(productId);
                     }
                 });
             },
-            deleteConfirmation(categoryID) {
-                axios.delete(`${APP_URL}/api/admin/product/${categoryID}`)
+            deleteConfirmation(id) {
+                axios.post(`${APP_URL}/api/admin/product/${id}/restore`)
                     .then(res => {
                         Alert.showSuccessAlert(res.data.message);
                         this.$refs.myTable.refresh();

@@ -26,21 +26,25 @@
             return {
                 isLoading: false,
                 isPaymentSuccessful: false,
-                paymentId: '',
+                orderId: '',
                 orderData: [],
                 paymentData: [],
-
+                paymentType: 1,
             }
         },
         methods: {
             getPaymentDetails() {
-                axios.get(`${APP_URL}/api/order/payment/${this.paymentId}/status`)
+                axios.get(`${APP_URL}/api/order/${this.orderId}/details`)
                     .then(res => {
                         this.isLoading = false;
                         this.isPaymentSuccessful = res.data.payment.isPaid;
                         if (this.isPaymentSuccessful) {
                             this.orderData = res.data.order;
-                            this.paymentData = res.data.orderPayment;
+                            if (this.paymentType === 2) {
+                                this.paymentData = res.data.order.second_payment;
+                            } else {
+                                this.paymentData = res.data.order.first_payment;
+                            }
                         }
                     }).catch(error => {
                     console.error(error)
@@ -49,7 +53,9 @@
         },
         created() {
             this.isLoading = true;
-            this.paymentId = this.$route.query.paymentId;
+            this.orderId = this.$route.query.order;
+            this.isPaymentSuccessful = this.$route.query.status === 'success';
+            this.paymentType = this.$route.query.type;
             this.getPaymentDetails();
         },
     }

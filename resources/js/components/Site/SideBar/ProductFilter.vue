@@ -130,6 +130,8 @@
 </script>
 
 <style>
+
+
     .price-range-text {
         text-align: center;
         font-weight: bold;

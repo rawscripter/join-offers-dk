@@ -50,6 +50,11 @@ class Product extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function savingPercentage()
     {
         return ceil(100 - (($this->current_price / $this->market_price) * 100));
@@ -78,4 +83,13 @@ class Product extends Model
         return false;
     }
 
+    public function reduceProductPriceOnUserOrder()
+    {
+        if ($this->current_price > $this->last_price) {
+            if ($this->minus_price_user_price > 0) {
+                $this->current_price = $this->current_price - $this->minus_price_user_price;
+                $this->save();
+            }
+        }
+    }
 }

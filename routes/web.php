@@ -35,9 +35,15 @@ Route::get('/register', function () {
     return view('site.index');
 });
 
+
+// for payment
+Route::get('/checkout/payment/status','PaymentController@storePaymentDetails');
+
+
+
 Route::get('/{any}', function (\Illuminate\Http\Request $request) {
     if ($request->is('admin/*')) {
-     return   view('admin.index');
+        return view('admin.index');
     }
     return view('site.index');
 });
@@ -63,5 +69,4 @@ Route::get('/{any}/{any1}/{any2}/{any3}', function (\Illuminate\Http\Request $re
     }
     return view('site.index');
 });
-
 

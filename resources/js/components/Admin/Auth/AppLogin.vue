@@ -157,7 +157,7 @@
                     axios.post(`${APP_URL}/api/login`, this.form)
                         .then(response => {
                             if (response.status === 200) {
-                                User.responseAfterLogin(response);
+                                User.responseAfterLogin(response, '/admin');
                             }
                             if (response.status === 400) {
                                 this.formErrors.text = response.data

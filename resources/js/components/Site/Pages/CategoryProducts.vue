@@ -12,10 +12,10 @@
                                             :subCategories="subCategories"
                                             @selectedSubCategory="selectedSubCategory"
                         ></SubCategoryMenuBar>
+                        <loading :active.sync="isLoading"
+                                 :is-full-page="false"></loading>
                         <div class="product-area" v-if="totalProducts">
                             <div class="row">
-                                <loading :active.sync="isLoading"
-                                         :is-full-page="false"></loading>
                                 <div v-for="product in products" :key="product.id"
                                      class="col-md-4 wow bounceIn col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
                                     <!-- product single  -->
@@ -35,8 +35,6 @@
                         </div>
                     </div>
 
-                    <infinite-loading :identifier="infiniteId" v-if="hasMorePages" @distance="1"
-                                      @infinite="infiniteHandler"></infinite-loading>
 
                 </div>
             </div>
@@ -93,16 +91,16 @@
             },
             resetState() {
                 this.page = 1;
-                this.lastPage = 1;
+                this.lastPage = 2;
                 this.products = [];
-                this.infiniteId += new Date();
+                this.loadMore();
             },
-
-            infiniteHandler($state) {
+            loadMore() {
+                this.isLoading = true;
                 let vm = this;
-                let query = this.query;
                 let categorySlug = this.categorySlug;
-                if (this.lastPage >= this.page) {
+                setTimeout(e => {
+                    //send axios request
                     axios.get(`${APP_URL}/api/category/${categorySlug}/products?page=` + this.page, {
                         params: {
                             gender: vm.query.gender,
@@ -118,10 +116,11 @@
                             $.each(response.data.products, function (key, value) {
                                 vm.products.push(value);
                             });
-                            $state.loaded();
+                            vm.page += 1;
                         });
-                }
-                this.page = this.page + 1;
+                    this.isLoading = false;
+                }, 500);
+                /**************************************/
             },
 
             getSubCategories(categorySlug) {
@@ -145,7 +144,19 @@
             this.categorySlug = this.$route.params.category;
             this.getSubCategories(this.$route.params.category);
             this.isLoading = true;
-        }
+        },
+
+        mounted() {
+            // Detect when scrolled to bottom.
+            const listElm = document.querySelector('body');
+            listElm.addEventListener('scroll', e => {
+                if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+                    this.loadMore();
+                }
+            });
+            // Initially load some items.
+            this.loadMore();
+        },
     }
 </script>
 

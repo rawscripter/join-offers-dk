@@ -183,7 +183,6 @@
                     .then(res => {
                         this.initCheckout(res.data.paymentId)
                         this.hideOrderDetailsForm = true;
-
                     }).catch(error => {
                     console.error(error)
                 })

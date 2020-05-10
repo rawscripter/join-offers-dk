@@ -1,11 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import AppHome from "../components/Admin/AppHome";
 import AppLogin from "../components/Admin/Auth/AppLogin";
 import AppBody from "../components/Admin/BodyComponents/AppBody";
 import AppLogOut from "../components/Admin/Auth/AppLogOut";
-import UserIndex from "../components/Admin/BodyComponents/BodyParts/User/UserIndex";
-import UserCreate from "../components/Admin/BodyComponents/BodyParts/User/UserCreate";
 import CategoryIndex from "../components/Admin/BodyComponents/BodyParts/Category/CategoryIndex";
 import SubCategoryIndex from "../components/Admin/BodyComponents/BodyParts/SubCategory/SubCategoryIndex";
 import ProductsIndex from "../components/Admin/BodyComponents/BodyParts/Product/ProductsIndex";
@@ -22,22 +19,24 @@ import CheckoutPage from "../components/Site/Pages/CheckoutPage";
 import CheckoutStatusPage from "../components/Site/Pages/CheckoutStatusPage";
 import CustomerProfile from "../components/Site/Pages/Customer/CustomerProfile";
 import CustomerOrders from "../components/Site/Pages/Customer/CustomerOrders";
-
+import OrdersIndex from "../components/Admin/BodyComponents/BodyParts/Order/OrdersIndex";
+import ArchiveProductsIndex from "../components/Admin/BodyComponents/BodyParts/Product/ArchiveProductsIndex";
+import CustomerIndex from "../components/Admin/BodyComponents/BodyParts/Customer/CustomerIndex";
+import OrderDetails from "../components/Admin/BodyComponents/BodyParts/Order/OrderDetails";
 //importing components
-
 Vue.use(VueRouter);
-
-
 const routes = [
     // routes for admin dashboard
     {path: '/admin', component: AppBody},
     {path: '/admin/login', component: AppLogin},
     {path: '/logout', component: AppLogOut},
-    {path: '/admin/users', component: UserIndex},
-    {path: '/admin/user/create', component: UserCreate},
     {path: '/admin/category', component: CategoryIndex},
+    {path: '/admin/customers', component: CustomerIndex},
     {path: '/admin/sub-category', component: SubCategoryIndex},
     {path: '/admin/products', name: 'products', component: ProductsIndex},
+    {path: '/admin/products/archive', name: 'products', component: ArchiveProductsIndex},
+    {path: '/admin/orders', name: 'orders', component: OrdersIndex},
+    {path: '/admin/order/:order/details', name: 'admin-order-details', component: OrderDetails},
     {path: '/admin/product/create', name: 'product.create', component: ProductCreate},
     {path: '/admin/product/:product/edit', name: 'product.edit', component: ProductEdit},
 
@@ -82,11 +81,13 @@ const routes = [
         }
     },
     {
-        path: '/checkout/payment/status',
+        path: '/order/payment',
         name: 'order-payment-status',
         component: CheckoutStatusPage,
         meta: {
-            title: 'Order Details!'
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: false,
         }
     },
     {
@@ -116,7 +117,7 @@ const routes = [
         name: 'search-products',
         component: SearchPage,
         meta: {
-            title: 'Search Products!'
+            title: 'Search Products!',
         }
     },
     {
@@ -124,7 +125,9 @@ const routes = [
         name: 'customer-profile',
         component: CustomerProfile,
         meta: {
-            title: 'Customer Profile! '
+            title: 'Update Profile! ',
+            requireAuth: true,
+            requireAdmin: false,
         }
     },
     {
@@ -132,17 +135,53 @@ const routes = [
         name: 'customer-orders',
         component: CustomerOrders,
         meta: {
-            title: 'Customer Orders! '
+            title: 'Customer Orders! ',
+            requireAuth: true,
+            requireAdmin: false,
+        }
+    },
+    {
+        path: '/customer/complete/orders',
+        name: 'customer-completed-orders',
+        component: CustomerOrders,
+        meta: {
+            title: 'Customer Orders! ',
+            requireAuth: true,
+            requireAdmin: false,
+        }
+    },
+    {
+        path: '/customer/canceled/orders',
+        name: 'customer-canceled-orders',
+        component: CustomerOrders,
+        meta: {
+            title: 'Customer Orders! ',
+            requireAuth: true,
+            requireAdmin: false,
         }
     },
 
 ];
-
-
 const router = new VueRouter({
     routes,
     mode: 'history',
     hashbang: true
 });
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requireAuth)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!User.loggedIn()) {
+            next({
+                path: '/login',
+                query: {redirect: to.fullPath}
+            })
+        } else {
+            next();
+        }
+    } else {
+        next(); // make sure to always call next()!
+    }
+})
 
 export default router;

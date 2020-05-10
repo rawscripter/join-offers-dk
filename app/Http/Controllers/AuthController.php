@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Resources\UserInfoResource;
 use App\Http\Resources\UserResource;
 use App\User;
+use App\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +16,41 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response(new UserResource($request->user()));
+    }
+
+    public function getUserInfo(Request $request)
+    {
+        return response(new UserInfoResource($request->user()->info));
+    }
+
+    public function updatePassword(Request $request)
+    {
+        if ($request->newPassword == $request->confirmPassword) {
+            $user = Auth::guard('api')->user();
+
+            $newPass = Hash::make($request->newPassword);
+            $user->password = $newPass;
+            $user->save();
+
+            $res['status'] = 200;
+            $res['message'] = 'Password updated successfully.';
+        } else {
+            $res['status'] = 201;
+            $res['message'] = 'Invalid Request.';
+        }
+        return response()->json($res);
+
+    }
+
+    public function updateInfo(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+        $user->info->update($request->all());
+        $user->name = $request->name;
+        $user->save();
+        $res['status'] = 200;
+        $res['message'] = 'Info updated successfully.';
+        return response()->json($res);
     }
 
     public function login(Request $request)
@@ -47,11 +84,16 @@ class AuthController extends Controller
         $user = User::where('email', $request->username)->first();
 
         if (!$user) {
-            User::create([
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->username,
                 'password' => Hash::make($request->password),
             ]);
+
+            UserInfo::create([
+                'user_ud' => $user->id,
+            ]);
+
             $http = new \GuzzleHttp\Client;
             try {
                 $response = $http->post(env('PASSPORT_AUTH_URL'), [

@@ -418,13 +418,13 @@ small {
     font-size: 14px;
 }
 
-div#app {
-    min-height: 88vh !important;
-}
+/*div#app {*/
+/*    min-height: 88vh !important;*/
+/*}*/
 
-footer.footer-area.mt-5 {
-    max-height: 10vh !important;
-}
+/*footer.footer-area.mt-5 {*/
+/*    max-height: 10vh !important;*/
+/*}*/
 
 
 nav {

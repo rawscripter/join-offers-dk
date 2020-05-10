@@ -144,4 +144,5 @@
     img.show-small-img.active {
         border: 2px solid #ff500d;
     }
+
 </style>

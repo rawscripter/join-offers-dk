@@ -8,7 +8,7 @@ class Token {
                 if (response.data.rui) {
                     AppStorage.storeUser(response.data.rui, response.data.run);
                 } else {
-                    User.logOut();
+                   // User.logOut();
                 }
             })
             .catch(error => {

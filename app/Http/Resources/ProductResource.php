@@ -18,6 +18,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'event_id' => $this->event_id,
             'slug' => $this->slug,
             'product_type' => $this->product_type,
             'thumbImage' => $this->thumbImage(),
@@ -41,6 +42,8 @@ class ProductResource extends JsonResource
             'offer_price' => $this->offer_price,
             'last_price' => $this->last_price,
             'total_offer_spots' => $this->total_offer_spots,
+            'max_unit_per_user' => $this->max_unit_per_user,
+            'totalOrders' => $this->orders->count(),
             'minus_price_user_price' => $this->minus_price_user_price,
             'user' => $this->user->name,
             'expire_date' => Carbon::parse($this->expire_date)->format('d F Y H:i:s'),

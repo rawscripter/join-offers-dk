@@ -19,7 +19,7 @@
             SiteLayout,
         },
         watch: {
-            '$route':{
+            '$route': {
                 handler: (to, from) => {
                     document.title = to.meta.title || 'Your Website'
                 },

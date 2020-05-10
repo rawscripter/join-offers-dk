@@ -1,5 +1,5 @@
 <template>
-    <div class="page-wrapper wow">
+    <div class="page-wrapper wow" id="product_area">
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-lg-3 ">
@@ -7,9 +7,7 @@
                 </div>
                 <div class="col-md-10 col-lg-9">
                     <div class="main-content">
-<!--                        <loading :active.sync="isLoading"-->
-<!--                                 :is-full-page="true"></loading>-->
-                        <div v-if="totalProducts" class="product-area">
+                        <div class="product-area" v-if="totalProducts">
                             <div class="row">
                                 <div v-for="product in products" :key="product.id"
                                      class="col-md-4 bounceInUp wow col-lg-4 col-sm-6 shadow-sm ml-0 pl-0 mr-0 pr-0">
@@ -17,11 +15,10 @@
                                     <SingleProduct :product="product"></SingleProduct>
                                     <!-- end of product single  -->
                                 </div>
-
                             </div>
                         </div>
                         <div v-else>
-                            <div class="text-center mt-5">
+                            <div class="text-center mt-5" v-if="!isLoading">
                                 <h3 class="big-error-font">
                                     <strong>
                                         No Product Found
@@ -29,9 +26,9 @@
                                 </h3>
                             </div>
                         </div>
+                        <loading :active.sync="isLoading"
+                                 :is-full-page="false"></loading>
                     </div>
-                    <infinite-loading :identifier="infiniteId" v-if="hasMorePages" @distance="1"
-                                      @infinite="infiniteHandler"></infinite-loading>
                 </div>
             </div>
         </div>
@@ -50,13 +47,13 @@
             SubCategoryMenuBar,
             SingleProduct
         },
+
         data() {
             return {
                 isLoading: false,
                 products: [],
                 page: 1,
                 lastPage: 2,
-                infiniteId: +new Date(),
                 query: {
                     gender: 'All',
                     short: 'New',
@@ -75,13 +72,14 @@
             },
             resetState() {
                 this.page = 1;
-                this.lastPage = 1;
+                this.lastPage = 2;
                 this.products = [];
-                this.infiniteId += new Date();
+                this.loadMore();
             },
-            infiniteHandler($state) {
+            loadMore() {
+                this.isLoading = true;
                 let vm = this;
-                if (this.lastPage >= this.page) {
+                setTimeout(e => {
                     axios.get(`${APP_URL}/api/products?page=` + this.page, {
                         params: {
                             gender: vm.query.gender,
@@ -96,12 +94,13 @@
                             $.each(response.data.products, function (key, value) {
                                 vm.products.push(value);
                             });
-                            $state.loaded();
+                            vm.page += 1;
                         });
-                }
-                this.page = this.page + 1;
-            },
+                    this.isLoading = false;
+                }, 500);
+                /**************************************/
 
+            },
         },
         created() {
             this.isLoading = true;
@@ -114,18 +113,27 @@
                 return this.products.length > 0;
             }
         },
+        mounted() {
+            // Detect when scrolled to bottom.
+            const listElm = document.querySelector('body');
+            listElm.addEventListener('scroll', e => {
+                if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+                    this.loadMore();
+                }
+            });
+            // Initially load some items.
+            this.loadMore();
+        },
 
     }
 </script>
 
 <style scoped>
-
     .product-area {
         background: #fafafa;
         padding: 5px;
         min-height: 70vh;
     }
-
 
     .big-error-font {
         font-size: 48px;

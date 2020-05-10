@@ -21,7 +21,9 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import Vuelidate from 'vuelidate';
 
+Vue.use(Vuelidate);
 Vue.use(CKEditor);
 
 Vue.use(ServerTable);
