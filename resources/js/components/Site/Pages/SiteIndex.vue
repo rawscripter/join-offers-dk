@@ -21,7 +21,7 @@
                             <div class="text-center mt-5" v-if="!isLoading">
                                 <h3 class="big-error-font">
                                     <strong>
-                                        No Product Found
+                                        {{errorText}}
                                     </strong>
                                 </h3>
                             </div>
@@ -50,6 +50,7 @@
 
         data() {
             return {
+                errorText: 'Loading...',
                 isLoading: false,
                 products: [],
                 page: 1,
@@ -91,9 +92,13 @@
                         .then(response => {
                             this.isLoading = false;
                             this.lastPage = response.data.lastPage;
-                            $.each(response.data.products, function (key, value) {
-                                vm.products.push(value);
-                            });
+                            if (response.data.products != '') {
+                                $.each(response.data.products, function (key, value) {
+                                    vm.products.push(value);
+                                });
+                            } else {
+                                this.errorText = 'No Product Found';
+                            }
                             vm.page += 1;
                         });
                     this.isLoading = false;

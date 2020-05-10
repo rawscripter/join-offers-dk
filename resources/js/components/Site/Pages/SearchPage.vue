@@ -22,7 +22,7 @@
                             <div class="text-center m-100 mt-5">
                                 <h3 class="mt-6 big-error-font">
                                     <strong>
-                                        No Search Result
+                                        {{errorText}}
                                     </strong>
                                     <br>
                                     <router-link class="back-to-home" tag="a" to="/">
@@ -53,6 +53,7 @@
         },
         data() {
             return {
+                errorText: 'Loading...',
                 isLoading: false,
                 page: 1,
                 products: [],
@@ -69,9 +70,16 @@
                         .then(response => {
                             vm.isLoading = false;
                             vm.lastPage = response.data.lastPage;
-                            $.each(response.data.products, function (key, value) {
-                                vm.products.push(value);
-                            });
+
+                            if (response.data.products != '') {
+                                $.each(response.data.products, function (key, value) {
+                                    vm.products.push(value);
+                                });
+                            } else {
+                                this.errorText = 'No Product Found';
+                            }
+
+
                             vm.page += 1;
                         });
 

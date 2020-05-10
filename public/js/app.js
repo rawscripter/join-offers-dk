@@ -6435,6 +6435,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      errorText: 'Loading...',
       isLoading: false,
       products: [],
       subCategories: [],
@@ -6492,9 +6493,15 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           _this.isLoading = false;
           _this.lastPage = response.data.lastPage;
-          $.each(response.data.products, function (key, value) {
-            vm.products.push(value);
-          });
+
+          if (response.data.products != '') {
+            $.each(response.data.products, function (key, value) {
+              vm.products.push(value);
+            });
+          } else {
+            _this.errorText = 'No Product Found';
+          }
+
           vm.page += 1;
         });
         _this.isLoading = false;
@@ -7535,6 +7542,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      errorText: 'Loading...',
       isLoading: false,
       page: 1,
       products: [],
@@ -7552,9 +7560,15 @@ __webpack_require__.r(__webpack_exports__);
         axios.get("".concat(APP_URL, "/api/products?page=").concat(_this.page, "&query=").concat(_this.query)).then(function (response) {
           vm.isLoading = false;
           vm.lastPage = response.data.lastPage;
-          $.each(response.data.products, function (key, value) {
-            vm.products.push(value);
-          });
+
+          if (response.data.products != '') {
+            $.each(response.data.products, function (key, value) {
+              vm.products.push(value);
+            });
+          } else {
+            _this.errorText = 'No Product Found';
+          }
+
           vm.page += 1;
         });
         _this.isLoading = false;
@@ -7654,6 +7668,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      errorText: 'Loading...',
       isLoading: false,
       products: [],
       page: 1,
@@ -7696,9 +7711,15 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           _this.isLoading = false;
           _this.lastPage = response.data.lastPage;
-          $.each(response.data.products, function (key, value) {
-            vm.products.push(value);
-          });
+
+          if (response.data.products != '') {
+            $.each(response.data.products, function (key, value) {
+              vm.products.push(value);
+            });
+          } else {
+            _this.errorText = 'No Product Found';
+          }
+
           vm.page += 1;
         });
         _this.isLoading = false;
@@ -60121,7 +60142,19 @@ var render = function() {
                         0
                       )
                     ])
-                  : _c("div", [_vm._m(0)])
+                  : _c("div", [
+                      _c("div", { staticClass: "text-center mt-5" }, [
+                        _c("h3", { staticClass: "big-error-font" }, [
+                          _c("strong", [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.errorText) +
+                                "\n                                "
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
               ],
               1
             )
@@ -60131,22 +60164,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center mt-5" }, [
-      _c("h3", { staticClass: "big-error-font" }, [
-        _c("strong", [
-          _vm._v(
-            "\n                                    No Product Found\n                                "
-          )
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -61756,7 +61774,9 @@ var render = function() {
                       [
                         _c("strong", [
                           _vm._v(
-                            "\n                                    No Search Result\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.errorText) +
+                              "\n                                "
                           )
                         ]),
                         _vm._v(" "),
@@ -61857,7 +61877,15 @@ var render = function() {
                   : _c("div", [
                       !_vm.isLoading
                         ? _c("div", { staticClass: "text-center mt-5" }, [
-                            _vm._m(0)
+                            _c("h3", { staticClass: "big-error-font" }, [
+                              _c("strong", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(_vm.errorText) +
+                                    "\n                                "
+                                )
+                              ])
+                            ])
                           ])
                         : _vm._e()
                     ]),
@@ -61879,20 +61907,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "big-error-font" }, [
-      _c("strong", [
-        _vm._v(
-          "\n                                    No Product Found\n                                "
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
