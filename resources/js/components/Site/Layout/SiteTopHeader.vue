@@ -77,8 +77,10 @@
                                                 Favourites
                                             </router-link>
 
-                                            <a class="dropdown-item" href="#">Dashboard</a>
-
+                                            <router-link tag="a" class="dropdown-item"
+                                                         :to="{name:'customer-dashboard'}">
+                                                Dashboard
+                                            </router-link>
                                             <router-link tag="a" class="dropdown-item" :to="{name:'customer-profile'}">
                                                 Profile
                                             </router-link>

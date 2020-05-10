@@ -7,49 +7,39 @@
                              :is-full-page="false"></loading>
                     <div class="login-form shadow shadow-sm p-5 mt-5">
                         <div class="login-header">
-                            <h4>Login</h4>
+                            <h4>Register</h4>
                         </div>
                         <div class="social-login-button mb-3">
-                            <button type="button" class="btn btn-theme btn-block"><i class="fab fa-facebook-f"></i>
-                                Login with facebook
-                            </button>
-                            <button type="button" class="btn btn-theme btn-block"><i class="fab fa-google"></i>
-                                Login with google
-                            </button>
+                            <SocialLogin :redirectUrl="redirectUrl"></SocialLogin>
                         </div>
-                        <h6 class="mb-3">OR</h6>
-
-                        <div v-if="hasFormError" class="text-center mt-2 mb-2 error invalid-feedback">
+                        <h6 class="mb-2">OR</h6>
+                        <div v-if="hasFormError" class="text-center error invalid-feedback mb-3">
                             <b>{{formErrors.text}}</b>
+
                         </div>
 
                         <form action="#" id="login" @submit.prevent="submitLoginForm">
                             <div class="form-group">
-                                <input required type="text" v-model="form.username" name="email" class="form-control"
-                                       placeholder="Enter your email" id="Email or username">
+                                <input required type="text" v-model="form.name" name="name" class="form-control"
+                                       placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <input required type="email" v-model="form.username" name="email" class="form-control"
+                                       placeholder="Enter your email">
                             </div>
                             <div class="form-group">
                                 <input required type="password" v-model="form.password"
                                        name="password" class="form-control"
                                        placeholder="Enter your password"
+                                       minlength="6"
                                        id="password">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-block rounded-0">Login</button>
+                                <button type="submit" class="btn btn-success btn-block rounded-0">Register</button>
                             </div>
-                            <div class="remember_forger_pass_option d-flex justify-content-between">
-                                <label class="checkbox_container">Remember me
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <!--                                <a href="#">Forget password ?</a>-->
-                            </div>
-                            <br>
                             <div class="register text-left">
-                                <p>Don't have an account?
-                                    <a href="javascript:void(0)" class="theme-color" @click="goToRegister">
-                                        Register Now
-                                    </a>
+                                <p>Already have an account?
+                                    <a href="javascript:void(0)" class="theme-color" @click="goToLogin"> Login Now</a>
                                 </p>
                             </div>
                         </form>
@@ -61,12 +51,18 @@
 </template>
 
 <script>
+    import SocialLogin from "./SocialLogin";
     export default {
         name: "UserLogin",
+        components: {
+            SocialLogin
+        },
         data() {
             return {
                 isLoading: false,
+                redirectUrl: '/',
                 form: {
+                    name: null,
                     username: null,
                     password: null
                 },
@@ -75,25 +71,25 @@
                     password: false,
                     text: ''
                 },
-                redirectUrl: '/',
             }
         },
         methods: {
-            goToRegister() {
+            goToLogin() {
                 if (this.redirectUrl !== '/') {
-                    this.$router.push({name: 'register', query: {redirect: this.redirectUrl}});
+                    this.$router.push({name: 'login', query: {redirect: this.redirectUrl}});
                 } else {
-                    this.$router.push({name: 'register'});
+                    this.$router.push({name: 'login'});
                 }
             },
+
             submitLoginForm() {
                 this.isLoading = true;
                 if (this.validateForm()) {
-                    axios.post(`${APP_URL}/api/login`, this.form)
+                    axios.post(`${APP_URL}/api/register`, this.form)
                         .then(response => {
                             this.isLoading = false;
                             if (response.status === 200) {
-                                User.responseAfterLogin(response, this.redirectUrl);
+                                User.responseAfterLogin(response,this.redirectUrl);
                             }
                             if (response.status === 400) {
                                 this.formErrors.text = response.data;
@@ -120,14 +116,13 @@
                 return false;
             }
         },
-        created() {
-            this.redirectUrl = this.$route.query.redirect;
-        },
         computed: {
             hasFormError() {
                 return this.formErrors.text !== '';
             }
+        },
+        created() {
+            this.redirectUrl = this.$route.query.redirect;
         }
     }
 </script>
-

@@ -48,6 +48,12 @@ class User extends Authenticatable
         return $this->hasOne(UserInfo::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class)
+            ->orderByDesc('created_at');
+    }
+
     public function runningOrders()
     {
         return $this->hasMany(Order::class)
@@ -70,5 +76,8 @@ class User extends Authenticatable
             ->where('is_canceled', '=', 1);
     }
 
-
+    public function linkedSocialAccounts()
+    {
+        return $this->hasMany(LinkedSocialAccount::class);
+    }
 }

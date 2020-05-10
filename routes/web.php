@@ -40,6 +40,9 @@ Route::get('/register', function () {
 Route::get('/checkout/payment/status','PaymentController@storePaymentDetails');
 
 
+Route::post('sociallogin/{provider}', 'AuthController@SocialSignup');
+Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
+
 
 Route::get('/{any}', function (\Illuminate\Http\Request $request) {
     if ($request->is('admin/*')) {

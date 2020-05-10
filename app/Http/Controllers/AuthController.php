@@ -10,9 +10,22 @@ use App\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
+
+    public function SocialSignup($provider)
+    {
+        // Socialite will pick response data automatic
+        $user = Socialite::driver($provider)->stateless()->user();
+
+        $user = SocialAccountsServiceController::findOrCreate($user, $provider);
+        $data['access_token'] = $user->createToken('login')->accessToken;
+        $data['token_type'] = "Bearer";
+        return response()->json($data);
+    }
+
     public function user(Request $request)
     {
         return response(new UserResource($request->user()));

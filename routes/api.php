@@ -61,6 +61,8 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
 // apis for customer
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'customer'], function () {
     Route::get('/orders', 'OrderController@customerOrders');
+    Route::get('/dashboard/data', 'CustomerDashboardController@adminDashboardData');
+
 });
 
 // apis for site

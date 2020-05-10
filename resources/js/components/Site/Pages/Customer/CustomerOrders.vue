@@ -15,7 +15,7 @@
                         <div class="user-profile-all-order p-3">
                             <h5 class="text-center">My JoinOffers</h5>
                             <hr>
-                            <div v-for="(order,index) in orders" class="table-responsive shadow">
+                            <div v-for="(order,index) in orders" class="table-responsive shadow wow bounceInUp">
                                 <table class="table table-bordered text-center">
                                     <tr>
                                         <td rowspan="4" style="width:20%">

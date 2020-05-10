@@ -9,10 +9,10 @@
                     <div class="main-content">
                         <div class="user-profile-update-form ">
                             <div class="row">
-                                <div class="col-md-6 col-lg-6 ml-auto">
+                                <div class="col-md-6 col-lg-6 ml-auto wow bounceInUp">
                                     <CustomerProfileInfo></CustomerProfileInfo>
                                 </div>
-                                <div class="col-md-6 col-lg-6 mr-auto">
+                                <div class="col-md-6 col-lg-6 mr-auto  wow bounceInUp">
                                     <UpdateUserPassword></UpdateUserPassword>
                                 </div>
                             </div>

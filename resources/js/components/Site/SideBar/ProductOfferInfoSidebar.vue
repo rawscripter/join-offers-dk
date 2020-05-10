@@ -36,9 +36,23 @@
             <p><i class="fas fa-sync"></i> Pamind mig</p>
             <p><i class="fas fa-sync"></i> Del pa</p>
             <div class="sidebar-social mt-2 d-flex justify-content-around">
-                <a href="#"><i class="fab fa-facebook-square"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
+
+
+                <social-sharing
+                    :url="getCurrentPageUrl"
+                    :title="product.name"
+                    :description="product.short_des"
+                    :quote="product.short_des"
+                    inline-template>
+                    <div>
+                        <network network="facebook">
+                            <a href="#"><i class="fab fa-facebook-square"></i></a>
+                        </network>
+                        <network network="linkedin">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </network>
+                    </div>
+                </social-sharing>
             </div>
         </div>
 
@@ -73,6 +87,9 @@
             }
         },
         computed: {
+            getCurrentPageUrl() {
+                return window.location.href;
+            },
             isExpired() {
                 let now = new Date();
                 let expire = new Date(this.product.expire_date);

@@ -12,8 +12,6 @@ import ProductDetailsPage from "../components/Site/Pages/ProductDetailsPage";
 import CategoryProducts from "../components/Site/Pages/CategoryProducts";
 import ProductEdit from "../components/Admin/BodyComponents/BodyParts/Product/ProductEdit";
 import SearchPage from "../components/Site/Pages/SearchPage";
-import UserLogin from "../components/Site/Pages/UserLogin";
-import UserRegister from "../components/Site/Pages/UserRegister";
 import FavouriteProudctsPage from "../components/Site/Pages/FavouriteProudctsPage";
 import CheckoutPage from "../components/Site/Pages/CheckoutPage";
 import CheckoutStatusPage from "../components/Site/Pages/CheckoutStatusPage";
@@ -23,6 +21,9 @@ import OrdersIndex from "../components/Admin/BodyComponents/BodyParts/Order/Orde
 import ArchiveProductsIndex from "../components/Admin/BodyComponents/BodyParts/Product/ArchiveProductsIndex";
 import CustomerIndex from "../components/Admin/BodyComponents/BodyParts/Customer/CustomerIndex";
 import OrderDetails from "../components/Admin/BodyComponents/BodyParts/Order/OrderDetails";
+import CustomerDashboard from "../components/Site/Pages/Customer/CustomerDashboard";
+import UserLogin from "../components/Site/Pages/Auth/UserLogin";
+import UserRegister from "../components/Site/Pages/Auth/UserRegister";
 //importing components
 Vue.use(VueRouter);
 const routes = [
@@ -39,6 +40,15 @@ const routes = [
     {path: '/admin/order/:order/details', name: 'admin-order-details', component: OrderDetails},
     {path: '/admin/product/create', name: 'product.create', component: ProductCreate},
     {path: '/admin/product/:product/edit', name: 'product.edit', component: ProductEdit},
+
+
+    {
+        path: '/auth/:provider/callback',
+        component: {
+            template: '<div class="auth-component"></div>'
+        }
+    },
+
 
     // routes for site
     {
@@ -126,6 +136,16 @@ const routes = [
         component: CustomerProfile,
         meta: {
             title: 'Update Profile! ',
+            requireAuth: true,
+            requireAdmin: false,
+        }
+    },
+    {
+        path: '/customer/dashboard',
+        name: 'customer-dashboard',
+        component: CustomerDashboard,
+        meta: {
+            title: 'Dashboard! ',
             requireAuth: true,
             requireAdmin: false,
         }

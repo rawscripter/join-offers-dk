@@ -8,6 +8,28 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+var SocialSharing = require('vue-social-sharing');
+
+Vue.use(SocialSharing);
+
+
+import axios from 'axios'
+import VueSocialauth from 'vue-social-auth'
+
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios)
+
+
+Vue.use(VueSocialauth, {
+
+    providers: {
+        github: {
+            clientId: '5defb7b174f112bb4314',
+            redirectUri: 'http://laravu.test/auth/github/callback' // Your client app URL
+        }
+    }
+})
+
 //importing classes
 import User from './Helpers/User';
 import Notification from './Helpers/Notification';

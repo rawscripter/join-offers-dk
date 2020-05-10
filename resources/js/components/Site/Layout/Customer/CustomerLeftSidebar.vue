@@ -2,40 +2,31 @@
     <div class="main-sidebar shadow p-2" id="main_sidebar">
         <div class="profile-meu">
             <ul>
-                <!--                <li><a href="#">Dashboard</a> </li>-->
-                <!--                <li><a href="#">Profile</a> </li>-->
-                <!--                <li><a href="#">Orders</a> </li>-->
-                <!--                <li><a href="#">Favorites</a>  </li>-->
 
-                <!--                <router-link tag="a" class="dropdown-item"  :to="{name:'favourites'}">-->
-                <!--                    Favourites-->
-                <!--                </router-link>-->
-
-                <a class="dropdown-item" href="#">Dashboard</a>
-
+                <router-link tag="a" class="dropdown-item" :to="{name:'customer-dashboard'}">
+                    Dashboard
+                </router-link>
                 <router-link tag="a" class="dropdown-item" :to="{name:'customer-profile'}">
                     Profile
                 </router-link>
                 <router-link tag="a" class="dropdown-item" exact :to="{name:'customer-orders',query:{type:'running'}}">
-                    Running Orders
+                    Running Events
                 </router-link>
 
                 <router-link tag="a" class="dropdown-item" exact
                              :to="{name:'customer-completed-orders',query:{type:'completed'}}">
-                    Completed Orders
+                    Completed Events
                 </router-link>
 
                 <router-link tag="a" class="dropdown-item" exact
                              :to="{name:'customer-canceled-orders',query:{type:'canceled'}}">
-                    Canceled Orders
+                    Canceled Events
                 </router-link>
-
 
                 <div class="dropdown-divider"></div>
                 <router-link class="dropdown-item" to="/logout">
                     Logout
                 </router-link>
-
 
             </ul>
         </div>
@@ -59,7 +50,17 @@
         padding: 0px !important;
     }
 
-    a.dropdown-item.router-link-exact-active.router-link-active {
+    a.dropdown-item {
+        font-weight: bold;
+        color: #6c757d !important;
+    }
+    a.dropdown-item.router-link-exact-active.router-link-active:visited {
+        background: #efefef;
+    }
+    a.dropdown-item.router-link-exact-active.router-link-active,
+    a.dropdown-item.router-link-exact-active.router-link-active:visited,
+    a.dropdown-item.router-link-exact-active.router-link-active:focus,
+    a.dropdown-item.router-link-exact-active.router-link-active:checked {
         background: #efefef;
     }
 
@@ -68,6 +69,7 @@
     }
 
     div#main_sidebar {
-        height: 45vh;
+        min-height: 45vh;
     }
+
 </style>
