@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('order_status')->default(0);
             $table->boolean('is_canceled')->default(0);
             $table->bigInteger('canceled_by')->unsigned();
+            $table->timestamp('payment_deadline')->nullable();
 
             $table->foreign('product_id')
                 ->references('id')->on('products');

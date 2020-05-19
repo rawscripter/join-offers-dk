@@ -13,7 +13,7 @@
         name: "AppHome",
         data() {
             return {
-                userLoggedIn: User.loggedIn()
+                userLoggedIn: User.isAdmin()
             }
         },
         components: {

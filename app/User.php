@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -79,5 +78,11 @@ class User extends Authenticatable
     public function linkedSocialAccounts()
     {
         return $this->hasMany(LinkedSocialAccount::class);
+    }
+
+    public function isSubscribed()
+    {
+        return Subscriber::where('user_id', $this->id)->where('email', $this->email)->first();
+
     }
 }

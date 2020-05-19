@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Product::class, function (Faker $faker) {
     $cat = \App\Category::all()->random();
+    $user = \App\User::all()->random();
 
     $marketPrice = rand(500, 10000);
     $offer_price = $marketPrice - rand(50, 200);
@@ -15,6 +16,8 @@ $factory->define(\App\Product::class, function (Faker $faker) {
     $items = ['All', 'Men', 'Women', 'Kids'];
     $productType = $items[array_rand($items)];;
     $eventId = (new \App\Http\Controllers\ProductController)->generateEventId(8);
+    $randomDay = rand(5, 10);
+    $expireDate = \Carbon\Carbon::now()->addDays($randomDay);
     return [
         'name' => $faker->name,
         'slug' => \Illuminate\Support\Str::slug($faker->name),
@@ -33,8 +36,8 @@ $factory->define(\App\Product::class, function (Faker $faker) {
         'current_price' => $lastPrice,
         'total_offer_spots' => $total_offer_spots,
         'minus_price_user_price' => $minus_per_user,
-        'expire_date' => '2020-05-20 16:00:00',
+        'expire_date' => $expireDate,
         'product_type' => $productType,
-        'user_id' => 1,
+        'user_id' => $user->id,
     ];
 });

@@ -73,7 +73,7 @@ class PaymentController extends Controller
             "taxRate": 0,
             "taxAmount": 0,
             "grossTotalAmount": ' . $total * 100 . ',
-            "netTotalAmount": ' . $total . '
+            "netTotalAmount": ' . $total* 100 . '
         }
         ],
         "amount": ' . $total * 100 . ',
@@ -130,7 +130,7 @@ class PaymentController extends Controller
         if ($paymentFailed) {
             //delete temporary table data
             $temporaryOrder = TemporaryOrder::where('custom_order_id', $orderId)->first();
-            if($temporaryOrder){
+            if ($temporaryOrder) {
                 $temporaryOrder->delete();
             }
 

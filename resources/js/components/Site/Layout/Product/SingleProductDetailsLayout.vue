@@ -8,7 +8,6 @@
         <!-- Secondary carousel image thumbnail gallery -->
         <div v-if="hasImages" class="small-img">
             <div class="image-container">
-
                 <img v-for="(image,index) in product.productImages"
                      :src="image.thumbImage"
                      @click="changeMainImage(index)"
@@ -18,7 +17,7 @@
         </div>
 
         <div class="timer text-center mt-2 mb-2">
-            <vac :end-time="new Date(product.expire_date)">
+            <vac v-if="isOfferTimeStarted" :end-time="new Date(product.expire_date)">
                 <div
                     class="timer-area d-flex justify-content-center mt-3 mb-3"
                     slot="process"
@@ -61,6 +60,9 @@
                 </div>
                 <span slot="finish" class="expired">Offer Expired!</span>
             </vac>
+            <span v-else class="expired">
+                Coming Soon
+            </span>
         </div>
 
         <h3 class="title mt-2 text-center">
@@ -68,6 +70,10 @@
         </h3>
         <!-- discription div  -->
         <div class="discription" v-html="product.full_des">
+        </div>
+        <br>
+        <h5 class="mt-2"><strong>Order Note:</strong></h5>
+        <div class="orderNote" v-html="product.order_note">
         </div>
     </div>
 </template>
@@ -91,6 +97,11 @@
         computed: {
             hasImages() {
                 return this.product.productImages.length > 0;
+            },
+            isOfferTimeStarted() {
+                let startDate = new Date(this.product.offer_start_date);
+                let current_date = Date.now();
+                return current_date > startDate;
             }
         }
     }

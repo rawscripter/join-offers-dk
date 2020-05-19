@@ -545,50 +545,62 @@ nav {
 }
 
 .profile-meu {
-    padding:40px 0;
+    padding: 40px 0;
 }
+
 .profile-meu ul {
-    margin:0;
-    padding:0;
-    padding:0 0 0 20px;
+    margin: 0;
+    padding: 0;
+    padding: 0 0 0 20px;
 }
+
 .profile-meu ul li {
-    list-style:none;
+    list-style: none;
 }
 
 .profile-meu ul li a {
     text-decoration: none;
     color: #000;
-    text-shadow: 2px 3px 3px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2), 0px -5px 35px rgba(255, 255, 255, 0.3);
     padding: 4px 33px;
     display: block;
     font-size: 18px;
-    transition:.25s;
+    transition: .25s;
 }
+
 .profile-meu ul li a:hover {
     color: #FF8B37;
 }
+
 .profile-meu {
-    padding:40px 0;
+    padding: 40px 0;
 }
+
 .profile-meu ul {
-    margin:0;
-    padding:0;
-    padding:0 0 0 20px;
+    margin: 0;
+    padding: 0;
+    padding: 0 0 0 20px;
 }
+
 .profile-meu ul li {
-    list-style:none;
+    list-style: none;
 }
 
 .profile-meu ul li a {
     text-decoration: none;
     color: #000;
-    text-shadow: 2px 3px 3px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2), 0px -5px 35px rgba(255, 255, 255, 0.3);
     padding: 4px 33px;
     display: block;
     font-size: 18px;
-    transition:.25s;
+    transition: .25s;
 }
+
 .profile-meu ul li a:hover {
     color: #FF8B37;
+}
+.short-description {
+    height: 100px !important;
+    overflow: hidden;
+    margin-bottom: 13px;
 }

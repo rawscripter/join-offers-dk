@@ -29,6 +29,7 @@ class ProductResource extends JsonResource
             'isLikedByCurrentUser' => $this->isAuthUserLikedPost(),
             'short_des' => $this->short_des,
             'full_des' => $this->full_des,
+            'order_note' => $this->order_note,
             'category' => $this->category->name,
             'categoryData' => $this->category,
             'subCategory' => $this->subCategory->name,
@@ -48,6 +49,7 @@ class ProductResource extends JsonResource
             'user' => $this->user->name,
             'expire_date' => Carbon::parse($this->expire_date)->format('d F Y H:i:s'),
             'expire_date_timestamp' => Carbon::parse($this->expire_date)->format('Y-m-d\TH:i'),
+            'offer_start_date' => Carbon::parse($this->offer_start_date)->format('Y-m-d\TH:i'),
             'created_at' => Carbon::parse($this->created_at)->format('d F Y'),
         ];
     }

@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Resources\UserInfoResource;
 use App\Http\Resources\UserResource;
 use App\User;
 use App\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -97,6 +100,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->username)->first();
 
         if (!$user) {
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->username,
@@ -104,7 +108,7 @@ class AuthController extends Controller
             ]);
 
             UserInfo::create([
-                'user_ud' => $user->id,
+                'user_id' => $user->id,
             ]);
 
             $http = new \GuzzleHttp\Client;
@@ -139,5 +143,38 @@ class AuthController extends Controller
             $token->delete();
         });
         return json_encode('Logged Out Successfully.');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $this->validate($request, ['email' => 'required|email|exists:users']);
+
+        $response = $this->broker()->sendResetLink($request->only('email'));
+        return $response == Password::RESET_LINK_SENT
+            ? [
+                'success' => true,
+                'msg' => 'Successful'
+            ]
+            : [
+                'success' => false,
+                'msg' => 'Reset email sending failed.'
+            ];
+    }
+
+    public function broker()
+    {
+        return Password::broker();
+    }
+
+    public function confirmPassword(Request $request)
+    {
+        (new ResetPasswordController)->reset($request);
+        $user = \auth()->user();
+        if ($user) {
+            $data['access_token'] = $user->createToken('login')->accessToken;
+            $data['token_type'] = "Bearer";
+            return response()->json($data);
+        }
+        return false;
     }
 }

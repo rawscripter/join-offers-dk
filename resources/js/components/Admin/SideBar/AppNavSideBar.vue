@@ -140,6 +140,18 @@
                                 name: 'All Products',
                                 link: '/admin/products'
                             },
+                            {
+                                name: 'Running Products',
+                                link: '/admin/products?status=running'
+                            },
+                            {
+                                name: 'Upcoming Products',
+                                link: '/admin/products?status=coming_soon'
+                            },
+                            {
+                                name: 'Expired Products',
+                                link: '/admin/products?status=expired'
+                            },
 
                             {
                                 name: 'Create New Product',

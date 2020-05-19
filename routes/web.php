@@ -1,5 +1,7 @@
 <?php
 
+use App\Order;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,18 +28,40 @@ Route::get('/', function () {
 });
 
 // to load main site
+Route::get('/delete/product', function () {
+    for ($i = 67000; $i < 67047; $i++) {
+        $product = \App\Product::find($i);
+        if ($product) {
+            if ($product->likes->count()) {
+              continue;
+            }
+            if ($product->orders->count()) {
+              continue;
+            }
+            $product->delete();
+        }
+    }
+});
+
+
+// to load main site
 Route::get('/login', function () {
     return view('site.index');
-});
+})->name('login');
 
 // to load main site
 Route::get('/register', function () {
     return view('site.index');
 });
 
+//// to load main site
+Route::get('/password/reset/{token}', function () {
+    return view('site.index');
+})->name('password.reset');
+
 
 // for payment
-Route::get('/checkout/payment/status','PaymentController@storePaymentDetails');
+Route::get('/checkout/payment/status', 'PaymentController@storePaymentDetails');
 
 
 Route::post('sociallogin/{provider}', 'AuthController@SocialSignup');

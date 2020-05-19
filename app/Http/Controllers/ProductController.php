@@ -27,17 +27,34 @@ class ProductController extends Controller
     {
         $res['status'] = 200;
         $res['message'] = 'All Categories';
-        if ($request['query']) {
-            $products = Product::where('is_archive', 0)->where('name', 'like', '%' . $request['query'] . '%')->paginate($request->limit ? $request->limit : 20);
-            $total = Product::where('is_archive', 0)->where('name', 'like', '%' . $request['query'] . '%')->get();
-        } elseif ($request->orderBy) {
-            $products = Product::where('is_archive', 0)->orderBy($request->orderBy, $request->ascending == 1 ? 'ASC' : 'DESC')->paginate($request->limit ? $request->limit : 20);
-            $total = Product::where('is_archive', 0)->orderBy($request->orderBy, $request->ascending == 1 ? 'ASC' : 'DESC')->get();
-        } else {
-            $products = Product::where('is_archive', 0)->paginate($request->limit ? $request->limit : 20);
-            $total = Product::where('is_archive', 0)->get();
+
+        $products = Product::query();
+        $products->where('is_archive', 0);
+
+        if (isset($request->status) && $request->status == 'running') {
+            $products->where('offer_start_date', '<', Carbon::now());
         }
-        $res['total'] = $total->count();
+        if (isset($request->status) && $request->status == 'coming_soon') {
+            $products->where('offer_start_date', '>', Carbon::now());
+        }
+
+        if (isset($request->status) && $request->status == 'expired') {
+            $products->where('expire_date', '<', Carbon::now());
+        }
+
+        if ($request['query']) {
+            $products->where('name', 'like', '%' . $request['query'] . '%')
+                ->orWhere('event_id', 'like', '%' . $request['query'] . '%')
+                ->orWhere('id', 'like', '%' . $request['query'] . '%');
+        }
+        if ($request->orderBy) {
+            $products->orderBy($request->orderBy, $request->ascending == 1 ? 'ASC' : 'DESC');
+        }
+
+        $products = $products->paginate($request->limit ? $request->limit : 20);
+
+
+        $res['total'] = $products->total();
         $res['products'] = ProductResource::collection($products);
         return response()->json($res);
     }
@@ -52,17 +69,22 @@ class ProductController extends Controller
     {
         $res['status'] = 200;
         $res['message'] = 'All Categories';
+
+        $products = Product::query();
+        $products->where('is_archive', 1);
         if ($request['query']) {
-            $products = Product::where('is_archive', 1)->where('name', 'like', '%' . $request['query'] . '%')->paginate($request->limit ? $request->limit : 20);
-            $total = Product::where('is_archive', 1)->where('name', 'like', '%' . $request['query'] . '%')->get();
-        } elseif ($request->orderBy) {
-            $products = Product::where('is_archive', 1)->orderBy($request->orderBy, $request->ascending == 1 ? 'ASC' : 'DESC')->paginate($request->limit ? $request->limit : 20);
-            $total = Product::where('is_archive', 1)->orderBy($request->orderBy, $request->ascending == 1 ? 'ASC' : 'DESC')->get();
-        } else {
-            $products = Product::where('is_archive', 1)->paginate($request->limit ? $request->limit : 20);
-            $total = Product::where('is_archive', 1)->get();
+            $products->where('name', 'like', '%' . $request['query'] . '%')
+                ->orWhere('event_id', 'like', '%' . $request['query'] . '%')
+                ->orWhere('id', 'like', '%' . $request['query'] . '%');
         }
-        $res['total'] = $total->count();
+        if ($request->orderBy) {
+            $products->orderBy($request->orderBy, $request->ascending == 1 ? 'ASC' : 'DESC');
+        }
+
+        $products = $products->paginate($request->limit ? $request->limit : 20);
+
+
+        $res['total'] = $products->total();
         $res['products'] = ProductResource::collection($products);
         return response()->json($res);
     }
@@ -77,6 +99,13 @@ class ProductController extends Controller
             $minPrice = $_GET['minPrice'];
             $maxPrice = $_GET['maxPrice'];
             $products = Product::query();
+            // only coming soon products
+            if ($short === 'coming_soon') {
+                $products->where('offer_start_date', '>', Carbon::now());
+            } else {
+                $products->where('offer_start_date', '<', Carbon::now());
+            }
+
             // to filter the gender
             if (strtolower($gender) != 'all') {
                 $products->where('product_type', $gender);
@@ -96,6 +125,7 @@ class ProductController extends Controller
                 $products->where('expire_date', '>', Carbon::now());
                 $products->where('expire_date', '<', Carbon::now()->addDays(1));
             }
+            $products->where('expire_date', '>', Carbon::now());
 
             $products = $products->paginate(6);
 
@@ -230,7 +260,7 @@ class ProductController extends Controller
     public function showRelatedForSite($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        $products = Product::where('category_id', $product->category->id)->where('id', '!=', $product->id)->limit(3)->get();
+        $products = Product::where('offer_start_date', '<', Carbon::now())->where('category_id', $product->category->id)->where('id', '!=', $product->id)->limit(3)->get();
         if (!empty($products)) {
             $res['status'] = 200;
             $res['message'] = 'Product Found Successfully.';
@@ -415,6 +445,7 @@ class ProductController extends Controller
         $data['slug'] = Str::slug($request->name);
         $data['short_des'] = $request->short_des;
         $data['full_des'] = $request->full_des;
+        $data['order_note'] = $request->order_note;
         $data['category_id'] = $request->category_id;
         $data['sub_category_id'] = $request->sub_category_id;
         $data['market_price'] = $request->market_price;
@@ -427,6 +458,7 @@ class ProductController extends Controller
         $data['max_unit_per_user'] = $request->max_unit_per_user;
         $data['user_id'] = auth()->user()->id;
         $data['expire_date'] = Carbon::parse($request->expire_date)->format('Y-m-d H:s:i');
+        $data['offer_start_date'] = Carbon::parse($request->offer_start_date)->format('Y-m-d H:s:i');
         return $data;
     }
 

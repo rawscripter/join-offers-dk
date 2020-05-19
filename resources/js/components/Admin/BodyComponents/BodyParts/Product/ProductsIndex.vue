@@ -19,8 +19,20 @@
 
                     <div class="table-responsivess">
                         <v-server-table ref="myTable"
+                                        :url="serverRequestUrl"
                                         :columns="columns"
                                         :options="options">
+
+
+                             <span slot="totalOrders" slot-scope="{row}">
+
+                                 <router-link class="btn btn-sm btn-primary"
+                                              :to="{name:'orders',query:{product:row.id,status:'all'}}">
+                                     {{row.totalOrders}}
+                                 </router-link>
+                            </span>
+
+
                             <span slot="actions" slot-scope="{row}">
                                 <button class="btn btn-sm btn-primary" v-on:click="edit(row.id)">Edit</button>
                                 <button class="btn btn-sm btn-danger"
@@ -43,16 +55,27 @@
         name: "ProductIndex",
         data() {
             return {
-                columns: ['id', 'name',
-                    'category', 'subCategory', 'market_price',
-                    'offer_price', 'last_price',
-                    'total_offer_spots', 'minus_price_user_price',
-                    'expire_date', 'user', 'created_at',
+                productStatus: null,
+                columns: ['id',
+                    'name',
+                    'event_id',
+                    'category',
+                    'subCategory',
+                    'market_price',
+                    'offer_price',
+                    'last_price',
+                    'total_offer_spots',
+                    'minus_price_user_price',
+                    'totalOrders',
+                    'expire_date',
+                    'user',
+                    'created_at',
                     'actions'],
                 options: {
                     headings: {
                         id: 'ID',
                         name: 'Name',
+                        event_id: 'Event ID',
                         category: 'Category',
                         subCategory: 'Sub Category',
                         market_price: 'Market Price',
@@ -60,6 +83,7 @@
                         last_price: 'Last Price',
                         total_offer_spots: 'Total Spots',
                         minus_price_user_price: 'Price Per User',
+                        totalOrders: 'Total Orders',
                         expire_date: 'Expire Date',
                         user: 'Added By',
                         created_at: 'Created At',
@@ -67,14 +91,8 @@
                     },
                     perPage: 10,
                     perPageValues: [10, 20, 25, 50, 100],
-                    sortable: ['name'],
-                    filterable: ['name'],
-                    requestFunction: function (data) {
-                        let self = this;
-                        return axios.get(`${APP_URL}/api/admin/product`, {params: data}).catch(function (e) {
-                            self.dispatch('error', e);
-                        }.bind(this));
-                    },
+                    sortable: ['name', 'event_id', 'expire_date', 'current_price', 'id'],
+                    filterable: ['name', 'event_id', 'expire_date', 'current_price', 'id'],
                     responseAdapter: function (resp) {
                         return {
                             data: resp.data.products,
@@ -114,6 +132,23 @@
                 })
             }
         },
+        computed: {
+            serverRequestUrl() {
+                if (this.productStatus != null) {
+                    return `${APP_URL}/api/admin/product?status=${this.productStatus}`;
+                }else{
+                    return `${APP_URL}/api/admin/product`;
+                }
+            },
+        },
+        watch: {
+            '$route.query': {
+                immediate: true,
+                handler(newVal) {
+                    this.productStatus = newVal.status;
+                }
+            }
+        },
     }
 </script>
 
@@ -129,4 +164,6 @@
     .VueTables__limit-field {
         display: flex !important;
     }
+
+
 </style>

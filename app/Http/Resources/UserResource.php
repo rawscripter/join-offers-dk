@@ -17,6 +17,7 @@ class UserResource extends JsonResource
         return [
             'rui' => base64_encode($this->id),
             'run' => base64_encode($this->name),
+            'url' => base64_encode($this->role),
         ];
     }
 }

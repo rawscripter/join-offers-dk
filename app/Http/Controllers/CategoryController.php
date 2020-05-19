@@ -56,6 +56,12 @@ class CategoryController extends Controller
                 $maxPrice = $_GET['maxPrice'];
                 $subCategory = $_GET['subCategory'] ?? null;
                 $products = Product::query();
+                if ($request['short'] == 'coming_soon') {
+                    $products->where('offer_start_date', '>', Carbon::now());
+                } else {
+                    $products->where('offer_start_date', '<', Carbon::now());
+                }
+
 
                 $products->where('category_id', $category->id);
 

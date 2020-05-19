@@ -84,3 +84,5 @@ Route::get('/category/{categorySlug}/sub-categories', 'CategoryController@subCat
 
 Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
+Route::post('/reset/password', 'AuthController@resetPassword');
+Route::post('/confirm/password', 'AuthController@confirmPassword');

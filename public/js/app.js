@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js ***!
@@ -2042,7 +2054,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "AppHome",
   data: function data() {
     return {
-      userLoggedIn: User.loggedIn()
+      userLoggedIn: User.isAdmin()
     };
   },
   components: {
@@ -2273,6 +2285,11 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return false;
+    }
+  },
+  created: function created() {
+    if (User.isAdmin()) {
+      this.$router.push('/admin');
     }
   }
 });
@@ -3284,15 +3301,21 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       orderStatus: 'all',
-      columns: ['id', 'custom_order_id', 'product.name', 'product.current_price', 'product.expire_date', 'join_price', 'quantity', 'total_price', 'is_join_price_paid', 'is_full_price_paid', 'order_status', 'created_at', 'actions'],
+      product: null,
+      columns: ['id', 'custom_order_id', 'product.name', 'product.expire_date', // 'product.market_price',
+      // 'product.offer_price',
+      // 'product.current_price',
+      'join_price', 'quantity', 'total_price', 'is_join_price_paid', 'is_full_price_paid', 'order_status', 'created_at', 'actions'],
       options: {
         headings: {
           id: 'ID',
           custom_order_id: 'Order ID',
           'product.name': 'Product Name',
-          'product.current_price': 'Product Current Price',
-          'product.expire_date': 'Product Expire Date',
-          join_price: 'Product Join price',
+          // 'product.current_price': 'Current Price',
+          // 'product.market_price': 'Market Price',
+          // 'product.offer_price': 'Start Price',
+          'product.expire_date': 'End Date',
+          join_price: 'Join price',
           total_price: 'Paid Join Price',
           quantity: 'Order Quantity',
           created_at: 'Order At',
@@ -3303,7 +3326,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         perPage: 10,
         perPageValues: [10, 20, 25, 50, 100],
-        sortable: ['name'],
+        sortable: ['name', 'custom_order_id', 'created_at', 'order_status', 'is_join_price_paid', 'is_full_price_paid', 'quantity'],
         filterable: ['name'],
         responseAdapter: function responseAdapter(resp) {
           return {
@@ -3319,7 +3342,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     serverRequestUrl: function serverRequestUrl() {
-      return "".concat(APP_URL, "/api/admin/orders?status=").concat(this.orderStatus);
+      if (this.product != null) {
+        return "".concat(APP_URL, "/api/admin/orders?status=").concat(this.orderStatus, "&product=").concat(this.product);
+      } else {
+        return "".concat(APP_URL, "/api/admin/orders?status=").concat(this.orderStatus);
+      }
     },
     tableHeadClass: function tableHeadClass() {
       if (this.orderStatus === 'all') {
@@ -3350,6 +3377,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     if (this.$route.query.status) {
       this.orderStatus = this.$route.query.status;
+      this.product = this.$route.query.product;
     }
   }
 });
@@ -3655,6 +3683,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductCreate",
@@ -3670,6 +3711,7 @@ __webpack_require__.r(__webpack_exports__);
         name: null,
         category_id: null,
         short_des: null,
+        order_note: null,
         full_des: null,
         sub_category_id: null,
         market_price: null,
@@ -3679,6 +3721,7 @@ __webpack_require__.r(__webpack_exports__);
         total_offer_spots: null,
         minus_price_user_price: null,
         expire_date: null,
+        offer_start_date: null,
         product_image: null
       },
       errors_exist: false,
@@ -3940,6 +3983,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3970,6 +4026,7 @@ __webpack_require__.r(__webpack_exports__);
         name: null,
         category_id: null,
         short_des: null,
+        order_note: null,
         full_des: null,
         sub_category_id: null,
         productImages: null,
@@ -3981,6 +4038,7 @@ __webpack_require__.r(__webpack_exports__);
         total_offer_spots: null,
         minus_price_user_price: null,
         expire_date: null,
+        offer_start_date: null,
         product_image: null
       },
       errors_exist: false,
@@ -4156,15 +4214,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductIndex",
   data: function data() {
     return {
-      columns: ['id', 'name', 'category', 'subCategory', 'market_price', 'offer_price', 'last_price', 'total_offer_spots', 'minus_price_user_price', 'expire_date', 'user', 'created_at', 'actions'],
+      productStatus: null,
+      columns: ['id', 'name', 'event_id', 'category', 'subCategory', 'market_price', 'offer_price', 'last_price', 'total_offer_spots', 'minus_price_user_price', 'totalOrders', 'expire_date', 'user', 'created_at', 'actions'],
       options: {
         headings: {
           id: 'ID',
           name: 'Name',
+          event_id: 'Event ID',
           category: 'Category',
           subCategory: 'Sub Category',
           market_price: 'Market Price',
@@ -4172,6 +4244,7 @@ __webpack_require__.r(__webpack_exports__);
           last_price: 'Last Price',
           total_offer_spots: 'Total Spots',
           minus_price_user_price: 'Price Per User',
+          totalOrders: 'Total Orders',
           expire_date: 'Expire Date',
           user: 'Added By',
           created_at: 'Created At',
@@ -4179,16 +4252,8 @@ __webpack_require__.r(__webpack_exports__);
         },
         perPage: 10,
         perPageValues: [10, 20, 25, 50, 100],
-        sortable: ['name'],
-        filterable: ['name'],
-        requestFunction: function requestFunction(data) {
-          var self = this;
-          return axios.get("".concat(APP_URL, "/api/admin/product"), {
-            params: data
-          })["catch"](function (e) {
-            self.dispatch('error', e);
-          }.bind(this));
-        },
+        sortable: ['name', 'event_id', 'expire_date', 'current_price', 'id'],
+        filterable: ['name', 'event_id', 'expire_date', 'current_price', 'id'],
         responseAdapter: function responseAdapter(resp) {
           return {
             data: resp.data.products,
@@ -4237,6 +4302,23 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.error(error);
       });
+    }
+  },
+  computed: {
+    serverRequestUrl: function serverRequestUrl() {
+      if (this.productStatus != null) {
+        return "".concat(APP_URL, "/api/admin/product?status=").concat(this.productStatus);
+      } else {
+        return "".concat(APP_URL, "/api/admin/product");
+      }
+    }
+  },
+  watch: {
+    '$route.query': {
+      immediate: true,
+      handler: function handler(newVal) {
+        this.productStatus = newVal.status;
+      }
     }
   }
 });
@@ -4878,6 +4960,15 @@ __webpack_require__.r(__webpack_exports__);
           name: 'All Products',
           link: '/admin/products'
         }, {
+          name: 'Running Products',
+          link: '/admin/products?status=running'
+        }, {
+          name: 'Upcoming Products',
+          link: '/admin/products?status=coming_soon'
+        }, {
+          name: 'Expired Products',
+          link: '/admin/products?status=expired'
+        }, {
           name: 'Create New Product',
           link: '/admin/product/create'
         }, {
@@ -5392,9 +5483,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SingleProduct",
   props: ['product'],
+  data: function data() {
+    return {
+      showModal: false
+    };
+  },
   methods: {
     addProductToFavouriteList: function addProductToFavouriteList(slug) {
       var _this = this;
@@ -5427,6 +5545,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     totalLiked: function totalLiked() {
       return this.product.total_favourites;
+    },
+    isOfferTimeStarted: function isOfferTimeStarted() {
+      var startDate = new Date(this.product.offer_start_date);
+      var current_date = Date.now();
+      return current_date > startDate;
     }
   }
 });
@@ -5442,6 +5565,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5534,6 +5663,11 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     hasImages: function hasImages() {
       return this.product.productImages.length > 0;
+    },
+    isOfferTimeStarted: function isOfferTimeStarted() {
+      var startDate = new Date(this.product.offer_start_date);
+      var current_date = Date.now();
+      return current_date > startDate;
     }
   }
 });
@@ -6058,6 +6192,131 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UserChangePassword",
+  data: function data() {
+    return {
+      isLoading: false,
+      form: {
+        email: null,
+        password: null,
+        password_confirmation: null,
+        token: null
+      },
+      formErrors: {
+        email: false,
+        text: ''
+      },
+      redirectUrl: '/'
+    };
+  },
+  methods: {
+    submitLoginForm: function submitLoginForm() {
+      var _this = this;
+
+      this.isLoading = true;
+      axios.post("".concat(APP_URL, "/api/confirm/password"), this.form).then(function (response) {
+        _this.isLoading = false;
+
+        if (response.status === 200) {
+          Alert.showSuccessAlert(response.data.message);
+          setTimeout(function () {
+            User.responseAfterLogin(response);
+          }, 500);
+        }
+
+        if (response.status === 400) {
+          Alert.showErrorAlert(response.data.message);
+        }
+
+        if (response.status === 422) {
+          Alert.showErrorAlert(response.data.message);
+        }
+      })["catch"](function (error) {
+        Alert.showErrorAlert(response.data.message);
+      });
+    }
+  },
+  created: function created() {
+    this.form.email = this.$route.query.email;
+    this.form.token = this.$route.params.token;
+
+    if (User.loggedIn()) {
+      this.$router.push('/');
+    }
+  },
+  computed: {
+    hasFormError: function hasFormError() {
+      return this.formErrors.text !== '';
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserLogin.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Site/Pages/Auth/UserLogin.vue?vue&type=script&lang=js& ***!
@@ -6068,6 +6327,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SocialLogin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SocialLogin */ "./resources/js/components/Site/Pages/Auth/SocialLogin.vue");
+//
+//
 //
 //
 //
@@ -6205,6 +6466,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.redirectUrl = this.$route.query.redirect;
+
+    if (User.loggedIn()) {
+      this.$router.push('/');
+    }
   },
   computed: {
     hasFormError: function hasFormError() {
@@ -6362,6 +6627,117 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.redirectUrl = this.$route.query.redirect;
+
+    if (User.loggedIn()) {
+      this.$router.push('/');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UserResetPassword",
+  data: function data() {
+    return {
+      isLoading: false,
+      form: {
+        email: null
+      },
+      formErrors: {
+        email: false,
+        text: ''
+      },
+      redirectUrl: '/'
+    };
+  },
+  methods: {
+    submitLoginForm: function submitLoginForm() {
+      var _this = this;
+
+      this.isLoading = true;
+      axios.post("".concat(APP_URL, "/api/reset/password"), this.form).then(function (response) {
+        _this.isLoading = false;
+
+        if (response.status === 200) {
+          // User.responseAfterLogin(response, this.redirectUrl);
+          Alert.showSuccessAlert('Password reset link has been sent to your Mail.');
+          _this.form.email = '';
+        }
+
+        if (response.status === 400) {
+          Alert.showErrorAlert('No Record Found.');
+        }
+
+        if (response.status === 422) {
+          Alert.showErrorAlert('No Email Found.');
+        }
+      })["catch"](function (error) {
+        Alert.showErrorAlert('No Email Found.');
+      });
+    }
+  },
+  created: function created() {
+    this.redirectUrl = this.$route.query.redirect;
+
+    if (User.loggedIn()) {
+      this.$router.push('/');
+    }
+  },
+  computed: {
+    hasFormError: function hasFormError() {
+      return this.formErrors.text !== '';
+    }
   }
 });
 
@@ -6684,6 +7060,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CheckoutPage",
@@ -6699,6 +7086,7 @@ __webpack_require__.r(__webpack_exports__);
       productSlug: null,
       isUserLoggedIn: User.loggedIn(),
       orderDetails: {
+        newsletter: 0,
         productId: null,
         quantity: 1,
         totalPrice: 0,
@@ -6713,7 +7101,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     increaseOrderQuantity: function increaseOrderQuantity() {
-      this.orderDetails.quantity++;
+      if (this.product.max_unit_per_user > this.orderDetails.quantity) {
+        this.orderDetails.quantity++;
+      } else {
+        alert('Minimum order Quantity is ' + this.product.max_unit_per_user);
+      }
     },
     decreaseOrderQuantity: function decreaseOrderQuantity() {
       if (this.orderDetails.quantity > 1) {
@@ -7005,6 +7397,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layout_Customer_CustomerLeftSidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Layout/Customer/CustomerLeftSidebar */ "./resources/js/components/Site/Layout/Customer/CustomerLeftSidebar.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7852,6 +8250,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8011,6 +8415,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     totalLiked: function totalLiked() {
       return this.product.total_favourites;
+    },
+    isOfferTimeStarted: function isOfferTimeStarted() {
+      var startDate = new Date(this.product.offer_start_date);
+      var current_date = Date.now();
+      return current_date > startDate;
     }
   }
 });
@@ -15043,7 +15452,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../../node_mod
 
 
 // module
-exports.push([module.i, "\n.VueTables__search-field {\n    display: flex !important;\n}\n.VueTables__search-field label, .VueTables__limit-field label {\n    margin-right: 10px;\n}\n.VueTables__limit-field {\n    display: flex !important;\n}\n", ""]);
+exports.push([module.i, "\n.VueTables__search-field {\n    display: flex !important;\n}\n.VueTables__search-field label, .VueTables__limit-field label {\n    margin-right: 10px;\n}\n.VueTables__limit-field {\n    display: flex !important;\n}\n\n\n", ""]);
 
 // exports
 
@@ -15176,7 +15585,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../../node_mod
 
 
 // module
-exports.push([module.i, "\n.love[data-v-acbbf138] {\n    cursor: pointer;\n}\n.bottom-pane[data-v-acbbf138] {\n    margin-top: 0px;\n    border-radius: 5px;\n    background-color: #eaeaea;\n    padding: 5px;\n    border: 0px;\n    text-align: center;\n    width: 35px;\n}\n.num[data-v-acbbf138] {\n    font-size: 16px;\n    color: #000;\n    font-weight: bold;\n}\nspan.expired[data-v-acbbf138] {\n    font-weight: bold;\n    color: red;\n    font-size: 18px;\n}\nh5[data-v-acbbf138] {\n    font-weight: 700;\n    font-size: 17px;\n}\n.category a[data-v-acbbf138] {\n    text-decoration: none;\n    color: unset;\n}\n", ""]);
+exports.push([module.i, "\n.love[data-v-acbbf138] {\n    cursor: pointer;\n}\n.share[data-v-acbbf138] {\n    cursor: pointer;\n}\n.bottom-pane[data-v-acbbf138] {\n    margin-top: 0px;\n    border-radius: 5px;\n    background-color: #eaeaea;\n    padding: 5px;\n    border: 0px;\n    text-align: center;\n    width: 35px;\n}\n.num[data-v-acbbf138] {\n    font-size: 16px;\n    color: #000;\n    font-weight: bold;\n}\nspan.expired[data-v-acbbf138] {\n    font-weight: bold;\n    color: red;\n    font-size: 18px;\n}\nh5[data-v-acbbf138] {\n    font-weight: 700;\n    font-size: 17px;\n}\n.category a[data-v-acbbf138] {\n    text-decoration: none;\n    color: unset;\n}\n.active[data-v-acbbf138] {\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -46505,6 +46914,746 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] =
+    GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : undefined
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/setimmediate/setImmediate.js":
 /*!***************************************************!*\
   !*** ./node_modules/setimmediate/setImmediate.js ***!
@@ -54898,6 +56047,28 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-12" },
+                  [
+                    _c("label", { staticClass: "col-form-label" }, [
+                      _vm._v("Order Note:")
+                    ]),
+                    _vm._v(" "),
+                    _c("ckeditor", {
+                      attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                      model: {
+                        value: _vm.formData.order_note,
+                        callback: function($$v) {
+                          _vm.$set(_vm.formData, "order_note", $$v)
+                        },
+                        expression: "formData.order_note"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
                 _c("div", { staticClass: "col-md-4" }, [
                   _c(
                     "label",
@@ -55167,6 +56338,51 @@ var render = function() {
                         _vm.$set(
                           _vm.formData,
                           "max_unit_per_user",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "offer_start_date" }
+                    },
+                    [
+                      _vm._v(
+                        "Offer Start\n                                    Date:"
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.offer_start_date,
+                        expression: "formData.offer_start_date"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      id: "offer_start_date",
+                      type: "datetime-local"
+                    },
+                    domProps: { value: _vm.formData.offer_start_date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.formData,
+                          "offer_start_date",
                           $event.target.value
                         )
                       }
@@ -55681,6 +56897,28 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-12" },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Order Note:")
+                      ]),
+                      _vm._v(" "),
+                      _c("ckeditor", {
+                        attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                        model: {
+                          value: _vm.formData.order_note,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "order_note", $$v)
+                          },
+                          expression: "formData.order_note"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
                     _c(
                       "label",
@@ -55962,6 +57200,47 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-form-label",
+                        attrs: { for: "offer_start_date" }
+                      },
+                      [
+                        _vm._v(
+                          "Offer Start\n                                    Date:"
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.offer_start_date,
+                          expression: "formData.offer_start_date"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "offer_start_date", type: "datetime-local" },
+                      domProps: { value: _vm.formData.offer_start_date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.formData,
+                            "offer_start_date",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
                         attrs: { for: "expire_date" }
                       },
                       [
@@ -56173,8 +57452,44 @@ var render = function() {
             [
               _c("v-server-table", {
                 ref: "myTable",
-                attrs: { columns: _vm.columns, options: _vm.options },
+                attrs: {
+                  url: _vm.serverRequestUrl,
+                  columns: _vm.columns,
+                  options: _vm.options
+                },
                 scopedSlots: _vm._u([
+                  {
+                    key: "totalOrders",
+                    fn: function(ref) {
+                      var row = ref.row
+                      return _c(
+                        "span",
+                        {},
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-sm btn-primary",
+                              attrs: {
+                                to: {
+                                  name: "orders",
+                                  query: { product: row.id, status: "all" }
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                     " +
+                                  _vm._s(row.totalOrders) +
+                                  "\n                                 "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    }
+                  },
                   {
                     key: "actions",
                     fn: function(ref) {
@@ -58265,45 +59580,49 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _vm.isLiked
-            ? _c(
-                "div",
-                {
-                  staticClass: "love",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeProductToFavouriteList(_vm.product.slug)
-                    }
+          _c("div", { staticClass: "icons d-flex" }, [
+            _c(
+              "div",
+              {
+                staticClass: "share mr-2",
+                on: {
+                  click: function($event) {
+                    _vm.showModal = true
                   }
-                },
-                [
+                }
+              },
+              [_c("i", { staticClass: "fas fa-share theme-color" })]
+            ),
+            _vm._v(" "),
+            _vm.isLiked
+              ? _c("div", { staticClass: "love" }, [
                   _c("i", {
                     staticClass: "fas fa-heart",
                     staticStyle: { color: "red" }
                   }),
                   _vm._v(" "),
                   _c("span", [_vm._v(" " + _vm._s(_vm.totalLiked))])
-                ]
-              )
-            : _c(
-                "div",
-                {
-                  staticClass: "love",
-                  on: {
-                    click: function($event) {
-                      return _vm.addProductToFavouriteList(_vm.product.slug)
+                ])
+              : _c(
+                  "div",
+                  {
+                    staticClass: "love",
+                    on: {
+                      click: function($event) {
+                        return _vm.addProductToFavouriteList(_vm.product.slug)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "far fa-heart",
-                    staticStyle: { color: "red" }
-                  }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(" " + _vm._s(_vm.totalLiked))])
-                ]
-              )
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "far fa-heart",
+                      staticStyle: { color: "red" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(" " + _vm._s(_vm.totalLiked))])
+                  ]
+                )
+          ])
         ]
       ),
       _vm._v(" "),
@@ -58338,80 +59657,130 @@ var render = function() {
         "div",
         { staticClass: "timer text-center mt-2 mb-2" },
         [
-          _c(
-            "vac",
-            {
-              attrs: { "end-time": new Date(_vm.product.expire_date) },
-              scopedSlots: _vm._u([
+          _vm.isOfferTimeStarted
+            ? _c(
+                "vac",
                 {
-                  key: "process",
-                  fn: function(ref) {
-                    var timeObj = ref.timeObj
-                    return _c(
-                      "div",
+                  attrs: { "end-time": new Date(_vm.product.expire_date) },
+                  scopedSlots: _vm._u(
+                    [
                       {
-                        staticClass:
-                          "timer-area d-flex justify-content-center mt-3 mb-3"
-                      },
-                      [
-                        _c("div", { staticClass: "clock" }, [
-                          _c("div", { staticClass: "well bottom-pane" }, [
-                            _c(
-                              "div",
-                              { staticClass: "num", attrs: { id: "days" } },
-                              [_vm._v(_vm._s(timeObj.d))]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "clock" }, [
-                          _c("div", { staticClass: "well bottom-pane" }, [
-                            _c(
-                              "div",
-                              { staticClass: "num", attrs: { id: "hours" } },
-                              [_vm._v(_vm._s(timeObj.h))]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "clock" }, [
-                          _c("div", { staticClass: "well bottom-pane" }, [
-                            _c(
-                              "div",
-                              { staticClass: "num", attrs: { id: "mins" } },
-                              [_vm._v(_vm._s(timeObj.m))]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "clock" }, [
-                          _c("div", { staticClass: "well bottom-pane" }, [
-                            _c(
-                              "div",
-                              { staticClass: "num", attrs: { id: "secs" } },
-                              [_vm._v(_vm._s(timeObj.s))]
-                            )
-                          ])
-                        ])
-                      ]
-                    )
-                  }
-                }
-              ])
-            },
-            [
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "expired",
-                  attrs: { slot: "finish" },
-                  slot: "finish"
+                        key: "process",
+                        fn: function(ref) {
+                          var timeObj = ref.timeObj
+                          return _c(
+                            "div",
+                            {
+                              staticClass:
+                                "timer-area d-flex justify-content-center mt-3 mb-3"
+                            },
+                            [
+                              _c("div", { staticClass: "clock" }, [
+                                _c("div", { staticClass: "well bottom-pane" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "num",
+                                      attrs: { id: "days" }
+                                    },
+                                    [_vm._v(_vm._s(timeObj.d))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "well top-pane" }, [
+                                  _c("div", { staticClass: "text" }, [
+                                    _c("strong", [_vm._v("Day")])
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "clock" }, [
+                                _c("div", { staticClass: "well bottom-pane" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "num",
+                                      attrs: { id: "hours" }
+                                    },
+                                    [_vm._v(_vm._s(timeObj.h))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "well top-pane" }, [
+                                  _c("div", { staticClass: "text" }, [
+                                    _c("strong", [_vm._v("Hour")])
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "clock" }, [
+                                _c("div", { staticClass: "well bottom-pane" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "num",
+                                      attrs: { id: "mins" }
+                                    },
+                                    [_vm._v(_vm._s(timeObj.m))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "well top-pane" }, [
+                                  _c("div", { staticClass: "text" }, [
+                                    _c("strong", [_vm._v("Min")])
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "clock" }, [
+                                _c("div", { staticClass: "well bottom-pane" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "num",
+                                      attrs: { id: "secs" }
+                                    },
+                                    [_vm._v(_vm._s(timeObj.s))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "well top-pane" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "text",
+                                      attrs: { id: "days-text" }
+                                    },
+                                    [_c("strong", [_vm._v("Sec")])]
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    120234961
+                  )
                 },
-                [_vm._v("Offer Expired!")]
+                [
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "expired",
+                      attrs: { slot: "finish" },
+                      slot: "finish"
+                    },
+                    [_vm._v("Offer Expired!")]
+                  )
+                ]
               )
-            ]
-          )
+            : _c("span", { staticClass: "expired" }, [
+                _vm._v("\n            Coming Soon\n        ")
+              ])
         ],
         1
       ),
@@ -58430,13 +59799,13 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("h5", [
-              _c("del", [_vm._v(_vm._s(_vm.product.market_price) + ",-")])
+              _c("del", [_vm._v(_vm._s(_vm.product.market_price) + " dkk,-")])
             ]),
             _vm._v(" "),
             _c("h6", [_vm._v("Strtpris ")]),
             _vm._v(" "),
             _c("h5", [
-              _c("del", [_vm._v(_vm._s(_vm.product.offer_price) + ",-")])
+              _c("del", [_vm._v(_vm._s(_vm.product.offer_price) + " dkk,-")])
             ]),
             _vm._v(" "),
             _c("h6", [_vm._v("Du sprarer ")]),
@@ -58453,7 +59822,7 @@ var render = function() {
             _vm._v(" "),
             _vm._m(2),
             _vm._v(" "),
-            _c("h5", [_vm._v(_vm._s(_vm.product.current_price))])
+            _c("h5", [_vm._v(_vm._s(_vm.product.current_price) + " dkk")])
           ])
         ]
       ),
@@ -58545,115 +59914,136 @@ var render = function() {
       "div",
       { staticClass: "timer text-center mt-2 mb-2" },
       [
-        _c(
-          "vac",
-          {
-            attrs: { "end-time": new Date(_vm.product.expire_date) },
-            scopedSlots: _vm._u([
+        _vm.isOfferTimeStarted
+          ? _c(
+              "vac",
               {
-                key: "process",
-                fn: function(ref) {
-                  var timeObj = ref.timeObj
-                  return _c(
-                    "div",
+                attrs: { "end-time": new Date(_vm.product.expire_date) },
+                scopedSlots: _vm._u(
+                  [
                     {
-                      staticClass:
-                        "timer-area d-flex justify-content-center mt-3 mb-3"
-                    },
-                    [
-                      _c("div", { staticClass: "clock" }, [
-                        _c("div", { staticClass: "well top-pane" }, [
-                          _c(
-                            "div",
-                            { staticClass: "text", attrs: { id: "days-text" } },
-                            [_vm._v("Dage")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "well bottom-pane" }, [
-                          _c(
-                            "div",
-                            { staticClass: "num", attrs: { id: "days" } },
-                            [_vm._v(_vm._s(timeObj.d))]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "clock" }, [
-                        _c("div", { staticClass: "well top-pane" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "text",
-                              attrs: { id: "hours-text" }
-                            },
-                            [_vm._v("Timer")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "well bottom-pane" }, [
-                          _c(
-                            "div",
-                            { staticClass: "num", attrs: { id: "hours" } },
-                            [_vm._v(_vm._s(timeObj.h))]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "clock" }, [
-                        _c("div", { staticClass: "well top-pane" }, [
-                          _c(
-                            "div",
-                            { staticClass: "text", attrs: { id: "mins-text" } },
-                            [_vm._v("Min.")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "well bottom-pane" }, [
-                          _c(
-                            "div",
-                            { staticClass: "num", attrs: { id: "mins" } },
-                            [_vm._v(_vm._s(timeObj.m))]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "clock" }, [
-                        _c("div", { staticClass: "well top-pane" }, [
-                          _c(
-                            "div",
-                            { staticClass: "text", attrs: { id: "secs-text" } },
-                            [_vm._v("Sek")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "well bottom-pane" }, [
-                          _c(
-                            "div",
-                            { staticClass: "num", attrs: { id: "secs" } },
-                            [_vm._v(_vm._s(timeObj.s))]
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                }
-              }
-            ])
-          },
-          [
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass: "expired",
-                attrs: { slot: "finish" },
-                slot: "finish"
+                      key: "process",
+                      fn: function(ref) {
+                        var timeObj = ref.timeObj
+                        return _c(
+                          "div",
+                          {
+                            staticClass:
+                              "timer-area d-flex justify-content-center mt-3 mb-3"
+                          },
+                          [
+                            _c("div", { staticClass: "clock" }, [
+                              _c("div", { staticClass: "well top-pane" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "text",
+                                    attrs: { id: "days-text" }
+                                  },
+                                  [_vm._v("Dage")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "well bottom-pane" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "num", attrs: { id: "days" } },
+                                  [_vm._v(_vm._s(timeObj.d))]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "clock" }, [
+                              _c("div", { staticClass: "well top-pane" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "text",
+                                    attrs: { id: "hours-text" }
+                                  },
+                                  [_vm._v("Timer")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "well bottom-pane" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "num",
+                                    attrs: { id: "hours" }
+                                  },
+                                  [_vm._v(_vm._s(timeObj.h))]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "clock" }, [
+                              _c("div", { staticClass: "well top-pane" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "text",
+                                    attrs: { id: "mins-text" }
+                                  },
+                                  [_vm._v("Min.")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "well bottom-pane" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "num", attrs: { id: "mins" } },
+                                  [_vm._v(_vm._s(timeObj.m))]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "clock" }, [
+                              _c("div", { staticClass: "well top-pane" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "text",
+                                    attrs: { id: "secs-text" }
+                                  },
+                                  [_vm._v("Sek")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "well bottom-pane" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "num", attrs: { id: "secs" } },
+                                  [_vm._v(_vm._s(timeObj.s))]
+                                )
+                              ])
+                            ])
+                          ]
+                        )
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  2193913392
+                )
               },
-              [_vm._v("Offer Expired!")]
+              [
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "expired",
+                    attrs: { slot: "finish" },
+                    slot: "finish"
+                  },
+                  [_vm._v("Offer Expired!")]
+                )
+              ]
             )
-          ]
-        )
+          : _c("span", { staticClass: "expired" }, [
+              _vm._v("\n            Coming Soon\n        ")
+            ])
       ],
       1
     ),
@@ -58665,10 +60055,28 @@ var render = function() {
     _c("div", {
       staticClass: "discription",
       domProps: { innerHTML: _vm._s(_vm.product.full_des) }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "orderNote",
+      domProps: { innerHTML: _vm._s(_vm.product.order_note) }
     })
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mt-2" }, [
+      _c("strong", [_vm._v("Order Note:")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -59629,6 +61037,223 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=template&id=8a8aa956&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=template&id=8a8aa956& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "page-wrapper wow bounceIn" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-4 m-auto" },
+          [
+            _c("loading", {
+              attrs: { active: _vm.isLoading, "is-full-page": false },
+              on: {
+                "update:active": function($event) {
+                  _vm.isLoading = $event
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "login-form shadow shadow-sm p-5 mt-5" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm.hasFormError
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-center mt-2 mb-2 error invalid-feedback"
+                    },
+                    [_c("b", [_vm._v(_vm._s(_vm.formErrors.text))])]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: { action: "#", id: "login" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submitLoginForm($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.email,
+                          expression: "form.email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        type: "text",
+                        name: "email",
+                        placeholder: "Enter your email",
+                        id: "Email or username"
+                      },
+                      domProps: { value: _vm.form.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password,
+                          expression: "form.password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        type: "password",
+                        name: "password",
+                        placeholder: "Enter your Password"
+                      },
+                      domProps: { value: _vm.form.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "password", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password_confirmation,
+                          expression: "form.password_confirmation"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        type: "password",
+                        name: "confirmPassword",
+                        placeholder: "Confirm Password"
+                      },
+                      domProps: { value: _vm.form.password_confirmation },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "password_confirmation",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "register text-left" }, [
+                    _c(
+                      "p",
+                      [
+                        _vm._v(
+                          "Have an account?\n                                "
+                        ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "theme-color",
+                            attrs: { to: { name: "login" } }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Login\n                                "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]
+              )
+            ])
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "login-header" }, [
+      _c("h4", [_vm._v("Reset Password")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success btn-block rounded-0",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Change Password\n                            ")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserLogin.vue?vue&type=template&id=5e99a522&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Site/Pages/Auth/UserLogin.vue?vue&type=template&id=5e99a522& ***!
@@ -59759,7 +61384,30 @@ var render = function() {
                   _vm._v(" "),
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "remember_forger_pass_option d-flex justify-content-between"
+                    },
+                    [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "theme-color",
+                          attrs: { to: { name: "reset-password" } }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Forget password ?\n                            "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
@@ -59821,21 +61469,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "remember_forger_pass_option d-flex justify-content-between"
-      },
-      [
-        _c("label", { staticClass: "checkbox_container" }, [
-          _vm._v("Remember me\n                                "),
-          _c("input", { attrs: { type: "checkbox" } }),
-          _vm._v(" "),
-          _c("span", { staticClass: "checkmark" })
-        ])
-      ]
-    )
+    return _c("label", { staticClass: "checkbox_container" }, [
+      _vm._v("Remember me\n                                "),
+      _c("input", { attrs: { type: "checkbox" } }),
+      _vm._v(" "),
+      _c("span", { staticClass: "checkmark" })
+    ])
   }
 ]
 render._withStripped = true
@@ -60047,6 +61686,161 @@ var staticRenderFns = [
           attrs: { type: "submit" }
         },
         [_vm._v("Register")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=template&id=1caf3490&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=template&id=1caf3490& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "page-wrapper wow bounceIn" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-4 m-auto" },
+          [
+            _c("loading", {
+              attrs: { active: _vm.isLoading, "is-full-page": false },
+              on: {
+                "update:active": function($event) {
+                  _vm.isLoading = $event
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "login-form shadow shadow-sm p-5 mt-5" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm.hasFormError
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-center mt-2 mb-2 error invalid-feedback"
+                    },
+                    [_c("b", [_vm._v(_vm._s(_vm.formErrors.text))])]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: { action: "#", id: "login" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submitLoginForm($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.email,
+                          expression: "form.email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        type: "text",
+                        name: "email",
+                        placeholder: "Enter your email",
+                        id: "Email or username"
+                      },
+                      domProps: { value: _vm.form.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "register text-left" }, [
+                    _c(
+                      "p",
+                      [
+                        _vm._v(
+                          "Have an account?\n                                "
+                        ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "theme-color",
+                            attrs: { to: { name: "login" } }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Login\n                                "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]
+              )
+            ])
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "login-header" }, [
+      _c("h4", [_vm._v("Reset Password")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success btn-block rounded-0",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Reset")]
       )
     ])
   }
@@ -60280,11 +62074,7 @@ var render = function() {
                                       attrs: { type: "button" },
                                       on: { click: _vm.decreaseOrderQuantity }
                                     },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-arrows-alt-h"
-                                      })
-                                    ]
+                                    [_c("i", { staticClass: "fas fa-minus" })]
                                   ),
                                   _vm._v(" "),
                                   _c("input", {
@@ -60301,6 +62091,7 @@ var render = function() {
                                       "text-align": "center"
                                     },
                                     attrs: {
+                                      max: _vm.product.max_unit_per_user,
                                       type: "number",
                                       id: "oqty",
                                       min: "1"
@@ -60333,7 +62124,14 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(1),
+                                _c("td", { staticStyle: { width: "25%" } }, [
+                                  _c("p", {
+                                    staticClass: "m-0 p-0",
+                                    domProps: {
+                                      innerHTML: _vm._s(_vm.product.order_note)
+                                    }
+                                  })
+                                ]),
                                 _vm._v(" "),
                                 _c("td", [
                                   _vm._v(
@@ -60363,7 +62161,7 @@ var render = function() {
                 _vm.isUserLoggedIn
                   ? _c("div", { staticClass: "checkout-billing-area mt-4" }, [
                       _c("div", { staticClass: "row" }, [
-                        _vm._m(2),
+                        _vm._m(1),
                         _vm._v(" "),
                         !_vm.hideOrderDetailsForm
                           ? _c(
@@ -60387,7 +62185,7 @@ var render = function() {
                                   { staticClass: "checkout-customer-info" },
                                   [
                                     _c("div", { staticClass: "cards shadow" }, [
-                                      _vm._m(3),
+                                      _vm._m(2),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "card-body" }, [
                                         _c(
@@ -60399,7 +62197,7 @@ var render = function() {
                                           },
                                           [
                                             _c("tr", [
-                                              _vm._m(4),
+                                              _vm._m(3),
                                               _vm._v(" "),
                                               _c("td", [
                                                 _vm._v(
@@ -60410,7 +62208,7 @@ var render = function() {
                                             ]),
                                             _vm._v(" "),
                                             _c("tr", [
-                                              _vm._m(5),
+                                              _vm._m(4),
                                               _vm._v(" "),
                                               _c("td", [
                                                 _vm._v(
@@ -60422,7 +62220,7 @@ var render = function() {
                                             ]),
                                             _vm._v(" "),
                                             _c("tr", [
-                                              _vm._m(6),
+                                              _vm._m(5),
                                               _vm._v(" "),
                                               _c("td", [
                                                 _vm._v(
@@ -60445,7 +62243,7 @@ var render = function() {
                                             ]),
                                             _vm._v(" "),
                                             _c("tr", [
-                                              _vm._m(7),
+                                              _vm._m(6),
                                               _vm._v(" "),
                                               _c("td", [
                                                 _vm._v(
@@ -60457,7 +62255,7 @@ var render = function() {
                                             ]),
                                             _vm._v(" "),
                                             _c("tr", [
-                                              _vm._m(8),
+                                              _vm._m(7),
                                               _vm._v(" "),
                                               _c("td", [
                                                 _vm._v(
@@ -60466,6 +62264,127 @@ var render = function() {
                                                   ) + " dk"
                                                 )
                                               ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("tr", [
+                                              _c(
+                                                "td",
+                                                { attrs: { colspan: "2" } },
+                                                [
+                                                  _c("div", [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticClass:
+                                                          "checkbox_container"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Subscribe to news letter.\n                                                        "
+                                                        ),
+                                                        _c("input", {
+                                                          directives: [
+                                                            {
+                                                              name: "model",
+                                                              rawName:
+                                                                "v-model",
+                                                              value:
+                                                                _vm.orderDetails
+                                                                  .newsletter,
+                                                              expression:
+                                                                "orderDetails.newsletter"
+                                                            }
+                                                          ],
+                                                          attrs: {
+                                                            value: "1",
+                                                            type: "checkbox"
+                                                          },
+                                                          domProps: {
+                                                            checked: Array.isArray(
+                                                              _vm.orderDetails
+                                                                .newsletter
+                                                            )
+                                                              ? _vm._i(
+                                                                  _vm
+                                                                    .orderDetails
+                                                                    .newsletter,
+                                                                  "1"
+                                                                ) > -1
+                                                              : _vm.orderDetails
+                                                                  .newsletter
+                                                          },
+                                                          on: {
+                                                            change: function(
+                                                              $event
+                                                            ) {
+                                                              var $$a =
+                                                                  _vm
+                                                                    .orderDetails
+                                                                    .newsletter,
+                                                                $$el =
+                                                                  $event.target,
+                                                                $$c = $$el.checked
+                                                                  ? true
+                                                                  : false
+                                                              if (
+                                                                Array.isArray(
+                                                                  $$a
+                                                                )
+                                                              ) {
+                                                                var $$v = "1",
+                                                                  $$i = _vm._i(
+                                                                    $$a,
+                                                                    $$v
+                                                                  )
+                                                                if (
+                                                                  $$el.checked
+                                                                ) {
+                                                                  $$i < 0 &&
+                                                                    _vm.$set(
+                                                                      _vm.orderDetails,
+                                                                      "newsletter",
+                                                                      $$a.concat(
+                                                                        [$$v]
+                                                                      )
+                                                                    )
+                                                                } else {
+                                                                  $$i > -1 &&
+                                                                    _vm.$set(
+                                                                      _vm.orderDetails,
+                                                                      "newsletter",
+                                                                      $$a
+                                                                        .slice(
+                                                                          0,
+                                                                          $$i
+                                                                        )
+                                                                        .concat(
+                                                                          $$a.slice(
+                                                                            $$i +
+                                                                              1
+                                                                          )
+                                                                        )
+                                                                    )
+                                                                }
+                                                              } else {
+                                                                _vm.$set(
+                                                                  _vm.orderDetails,
+                                                                  "newsletter",
+                                                                  $$c
+                                                                )
+                                                              }
+                                                            }
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c("span", {
+                                                          staticClass:
+                                                            "checkmark"
+                                                        })
+                                                      ]
+                                                    )
+                                                  ])
+                                                ]
+                                              )
                                             ]),
                                             _vm._v(" "),
                                             _c("tr", [
@@ -60544,16 +62463,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Note")]),
         _vm._v(" "),
         _c("th", [_vm._v("| alt")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticStyle: { width: "25%" } }, [
-      _c("p", { staticClass: "m-0 p-0" }, [
-        _vm._v("1. Lorem ipsum, dolor sit amet consectetur adipisicing elit.")
       ])
     ])
   },
@@ -60917,6 +62826,14 @@ var render = function() {
                                 "table-responsive shadow wow bounceInUp"
                             },
                             [
+                              _c("div", { staticClass: "text-center mb-2" }, [
+                                _c("strong", [
+                                  _vm._v(
+                                    "Order #" + _vm._s(order.custom_order_id)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
                               _c(
                                 "table",
                                 {
@@ -60928,7 +62845,7 @@ var render = function() {
                                     _c(
                                       "td",
                                       {
-                                        staticStyle: { width: "20%" },
+                                        staticStyle: { width: "15%" },
                                         attrs: { rowspan: "4" }
                                       },
                                       [
@@ -60996,13 +62913,25 @@ var render = function() {
                                         ),
                                         _c("strong", [
                                           _vm._v(
-                                            _vm._s(order.product.last_price)
+                                            _vm._s(order.product.market_price) +
+                                              " dkk"
                                           )
                                         ])
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _c("td", { staticStyle: { width: "15%" } }),
+                                    _c(
+                                      "td",
+                                      { staticStyle: { width: "15%" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Order Quantity: "
+                                        ),
+                                        _c("strong", [
+                                          _vm._v(_vm._s(order.quantity))
+                                        ])
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     !order.is_canceled
                                       ? _c(
@@ -61012,6 +62941,25 @@ var render = function() {
                                             attrs: { rowspan: "2" }
                                           },
                                           [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass: "text-center mb-2"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v(
+                                                    "First Payment\n                                            (" +
+                                                      _vm._s(
+                                                        order.first_payment
+                                                          .amount
+                                                      ) +
+                                                      " dkk)"
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
                                             _c(
                                               "button",
                                               {
@@ -61067,7 +63015,8 @@ var render = function() {
                                         ),
                                         _c("strong", [
                                           _vm._v(
-                                            _vm._s(order.product.offer_price)
+                                            _vm._s(order.product.offer_price) +
+                                              " dkk"
                                           )
                                         ])
                                       ]
@@ -61115,7 +63064,9 @@ var render = function() {
                                         ),
                                         _c("strong", [
                                           _vm._v(
-                                            _vm._s(order.product.current_price)
+                                            _vm._s(
+                                              order.product.current_price
+                                            ) + " dkk"
                                           )
                                         ])
                                       ]
@@ -61138,6 +63089,28 @@ var render = function() {
                                             attrs: { rowspan: "2" }
                                           },
                                           [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass: "text-center mb-2"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v(
+                                                    "Second Payment\n                                            (" +
+                                                      _vm._s(
+                                                        order.product
+                                                          .current_price *
+                                                          order.quantity -
+                                                          order.first_payment
+                                                            .amount
+                                                      ) +
+                                                      " dkk)"
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
                                             _c(
                                               "div",
                                               {
@@ -62104,6 +64077,29 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("span", { staticClass: "checkmark" })
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "checkbox_container" }, [
+            _vm._v("Coming Soon\n                "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.filter.short,
+                  expression: "filter.short"
+                }
+              ],
+              attrs: { value: "coming_soon", type: "radio" },
+              domProps: { checked: _vm._q(_vm.filter.short, "coming_soon") },
+              on: {
+                change: function($event) {
+                  return _vm.$set(_vm.filter, "short", "coming_soon")
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "checkmark" })
           ])
         ]),
         _vm._v(" "),
@@ -62257,11 +64253,15 @@ var render = function() {
     _c("div", { staticClass: "pricing-left" }, [
       _c("h6", [_vm._v("Gennemsnitlig markedsprice")]),
       _vm._v(" "),
-      _c("h5", [_c("del", [_vm._v(_vm._s(_vm.product.market_price) + ",-")])]),
+      _c("h5", [
+        _c("del", [_vm._v(_vm._s(_vm.product.market_price) + " dkk,-")])
+      ]),
       _vm._v(" "),
       _c("h6", [_vm._v("Strtpris ")]),
       _vm._v(" "),
-      _c("h5", [_c("del", [_vm._v(_vm._s(_vm.product.offer_price) + ",-")])]),
+      _c("h5", [
+        _c("del", [_vm._v(_vm._s(_vm.product.offer_price) + " dkk,-")])
+      ]),
       _vm._v(" "),
       _c("h6", [_vm._v("Deltagend")]),
       _vm._v(" "),
@@ -62269,30 +64269,19 @@ var render = function() {
       _vm._v(" "),
       _c("h6", [_vm._v("Din Pris")]),
       _vm._v(" "),
-      _c("h5", [_vm._v(_vm._s(_vm.product.current_price))]),
+      _c("h5", [_vm._v(_vm._s(_vm.product.current_price) + " dkk")]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
       _c("div", { staticClass: "love-section" }, [
         _vm.product.isLikedByCurrentUser
-          ? _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                on: {
-                  click: function($event) {
-                    return _vm.removeProductToFavouriteList(_vm.product.slug)
-                  }
-                }
-              },
-              [
-                _vm._v(" " + _vm._s(_vm.product.total_favourites) + " "),
-                _c("i", {
-                  staticClass: "fas fa-heart",
-                  staticStyle: { color: "red" }
-                })
-              ]
-            )
+          ? _c("button", { staticClass: "btn btn-success" }, [
+              _vm._v(" " + _vm._s(_vm.product.total_favourites) + " "),
+              _c("i", {
+                staticClass: "fas fa-heart",
+                staticStyle: { color: "red" }
+              })
+            ])
           : _c(
               "button",
               {
@@ -62319,26 +64308,31 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "checkout mt-3 mb-3" },
-      [
-        !_vm.isExpired
-          ? _c(
-              "router-link",
-              {
-                staticClass: "btn btn-theme btn-block",
-                attrs: {
-                  tag: "div",
-                  to: { name: "checkout", params: { slug: _vm.product.slug } }
-                }
-              },
-              [_vm._v("\n            Order Now\n        ")]
-            )
-          : _vm._e()
-      ],
-      1
-    ),
+    _vm.isOfferTimeStarted
+      ? _c(
+          "div",
+          { staticClass: "checkout mt-3 mb-3" },
+          [
+            !_vm.isExpired
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-theme btn-block",
+                    attrs: {
+                      tag: "div",
+                      to: {
+                        name: "checkout",
+                        params: { slug: _vm.product.slug }
+                      }
+                    }
+                  },
+                  [_vm._v("\n            Order Now\n        ")]
+                )
+              : _vm._e()
+          ],
+          1
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "sidebar-action" }, [
       _vm._m(0),
@@ -62413,7 +64407,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", [_c("i", { staticClass: "fas fa-sync" }), _vm._v(" Del pa")])
+    return _c("p", [_c("i", { staticClass: "fas fa-share" }), _vm._v(" Share")])
   }
 ]
 render._withStripped = true
@@ -87766,6 +89760,7 @@ var AppStorage = /*#__PURE__*/function () {
       localStorage.removeItem('token');
       localStorage.removeItem('rui');
       localStorage.removeItem('run');
+      localStorage.removeItem('url');
     }
   }, {
     key: "getToken",
@@ -87775,9 +89770,10 @@ var AppStorage = /*#__PURE__*/function () {
 
   }, {
     key: "storeUser",
-    value: function storeUser(id, user) {
+    value: function storeUser(id, user, role) {
       this.storeUserId(id);
       this.storeUserName(user);
+      this.storeUserRole(role);
     }
   }, {
     key: "storeUserId",
@@ -87795,9 +89791,19 @@ var AppStorage = /*#__PURE__*/function () {
       localStorage.setItem('run', user);
     }
   }, {
+    key: "storeUserRole",
+    value: function storeUserRole(role) {
+      localStorage.setItem('url', role);
+    }
+  }, {
     key: "getUserName",
     value: function getUserName() {
       return atob(localStorage.getItem('run'));
+    }
+  }, {
+    key: "getUserRole",
+    value: function getUserRole() {
+      return atob(localStorage.getItem('url'));
     }
   }]);
 
@@ -87901,15 +89907,7 @@ var Token = /*#__PURE__*/function () {
   _createClass(Token, [{
     key: "isValid",
     value: function isValid(token) {
-      axios.get("".concat(APP_URL, "/api/user")).then(function (response) {
-        if (response.data.rui) {
-          _AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].storeUser(response.data.rui, response.data.run);
-        } else {// User.logOut();
-        }
-      })["catch"](function (error) {
-        return true;
-      });
-      if (_AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].getUserId()) return true;
+      return !!_AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].getUserId();
     }
   }]);
 
@@ -87929,8 +89927,16 @@ var Token = /*#__PURE__*/function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Token__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Token */ "./resources/js/Helpers/Token.js");
-/* harmony import */ var _AppStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppStorage */ "./resources/js/Helpers/AppStorage.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Token__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Token */ "./resources/js/Helpers/Token.js");
+/* harmony import */ var _AppStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppStorage */ "./resources/js/Helpers/AppStorage.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -87947,23 +89953,93 @@ var User = /*#__PURE__*/function () {
 
   _createClass(User, [{
     key: "responseAfterLogin",
-    value: function responseAfterLogin(response) {
-      var nextUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '/';
-      var access_token = response.data.access_token;
+    value: function () {
+      var _responseAfterLogin = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(response) {
+        var nextUrl,
+            access_token,
+            _args = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                nextUrl = _args.length > 1 && _args[1] !== undefined ? _args[1] : '/';
+                access_token = response.data.access_token;
 
-      if (access_token) {
-        _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].store(access_token);
+                if (access_token) {
+                  _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].store(access_token);
+                }
+
+                _context.next = 5;
+                return this.getUserData(access_token).then(function (res) {
+                  window.location = nextUrl;
+                });
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function responseAfterLogin(_x) {
+        return _responseAfterLogin.apply(this, arguments);
       }
 
-      window.location = nextUrl;
-    }
+      return responseAfterLogin;
+    }()
+  }, {
+    key: "getUserData",
+    value: function () {
+      var _getUserData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(access_token) {
+        var config, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                config = {
+                  headers: {
+                    Authorization: "Bearer ".concat(access_token)
+                  }
+                };
+                _context2.next = 4;
+                return axios.get("".concat(APP_URL, "/api/user"), config).then(function (response) {
+                  if (response.data.rui) {
+                    _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].storeUser(response.data.rui, response.data.run, response.data.url);
+                  }
+                });
+
+              case 4:
+                res = _context2.sent;
+                return _context2.abrupt("return", res);
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }));
+
+      function getUserData(_x2) {
+        return _getUserData.apply(this, arguments);
+      }
+
+      return getUserData;
+    }()
   }, {
     key: "hasToken",
     value: function hasToken() {
-      var storedToken = _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getToken();
+      var storedToken = _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getToken();
 
       if (storedToken) {
-        return _Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(storedToken);
+        return _Token__WEBPACK_IMPORTED_MODULE_1__["default"].isValid(storedToken);
       }
 
       return false;
@@ -87976,20 +90052,35 @@ var User = /*#__PURE__*/function () {
   }, {
     key: "name",
     value: function name() {
-      if (this.loggedIn()) return _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getUserName();
+      if (this.loggedIn()) return _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getUserName();
       return false;
+    }
+  }, {
+    key: "role",
+    value: function role() {
+      if (this.loggedIn()) return _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getUserRole();
+      return false;
+    }
+  }, {
+    key: "isAdmin",
+    value: function isAdmin() {
+      if (this.role() === 'admin') {
+        return true;
+      } else {
+        return false;
+      }
     }
   }, {
     key: "id",
     value: function id() {
-      if (this.loggedIn()) return _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getUserId();
+      if (this.loggedIn()) return _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getUserId();
       return false;
     }
   }, {
     key: "logOut",
     value: function logOut() {
       axios.post("".concat(APP_URL, "/api/logout")).then(function (response) {
-        _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
+        _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].clear();
         window.location = '/login';
       })["catch"](function (error) {
         console.error(error);
@@ -88045,6 +90136,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Site_Pages_Customer_CustomerDashboard__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../components/Site/Pages/Customer/CustomerDashboard */ "./resources/js/components/Site/Pages/Customer/CustomerDashboard.vue");
 /* harmony import */ var _components_Site_Pages_Auth_UserLogin__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../components/Site/Pages/Auth/UserLogin */ "./resources/js/components/Site/Pages/Auth/UserLogin.vue");
 /* harmony import */ var _components_Site_Pages_Auth_UserRegister__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../components/Site/Pages/Auth/UserRegister */ "./resources/js/components/Site/Pages/Auth/UserRegister.vue");
+/* harmony import */ var _components_Site_Pages_Auth_UserResetPassword__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../components/Site/Pages/Auth/UserResetPassword */ "./resources/js/components/Site/Pages/Auth/UserResetPassword.vue");
+/* harmony import */ var _components_Site_Pages_Auth_UserChangePassword__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../components/Site/Pages/Auth/UserChangePassword */ "./resources/js/components/Site/Pages/Auth/UserChangePassword.vue");
+
+
 
 
 
@@ -88075,45 +90170,95 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [// routes for admin dashboard
 {
-  path: '/admin',
-  component: _components_Admin_BodyComponents_AppBody__WEBPACK_IMPORTED_MODULE_3__["default"]
-}, {
   path: '/admin/login',
   component: _components_Admin_Auth_AppLogin__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   path: '/logout',
   component: _components_Admin_Auth_AppLogOut__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
+  path: '/admin',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
+  component: _components_Admin_BodyComponents_AppBody__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, {
   path: '/admin/category',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   component: _components_Admin_BodyComponents_BodyParts_Category_CategoryIndex__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   path: '/admin/customers',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   component: _components_Admin_BodyComponents_BodyParts_Customer_CustomerIndex__WEBPACK_IMPORTED_MODULE_21__["default"]
 }, {
   path: '/admin/sub-category',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   component: _components_Admin_BodyComponents_BodyParts_SubCategory_SubCategoryIndex__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
   path: '/admin/products',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   name: 'products',
   component: _components_Admin_BodyComponents_BodyParts_Product_ProductsIndex__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
   path: '/admin/products/archive',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   name: 'products',
   component: _components_Admin_BodyComponents_BodyParts_Product_ArchiveProductsIndex__WEBPACK_IMPORTED_MODULE_20__["default"]
 }, {
   path: '/admin/orders',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   name: 'orders',
   component: _components_Admin_BodyComponents_BodyParts_Order_OrdersIndex__WEBPACK_IMPORTED_MODULE_19__["default"]
 }, {
   path: '/admin/order/:order/details',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   name: 'admin-order-details',
   component: _components_Admin_BodyComponents_BodyParts_Order_OrderDetails__WEBPACK_IMPORTED_MODULE_22__["default"]
 }, {
   path: '/admin/product/create',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   name: 'product.create',
   component: _components_Admin_BodyComponents_BodyParts_Product_ProductCreate__WEBPACK_IMPORTED_MODULE_8__["default"]
 }, {
   path: '/admin/product/:product/edit',
+  meta: {
+    title: 'Order Details!',
+    requireAuth: true,
+    requireAdmin: true
+  },
   name: 'product.edit',
   component: _components_Admin_BodyComponents_BodyParts_Product_ProductEdit__WEBPACK_IMPORTED_MODULE_12__["default"]
 }, {
@@ -88134,6 +90279,20 @@ var routes = [// routes for admin dashboard
   name: 'login',
   meta: {
     title: 'Login!'
+  }
+}, {
+  path: '/reset/password',
+  component: _components_Site_Pages_Auth_UserResetPassword__WEBPACK_IMPORTED_MODULE_26__["default"],
+  name: 'reset-password',
+  meta: {
+    title: 'Reset Password!'
+  }
+}, {
+  path: '/password/reset/:token',
+  component: _components_Site_Pages_Auth_UserChangePassword__WEBPACK_IMPORTED_MODULE_27__["default"],
+  name: 'reset-password',
+  meta: {
+    title: 'Change Password!'
   }
 }, {
   path: '/register',
@@ -88258,7 +90417,22 @@ router.beforeEach(function (to, from, next) {
         }
       });
     } else {
-      next();
+      if (to.matched.some(function (record) {
+        return record.meta.requireAdmin;
+      })) {
+        if (!User.isAdmin()) {
+          next({
+            path: '/admin/login',
+            query: {
+              redirect: to.fullPath
+            }
+          });
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
     }
   } else {
     next(); // make sure to always call next()!
@@ -88307,7 +90481,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // window.APP_URL = 'http://laravu.test';
+
+window.APP_URL = 'http://offer.danpanel.dk';
+window.CURRENCY = 'dkk';
 
 var SocialSharing = __webpack_require__(/*! vue-social-sharing */ "./node_modules/vue-social-sharing/dist/vue-social-sharing.common.js");
 
@@ -88316,11 +90493,13 @@ Vue.use(SocialSharing);
 
 
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
+window.User = _Helpers_User__WEBPACK_IMPORTED_MODULE_3__["default"];
+window.Alert = _Helpers_Notification__WEBPACK_IMPORTED_MODULE_4__["default"];
 Vue.use(vue_social_auth__WEBPACK_IMPORTED_MODULE_1__["default"], {
   providers: {
     github: {
       clientId: '5defb7b174f112bb4314',
-      redirectUri: 'http://laravu.test/auth/github/callback' // Your client app URL
+      redirectUri: "".concat(APP_URL, "/auth/github/callback") // Your client app URL
 
     }
   }
@@ -88344,10 +90523,6 @@ Vue.component('Loading', vue_loading_overlay__WEBPACK_IMPORTED_MODULE_8___defaul
  // Vue.component('', require('vue-infinite-loading'));
 
 Vue.use(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_12___default.a);
-window.User = _Helpers_User__WEBPACK_IMPORTED_MODULE_3__["default"];
-window.Alert = _Helpers_Notification__WEBPACK_IMPORTED_MODULE_4__["default"];
-window.APP_URL = 'http://laravu.test'; // window.APP_URL = 'http://offer.danpanel.dk';
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -91106,6 +93281,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Site/Pages/Auth/UserChangePassword.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Site/Pages/Auth/UserChangePassword.vue ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserChangePassword_vue_vue_type_template_id_8a8aa956___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserChangePassword.vue?vue&type=template&id=8a8aa956& */ "./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=template&id=8a8aa956&");
+/* harmony import */ var _UserChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserChangePassword.vue?vue&type=script&lang=js& */ "./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserChangePassword_vue_vue_type_template_id_8a8aa956___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserChangePassword_vue_vue_type_template_id_8a8aa956___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Site/Pages/Auth/UserChangePassword.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserChangePassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=template&id=8a8aa956&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=template&id=8a8aa956& ***!
+  \*******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserChangePassword_vue_vue_type_template_id_8a8aa956___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserChangePassword.vue?vue&type=template&id=8a8aa956& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserChangePassword.vue?vue&type=template&id=8a8aa956&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserChangePassword_vue_vue_type_template_id_8a8aa956___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserChangePassword_vue_vue_type_template_id_8a8aa956___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Site/Pages/Auth/UserLogin.vue":
 /*!***************************************************************!*\
   !*** ./resources/js/components/Site/Pages/Auth/UserLogin.vue ***!
@@ -91239,6 +93483,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserRegister_vue_vue_type_template_id_6165410d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserRegister_vue_vue_type_template_id_6165410d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Site/Pages/Auth/UserResetPassword.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Site/Pages/Auth/UserResetPassword.vue ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserResetPassword_vue_vue_type_template_id_1caf3490___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserResetPassword.vue?vue&type=template&id=1caf3490& */ "./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=template&id=1caf3490&");
+/* harmony import */ var _UserResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserResetPassword.vue?vue&type=script&lang=js& */ "./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserResetPassword_vue_vue_type_template_id_1caf3490___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserResetPassword_vue_vue_type_template_id_1caf3490___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Site/Pages/Auth/UserResetPassword.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserResetPassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=template&id=1caf3490&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=template&id=1caf3490& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserResetPassword_vue_vue_type_template_id_1caf3490___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserResetPassword.vue?vue&type=template&id=1caf3490& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Site/Pages/Auth/UserResetPassword.vue?vue&type=template&id=1caf3490&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserResetPassword_vue_vue_type_template_id_1caf3490___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserResetPassword_vue_vue_type_template_id_1caf3490___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

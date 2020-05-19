@@ -15,6 +15,7 @@
     <link href="{{asset('assets/css/skins/header/menu/light.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/css/skins/brand/dark.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/css/skins/aside/dark.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/css/skins/aside/raw-custom.css')}}" rel="stylesheet" type="text/css"/>
 
 </head>
 <body

@@ -123,6 +123,9 @@
         },
         created() {
             this.redirectUrl = this.$route.query.redirect;
+            if (User.loggedIn()) {
+                this.$router.push('/');
+            }
         }
     }
 </script>

@@ -62,11 +62,14 @@
         data() {
             return {
                 orderStatus: 'all',
+                product: null,
                 columns: ['id',
                     'custom_order_id',
                     'product.name',
-                    'product.current_price',
                     'product.expire_date',
+                    // 'product.market_price',
+                    // 'product.offer_price',
+                    // 'product.current_price',
                     'join_price',
                     'quantity',
                     'total_price',
@@ -81,9 +84,11 @@
                         id: 'ID',
                         custom_order_id: 'Order ID',
                         'product.name': 'Product Name',
-                        'product.current_price': 'Product Current Price',
-                        'product.expire_date': 'Product Expire Date',
-                        join_price: 'Product Join price',
+                        // 'product.current_price': 'Current Price',
+                        // 'product.market_price': 'Market Price',
+                        // 'product.offer_price': 'Start Price',
+                        'product.expire_date': 'End Date',
+                        join_price: 'Join price',
                         total_price: 'Paid Join Price',
                         quantity: 'Order Quantity',
                         created_at: 'Order At',
@@ -94,7 +99,7 @@
                     },
                     perPage: 10,
                     perPageValues: [10, 20, 25, 50, 100],
-                    sortable: ['name'],
+                    sortable: ['name', 'custom_order_id', 'created_at', 'order_status', 'is_join_price_paid', 'is_full_price_paid', 'quantity'],
                     filterable: ['name'],
                     responseAdapter: function (resp) {
                         return {
@@ -111,7 +116,11 @@
         },
         computed: {
             serverRequestUrl() {
-                return `${APP_URL}/api/admin/orders?status=${this.orderStatus}`;
+                if (this.product != null) {
+                    return `${APP_URL}/api/admin/orders?status=${this.orderStatus}&product=${this.product}`;
+                } else {
+                    return `${APP_URL}/api/admin/orders?status=${this.orderStatus}`;
+                }
             },
             tableHeadClass() {
                 if (this.orderStatus === 'all') {
@@ -140,6 +149,7 @@
         created() {
             if (this.$route.query.status) {
                 this.orderStatus = this.$route.query.status;
+                this.product = this.$route.query.product;
             }
         }
 

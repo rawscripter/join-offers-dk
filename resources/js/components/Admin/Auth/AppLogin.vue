@@ -184,6 +184,11 @@
                 }
                 return false;
             }
+        },
+        created() {
+            if (User.isAdmin()) {
+                this.$router.push('/admin');
+            }
         }
     }
 </script>

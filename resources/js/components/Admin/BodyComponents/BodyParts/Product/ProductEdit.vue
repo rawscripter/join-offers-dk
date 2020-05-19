@@ -76,6 +76,13 @@
                             </div>
 
 
+                            <div class="col-md-12">
+                                <label class="col-form-label">Order Note:</label>
+                                <ckeditor :editor="editor" v-model="formData.order_note"
+                                          :config="editorConfig"></ckeditor>
+                            </div>
+
+
                             <div class="col-md-4">
                                 <label for="market_price" class="col-form-label">Market Price:</label>
                                 <input required
@@ -122,6 +129,12 @@
                                        type="text">
                             </div>
 
+                            <div class="col-md-4">
+                                <label for="offer_start_date" class="col-form-label">Offer Start
+                                    Date:</label>
+                                <input v-model="formData.offer_start_date" class="form-control" id="offer_start_date"
+                                       type="datetime-local">
+                            </div>
                             <div class="col-md-4">
                                 <label for="expire_date" class="col-form-label">Expire
                                     Date:</label>
@@ -204,6 +217,7 @@
                     name: null,
                     category_id: null,
                     short_des: null,
+                    order_note: null,
                     full_des: null,
                     sub_category_id: null,
                     productImages: null,
@@ -215,6 +229,7 @@
                     total_offer_spots: null,
                     minus_price_user_price: null,
                     expire_date: null,
+                    offer_start_date: null,
                     product_image: null,
 
                 },

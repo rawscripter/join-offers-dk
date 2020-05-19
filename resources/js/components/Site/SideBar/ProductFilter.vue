@@ -54,6 +54,12 @@
                     <input v-model="filter.short" value="old" type="radio">
                     <span class="checkmark"></span>
                 </label>
+
+                <label class="checkbox_container">Coming Soon
+                    <input v-model="filter.short" value="coming_soon" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+
                 <!-- end of checkbox single  -->
             </div>
             <div class="price_filter">

@@ -11,6 +11,7 @@ class AppStorage {
         localStorage.removeItem('token');
         localStorage.removeItem('rui');
         localStorage.removeItem('run');
+        localStorage.removeItem('url');
     }
 
     getToken() {
@@ -20,9 +21,10 @@ class AppStorage {
 
     //storing user info
 
-    storeUser(id, user) {
+    storeUser(id, user, role) {
         this.storeUserId(id);
         this.storeUserName(user)
+        this.storeUserRole(role)
     }
 
     storeUserId(Id) {
@@ -38,10 +40,18 @@ class AppStorage {
         localStorage.setItem('run', user);
     }
 
+    storeUserRole(role) {
+        localStorage.setItem('url', role);
+    }
 
     getUserName() {
         return atob(localStorage.getItem('run'));
     }
+
+    getUserRole() {
+        return atob(localStorage.getItem('url'));
+    }
+
 
 }
 

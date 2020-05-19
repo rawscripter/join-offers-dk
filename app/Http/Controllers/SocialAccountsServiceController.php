@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LinkedSocialAccount;
 use App\User;
+use App\UserInfo;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Two\User as ProviderUser;
 
@@ -29,6 +30,7 @@ class SocialAccountsServiceController extends Controller
                     'profile_picture' => $providerUser->getAvatar(),
                     'email' => $providerUser->getEmail(),
                 ]);
+                UserInfo::create(['user_id' => $user->id]);
             }
             $user->linkedSocialAccounts()->create([
                 'provider_id' => $providerUser->getId(),

@@ -7,6 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+// window.APP_URL = 'http://laravu.test';
+window.APP_URL = 'http://offer.danpanel.dk';
+window.CURRENCY = 'dkk';
 
 var SocialSharing = require('vue-social-sharing');
 
@@ -17,7 +20,11 @@ import axios from 'axios'
 import VueSocialauth from 'vue-social-auth'
 
 import VueAxios from 'vue-axios'
+
 Vue.use(VueAxios, axios)
+
+window.User = User;
+window.Alert = Notification;
 
 
 Vue.use(VueSocialauth, {
@@ -25,7 +32,7 @@ Vue.use(VueSocialauth, {
     providers: {
         github: {
             clientId: '5defb7b174f112bb4314',
-            redirectUri: 'http://laravu.test/auth/github/callback' // Your client app URL
+            redirectUri: `${APP_URL}/auth/github/callback` // Your client app URL
         }
     }
 })
@@ -56,10 +63,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 // Vue.component('', require('vue-infinite-loading'));
 Vue.use(InfiniteLoading);
 
-window.User = User;
-window.Alert = Notification;
-window.APP_URL = 'http://laravu.test';
-// window.APP_URL = 'http://offer.danpanel.dk';
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -41,15 +41,16 @@
                                 <td>
                                     <button type="button" @click="decreaseOrderQuantity"
                                             class="btn btn-success btn-sm rounded mr-0"><i
-                                        class="fas fa-arrows-alt-h"></i></button>
-                                    <input type="number" id="oqty" min="1" v-model="orderDetails.quantity"
+                                        class="fas fa-minus"></i></button>
+                                    <input :max="product.max_unit_per_user" type="number" id="oqty" min="1"
+                                           v-model="orderDetails.quantity"
                                            style="width:70px;text-align:center">
                                     <button type="button" @click="increaseOrderQuantity" class="btn btn-success btn-sm">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </td>
                                 <td style="width:25%">
-                                    <p class="m-0 p-0">1. Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                    <p class="m-0 p-0" v-html="product.order_note"></p>
                                 </td>
                                 <td>
                                     {{orderDetails.totalPrice}} <br>
@@ -105,6 +106,16 @@
                                                 <td>{{orderDetails.totalPrice}} dk</td>
                                             </tr>
                                             <tr>
+                                                <td colspan="2">
+                                                    <div>
+                                                        <label class="checkbox_container">Subscribe to news letter.
+                                                            <input v-model="orderDetails.newsletter" value="1"
+                                                                   type="checkbox"> <span
+                                                                class="checkmark"></span></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td rowspan="2" colspan="2">
                                                     <button @click="createOrder"
                                                             class="btn btn-block mt-3 btn-success">Order Now
@@ -141,6 +152,7 @@
                 productSlug: null,
                 isUserLoggedIn: User.loggedIn(),
                 orderDetails: {
+                    newsletter: 0,
                     productId: null,
                     quantity: 1,
                     totalPrice: 0,
@@ -155,7 +167,12 @@
         },
         methods: {
             increaseOrderQuantity() {
-                this.orderDetails.quantity++;
+                if (this.product.max_unit_per_user > this.orderDetails.quantity) {
+                    this.orderDetails.quantity++;
+                } else {
+                    alert('Minimum order Quantity is ' + this.product.max_unit_per_user);
+                }
+
             },
             decreaseOrderQuantity() {
                 if (this.orderDetails.quantity > 1) {

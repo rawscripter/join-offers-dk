@@ -24,23 +24,109 @@ import OrderDetails from "../components/Admin/BodyComponents/BodyParts/Order/Ord
 import CustomerDashboard from "../components/Site/Pages/Customer/CustomerDashboard";
 import UserLogin from "../components/Site/Pages/Auth/UserLogin";
 import UserRegister from "../components/Site/Pages/Auth/UserRegister";
+import UserResetPassword from "../components/Site/Pages/Auth/UserResetPassword";
+import UserChangePassword from "../components/Site/Pages/Auth/UserChangePassword";
 //importing components
 Vue.use(VueRouter);
 const routes = [
     // routes for admin dashboard
-    {path: '/admin', component: AppBody},
-    {path: '/admin/login', component: AppLogin},
-    {path: '/logout', component: AppLogOut},
-    {path: '/admin/category', component: CategoryIndex},
-    {path: '/admin/customers', component: CustomerIndex},
-    {path: '/admin/sub-category', component: SubCategoryIndex},
-    {path: '/admin/products', name: 'products', component: ProductsIndex},
-    {path: '/admin/products/archive', name: 'products', component: ArchiveProductsIndex},
-    {path: '/admin/orders', name: 'orders', component: OrdersIndex},
-    {path: '/admin/order/:order/details', name: 'admin-order-details', component: OrderDetails},
-    {path: '/admin/product/create', name: 'product.create', component: ProductCreate},
-    {path: '/admin/product/:product/edit', name: 'product.edit', component: ProductEdit},
+    {
+        path: '/admin/login',
+        component: AppLogin
+    },
+    {
+        path: '/logout',
+        component: AppLogOut
+    },
+    {
+        path: '/admin',
+        meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        component: AppBody
+    },
+    {
+        path: '/admin/category', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
 
+        component: CategoryIndex
+    },
+    {
+        path: '/admin/customers', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        component: CustomerIndex
+    },
+    {
+        path: '/admin/sub-category', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        component: SubCategoryIndex
+    },
+    {
+        path: '/admin/products', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        name: 'products',
+        component: ProductsIndex
+    },
+    {
+        path: '/admin/products/archive', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        name: 'products',
+        component: ArchiveProductsIndex
+    },
+    {
+        path: '/admin/orders', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        name: 'orders',
+        component: OrdersIndex
+    },
+    {
+        path: '/admin/order/:order/details', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        name: 'admin-order-details',
+        component: OrderDetails
+    },
+    {
+        path: '/admin/product/create', meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        name: 'product.create',
+        component: ProductCreate
+    },
+    {
+        path: '/admin/product/:product/edit',
+        meta: {
+            title: 'Order Details!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        name: 'product.edit',
+        component: ProductEdit
+    },
 
     {
         path: '/auth/:provider/callback',
@@ -64,6 +150,23 @@ const routes = [
         name: 'login',
         meta: {
             title: 'Login!'
+        }
+    },
+    {
+        path: '/reset/password',
+        component: UserResetPassword,
+        name: 'reset-password',
+        meta: {
+            title: 'Reset Password!'
+        }
+    },
+
+    {
+        path: '/password/reset/:token',
+        component: UserChangePassword,
+        name: 'reset-password',
+        meta: {
+            title: 'Change Password!'
         }
     },
     {
@@ -197,7 +300,21 @@ router.beforeEach((to, from, next) => {
                 query: {redirect: to.fullPath}
             })
         } else {
-            next();
+
+            if (to.matched.some(record => record.meta.requireAdmin)) {
+                if (!User.isAdmin()) {
+                    next({
+                        path: '/admin/login',
+                        query: {redirect: to.fullPath}
+                    })
+                } else {
+                    next();
+                }
+
+            } else {
+                next();
+            }
+
         }
     } else {
         next(); // make sure to always call next()!

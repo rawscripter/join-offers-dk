@@ -38,7 +38,9 @@
                                     <input type="checkbox">
                                     <span class="checkmark"></span>
                                 </label>
-                                <!--                                <a href="#">Forget password ?</a>-->
+                                <router-link :to="{name:'reset-password'}" class="theme-color">
+                                    Forget password ?
+                                </router-link>
                             </div>
                             <br>
                             <div class="register text-left">
@@ -124,6 +126,9 @@
         },
         created() {
             this.redirectUrl = this.$route.query.redirect;
+            if (User.loggedIn()) {
+                this.$router.push('/');
+            }
         },
         computed: {
             hasFormError() {

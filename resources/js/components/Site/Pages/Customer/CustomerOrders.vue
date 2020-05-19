@@ -16,9 +16,10 @@
                             <h5 class="text-center">My JoinOffers</h5>
                             <hr>
                             <div v-for="(order,index) in orders" class="table-responsive shadow wow bounceInUp">
+                                <div class="text-center mb-2"><strong>Order #{{order.custom_order_id}}</strong></div>
                                 <table class="table table-bordered text-center">
                                     <tr>
-                                        <td rowspan="4" style="width:20%">
+                                        <td rowspan="4" style="width:15%">
                                             <router-link
                                                 :to="{name: 'product-details', params:{slug:order.product.slug}}">
                                                 <img :src="order.product.featureImage" alt="Product image"
@@ -33,14 +34,16 @@
                                             </router-link>
                                         </td>
                                         <td style="width:15%">Average Prince:
-                                            <strong>{{order.product.last_price}}</strong></td>
+                                            <strong>{{order.product.market_price}} dkk</strong></td>
                                         <td style="width:15%">
-
+                                            Order Quantity: <strong>{{order.quantity}}</strong>
                                         </td>
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
+                                            <div class="text-center mb-2"><strong>First Payment
+                                                ({{order.first_payment.amount}} dkk)</strong></div>
                                             <button style="width: 120px" class="btn btn-info btn-sm">Paid</button>
                                         </td>
-                                        <td style="width:15%" rowspan="4"  v-else>
+                                        <td style="width:15%" rowspan="4" v-else>
                                             <button style="width: 120px" class="btn btn-danger btn-sm">Canceled</button>
                                         </td>
                                     </tr>
@@ -49,7 +52,7 @@
                                         </td>
                                         <td style="width:15%">
                                             Start Prince:
-                                            <strong>{{order.product.offer_price}}</strong>
+                                            <strong>{{order.product.offer_price}} dkk</strong>
                                         </td>
                                         <td style="width:15%">Participants:
                                             <strong>{{order.product.totalOrders}}</strong></td>
@@ -60,10 +63,13 @@
                                         </td>
                                         <td style="width:15%">
                                             Current Price:
-                                            <strong>{{order.product.current_price}}</strong>
+                                            <strong>{{order.product.current_price}} dkk</strong>
                                         </td>
                                         <td style="width:15%;" rowspan="2">graph</td>
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
+                                            <div class="text-center mb-2"><strong>Second Payment
+                                                ({{(order.product.current_price * order.quantity) -
+                                                order.first_payment.amount}} dkk)</strong></div>
                                             <div class="timer text-center mt-2 mb-2">
                                                 <vac :end-time="new Date(order.product.expire_date)">
                                                     <div
