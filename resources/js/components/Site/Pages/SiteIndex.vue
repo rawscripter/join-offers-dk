@@ -92,9 +92,21 @@
                         .then(response => {
                             this.isLoading = false;
                             this.lastPage = response.data.lastPage;
-                            if (response.data.products != '') {
+                            if (response.data.products !== '') {
                                 $.each(response.data.products, function (key, value) {
-                                    vm.products.push(value);
+
+                                    let found = false;
+                                    for (let i = 0; i < vm.products.length; i++) {
+                                        if (vm.products[i].id === value.id) {
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (!found) {
+                                        vm.products.push(value);
+                                    }
+
                                 });
                             } else {
                                 this.errorText = 'No Product Found';

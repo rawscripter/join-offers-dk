@@ -6872,7 +6872,18 @@ __webpack_require__.r(__webpack_exports__);
 
           if (response.data.products != '') {
             $.each(response.data.products, function (key, value) {
-              vm.products.push(value);
+              var found = false;
+
+              for (var i = 0; i < vm.products.length; i++) {
+                if (vm.products[i].id === value.id) {
+                  found = true;
+                  break;
+                }
+              }
+
+              if (!found) {
+                vm.products.push(value);
+              }
             });
           } else {
             _this.errorText = 'No Product Found';
@@ -7773,7 +7784,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.isLoading = false;
         _this.lastPage = response.data.lastPage;
         $.each(response.data.products, function (key, value) {
-          vm.products.push(value);
+          var found = false;
+
+          for (var i = 0; i < vm.products.length; i++) {
+            if (vm.products[i].id === value.id) {
+              found = true;
+              break;
+            }
+          }
+
+          if (!found) {
+            vm.products.push(value);
+          }
         });
         $state.loaded();
       });
@@ -7959,9 +7981,20 @@ __webpack_require__.r(__webpack_exports__);
           vm.isLoading = false;
           vm.lastPage = response.data.lastPage;
 
-          if (response.data.products != '') {
+          if (response.data.products !== '') {
             $.each(response.data.products, function (key, value) {
-              vm.products.push(value);
+              var found = false;
+
+              for (var i = 0; i < vm.products.length; i++) {
+                if (vm.products[i].id === value.id) {
+                  found = true;
+                  break;
+                }
+              }
+
+              if (!found) {
+                vm.products.push(value);
+              }
             });
           } else {
             _this.errorText = 'No Product Found';
@@ -8110,9 +8143,20 @@ __webpack_require__.r(__webpack_exports__);
           _this.isLoading = false;
           _this.lastPage = response.data.lastPage;
 
-          if (response.data.products != '') {
+          if (response.data.products !== '') {
             $.each(response.data.products, function (key, value) {
-              vm.products.push(value);
+              var found = false;
+
+              for (var i = 0; i < vm.products.length; i++) {
+                if (vm.products[i].id === value.id) {
+                  found = true;
+                  break;
+                }
+              }
+
+              if (!found) {
+                vm.products.push(value);
+              }
             });
           } else {
             _this.errorText = 'No Product Found';
