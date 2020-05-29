@@ -50,6 +50,11 @@ class Product extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -57,7 +62,7 @@ class Product extends Model
 
     public function savingPercentage()
     {
-        return ceil(100 - (($this->current_price / $this->market_price) * 100));
+        return ceil(100 - (($this->current_price / $this->offer_price) * 100));
     }
 
     public function paymentPercentage()
@@ -83,11 +88,25 @@ class Product extends Model
         return false;
     }
 
-    public function reduceProductPriceOnUserOrder()
+    public function isAuthUserFavouritePost()
+    {
+        if (Auth::guard('api')->user()) {
+            $userID = Auth::guard('api')->user()->id;
+            $like = $this->favourites()->where('user_id', $userID)->get();
+            if ($like->isEmpty()) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function reduceProductPriceOnUserOrder($quantity = 1)
     {
         if ($this->current_price > $this->last_price) {
             if ($this->minus_price_user_price > 0) {
-                $this->current_price = $this->current_price - $this->minus_price_user_price;
+                $needToReduce = $this->minus_price_user_price * $quantity;
+                $this->current_price = $this->current_price - $needToReduce;
                 $this->save();
             }
         }

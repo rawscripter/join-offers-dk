@@ -72,6 +72,7 @@ Route::get('/favourites', 'ProductController@userFavouriteProductsForSite');
 Route::get('/product/{slug}', 'ProductController@showProductForSite');
 
 // favourite list
+Route::get('/product/{slug}/like/add', 'ProductController@addToLike');
 Route::get('/product/{slug}/favourite/add', 'ProductController@addToFavourite');
 Route::get('/product/{slug}/favourite/remove', 'ProductController@removeFromFavourite');
 

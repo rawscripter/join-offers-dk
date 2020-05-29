@@ -12,7 +12,7 @@
                         </h3>
                     </div>
                 </div>
-                <div class="kt-portlet__body">
+                <div class="kt-portlet__body" v-if="!isLoading">
                     <!--begin: Datatable -->
                     <h3>Upload Product Images</h3>
                     <vue-dropzone v-on:vdropzone-success="refresh" ref="myVueDropzone" id="dropzone"
@@ -144,7 +144,7 @@
 
                             <div class="col-md-4">
                                 <label for="xxxx" class="col-form-label">Product Type:</label>
-                                <select v-model="formData.product_type" name="" class="form-control" id="xxxx">
+                                <select v-model="formData.product_type" name="" class="form-control" id="xxxx" multiple>
                                     <option v-for="type in productTypes" :value="type">{{type}}</option>
                                 </select>
                             </div>
@@ -193,6 +193,7 @@
         },
         data() {
             return {
+                isLoading: false,
                 productTypes: [
                     'All',
                     'Men',
@@ -238,6 +239,7 @@
             }
         },
         created() {
+            this.isLoading = true;
             this.getCategories();
             this.getProduct(this.$route.params.product);
         },
@@ -274,6 +276,7 @@
             getProduct(product) {
                 axios.get(`${APP_URL}/api/admin/product/${product}`)
                     .then(res => {
+                        this.isLoading = false;
                         this.formData = res.data.product;
                         this.formData.category_id = res.data.product.categoryData.id;
                         this.getSubCategories(this.formData.category_id);
@@ -282,7 +285,7 @@
                     }).catch(err => console.log(err));
             },
             getCategories() {
-                axios.get(`${APP_URL}/api/admin/category/`)
+                axios.get(`${APP_URL}/api/admin/category`)
                     .then(res => {
                         this.categories = res.data.categories;
                     }).catch(error => {

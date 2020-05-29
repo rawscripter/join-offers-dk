@@ -8,8 +8,8 @@
                         <h4>Order ID: <strong>#{{orderData.custom_order_id}}</strong></h4>
                         <h4>Product Name: <strong>{{orderData.product.name}}</strong></h4>
                         <h4>Quantity: <strong>{{orderData.quantity}}</strong></h4>
-                        <h4>Product Price: <strong>{{orderData.product.offer_price}}</strong></h4>
-                        <h4>Paid Amount: <strong>{{paymentData.amount}}</strong></h4>
+                        <h4>Product Price: <strong>{{orderData.product.offer_price}} dkk</strong></h4>
+                        <h4>Paid Amount: <strong>{{paymentData.amount}} dkk</strong></h4>
                         <h4>Payment Status: <strong>{{'Paid'}}</strong></h4>
                         <h4>Payment Date: <strong>{{ paymentData.created_at }}</strong></h4>
                     </div>
@@ -17,8 +17,9 @@
                     <br>
                     <p>Visit Dashboard to get more information.</p>
                     <div class="text-center m-auto">
-                        <router-link :to="{name:'customer-orders'}" class="btn btn-theme ">
-                            Order Details
+                        <router-link :to="{name:'customer-completed-orders',query:{type:'completed'}}"
+                                     class="btn btn-theme ">
+                            Go to Orders
                         </router-link>
                     </div>
 

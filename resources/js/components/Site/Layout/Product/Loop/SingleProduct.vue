@@ -4,6 +4,9 @@
             <router-link :to="{name: 'product-details', params:{slug:product.slug}}">
                 <img :src="product.featureImage" alt="" style="width:100%">
             </router-link>
+            <span class="favourite-badge" @click="removeProductToFavouriteList(product.slug)" v-if="isUserFavourite">
+                Favourite
+            </span>
         </div>
         <div class="p_category_and_love d-flex justify-content-between">
             <div class="category">
@@ -13,17 +16,21 @@
             </div>
             <div class="icons d-flex">
                 <div class="share mr-2" @click="showModal = true">
-                    <i class="fas fa-share theme-color"></i>
+                    <img src="/images/icons/share.png" height="20" width="20" alt="">
                 </div>
-                <div class="love" v-if="isLiked" >
+
+                <div class="share mr-2" @click="addProductToFavouriteList(product.slug)" v-if="!isUserFavourite">
+                    <img src="/images/icons/favorite.png" height="20" width="24" alt="">
+                </div>
+                <div class="love" v-if="isUserLiked">
                     <i class="fas fa-heart"
                        style="color:red;"></i>
-                    <span> {{totalLiked}}</span>
+                    <span> {{totalLikes}}</span>
                 </div>
-                <div class="love" v-else @click="addProductToFavouriteList(product.slug)">
+                <div class="love" v-else @click="addProductToLikeList(product.slug)">
                     <i class="far fa-heart"
                        style="color:red;"></i>
-                    <span> {{totalLiked}}</span>
+                    <span> {{totalLikes}}</span>
                 </div>
             </div>
 
@@ -117,6 +124,79 @@
             Laes mere
         </router-link>
 
+
+        <div v-if="showModal" class="modal fade bd-example-modal-sm show"
+             tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel"
+             :class="showModal?'active':''"
+             style="padding-right: 17px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mySmallModalLabel">Share Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span @click="showModal=false" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <social-sharing
+                            :url="getProductUrl"
+                            :title="product.name"
+                            :description="product.short_des"
+                            :quote="product.short_des"
+                            inline-template>
+                            <div id="social-share">
+                                <network class="social" network="email">
+                                    <i class="fa fa-envelope"></i> Email
+                                </network>
+                                <network  class="social" network="facebook">
+                                    <i class="fab fa-facebook-f"></i> Facebook
+                                </network>
+                                <network  class="social" network="googleplus">
+                                    <i class="fab fa-google-plus"></i> Google +
+                                </network>
+                                <network  class="social" network="line">
+                                    <i class="fab fa-line"></i> Line
+                                </network>
+                                <network  class="social" network="linkedin">
+                                    <i class="fab fa-linkedin"></i> LinkedIn
+                                </network>
+                                <network  class="social" network="odnoklassniki">
+                                    <i class="fab fa-odnoklassniki"></i> Odnoklassniki
+                                </network>
+                                <network  class="social" network="pinterest">
+                                    <i class="fab fa-pinterest"></i> Pinterest
+                                </network>
+                                <network  class="social" network="reddit">
+                                    <i class="fab fa-reddit"></i> Reddit
+                                </network>
+                                <network  class="social" network="skype">
+                                    <i class="fab fa-skype"></i> Skype
+                                </network>
+                                <network  class="social" network="sms">
+                                    <i class="fab fa-commenting-o"></i> SMS
+                                </network>
+                                <network  class="social" network="telegram">
+                                    <i class="fab fa-telegram"></i> Telegram
+                                </network>
+                                <network  class="social" network="twitter">
+                                    <i class="fab fa-twitter"></i> Twitter
+                                </network>
+                                <network  class="social" network="vk">
+                                    <i class="fab fa-vk"></i> VKontakte
+                                </network>
+                                <network  class="social" network="weibo">
+                                    <i class="fab fa-weibo"></i> Weibo
+                                </network>
+                                <network  class="social" network="whatsapp">
+                                    <i class="fab fa-whatsapp"></i> Whatsapp
+                                </network>
+                            </div>
+                        </social-sharing>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -126,16 +206,29 @@
         props: ['product'],
         data() {
             return {
-                showModal: false
+                showModal: false,
+                isUserLiked: false,
+                isUserFavourite: false,
+                totalLikes: 0,
             }
         },
         methods: {
+
+            addProductToLikeList(slug) {
+                axios.get(`/api/product/${slug}/like/add`)
+                    .then(res => {
+                        if (res.data.status === 200) {
+                            this.isUserLiked = res.data.product.isLikedByCurrentUser;
+                            this.total_likes++;
+                        }
+                    }).catch(err => console.log(err));
+            },
             addProductToFavouriteList(slug) {
                 axios.get(`/api/product/${slug}/favourite/add`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            this.product.isLikedByCurrentUser = true;
-                            this.product.total_favourites++;
+                            this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
+                            Alert.showSuccessAlert('Event added to favourite list.')
                         }
                     }).catch(err => console.log(err));
             },
@@ -143,18 +236,15 @@
                 axios.get(`/api/product/${slug}/favourite/remove`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            this.product.isLikedByCurrentUser = false;
-                            this.product.total_favourites--;
+                            this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
+                            Alert.showSuccessAlert('Event removed from favourite list.')
                         }
                     }).catch(err => console.log(err));
             }
         },
         computed: {
-            isLiked() {
-                return this.product.isLikedByCurrentUser;
-            },
-            totalLiked() {
-                return this.product.total_favourites;
+            getProductUrl() {
+                return `${APP_URL}/product/${this.product.slug}`;
             },
             isOfferTimeStarted() {
                 let startDate = new Date(this.product.offer_start_date);
@@ -162,10 +252,24 @@
                 return current_date > startDate;
             },
         },
+        mounted() {
+            this.isUserLiked = this.product.isLikedByCurrentUser;
+            this.isUserFavourite = this.product.isFavouriteByCurrentUser;
+            this.totalLikes = this.product.total_favourites;
+        },
+        watch: {
+            isFavourite(val) {
+                console.log(val);
+            }
+        }
     }
 </script>
 
 <style scoped>
+    .active {
+        display: block;
+    }
+
     .love {
         cursor: pointer;
     }
@@ -209,4 +313,47 @@
     .active {
         display: block;
     }
+
+    span.favourite-badge {
+        position: absolute;
+        right: 13px;
+        background: #ff7231;
+        cursor: pointer;
+        padding: 1px 10px;
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: 1px;
+        font-size: 12px;
+    }
+
+    .modal-dialog {
+        margin-top: 150px;
+    }
+
+    .modal-dialog .modal-body span {
+        flex: none;
+        color: #FFFFFF;
+        background-color: #333;
+        border-radius: 3px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin: 0 10px 10px 0;
+    }
+
+    .modal-dialog .modal-body .fab {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        flex: 0 1 auto;
+    }
+
+    .modal-dialog .modal-body span {
+        padding: 0 10px;
+        flex: 1 1;
+        font-weight: 500;
+    }
+
 </style>

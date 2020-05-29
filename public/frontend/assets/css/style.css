@@ -599,8 +599,32 @@ nav {
 .profile-meu ul li a:hover {
     color: #FF8B37;
 }
+
 .short-description {
     height: 100px !important;
     overflow: hidden;
     margin-bottom: 13px;
+}
+
+.timer.text-center.mt-2.mb-2 {
+    min-height: 65px !important;
+}
+
+div#social-share {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+span.social {
+    padding: 6px;
+    background: #e6e6e6;
+    margin: 10px 5px;
+    text-align: center;
+    flex: 0 0 30%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.modal.fade.bd-example-modal-sm.show.active {
+    background: #0e0e0e47;
 }

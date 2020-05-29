@@ -73,7 +73,7 @@ class PaymentController extends Controller
             "taxRate": 0,
             "taxAmount": 0,
             "grossTotalAmount": ' . $total * 100 . ',
-            "netTotalAmount": ' . $total* 100 . '
+            "netTotalAmount": ' . $total * 100 . '
         }
         ],
         "amount": ' . $total * 100 . ',
@@ -150,7 +150,7 @@ class PaymentController extends Controller
             $temporaryOrder->delete();
             // reduce product price
             $product = Product::find($order->product->id);
-            $product->reduceProductPriceOnUserOrder();
+            $product->reduceProductPriceOnUserOrder($order->quantity);
             //set join offer paid as true
             $order->is_join_price_paid = 1;
             $type = 1;

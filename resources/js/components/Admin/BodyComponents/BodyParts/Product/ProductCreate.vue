@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="xxxx" class="col-form-label">Product Type:</label>
-                                <select v-model="formData.product_type" name="" class="form-control" id="xxxx">
+                                <select v-model="formData.product_type" name="" class="form-control" id="xxxx" multiple="multiple">
                                     <option v-for="type in productTypes" :value="type">{{type}}</option>
                                 </select>
                             </div>
@@ -211,7 +211,7 @@
         },
         methods: {
             getCategories() {
-                axios.get(`${APP_URL}/api/admin/category/`)
+                axios.get(`${APP_URL}/api/admin/category`)
                     .then(res => {
                         this.categories = res.data.categories;
                     }).catch(error => {

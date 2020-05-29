@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Favourite;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Like;
@@ -102,13 +103,12 @@ class ProductController extends Controller
             // only coming soon products
             if ($short === 'coming_soon') {
                 $products->where('offer_start_date', '>', Carbon::now());
-            } else {
-                $products->where('offer_start_date', '<', Carbon::now());
             }
+
 
             // to filter the gender
             if (strtolower($gender) != 'all') {
-                $products->where('product_type', $gender);
+                $products->where('product_type', 'like', "%\"{$gender}\"%");
             }
             // to filter the price
             $products->whereBetween('offer_price', [$minPrice, $maxPrice]);
@@ -147,7 +147,7 @@ class ProductController extends Controller
         if ($user) {
             $res['status'] = 200;
             $res['message'] = 'All Categories';
-            $products = $user->likedProducts;
+            $products = $user->favouriteProducts;
             $res['products'] = ProductResource::collection($products);
             $res['lastPage'] = 1;
         } else {
@@ -382,7 +382,7 @@ class ProductController extends Controller
         }
     }
 
-    public function addToFavourite($slug)
+    public function addToLike($slug)
     {
         $user = Auth::guard('api')->user();
         if ($user) {
@@ -394,6 +394,39 @@ class ProductController extends Controller
                     $product->total_favourites = $product->total_favourites + 1;
                     $product->save();
                     Like::create([
+                        'user_id' => $user->id,
+                        'product_id' => $product->id
+                    ]);
+                    $res['product'] = (new ProductResource($product));
+                } else {
+                    $res['status'] = 201;
+                    $res['message'] = 'No Product Found';
+                }
+
+            } else {
+                $res['status'] = 201;
+                $res['message'] = 'No Product Found';
+            }
+        } else {
+            $res['status'] = 201;
+            $res['message'] = 'Please login first.';
+        }
+
+        return response()->json($res);
+    }
+
+    public function addToFavourite($slug)
+    {
+        $user = Auth::guard('api')->user();
+        if ($user) {
+            $product = Product::where('slug', $slug)->first();
+            if (!empty($product)) {
+                if (!$product->isAuthUserFavouritePost()) {
+                    $res['status'] = 200;
+                    $res['message'] = 'Product added to favourite list.';
+                    $product->total_favourites = $product->total_favourites + 1;
+                    $product->save();
+                    Favourite::create([
                         'user_id' => $user->id,
                         'product_id' => $product->id
                     ]);
@@ -417,12 +450,12 @@ class ProductController extends Controller
         if ($user) {
             $product = Product::where('slug', $slug)->first();
             if (!empty($product)) {
-                if ($product->isAuthUserLikedPost()) {
+                if ($product->isAuthUserFavouritePost()) {
                     $res['status'] = 200;
                     $res['message'] = 'Product removed to favourite list.';
                     $product->total_favourites = $product->total_favourites - 1;
                     $product->save();
-                    Like::where('user_id', $user->id)->where('product_id', $product->id)->delete();
+                    Favourite::where('user_id', $user->id)->where('product_id', $product->id)->delete();
                     $res['product'] = (new ProductResource($product));
                 } else {
                     $res['status'] = 201;
@@ -452,13 +485,14 @@ class ProductController extends Controller
         $data['offer_price'] = $request->offer_price;
         $data['last_price'] = $request->last_price;
         $data['join_price'] = $request->join_price;
-        $data['product_type'] = $request->product_type;
+        $data['product_type'] = json_encode($request->product_type);
         $data['total_offer_spots'] = $request->total_offer_spots;
         $data['minus_price_user_price'] = $request->minus_price_user_price;
         $data['max_unit_per_user'] = $request->max_unit_per_user;
         $data['user_id'] = auth()->user()->id;
         $data['expire_date'] = Carbon::parse($request->expire_date)->format('Y-m-d H:s:i');
         $data['offer_start_date'] = Carbon::parse($request->offer_start_date)->format('Y-m-d H:s:i');
+
         return $data;
     }
 

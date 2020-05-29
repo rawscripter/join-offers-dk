@@ -4,7 +4,6 @@ import User from "./User";
 class Token {
     isValid(token) {
         return !!AppStorage.getUserId();
-
     }
 
 }

@@ -306,4 +306,8 @@
     .checkout-table tr {
         margin-top: 10px;
     }
+
+    .checkmark {
+        border-radius: 0%;
+    }
 </style>

@@ -40,7 +40,7 @@
                         this.isPaymentSuccessful = res.data.payment.isPaid;
                         if (this.isPaymentSuccessful) {
                             this.orderData = res.data.order;
-                            if (this.paymentType === 2) {
+                            if (this.paymentType == 2) {
                                 this.paymentData = res.data.order.second_payment;
                             } else {
                                 this.paymentData = res.data.order.first_payment;
