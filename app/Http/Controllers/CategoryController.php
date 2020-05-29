@@ -44,7 +44,6 @@ class CategoryController extends Controller
     {
         $category = Category::where('slug', $categorySlug)->first();
 
-
         if (!empty($category)) {
             $res['status'] = 200;
             $res['message'] = 'Category Found Successfully.';
@@ -56,10 +55,16 @@ class CategoryController extends Controller
                 $maxPrice = $_GET['maxPrice'];
                 $subCategory = $_GET['subCategory'] ?? null;
                 $products = Product::query();
-                if ($request['short'] == 'coming_soon') {
+
+//                if ($request['short'] == 'coming_soon') {
+//                    $products->where('offer_start_date', '>', Carbon::now());
+//                } else {
+//                    $products->where('offer_start_date', '<', Carbon::now());
+//                }
+//
+                // only coming soon products
+                if ($short === 'coming_soon') {
                     $products->where('offer_start_date', '>', Carbon::now());
-                } else {
-                    $products->where('offer_start_date', '<', Carbon::now());
                 }
 
 

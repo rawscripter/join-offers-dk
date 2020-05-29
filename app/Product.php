@@ -62,7 +62,8 @@ class Product extends Model
 
     public function savingPercentage()
     {
-        return ceil(100 - (($this->current_price / $this->offer_price) * 100));
+//        return ceil(100 - (($this->current_price / $this->offer_price) * 100));
+        return ceil(100 - (($this->current_price / $this->market_price) * 100));
     }
 
     public function paymentPercentage()

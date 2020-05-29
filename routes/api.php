@@ -78,7 +78,7 @@ Route::get('/product/{slug}/favourite/remove', 'ProductController@removeFromFavo
 
 
 Route::get('/product/{slug}/related-products', 'ProductController@showRelatedForSite');
-Route::get('/category/{categorySlug}/products', 'CategoryController@products');
+Route::get('/category/{categorySlug}/products', 'CategoryController@productsproducts');
 Route::get('/sub-category/{categorySlug}/products', 'SubCategoryController@products');
 Route::get('/category/{categorySlug}/sub-categories', 'CategoryController@subCategoriesForSite');;
 
