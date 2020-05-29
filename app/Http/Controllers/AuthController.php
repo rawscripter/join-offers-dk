@@ -61,7 +61,12 @@ class AuthController extends Controller
     public function updateInfo(Request $request)
     {
         $user = Auth::guard('api')->user();
-        $user->info->update($request->all());
+        if ($user->info) {
+            $user->info->update($request->all());
+        } else {
+            $user->info()->create($request->all());
+        }
+
         $user->name = $request->name;
         $user->save();
         $res['status'] = 200;

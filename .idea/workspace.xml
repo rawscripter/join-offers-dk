@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="bug fixed">
-      <change afterPath="$PROJECT_DIR$/app/Favourite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_20_174001_create_favourites_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/favorite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/share.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Helpers/Token.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Helpers/Token.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductEdit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductEdit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/checkout/OrderSuccessMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/checkout/OrderSuccessMessage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/CheckoutPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/CheckoutPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/CheckoutStatusPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/CheckoutStatusPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -336,7 +315,7 @@
       <workItem from="1589995881097" duration="1458000" />
       <workItem from="1590067966389" duration="605000" />
       <workItem from="1590133537810" duration="6605000" />
-      <workItem from="1590738803517" duration="2906000" />
+      <workItem from="1590738803517" duration="3168000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1587947426387</created>
@@ -486,11 +465,11 @@
     <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587982435089" />
     <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1589880155791" />
     <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590156336045" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1590741470622">
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1590741953078">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587982440660" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590741470622" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590741953078" />
     <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590156328090" />
   </component>
 </project>
