@@ -147,49 +147,46 @@
                             inline-template>
                             <div id="social-share">
                                 <network class="social" network="email">
-                                    <i class="fa fa-envelope"></i> Email
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Email.png" alt=""> Email
                                 </network>
                                 <network  class="social" network="facebook">
-                                    <i class="fab fa-facebook-f"></i> Facebook
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Facebook.png" alt=""> Facebook
                                 </network>
                                 <network  class="social" network="googleplus">
-                                    <i class="fab fa-google-plus"></i> Google +
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Google+.png" alt=""> Google +
                                 </network>
                                 <network  class="social" network="line">
-                                    <i class="fab fa-line"></i> Line
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Line.png" alt=""> Line
                                 </network>
                                 <network  class="social" network="linkedin">
-                                    <i class="fab fa-linkedin"></i> LinkedIn
-                                </network>
-                                <network  class="social" network="odnoklassniki">
-                                    <i class="fab fa-odnoklassniki"></i> Odnoklassniki
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---LinkedIn.png" alt=""> LinkedIn
                                 </network>
                                 <network  class="social" network="pinterest">
-                                    <i class="fab fa-pinterest"></i> Pinterest
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Pinterest.png" alt="">  Pinterest
                                 </network>
                                 <network  class="social" network="reddit">
-                                    <i class="fab fa-reddit"></i> Reddit
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Reddit.png" alt=""> Reddit
                                 </network>
                                 <network  class="social" network="skype">
-                                    <i class="fab fa-skype"></i> Skype
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Skype.png" alt=""> Skype
                                 </network>
                                 <network  class="social" network="sms">
-                                    <i class="fab fa-commenting-o"></i> SMS
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---SMS.png" alt=""> SMS
                                 </network>
                                 <network  class="social" network="telegram">
-                                    <i class="fab fa-telegram"></i> Telegram
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Telegram.png" alt=""> Telegram
                                 </network>
                                 <network  class="social" network="twitter">
-                                    <i class="fab fa-twitter"></i> Twitter
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Twitter.png" alt=""> Twitter
                                 </network>
                                 <network  class="social" network="vk">
-                                    <i class="fab fa-vk"></i> VKontakte
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Vkontakte.png" alt="">  VKontakte
                                 </network>
                                 <network  class="social" network="weibo">
-                                    <i class="fab fa-weibo"></i> Weibo
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Weibo.png" alt=""> Weibo
                                 </network>
                                 <network  class="social" network="whatsapp">
-                                    <i class="fab fa-whatsapp"></i> Whatsapp
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Whatsapp.png" alt=""> Whatsapp
                                 </network>
                             </div>
                         </social-sharing>

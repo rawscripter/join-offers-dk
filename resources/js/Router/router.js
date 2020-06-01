@@ -87,7 +87,7 @@ const routes = [
             requireAuth: true,
             requireAdmin: true,
         },
-        name: 'products',
+        name: 'admin.products',
         component: ArchiveProductsIndex
     },
     {
@@ -155,7 +155,7 @@ const routes = [
     {
         path: '/reset/password',
         component: UserResetPassword,
-        name: 'reset-password',
+        name: 'reset-password-token',
         meta: {
             title: 'Reset Password!'
         }

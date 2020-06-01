@@ -84,8 +84,10 @@
                                        type="text">
                             </div>
                             <div class="col-md-4">
-                                <label for="Join_price" class="col-form-label">Join Price:</label>
-                                <input required v-model="formData.join_price" class="form-control" id="Join_price"
+                                <label for="Join_price" class="col-form-label">Join Price (%):
+                                    <strong>({{formData.join_price}}dkk)</strong></label>
+                                <input required v-model="formData.join_price_percentage" class="form-control"
+                                       id="Join_price"
                                        type="text">
                             </div>
 
@@ -128,7 +130,8 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="xxxx" class="col-form-label">Product Type:</label>
-                                <select v-model="formData.product_type" name="" class="form-control" id="xxxx" multiple="multiple">
+                                <select v-model="formData.product_type" name="" class="form-control" id="xxxx"
+                                        multiple="multiple">
                                     <option v-for="type in productTypes" :value="type">{{type}}</option>
                                 </select>
                             </div>
@@ -192,15 +195,17 @@
                     order_note: null,
                     full_des: null,
                     sub_category_id: null,
-                    market_price: null,
-                    join_price: null,
-                    offer_price: null,
-                    last_price: null,
-                    total_offer_spots: null,
-                    minus_price_user_price: null,
+                    market_price: 0,
+                    join_price: 0,
+                    join_price_percentage: 0,
+                    offer_price: 0,
+                    last_price: 0,
+                    total_offer_spots: 1,
+                    minus_price_user_price: 0,
                     expire_date: null,
                     offer_start_date: null,
                     product_image: null,
+                    product_type: []
                 },
                 errors_exist: false,
                 formErrors: []
@@ -230,7 +235,7 @@
             },
             // to add a new category
             saveFormData() {
-                // add new category
+                // add new product
                 axios.post(`${APP_URL}/api/admin/product`, this.formData)
                     .then(res => {
                         if (!res.data.errors) {
@@ -265,6 +270,24 @@
                 errors = errors.flat();
                 return errors;
             },
+        },
+        watch: {
+            'formData.offer_price'(price) {
+                let joinPrice = (price * this.formData.join_price_percentage) / 100;
+                this.formData.join_price = joinPrice.toFixed(2);
+
+                // to set the price
+                let minusPrice = price / this.formData.total_offer_spots;
+                this.formData.minus_price_user_price = minusPrice.toFixed(2);
+            },
+            'formData.join_price_percentage'(percentage) {
+                let joinPrice = (this.formData.offer_price * percentage) / 100;
+                this.formData.join_price = joinPrice.toFixed(2);
+            },
+            'formData.total_offer_spots'(spot) {
+                let minusPrice = this.formData.offer_price / spot;
+                this.formData.minus_price_user_price = minusPrice.toFixed(2);
+            }
         }
     }
 </script>

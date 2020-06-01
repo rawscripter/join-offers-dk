@@ -485,6 +485,7 @@ class ProductController extends Controller
         $data['offer_price'] = $request->offer_price;
         $data['last_price'] = $request->last_price;
         $data['join_price'] = $request->join_price;
+        $data['join_price_percentage'] = $request->join_price_percentage;
         $data['product_type'] = json_encode($request->product_type);
         $data['total_offer_spots'] = $request->total_offer_spots;
         $data['minus_price_user_price'] = $request->minus_price_user_price;
@@ -505,6 +506,7 @@ class ProductController extends Controller
             'sub_category_id' => 'required',
             'market_price' => 'required',
             'offer_price' => 'required',
+            'join_price_percentage' => 'required',
             'last_price' => 'required',
             'total_offer_spots' => 'required',
             'minus_price_user_price' => 'required',

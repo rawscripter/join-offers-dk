@@ -40,6 +40,7 @@ class ProductResource extends JsonResource
             'saving_percentage' => $this->savingPercentage(),
             'is_join_payment_required' => $this->join_price > 0 ? true : false,
             'join_price' => $this->join_price,
+            'join_price_percentage' => $this->join_price_percentage,
             'join_payment_percentage' => $this->paymentPercentage(),
             'offer_price' => $this->offer_price,
             'last_price' => $this->last_price,

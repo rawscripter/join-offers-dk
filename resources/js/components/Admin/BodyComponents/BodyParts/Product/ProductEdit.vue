@@ -101,8 +101,10 @@
                                        type="text">
                             </div>
                             <div class="col-md-4">
-                                <label for="Join_price" class="col-form-label">Join Price:</label>
-                                <input required v-model="formData.join_price" class="form-control" id="Join_price"
+                                <label for="Join_price" class="col-form-label">Join Price (%):
+                                    <strong>({{formData.join_price}}dkk)</strong></label>
+                                <input required v-model="formData.join_price_percentage" class="form-control"
+                                       id="Join_price"
                                        type="text">
                             </div>
 
@@ -224,6 +226,7 @@
                     productImages: null,
                     market_price: null,
                     offer_price: null,
+                    join_price_percentage: 0,
                     max_unit_per_user: null,
                     last_price: null,
                     join_price: null,
@@ -345,6 +348,24 @@
                 return errors;
             },
         },
+        watch: {
+            'formData.offer_price'(price) {
+                let joinPrice = (price * this.formData.join_price_percentage) / 100;
+                this.formData.join_price = joinPrice.toFixed(2);
+
+                // to set the price
+                let minusPrice = price / this.formData.total_offer_spots;
+                this.formData.minus_price_user_price = minusPrice.toFixed(2);
+            },
+            'formData.join_price_percentage'(percentage) {
+                let joinPrice = (this.formData.offer_price * percentage) / 100;
+                this.formData.join_price = joinPrice.toFixed(2);
+            },
+            'formData.total_offer_spots'(spot) {
+                let minusPrice = this.formData.offer_price / spot;
+                this.formData.minus_price_user_price = minusPrice.toFixed(2);
+            }
+        }
 
     }
 </script>
