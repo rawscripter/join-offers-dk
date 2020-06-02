@@ -1,9 +1,9 @@
 <template>
-    <div class="main-sidebar shadow" id="main_sidebar">
+    <div :class="showFilterMenuOnMobile ? 'show-filter-on-mobile' : '' " class="main-sidebar shadow" id="main_sidebar">
         <div class="filter-title text-center">
             <h5><strong>Filter</strong></h5>
         </div>
-        <div class="sidebar-header d-flex justify-content-between">
+        <div  @click="showFilterMenuOnMobile = !showFilterMenuOnMobile" class="sidebar-header hide-desktop d-flex justify-content-between">
             <i class="fas fa-times mt-2" id="closeMobileSidebar"></i>
         </div>
         <form>
@@ -102,6 +102,7 @@
         props: ['callResetFilterFunction'],
         data() {
             return {
+                showFilterMenuOnMobile: false,
                 range: [0, 10000],
                 filter: {
                     gender: 'All',
@@ -131,6 +132,11 @@
                     this.$emit('filterFromResetCompleted')
                 }
             }
+        },
+        mounted() {
+            this.$root.$on('showFilterMenuOnMobile', (dataReceived) => {
+                this.showFilterMenuOnMobile = dataReceived;
+            })
         }
     }
 </script>
@@ -168,5 +174,16 @@
         font-size: 16px;
         color: #858585;
         border-radius: 4px;
+    }
+
+    .show-filter-on-mobile {
+        transform: translate(0px) !important;
+    }
+
+    #closeMobileSidebar {
+        padding-right: 10px;
+        position: absolute;
+        right: 0;
+        top: 18px;
     }
 </style>

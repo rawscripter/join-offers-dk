@@ -22,7 +22,9 @@
                         <div class="col-md-9 col-lg-9">
                             <div class="row">
                                 <div class="col-md-6 col-lg-4 d-flex justify-content-between">
-                                    <a href="#" class="hide-desktop"><i class="far fa-heart"></i> </a>
+                                    <router-link tag="a" to="/favourites" class="wishlist hide-desktop text-center">
+                                        <img src="/images/icons/favorite.png" height="30" alt="">
+                                    </router-link>
                                     <div class="header-logo" style="margin-top:0px ">
                                         <h4>
                                             <router-link to="/">
@@ -31,7 +33,47 @@
                                             </router-link>
                                         </h4>
                                     </div>
-                                    <a href="#" class="hide-desktop"><i class="fas fa-sign-out-alt" id="login"></i></a>
+                                    <div class="login text-center hide-desktop">
+                                        <div v-if="userLoggedIn">
+                                            <div class="user-login"
+                                                 @click="showUserMenuMobile = !showUserMenuMobile">
+                                                <i class="fas fa-user"></i>
+                                                <br>
+                                                Profile
+                                            </div>
+                                            <div class="dropdown-menu wow bounceIn" v-if="showUserMenuMobile">
+
+                                                <router-link tag="a" class="dropdown-item" :to="{name:'favourites'}">
+                                                    Favourites
+                                                </router-link>
+
+                                                <router-link tag="a" class="dropdown-item"
+                                                             :to="{name:'customer-dashboard'}">
+                                                    Dashboard
+                                                </router-link>
+                                                <router-link tag="a" class="dropdown-item"
+                                                             :to="{name:'customer-profile'}">
+                                                    Profile
+                                                </router-link>
+                                                <router-link tag="a" class="dropdown-item"
+                                                             :to="{name:'customer-orders'}">
+                                                    Orders
+                                                </router-link>
+                                                <div class="dropdown-divider"></div>
+                                                <router-link class="dropdown-item" to="/logout">
+                                                    Logout
+                                                </router-link>
+
+                                            </div>
+                                        </div>
+                                        <div class="user-login" v-if="!userLoggedIn">
+                                            <router-link to="/login">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                                <br>
+                                                Login
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 col-lg-8 mt-4">
                                     <div class="main_search mt-0 mb-2"
@@ -58,7 +100,7 @@
                             <div class="header_top_button d-flex justify-content-center">
                                 <router-link tag="div" to="/favourites" class="wishlist text-center">
                                     <a href="#">
-                                        <i class="far fa-heart"></i>
+                                        <img src="/images/icons/favorite.png" height="30" alt="">
                                         <br>
                                         <label>Favourite</label>
                                     </a>
@@ -122,6 +164,8 @@
         data() {
             return {
                 showUserMenu: false,
+                showUserMenuMobile: false,
+                showUserFilterMobile: false,
                 search: null,
                 tempSearch: null,
                 userLoggedIn: User.loggedIn(),
@@ -145,6 +189,8 @@
 </script>
 
 <style scoped>
+
+
     .top-heading {
         display: flex;
         justify-content: center;
@@ -168,5 +214,16 @@
         display: block !important;
         left: 50px;
         min-width: 180px;
+    }
+
+
+    @media (max-width: 720px) {
+        .dropdown-menu {
+            display: block !important;
+            right: 0;
+            left: unset;
+            width: 180px;
+            top: 70px;
+        }
     }
 </style>

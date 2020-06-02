@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="share mr-2" @click="addProductToFavouriteList(product.slug)" v-if="!isUserFavourite">
-                    <img src="/images/icons/favorite.png" height="20" width="24" alt="">
+                    <img src="/images/icons/favorite.png" height="20" alt="">
                 </div>
                 <div class="love" v-if="isUserLiked">
                     <i class="fas fa-heart"
@@ -226,6 +226,8 @@
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
                             Alert.showSuccessAlert('Event added to favourite list.')
+                        }else{
+                            alert(res.data.message);
                         }
                     }).catch(err => console.log(err));
             },
@@ -235,6 +237,8 @@
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
                             Alert.showSuccessAlert('Event removed from favourite list.')
+                        }else{
+                            alert(res.data.message);
                         }
                     }).catch(err => console.log(err));
             }

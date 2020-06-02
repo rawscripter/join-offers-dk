@@ -32,27 +32,91 @@
         </div>
 
         <div class="sidebar-action">
-            <p><i class="far fa-heart"></i> Gem till favouriter</p>
-            <p><i class="fas fa-sync"></i> Pamind mig</p>
-            <p><i class="fas fa-share"></i> Share</p>
+            <p @click="addProductToFavouriteList(product.slug)" v-if="!isUserFavourite"><img
+                src="/images/icons/favorite.png" height="20" alt=""> Gem till favouriter</p>
+            <br>
+            <p><i class="fas fa-sync  mr-2"></i> Pamind mig</p>
+            <br>
+            <p @click="showModal=true">
+                <img src="/images/icons/share.png" height="20" width="20" alt="">
+                Share</p>
             <div class="sidebar-social mt-2 d-flex justify-content-around">
+            </div>
+        </div>
 
-
-                <social-sharing
-                    :url="getCurrentPageUrl"
-                    :title="product.name"
-                    :description="product.short_des"
-                    :quote="product.short_des"
-                    inline-template>
-                    <div>
-                        <network network="facebook">
-                            <a href="#"><i class="fab fa-facebook-square"></i></a>
-                        </network>
-                        <network network="linkedin">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                        </network>
+        <div v-if="showModal" class="modal fade bd-example-modal-sm show"
+             tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel"
+             :class="showModal?'active':''"
+             style="padding-right: 17px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mySmallModalLabel">Share Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span @click="showModal=false" aria-hidden="true">×</span>
+                        </button>
                     </div>
-                </social-sharing>
+                    <div class="modal-body">
+                        <social-sharing
+                            :url="getProductUrl"
+                            :title="product.name"
+                            :description="product.short_des"
+                            :quote="product.short_des"
+                            inline-template>
+                            <div id="social-share">
+                                <network class="social" network="email">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Email.png" alt=""> Email
+                                </network>
+                                <network class="social" network="facebook">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Facebook.png" alt="">
+                                    Facebook
+                                </network>
+                                <network class="social" network="googleplus">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Google+.png" alt=""> Google +
+                                </network>
+                                <network class="social" network="line">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Line.png" alt=""> Line
+                                </network>
+                                <network class="social" network="linkedin">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---LinkedIn.png" alt="">
+                                    LinkedIn
+                                </network>
+                                <network class="social" network="pinterest">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Pinterest.png" alt="">
+                                    Pinterest
+                                </network>
+                                <network class="social" network="reddit">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Reddit.png" alt=""> Reddit
+                                </network>
+                                <network class="social" network="skype">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Skype.png" alt=""> Skype
+                                </network>
+                                <network class="social" network="sms">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---SMS.png" alt=""> SMS
+                                </network>
+                                <network class="social" network="telegram">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Telegram.png" alt="">
+                                    Telegram
+                                </network>
+                                <network class="social" network="twitter">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Twitter.png" alt=""> Twitter
+                                </network>
+                                <network class="social" network="vk">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Vkontakte.png" alt="">
+                                    VKontakte
+                                </network>
+                                <network class="social" network="weibo">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Weibo.png" alt=""> Weibo
+                                </network>
+                                <network class="social" network="whatsapp">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Whatsapp.png" alt="">
+                                    Whatsapp
+                                </network>
+                            </div>
+                        </social-sharing>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -64,15 +128,33 @@
         name: "ProductOfferInfoSidebar",
         props: ['product'],
         data() {
-            return {}
+            return {
+                showModal: false,
+                isUserLiked: false,
+                isUserFavourite: false,
+                totalLikes: 0,
+            }
         },
         methods: {
+            addProductToLikeList(slug) {
+                axios.get(`/api/product/${slug}/like/add`)
+                    .then(res => {
+                        if (res.data.status === 200) {
+                            this.isUserLiked = res.data.product.isLikedByCurrentUser;
+                            this.total_likes++;
+                        } else {
+                            alert(res.data.message);
+                        }
+                    }).catch(err => console.log(err));
+            },
             addProductToFavouriteList(slug) {
                 axios.get(`/api/product/${slug}/favourite/add`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            this.product.isLikedByCurrentUser = true;
-                            this.product.total_favourites++;
+                            this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
+                            Alert.showSuccessAlert('Event added to favourite list.')
+                        } else {
+                            alert(res.data.message);
                         }
                     }).catch(err => console.log(err));
             },
@@ -80,8 +162,8 @@
                 axios.get(`/api/product/${slug}/favourite/remove`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            this.product.isLikedByCurrentUser = false;
-                            this.product.total_favourites--;
+                            this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
+                            Alert.showSuccessAlert('Event removed from favourite list.')
                         }
                     }).catch(err => console.log(err));
             }
@@ -106,7 +188,12 @@
                 let current_date = Date.now();
                 return current_date > startDate;
             }
-        }
+        },
+        mounted() {
+            this.isUserLiked = this.product.isLikedByCurrentUser;
+            this.isUserFavourite = this.product.isFavouriteByCurrentUser;
+            this.totalLikes = this.product.total_favourites;
+        },
     }
 </script>
 
@@ -121,4 +208,13 @@
         font-weight: 700;
         font-size: 17px;
     }
+
+    .sidebar-action {
+        cursor: pointer;
+    }
+
+    .active {
+        display: block;
+    }
+
 </style>

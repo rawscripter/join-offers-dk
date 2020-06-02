@@ -6,8 +6,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <button class="navbar-toggler" type="button" id="openSidebar">
-                filter sidebar
+            <button class="navbar-toggler" @click="showFilterOnMobile" type="button"
+                    id="openSidebar">
+                <img src="/images/icons/filter.png" width="24" alt="">
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,6 +35,7 @@
         name: "SiteNavBar",
         data() {
             return {
+                filterMenu: false,
                 categories: []
             }
         },
@@ -46,10 +48,14 @@
                     console.error(error)
                 })
             },
+            showFilterOnMobile() {
+                this.$root.$emit('showFilterMenuOnMobile', !this.filterMenu);
+            }
         },
         created() {
             this.getCategories();
-        }
+        },
+
     }
 </script>
 
@@ -57,4 +63,6 @@
     a.nav-link.router-link-exact-active.router-link-active {
         color: rgb(255, 100, 45);
     }
+
+
 </style>

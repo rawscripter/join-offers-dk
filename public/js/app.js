@@ -5658,6 +5658,8 @@ __webpack_require__.r(__webpack_exports__);
         if (res.data.status === 200) {
           _this2.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
           Alert.showSuccessAlert('Event added to favourite list.');
+        } else {
+          alert(res.data.message);
         }
       })["catch"](function (err) {
         return console.log(err);
@@ -5670,6 +5672,8 @@ __webpack_require__.r(__webpack_exports__);
         if (res.data.status === 200) {
           _this3.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
           Alert.showSuccessAlert('Event removed from favourite list.');
+        } else {
+          alert(res.data.message);
         }
       })["catch"](function (err) {
         return console.log(err);
@@ -5891,10 +5895,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SiteNavBar",
   data: function data() {
     return {
+      filterMenu: false,
       categories: []
     };
   },
@@ -5907,6 +5913,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.error(error);
       });
+    },
+    showFilterOnMobile: function showFilterOnMobile() {
+      this.$root.$emit('showFilterMenuOnMobile', !this.filterMenu);
     }
   },
   created: function created() {
@@ -6042,6 +6051,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SiteTopHeader",
@@ -6049,6 +6100,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       showUserMenu: false,
+      showUserMenuMobile: false,
+      showUserFilterMobile: false,
       search: null,
       tempSearch: null,
       userLoggedIn: User.loggedIn(),
@@ -8455,6 +8508,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['callResetFilterFunction'],
   data: function data() {
     return {
+      showFilterMenuOnMobile: false,
       range: [0, 10000],
       filter: {
         gender: 'All',
@@ -8483,6 +8537,13 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('filterFromResetCompleted');
       }
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('showFilterMenuOnMobile', function (dataReceived) {
+      _this.showFilterMenuOnMobile = dataReceived;
+    });
   }
 });
 
@@ -8558,32 +8619,117 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductOfferInfoSidebar",
   props: ['product'],
   data: function data() {
-    return {};
+    return {
+      showModal: false,
+      isUserLiked: false,
+      isUserFavourite: false,
+      totalLikes: 0
+    };
   },
   methods: {
-    addProductToFavouriteList: function addProductToFavouriteList(slug) {
+    addProductToLikeList: function addProductToLikeList(slug) {
       var _this = this;
+
+      axios.get("/api/product/".concat(slug, "/like/add")).then(function (res) {
+        if (res.data.status === 200) {
+          _this.isUserLiked = res.data.product.isLikedByCurrentUser;
+          _this.total_likes++;
+        } else {
+          alert(res.data.message);
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    addProductToFavouriteList: function addProductToFavouriteList(slug) {
+      var _this2 = this;
 
       axios.get("/api/product/".concat(slug, "/favourite/add")).then(function (res) {
         if (res.data.status === 200) {
-          _this.product.isLikedByCurrentUser = true;
-          _this.product.total_favourites++;
+          _this2.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
+          Alert.showSuccessAlert('Event added to favourite list.');
+        } else {
+          alert(res.data.message);
         }
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     removeProductToFavouriteList: function removeProductToFavouriteList(slug) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/api/product/".concat(slug, "/favourite/remove")).then(function (res) {
         if (res.data.status === 200) {
-          _this2.product.isLikedByCurrentUser = false;
-          _this2.product.total_favourites--;
+          _this3.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
+          Alert.showSuccessAlert('Event removed from favourite list.');
         }
       })["catch"](function (err) {
         return console.log(err);
@@ -8610,6 +8756,11 @@ __webpack_require__.r(__webpack_exports__);
       var current_date = Date.now();
       return current_date > startDate;
     }
+  },
+  mounted: function mounted() {
+    this.isUserLiked = this.product.isLikedByCurrentUser;
+    this.isUserFavourite = this.product.isFavouriteByCurrentUser;
+    this.totalLikes = this.product.total_favourites;
   }
 });
 
@@ -15812,7 +15963,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\na.nav-link.router-link-exact-active.router-link-active[data-v-0a47ef7f] {\n    color: rgb(255, 100, 45);\n}\n", ""]);
+exports.push([module.i, "\na.nav-link.router-link-exact-active.router-link-active[data-v-0a47ef7f] {\n    color: rgb(255, 100, 45);\n}\n\n\n", ""]);
 
 // exports
 
@@ -15831,7 +15982,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.top-heading[data-v-1ec77583] {\n    display: flex;\n    justify-content: center;\n    margin: 0px;\n}\nimg#logo[data-v-1ec77583] {\n    width: 100px;\n}\n.user-profile a[data-v-1ec77583]:hover {\n    text-decoration: none;\n}\n.user-profile[data-v-1ec77583], .user-login[data-v-1ec77583] {\n    cursor: pointer !important;\n    color: #ff7c3b !important;\n}\n.dropdown-menu[data-v-1ec77583] {\n    display: block !important;\n    left: 50px;\n    min-width: 180px;\n}\n", ""]);
+exports.push([module.i, "\n.top-heading[data-v-1ec77583] {\n    display: flex;\n    justify-content: center;\n    margin: 0px;\n}\nimg#logo[data-v-1ec77583] {\n    width: 100px;\n}\n.user-profile a[data-v-1ec77583]:hover {\n    text-decoration: none;\n}\n.user-profile[data-v-1ec77583], .user-login[data-v-1ec77583] {\n    cursor: pointer !important;\n    color: #ff7c3b !important;\n}\n.dropdown-menu[data-v-1ec77583] {\n    display: block !important;\n    left: 50px;\n    min-width: 180px;\n}\n@media (max-width: 720px) {\n.dropdown-menu[data-v-1ec77583] {\n        display: block !important;\n        right: 0;\n        left: unset;\n        width: 180px;\n        top: 70px;\n}\n}\n", ""]);
 
 // exports
 
@@ -16059,7 +16210,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.price-range-text {\n    text-align: center;\n    font-weight: bold;\n    color: #ff652e;\n    font-size: 20px;\n}\n.reset-btn {\n    cursor: pointer;\n}\n.vue-slider-process {\n    background-color: #ff632d !important;\n    border-radius: 15px;\n}\n.vue-slider-dot-tooltip-inner {\n    border-color: #ff622c !important;\n    background-color: #ff652d !important;\n}\ninput[type=\"number\"] {\n    width: 100px;\n    text-align: center;\n    /* border-color: #aaaaaa; */\n    border: 1px solid #eaeaea;\n    padding: 5px 10px;\n    font-size: 16px;\n    color: #858585;\n    border-radius: 4px;\n}\n", ""]);
+exports.push([module.i, "\n.price-range-text {\n    text-align: center;\n    font-weight: bold;\n    color: #ff652e;\n    font-size: 20px;\n}\n.reset-btn {\n    cursor: pointer;\n}\n.vue-slider-process {\n    background-color: #ff632d !important;\n    border-radius: 15px;\n}\n.vue-slider-dot-tooltip-inner {\n    border-color: #ff622c !important;\n    background-color: #ff652d !important;\n}\ninput[type=\"number\"] {\n    width: 100px;\n    text-align: center;\n    /* border-color: #aaaaaa; */\n    border: 1px solid #eaeaea;\n    padding: 5px 10px;\n    font-size: 16px;\n    color: #858585;\n    border-radius: 4px;\n}\n.show-filter-on-mobile {\n    transform: translate(0px) !important;\n}\n#closeMobileSidebar {\n    padding-right: 10px;\n    position: absolute;\n    right: 0;\n    top: 18px;\n}\n", ""]);
 
 // exports
 
@@ -16078,7 +16229,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nsmall[data-v-a427a61e] {\n    font-size: 16px;\n    font-weight: bold;\n    letter-spacing: 1px;\n}\nh5[data-v-a427a61e] {\n    font-weight: 700;\n    font-size: 17px;\n}\n", ""]);
+exports.push([module.i, "\nsmall[data-v-a427a61e] {\n    font-size: 16px;\n    font-weight: bold;\n    letter-spacing: 1px;\n}\nh5[data-v-a427a61e] {\n    font-weight: 700;\n    font-size: 17px;\n}\n.sidebar-action[data-v-a427a61e] {\n    cursor: pointer;\n}\n.active[data-v-a427a61e] {\n    display: block;\n}\n\n", ""]);
 
 // exports
 
@@ -59878,7 +60029,6 @@ var render = function() {
                       attrs: {
                         src: "/images/icons/favorite.png",
                         height: "20",
-                        width: "24",
                         alt: ""
                       }
                     })
@@ -60820,9 +60970,14 @@ var render = function() {
           "button",
           {
             staticClass: "navbar-toggler",
-            attrs: { type: "button", id: "openSidebar" }
+            attrs: { type: "button", id: "openSidebar" },
+            on: { click: _vm.showFilterOnMobile }
           },
-          [_vm._v("\n            filter sidebar\n        ")]
+          [
+            _c("img", {
+              attrs: { src: "/images/icons/filter.png", width: "24", alt: "" }
+            })
+          ]
         ),
         _vm._v(" "),
         _c(
@@ -60949,7 +61104,22 @@ var render = function() {
                       "col-md-6 col-lg-4 d-flex justify-content-between"
                   },
                   [
-                    _vm._m(1),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "wishlist hide-desktop text-center",
+                        attrs: { tag: "a", to: "/favourites" }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "/images/icons/favorite.png",
+                            height: "30",
+                            alt: ""
+                          }
+                        })
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -60976,8 +61146,149 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(2)
-                  ]
+                    _c(
+                      "div",
+                      { staticClass: "login text-center hide-desktop" },
+                      [
+                        _vm.userLoggedIn
+                          ? _c("div", [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "user-login",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.showUserMenuMobile = !_vm.showUserMenuMobile
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-user" }),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                                            Profile\n                                        "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm.showUserMenuMobile
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass: "dropdown-menu wow bounceIn"
+                                    },
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            tag: "a",
+                                            to: { name: "favourites" }
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                Favourites\n                                            "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            tag: "a",
+                                            to: { name: "customer-dashboard" }
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                Dashboard\n                                            "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            tag: "a",
+                                            to: { name: "customer-profile" }
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                Profile\n                                            "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            tag: "a",
+                                            to: { name: "customer-orders" }
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                Orders\n                                            "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", {
+                                        staticClass: "dropdown-divider"
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: { to: "/logout" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                Logout\n                                            "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.userLoggedIn
+                          ? _c(
+                              "div",
+                              { staticClass: "user-login" },
+                              [
+                                _c("router-link", { attrs: { to: "/login" } }, [
+                                  _c("i", {
+                                    staticClass: "fas fa-sign-out-alt"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                                            Login\n                                        "
+                                  )
+                                ])
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ]
+                    )
+                  ],
+                  1
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6 col-lg-8 mt-4" }, [
@@ -61003,7 +61314,7 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(3),
+                            _vm._m(1),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -61033,7 +61344,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(" "),
-                            _vm._m(4)
+                            _vm._m(2)
                           ])
                         ]
                       )
@@ -61058,7 +61369,13 @@ var render = function() {
                     },
                     [
                       _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "far fa-heart" }),
+                        _c("img", {
+                          attrs: {
+                            src: "/images/icons/favorite.png",
+                            height: "30",
+                            alt: ""
+                          }
+                        }),
                         _vm._v(" "),
                         _c("br"),
                         _vm._v(" "),
@@ -61267,22 +61584,6 @@ var staticRenderFns = [
           )
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "hide-desktop", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "far fa-heart" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "hide-desktop", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fas fa-sign-out-alt", attrs: { id: "login" } })
     ])
   },
   function() {
@@ -64577,15 +64878,36 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "main-sidebar shadow", attrs: { id: "main_sidebar" } },
+    {
+      staticClass: "main-sidebar shadow",
+      class: _vm.showFilterMenuOnMobile ? "show-filter-on-mobile" : "",
+      attrs: { id: "main_sidebar" }
+    },
     [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c(
+        "div",
+        {
+          staticClass:
+            "sidebar-header hide-desktop d-flex justify-content-between",
+          on: {
+            click: function($event) {
+              _vm.showFilterMenuOnMobile = !_vm.showFilterMenuOnMobile
+            }
+          }
+        },
+        [
+          _c("i", {
+            staticClass: "fas fa-times mt-2",
+            attrs: { id: "closeMobileSidebar" }
+          })
+        ]
+      ),
       _vm._v(" "),
       _c("form", [
         _c("div", { staticClass: "till_filter" }, [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c("label", { staticClass: "checkbox_container" }, [
             _vm._v("alle\n                "),
@@ -64681,7 +65003,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "shoter_filter mt-3" }, [
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
           _c("label", { staticClass: "checkbox_container" }, [
             _vm._v("Ny\n                "),
@@ -64877,21 +65199,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "sidebar-header d-flex justify-content-between" },
-      [
-        _c("i", {
-          staticClass: "fas fa-times mt-2",
-          attrs: { id: "closeMobileSidebar" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("h5", [_c("b", [_vm._v("Till :")])])
   },
   function() {
@@ -65008,53 +65315,433 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "sidebar-action" }, [
+      !_vm.isUserFavourite
+        ? _c(
+            "p",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.addProductToFavouriteList(_vm.product.slug)
+                }
+              }
+            },
+            [
+              _c("img", {
+                attrs: {
+                  src: "/images/icons/favorite.png",
+                  height: "20",
+                  alt: ""
+                }
+              }),
+              _vm._v(" Gem till favouriter")
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2),
+      _c("br"),
       _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "sidebar-social mt-2 d-flex justify-content-around" },
+        "p",
+        {
+          on: {
+            click: function($event) {
+              _vm.showModal = true
+            }
+          }
+        },
         [
-          _c("social-sharing", {
+          _c("img", {
             attrs: {
-              url: _vm.getCurrentPageUrl,
-              title: _vm.product.name,
-              description: _vm.product.short_des,
-              quote: _vm.product.short_des
-            },
-            inlineTemplate: {
-              render: function() {
-                var _vm = this
-                var _h = _vm.$createElement
-                var _c = _vm._self._c || _h
-                return _c(
+              src: "/images/icons/share.png",
+              height: "20",
+              width: "20",
+              alt: ""
+            }
+          }),
+          _vm._v("\n            Share")
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "sidebar-social mt-2 d-flex justify-content-around"
+      })
+    ]),
+    _vm._v(" "),
+    _vm.showModal
+      ? _c(
+          "div",
+          {
+            staticClass: "modal fade bd-example-modal-sm show",
+            class: _vm.showModal ? "active" : "",
+            staticStyle: { "padding-right": "17px" },
+            attrs: {
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "mySmallModalLabel"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "mySmallModalLabel" }
+                    },
+                    [_vm._v("Share Event")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c(
+                        "span",
+                        {
+                          attrs: { "aria-hidden": "true" },
+                          on: {
+                            click: function($event) {
+                              _vm.showModal = false
+                            }
+                          }
+                        },
+                        [_vm._v("×")]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
                   "div",
+                  { staticClass: "modal-body" },
                   [
-                    _c("network", { attrs: { network: "facebook" } }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "fab fa-facebook-square" })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("network", { attrs: { network: "linkedin" } }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "fab fa-linkedin" })
-                      ])
-                    ])
+                    _c("social-sharing", {
+                      attrs: {
+                        url: _vm.getProductUrl,
+                        title: _vm.product.name,
+                        description: _vm.product.short_des,
+                        quote: _vm.product.short_des
+                      },
+                      inlineTemplate: {
+                        render: function() {
+                          var _vm = this
+                          var _h = _vm.$createElement
+                          var _c = _vm._self._c || _h
+                          return _c(
+                            "div",
+                            { attrs: { id: "social-share" } },
+                            [
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "email" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Email.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(" Email\n                            ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "facebook" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Facebook.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                Facebook\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "googleplus" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Google+.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    " Google +\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "line" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Line.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(" Line\n                            ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "linkedin" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---LinkedIn.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                LinkedIn\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "pinterest" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Pinterest.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                Pinterest\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "reddit" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Reddit.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    " Reddit\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "skype" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Skype.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(" Skype\n                            ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "sms" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---SMS.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(" SMS\n                            ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "telegram" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Telegram.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                Telegram\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "twitter" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Twitter.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    " Twitter\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "vk" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Vkontakte.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                VKontakte\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "weibo" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Weibo.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(" Weibo\n                            ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "network",
+                                {
+                                  staticClass: "social",
+                                  attrs: { network: "whatsapp" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      width: "20",
+                                      src:
+                                        "/images/icons/JoinOffers---Ikon---Whatsapp.png",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                Whatsapp\n                            "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        },
+                        staticRenderFns: []
+                      }
+                    })
                   ],
                   1
                 )
-              },
-              staticRenderFns: []
-            }
-          })
-        ],
-        1
-      )
-    ])
+              ])
+            ])
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -65063,24 +65750,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-      _c("i", { staticClass: "far fa-heart" }),
-      _vm._v(" Gem till favouriter")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("i", { staticClass: "fas fa-sync" }),
+      _c("i", { staticClass: "fas fa-sync  mr-2" }),
       _vm._v(" Pamind mig")
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [_c("i", { staticClass: "fas fa-share" }), _vm._v(" Share")])
   }
 ]
 render._withStripped = true
