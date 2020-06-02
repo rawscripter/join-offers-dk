@@ -25,7 +25,7 @@ class PaymentController extends Controller
             "taxRate": 0,
             "taxAmount": 0,
             "grossTotalAmount": ' . $order->total_price * 100 . ',
-            "netTotalAmount": ' . $order->total_price . '
+            "netTotalAmount": ' . $order->total_price * 100  . '
         }
         ],
         "amount": ' . $order->total_price * 100 . ',

@@ -62,6 +62,8 @@ class CategoryController extends Controller
 //                    $products->where('offer_start_date', '<', Carbon::now());
 //                }
 //
+                $products->where('expire_date', '>', Carbon::now());
+
                 // only coming soon products
                 if ($short === 'coming_soon') {
                     $products->where('offer_start_date', '>', Carbon::now());

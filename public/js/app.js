@@ -91826,9 +91826,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // window.APP_URL = 'http://laravu.test';
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.APP_URL = 'http://laravu.test'; // window.APP_URL = 'http://offer.danpanel.dk';
 
-window.APP_URL = 'http://offer.danpanel.dk';
 window.CURRENCY = 'dkk';
 
 var SocialSharing = __webpack_require__(/*! vue-social-sharing */ "./node_modules/vue-social-sharing/dist/vue-social-sharing.common.js");
