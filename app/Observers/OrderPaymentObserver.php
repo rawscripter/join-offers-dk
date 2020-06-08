@@ -11,19 +11,23 @@ class OrderPaymentObserver
      * Handle the order payment "created" event.
      *
      * @param \App\OrderPayment $orderPayment
-     * @return void
+     * @return string
      */
     public function created(OrderPayment $orderPayment)
     {
-        // send first Order Payment Confirmation mail
-        if ($orderPayment->type == 1) {
-            MailController::sendMailToUserAtOrderFirstPayment($orderPayment->order);
-        };
+        try {
+            // send first Order Payment Confirmation mail
+            if ($orderPayment->type == 1) {
+                MailController::sendMailToUserAtOrderFirstPayment($orderPayment->order);
+            };
 
-        // send first Order Payment Confirmation mail
-        if ($orderPayment->type == 2) {
-            MailController::sendMailToUserAtOrderSecondPayment($orderPayment->order);
-        };
+            // send first Order Payment Confirmation mail
+            if ($orderPayment->type == 2) {
+                MailController::sendMailToUserAtOrderSecondPayment($orderPayment->order);
+            };
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**

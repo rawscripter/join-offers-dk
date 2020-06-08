@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MailController;
 use App\Order;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -22,25 +23,16 @@ Route::get('/admin', function () {
 });
 
 
-// to load main site
-Route::get('/', function () {
-    return view('site.index');
+// to load admin dashboard
+Route::get('/test/mail', function () {
+    return env('MAIL_FROM_ADDRESS');
+    $order = Order::find(152);
+    MailController::sendMailToUserAtOrderFirstPayment($order);
 });
 
 // to load main site
-Route::get('/delete/product', function () {
-    for ($i = 67000; $i < 67047; $i++) {
-        $product = \App\Product::find($i);
-        if ($product) {
-            if ($product->likes->count()) {
-              continue;
-            }
-            if ($product->orders->count()) {
-              continue;
-            }
-            $product->delete();
-        }
-    }
+Route::get('/', function () {
+    return view('site.index');
 });
 
 

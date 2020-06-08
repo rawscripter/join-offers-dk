@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/fontawesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.min.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.min.css')}}">--}}
     <link rel="stylesheet" href="{{asset('frontend/assets/css/default.css')}}">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/style.css')}}">

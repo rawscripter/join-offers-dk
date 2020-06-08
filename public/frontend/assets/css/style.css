@@ -629,3 +629,6 @@ span.social {
     background: #0e0e0e47;
 }
 
+.wow {
+    visibility: visible !important;
+}

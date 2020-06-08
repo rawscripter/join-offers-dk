@@ -155,7 +155,7 @@ const routes = [
     {
         path: '/reset/password',
         component: UserResetPassword,
-        name: 'reset-password-token',
+        name: 'reset-password',
         meta: {
             title: 'Reset Password!'
         }
@@ -164,7 +164,7 @@ const routes = [
     {
         path: '/password/reset/:token',
         component: UserChangePassword,
-        name: 'reset-password',
+        name: 'reset-password-token',
         meta: {
             title: 'Change Password!'
         }
