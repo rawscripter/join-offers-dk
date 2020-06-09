@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="bug fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Observers/OrderPaymentObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Observers/OrderPaymentObserver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Router/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -336,6 +328,7 @@
       <workItem from="1591101289293" duration="954000" />
       <workItem from="1591176073666" duration="3048000" />
       <workItem from="1591202837228" duration="630000" />
+      <workItem from="1591613043196" duration="615000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1587947426387</created>
@@ -450,12 +443,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586956085588" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1591177562510">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1591613651202">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376623973" />
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591177174607" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591177562510" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591613651202" />
     <state x="433" y="125" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1591086277362">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -487,12 +480,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="601" y="265" width="700" height="530" key="recent.locations.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1588926064509" />
-    <state x="616" y="250" width="672" height="677" key="run.anything.popup" timestamp="1591204632460">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="2536" y="250" width="672" height="677" key="run.anything.popup" timestamp="1591613658131">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587982435089" />
     <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591204632460" />
-    <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590156336045" />
+    <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591613658131" />
     <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1591178445095">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
