@@ -26,6 +26,7 @@ import UserLogin from "../components/Site/Pages/Auth/UserLogin";
 import UserRegister from "../components/Site/Pages/Auth/UserRegister";
 import UserResetPassword from "../components/Site/Pages/Auth/UserResetPassword";
 import UserChangePassword from "../components/Site/Pages/Auth/UserChangePassword";
+import FilterPage from "../components/Site/Pages/FilterPage";
 //importing components
 Vue.use(VueRouter);
 const routes = [
@@ -142,6 +143,14 @@ const routes = [
         component: SiteIndex,
         meta: {
             title: 'Welcome to Join Offer!'
+        }
+    },  // routes for site
+    {
+        path: '/filter',
+        component: FilterPage,
+        name: 'filter',
+        meta: {
+            title: 'Filter Products.'
         }
     },
     {

@@ -4,6 +4,7 @@
 
         <div class="show">
             <img :src="displayProductImage" id="mainImage">
+
         </div>
         <!-- Secondary carousel image thumbnail gallery -->
         <div v-if="hasImages" class="small-img">
@@ -79,9 +80,11 @@
 </template>
 
 <script>
+
     export default {
         name: "SingleProductDetailsLayout",
         props: ['product'],
+
         data() {
             return {
                 displayProductImage: this.product.featureImage,

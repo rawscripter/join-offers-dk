@@ -16,21 +16,27 @@
             </div>
             <div class="icons d-flex">
                 <div class="share mr-2" @click="showModal = true">
-                    <img src="/images/icons/share.png" height="20" width="20" alt="">
+                    <img src="/images/icons/share.png" height="16" width="16" alt="">
                 </div>
 
                 <div class="share mr-2" @click="addProductToFavouriteList(product.slug)" v-if="!isUserFavourite">
-                    <img src="/images/icons/favorite.png" height="20" alt="">
+                    <img src="/images/icons/favorite.png" height="16" alt="">
                 </div>
                 <div class="love" v-if="isUserLiked">
                     <i class="fas fa-heart"
                        style="color:red;"></i>
                     <span> {{totalLikes}}</span>
                 </div>
+
                 <div class="love" v-else @click="addProductToLikeList(product.slug)">
                     <i class="far fa-heart"
                        style="color:red;"></i>
                     <span> {{totalLikes}}</span>
+                </div>
+
+                <div class="eye ml-2">
+                    <i class="fas fa-eye" style="color: #7e7b7a"></i>
+                    <span> {{product.total_clicks}}</span>
                 </div>
             </div>
 
@@ -149,44 +155,50 @@
                                 <network class="social" network="email">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---Email.png" alt=""> Email
                                 </network>
-                                <network  class="social" network="facebook">
-                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Facebook.png" alt=""> Facebook
+                                <network class="social" network="facebook">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Facebook.png" alt="">
+                                    Facebook
                                 </network>
-                                <network  class="social" network="googleplus">
+                                <network class="social" network="googleplus">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---Google+.png" alt=""> Google +
                                 </network>
-                                <network  class="social" network="line">
+                                <network class="social" network="line">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---Line.png" alt=""> Line
                                 </network>
-                                <network  class="social" network="linkedin">
-                                    <img width="20" src="/images/icons/JoinOffers---Ikon---LinkedIn.png" alt=""> LinkedIn
+                                <network class="social" network="linkedin">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---LinkedIn.png" alt="">
+                                    LinkedIn
                                 </network>
-                                <network  class="social" network="pinterest">
-                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Pinterest.png" alt="">  Pinterest
+                                <network class="social" network="pinterest">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Pinterest.png" alt="">
+                                    Pinterest
                                 </network>
-                                <network  class="social" network="reddit">
+                                <network class="social" network="reddit">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---Reddit.png" alt=""> Reddit
                                 </network>
-                                <network  class="social" network="skype">
+                                <network class="social" network="skype">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---Skype.png" alt=""> Skype
                                 </network>
-                                <network  class="social" network="sms">
+                                <network class="social" network="sms">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---SMS.png" alt=""> SMS
                                 </network>
-                                <network  class="social" network="telegram">
-                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Telegram.png" alt=""> Telegram
+                                <network class="social" network="telegram">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Telegram.png" alt="">
+                                    Telegram
                                 </network>
-                                <network  class="social" network="twitter">
+                                <network class="social" network="twitter">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---Twitter.png" alt=""> Twitter
                                 </network>
-                                <network  class="social" network="vk">
-                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Vkontakte.png" alt="">  VKontakte
+                                <network class="social" network="vk">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Vkontakte.png" alt="">
+                                    VKontakte
                                 </network>
-                                <network  class="social" network="weibo">
+                                <network class="social" network="weibo">
                                     <img width="20" src="/images/icons/JoinOffers---Ikon---Weibo.png" alt=""> Weibo
                                 </network>
-                                <network  class="social" network="whatsapp">
-                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Whatsapp.png" alt=""> Whatsapp
+                                <network class="social" network="whatsapp">
+                                    <img width="20" src="/images/icons/JoinOffers---Ikon---Whatsapp.png" alt="">
+                                    Whatsapp
                                 </network>
                             </div>
                         </social-sharing>
@@ -216,7 +228,7 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserLiked = res.data.product.isLikedByCurrentUser;
-                            this.total_likes++;
+                            this.totalLikes++;
                         }
                     }).catch(err => console.log(err));
             },
@@ -226,7 +238,7 @@
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
                             Alert.showSuccessAlert('Event added to favourite list.')
-                        }else{
+                        } else {
                             alert(res.data.message);
                         }
                     }).catch(err => console.log(err));
@@ -237,7 +249,7 @@
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
                             Alert.showSuccessAlert('Event removed from favourite list.')
-                        }else{
+                        } else {
                             alert(res.data.message);
                         }
                     }).catch(err => console.log(err));
@@ -256,7 +268,7 @@
         mounted() {
             this.isUserLiked = this.product.isLikedByCurrentUser;
             this.isUserFavourite = this.product.isFavouriteByCurrentUser;
-            this.totalLikes = this.product.total_favourites;
+            this.totalLikes = this.product.total_likes;
         },
         watch: {
             isFavourite(val) {

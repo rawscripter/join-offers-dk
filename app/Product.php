@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 
 class Product extends Model
@@ -76,8 +77,10 @@ class Product extends Model
 
     }
 
-    public function isAuthUserLikedPost()
+    public function isAuthUserLikedPost($id = null)
     {
+
+
         if (Auth::guard('api')->user()) {
             $userID = Auth::guard('api')->user()->id;
             $like = $this->likes()->where('user_id', $userID)->get();
@@ -85,8 +88,10 @@ class Product extends Model
                 return false;
             }
             return true;
+        } else {
+            return Cache::has('liked-product-' . $id);
         }
-        return false;
+
     }
 
     public function isAuthUserFavouritePost()

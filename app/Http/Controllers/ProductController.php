@@ -12,6 +12,7 @@ use App\ProductImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -125,7 +126,14 @@ class ProductController extends Controller
                 $products->where('expire_date', '>', Carbon::now());
                 $products->where('expire_date', '<', Carbon::now()->addDays(1));
             }
-            $products->where('expire_date', '>', Carbon::now());
+
+
+            if ($short === 'expired') {
+                $products->where('expire_date', '<', Carbon::now());
+            } else {
+                $products->where('expire_date', '>', Carbon::now());
+            }
+
 
             $products = $products->paginate(6);
 
@@ -136,6 +144,43 @@ class ProductController extends Controller
         }
         $res['products'] = ProductResource::collection($products);
         $res['lastPage'] = $res['products']->lastPage();
+        return response()->json($res);
+    }
+
+    public function runningProducts(Request $request)
+    {
+        $res['status'] = 200;
+        $res['message'] = 'All Categories';
+        $products = Product::inRandomOrder()
+            ->where('offer_start_date', '<', Carbon::now())
+            ->where('expire_date', '>', Carbon::now())
+            ->limit(3)
+            ->get();
+        $res['products'] = ProductResource::collection($products);
+        return response()->json($res);
+    }
+
+    public function comingSoonProducts(Request $request)
+    {
+        $res['status'] = 200;
+        $res['message'] = 'All Categories';
+        $products = Product::inRandomOrder()
+            ->where('offer_start_date', '>', Carbon::now())
+            ->limit(3)
+            ->get();
+        $res['products'] = ProductResource::collection($products);
+        return response()->json($res);
+    }
+
+    public function expiredProducts(Request $request)
+    {
+        $res['status'] = 200;
+        $res['message'] = 'All Categories';
+        $products = Product::inRandomOrder()
+            ->where('expire_date', '<', Carbon::now())
+            ->limit(3)
+            ->get();
+        $res['products'] = ProductResource::collection($products);
         return response()->json($res);
     }
 
@@ -260,7 +305,12 @@ class ProductController extends Controller
     public function showRelatedForSite($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        $products = Product::where('offer_start_date', '<', Carbon::now())->where('category_id', $product->category->id)->where('id', '!=', $product->id)->limit(3)->get();
+        $products = Product::inRandomOrder()
+            ->where('offer_start_date', '<', Carbon::now())
+            ->where('expire_date', '>', Carbon::now())
+            ->where('offer_start_date', '<', Carbon::now())
+            ->where('category_id', $product->category->id)
+            ->where('id', '!=', $product->id)->limit(3)->get();
         if (!empty($products)) {
             $res['status'] = 200;
             $res['message'] = 'Product Found Successfully.';
@@ -384,14 +434,15 @@ class ProductController extends Controller
 
     public function addToLike($slug)
     {
+        $product = Product::where('slug', $slug)->first();
+
         $user = Auth::guard('api')->user();
         if ($user) {
-            $product = Product::where('slug', $slug)->first();
             if (!empty($product)) {
                 if (!$product->isAuthUserLikedPost()) {
                     $res['status'] = 200;
                     $res['message'] = 'Product added to favourite list.';
-                    $product->total_favourites = $product->total_favourites + 1;
+                    $product->total_likes = $product->total_likes + 1;
                     $product->save();
                     Like::create([
                         'user_id' => $user->id,
@@ -408,10 +459,26 @@ class ProductController extends Controller
                 $res['message'] = 'No Product Found';
             }
         } else {
-            $res['status'] = 201;
-            $res['message'] = 'Please login first.';
+
+            $expiresAt = Carbon::now()->addCentury();
+            Cache::put('liked-product-' . $product->id, true, $expiresAt);
+
+            Like::create([
+                'session_id' => session()->getId(),
+                'product_id' => $product->id
+            ]);
+            $res['product'] = (new ProductResource($product));
+
+            $res['status'] = 200;
+            $res['message'] = 'Product added to favourite list.';
         }
 
+        return response()->json($res);
+    }
+
+    public function maxProductPrice()
+    {
+        $res['max'] = Product::max('offer_price');
         return response()->json($res);
     }
 

@@ -68,6 +68,11 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'customer'], function ()
 // apis for site
 Route::get('/categories', 'CategoryController@index');
 Route::get('/products', 'ProductController@productsForSite');
+Route::get('/running/products', 'ProductController@runningProducts');
+Route::get('/coming-soon/products', 'ProductController@comingSoonProducts');
+Route::get('/expired/products', 'ProductController@expiredProducts');
+
+
 Route::get('/favourites', 'ProductController@userFavouriteProductsForSite');
 Route::get('/product/{slug}', 'ProductController@showProductForSite');
 
@@ -75,6 +80,7 @@ Route::get('/product/{slug}', 'ProductController@showProductForSite');
 Route::get('/product/{slug}/like/add', 'ProductController@addToLike');
 Route::get('/product/{slug}/favourite/add', 'ProductController@addToFavourite');
 Route::get('/product/{slug}/favourite/remove', 'ProductController@removeFromFavourite');
+Route::get('/max/product/price', 'ProductController@maxProductPrice');
 
 
 Route::get('/product/{slug}/related-products', 'ProductController@showRelatedForSite');

@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="bug fixed">
+      <change afterPath="$PROJECT_DIR$/public/js/zoom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/FilterPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndexCopy.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Router/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/Loop/SingleProduct.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Product/SingleProductDetailsLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductFilter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductFilter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/site/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -154,7 +172,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/icons" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/Site/Pages" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -162,23 +180,23 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="web.server" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.3.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Site\Pages" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\images\icons" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Site\Pages\Auth" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\assets\css\skins\aside" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\views\layouts\email" />
-      <recent name="C:\xampp\htdocs\laravu.dev\app\Mail" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravu.dev\public\js" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\icons" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\views\layouts" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Site\Pages\Auth" />
-      <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Order" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -187,9 +205,9 @@
       <command value="open landingbii" />
       <command value="open gowinmii" />
       <command value="open laramail" />
-      <command value="open C:\xampp\htdocs\projects\soundiocloud" />
       <command value="open C:\Users\shuvo\Desktop\projects\lesan\rainer" />
       <command value="?" />
+      <command value="open C:\xampp\htdocs\projects\soundiocloud" />
       <command value="open surveybii" />
     </option>
   </component>
@@ -329,6 +347,13 @@
       <workItem from="1591176073666" duration="3048000" />
       <workItem from="1591202837228" duration="630000" />
       <workItem from="1591613043196" duration="615000" />
+      <workItem from="1591715869230" duration="46000" />
+      <workItem from="1592236949385" duration="719000" />
+      <workItem from="1592326363005" duration="8304000" />
+      <workItem from="1592383464526" duration="2825000" />
+      <workItem from="1592393555290" duration="1807000" />
+      <workItem from="1592414001614" duration="599000" />
+      <workItem from="1592451026074" duration="1373000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1587947426387</created>
@@ -387,10 +412,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584735574781" />
-    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589532185343">
+    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592331667141">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1589532185343" />
+    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592331667141" />
     <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589490618134" />
     <state x="2564" y="195" width="650" height="690" key="#phpunit.xml" timestamp="1588693703873">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -439,16 +464,16 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1233" y="216" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1588924886865" />
-    <state x="461" y="182" key="SettingsEditor" timestamp="1586956085588">
+    <state x="461" y="182" key="SettingsEditor" timestamp="1592384144547">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586956085588" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1591613651202">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592384144547" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1592451998394">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376623973" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591177174607" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591613651202" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592451998394" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592237629145" />
     <state x="433" y="125" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1591086277362">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -480,17 +505,17 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="601" y="265" width="700" height="530" key="recent.locations.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1588926064509" />
-    <state x="2536" y="250" width="672" height="677" key="run.anything.popup" timestamp="1591613658131">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="616" y="250" width="672" height="677" key="run.anything.popup" timestamp="1592331506865">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587982435089" />
-    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591204632460" />
+    <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592331506865" />
     <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591613658131" />
-    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1591178445095">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1592452302921">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587982440660" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591176472853" />
-    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591178445095" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592452302921" />
+    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592236953151" />
   </component>
 </project>

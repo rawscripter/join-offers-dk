@@ -1,9 +1,11 @@
 <template>
-    <div :class="showFilterMenuOnMobile ? 'show-filter-on-mobile' : '' " class="main-sidebar shadow" id="main_sidebar">
+    <div v-if="!isLoading" :class="showFilterMenuOnMobile ? 'show-filter-on-mobile' : '' " class="main-sidebar shadow"
+         id="main_sidebar">
         <div class="filter-title text-center">
             <h5><strong>Filter</strong></h5>
         </div>
-        <div  @click="showFilterMenuOnMobile = !showFilterMenuOnMobile" class="sidebar-header hide-desktop d-flex justify-content-between">
+        <div @click="showFilterMenuOnMobile = !showFilterMenuOnMobile"
+             class="sidebar-header hide-desktop d-flex justify-content-between">
             <i class="fas fa-times mt-2" id="closeMobileSidebar"></i>
         </div>
         <form>
@@ -60,6 +62,11 @@
                     <span class="checkmark"></span>
                 </label>
 
+                <label class="checkbox_container">Recently Expired
+                    <input v-model="filter.short" value="expired" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+
                 <!-- end of checkbox single  -->
             </div>
             <div class="price_filter">
@@ -68,7 +75,7 @@
                 <!--                <vue-range-slider @change="signalChange" :min="10" :max="10000"-->
                 <!--                                  v-model="range"></vue-range-slider>-->
 
-                <vue-slider :max="10000" v-model="range"></vue-slider>
+                <vue-slider :max="max" v-model="range"></vue-slider>
 
                 <div class="price-range-text mt-2">
                     <input type="number" v-model="range[0]">
@@ -102,14 +109,21 @@
         props: ['callResetFilterFunction'],
         data() {
             return {
+                isLoading: false,
                 showFilterMenuOnMobile: false,
-                range: [0, 10000],
+                min: 0,
+                max: 0,
+                range: [0, 0],
                 filter: {
                     gender: 'All',
                     short: 'new',
                     priceRange: null,
                 }
             }
+        },
+        created() {
+            this.isLoading = true,
+                this.getMaxProductPrice()
         },
         methods: {
             resetFilter() {
@@ -123,6 +137,15 @@
             signalChange() {
                 this.filter.priceRange = this.range;
                 this.$emit('filterProduct', this.filter)
+            },
+            getMaxProductPrice() {
+                axios.get(`${APP_URL}/api/max/product/price`)
+                    .then(res => {
+                        this.max = res.data.max;
+                        this.range[1] = res.data.max;
+                        this.isLoading = false;
+                    })
+
             }
         },
         watch: {

@@ -30,14 +30,17 @@
         "vue-awesome-countdown": "^1.0.25",
         "vue-axios": "^2.1.5",
         "vue-clickaway": "^2.2.2",
+        "vue-image-magnifier": "^0.2.1",
         "vue-infinite-loading": "^2.4.5",
         "vue-loading-overlay": "^3.3.2",
+        "vue-product-zoomer": "^3.0.1",
         "vue-router": "^3.1.6",
         "vue-slider-component": "^3.1.2",
         "vue-social-auth": "^1.4.3",
         "vue-social-sharing": "^2.4.7",
         "vue-sweetalert2": "^3.0.3",
         "vue-tables-2": "^2.0.14",
+        "vue-zoom-on-hover": "^1.0.2",
         "vue2-dropzone": "^3.6.0",
         "vuelidate": "^0.7.5"
     }
