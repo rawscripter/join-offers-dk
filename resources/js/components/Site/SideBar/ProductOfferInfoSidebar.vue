@@ -29,6 +29,9 @@
                          :to="{name: 'checkout', params:{slug:product.slug}}">
                 Order Now
             </router-link>
+            <div v-if="isExpired" @click="productRequestModal=true" class="btn btn-theme btn-block">
+                Make a Request
+            </div>
         </div>
 
         <div class="sidebar-action">
@@ -44,7 +47,7 @@
             </div>
         </div>
 
-        <div v-if="showModal" class="modal fade bd-example-modal-sm show"
+        <div v-if="product" class="modal fade bd-example-modal-sm show"
              tabindex="-1" role="dialog"
              aria-labelledby="mySmallModalLabel"
              :class="showModal?'active':''"
@@ -120,6 +123,43 @@
             </div>
         </div>
 
+        <div v-if="productRequestModal" class="modal fade bd-example-modal-sm show"
+             tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel"
+             :class="productRequestModal?'active':''"
+             style="padding-right: 17px;">
+            <div class="modal-dialog" style="margin-top: 100px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productRequestModal">Submit Offer Request</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span @click="productRequestModal=false" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form @submit.prevent="submitProductRequest">
+                            <div class="form-group">
+                                <label for="product">Email:</label>
+                                <input type="email" required v-model="productRequest.email" class="form-control"
+                                       id="product">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="note">Note:</label>
+                                <textarea v-model="productRequest.note" class="form-control" id="note" cols="10"
+                                          rows="5"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-theme btn-block">Submit Request</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -130,12 +170,33 @@
         data() {
             return {
                 showModal: false,
+                productRequestModal: false,
                 isUserLiked: false,
                 isUserFavourite: false,
                 totalLikes: 0,
+                isUserLogin: User.loggedIn(),
+                productRequest: {
+                    email: null,
+                    note: null,
+                    type: 'expired'
+                }
             }
         },
         methods: {
+            submitProductRequest() {
+                axios.post(`/api/product/${this.product.slug}/make/request`, this.productRequest)
+                    .then(res => {
+                        if (res.data.status === 200) {
+                            this.productRequestModal = false;
+                            Alert.showSuccessAlert(res.data.message);
+                            this.productRequest.email = null;
+                            this.productRequest.note = null;
+                            this.productRequest.type = null;
+                        } else {
+                            alert(res.data.message);
+                        }
+                    }).catch(err => console.log(err));
+            },
             addProductToLikeList(slug) {
                 axios.get(`/api/product/${slug}/like/add`)
                     .then(res => {
@@ -148,6 +209,10 @@
                     }).catch(err => console.log(err));
             },
             addProductToFavouriteList(slug) {
+                if (!this.isUserLogin) {
+                    this.$root.$emit('callProductRequestModal', this.product);
+                    return;
+                }
                 axios.get(`/api/product/${slug}/favourite/add`)
                     .then(res => {
                         if (res.data.status === 200) {
@@ -169,9 +234,10 @@
             }
         },
         computed: {
-            getCurrentPageUrl() {
-                return window.location.href;
+            getProductUrl() {
+                return `${APP_URL}/product/${this.product.slug}`;
             },
+
             isExpired() {
                 let now = new Date();
                 let expire = new Date(this.product.expire_date);
@@ -194,6 +260,7 @@
             this.isUserFavourite = this.product.isFavouriteByCurrentUser;
             this.totalLikes = this.product.total_favourites;
         },
+
     }
 </script>
 

@@ -26,4 +26,21 @@ class ImageController extends Controller
         $img->save($destinationPath . '/' . $imageName);
         return $imageName;
     }
+
+
+    public function saveImage($path, $image)
+    {
+        $imageName = time() . '_' . 'image' . '.' . $image->getClientOriginalExtension();
+        $destinationPath = public_path($path);
+        $image->move($destinationPath, $imageName);
+        return $imageName;
+    }
+
+
+    public function uploadRawImage(Request $request)
+    {
+        return $this->saveImage('images/icons', $request->file);
+    }
+
+
 }

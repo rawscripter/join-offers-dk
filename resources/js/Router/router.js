@@ -27,6 +27,7 @@ import UserRegister from "../components/Site/Pages/Auth/UserRegister";
 import UserResetPassword from "../components/Site/Pages/Auth/UserResetPassword";
 import UserChangePassword from "../components/Site/Pages/Auth/UserChangePassword";
 import FilterPage from "../components/Site/Pages/FilterPage";
+import RequestsIndex from "../components/Admin/BodyComponents/BodyParts/Request/RequestsIndex";
 //importing components
 Vue.use(VueRouter);
 const routes = [
@@ -99,6 +100,14 @@ const routes = [
         },
         name: 'orders',
         component: OrdersIndex
+    }, {
+        path: '/admin/requests', meta: {
+            title: 'Offer Requests!',
+            requireAuth: true,
+            requireAdmin: true,
+        },
+        name: 'requests',
+        component: RequestsIndex
     },
     {
         path: '/admin/order/:order/details', meta: {

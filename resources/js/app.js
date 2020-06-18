@@ -22,7 +22,8 @@ import VueSocialauth from 'vue-social-auth'
 
 import VueAxios from 'vue-axios'
 
-
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 
 Vue.use(VueAxios, axios)

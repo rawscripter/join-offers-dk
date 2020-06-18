@@ -2,6 +2,7 @@
     <div>
         <SiteTopHeader></SiteTopHeader>
         <hr class="m-0 p-0">
+        <HeaderVideoSection></HeaderVideoSection>
         <SiteNavBar></SiteNavBar>
         <!--to load body-->
         <slot></slot>
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+    import HeaderVideoSection from "./HeaderVideoSection";
     import SiteNavBar from "./SiteNavBar";
     import SiteTopHeader from "./SiteTopHeader";
 
@@ -16,7 +18,8 @@
         name: "SiteLayout",
         components: {
             SiteNavBar,
-            SiteTopHeader
+            SiteTopHeader,
+            HeaderVideoSection
         }
     }
 </script>

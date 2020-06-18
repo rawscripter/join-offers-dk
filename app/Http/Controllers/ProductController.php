@@ -322,6 +322,20 @@ class ProductController extends Controller
         return response()->json($res);
     }
 
+    public function userFavourites()
+    {
+        $user = Auth::guard('api')->user();
+        if ($user) {
+            $res['status'] = 200;
+            $res['totalFavourites'] = $user->favouriteProducts->count();
+        } else {
+            $res['status'] = 201;
+        }
+
+        return response()->json($res);
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -98,11 +98,11 @@
                         </div>
                         <div class="col-md-3 col-lg-3 mt-3">
                             <div class="header_top_button d-flex justify-content-center">
-                                <router-link tag="div" to="/favourites" class="wishlist text-center">
+                                <router-link tag="div" to="/favourites" class="wishlist favourite-box text-center">
                                     <a href="#">
                                         <img src="/images/icons/favorite.png" height="30" alt="">
                                         <br>
-                                        <label>Favourite</label>
+                                        <label>Favourites({{totalFavourites}})</label>
                                     </a>
                                 </router-link>
                                 <div class="login ml-4 text-center">
@@ -169,10 +169,19 @@
                 search: null,
                 tempSearch: null,
                 userLoggedIn: User.loggedIn(),
-                userName: User.name()
+                userName: User.name(),
+                totalFavourites: 0,
             }
         },
         methods: {
+            getUserFavourites() {
+                axios.get(`/api/user/total/favourites`)
+                    .then(res => {
+                        if (res.data.status == 200) {
+                            this.totalFavourites = res.data.totalFavourites;
+                        }
+                    })
+            },
             searchFrom() {
                 this.tempSearch = this.search.toLowerCase().trim();
                 this.tempSearch = this.search.toLowerCase().trim().replace(' ', '-');
@@ -184,6 +193,14 @@
             close() {
                 this.showUserMenu = false;
             }
+        },
+        created() {
+            this.getUserFavourites();
+        },
+        mounted() {
+            this.$root.$on('updateFavouriteProductList', (dataReceived) => {
+                this.getUserFavourites();
+            })
         }
     }
 </script>
@@ -216,6 +233,9 @@
         min-width: 180px;
     }
 
+    .favourite-box {
+        position: relative;
+    }
 
     @media (max-width: 720px) {
         .dropdown-menu {

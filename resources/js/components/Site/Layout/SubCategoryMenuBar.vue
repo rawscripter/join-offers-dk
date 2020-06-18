@@ -9,6 +9,8 @@
                                     @click="selectedSubCategory(index)"
                                     :class="{active : activeSubCategory === index}"
                             >
+                                <img v-if="category.icon" :src="`/images/icons/${category.icon}`" width="24" alt="ICON">
+
                                 <label>{{category.name}}</label>
                             </button>
                         </li>

@@ -3,12 +3,14 @@
         <SiteLayout>
             <router-view :key="this.$route.path"></router-view>
         </SiteLayout>
+
+        <SiteModals></SiteModals>
     </div>
 </template>
 
 <script>
     import SiteLayout from "./Layout/SiteLayout";
-
+import SiteModals from "./Modals/SiteModals";
 
     export default {
         name: "AppHomeForSite",
@@ -17,6 +19,7 @@
         },
         components: {
             SiteLayout,
+            SiteModals
         },
         watch: {
             '$route': {

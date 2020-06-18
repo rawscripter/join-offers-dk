@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\OrderPaymentResource;
 use App\Http\Resources\OrderResource;
-use App\Http\Resources\ProductResource;
 use App\Order;
 use App\OrderShippingInfo;
 use App\Product;
@@ -13,7 +11,6 @@ use App\TemporaryOrder;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function GuzzleHttp\Psr7\str;
 
 class OrderController extends Controller
 {

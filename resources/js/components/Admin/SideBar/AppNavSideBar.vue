@@ -182,6 +182,22 @@
                                 link: '/admin/orders?status=canceled'
                             },
                         ]
+                    }, {
+                        title: 'Manage Requests',
+                        menus: [
+                            {
+                                name: 'All Orders',
+                                link: '/admin/requests?status=all'
+                            },
+                            {
+                                name: 'Expired Offer',
+                                link: '/admin/requests?status=running'
+                            },
+                            {
+                                name: 'Favourite Offer',
+                                link: '/admin/requests?status=complete'
+                            },
+                        ]
                     },
                     {
                         title: 'Manage Customers',

@@ -218,6 +218,7 @@
                 showModal: false,
                 isUserLiked: false,
                 isUserFavourite: false,
+                isUserLogin: User.loggedIn(),
                 totalLikes: 0,
             }
         },
@@ -233,11 +234,19 @@
                     }).catch(err => console.log(err));
             },
             addProductToFavouriteList(slug) {
+
+                if (!this.isUserLogin) {
+                    this.$root.$emit('callProductRequestModal', this.product);
+                    return;
+                }
+
                 axios.get(`/api/product/${slug}/favourite/add`)
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event added to favourite list.')
+                            Alert.showSuccessAlert('Event added to favourite list.');
+                            this.$root.$emit('updateFavouriteProductList', true);
+
                         } else {
                             alert(res.data.message);
                         }
@@ -248,7 +257,9 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event removed from favourite list.')
+                            Alert.showSuccessAlert('Event removed from favourite list.');
+                            this.$root.$emit('updateFavouriteProductList', true);
+
                         } else {
                             alert(res.data.message);
                         }

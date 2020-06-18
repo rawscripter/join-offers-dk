@@ -115,3 +115,9 @@
         display: none;
     }
 }
+
+
+
+div#header_video {
+    background: #ececec;
+}

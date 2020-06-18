@@ -26,6 +26,20 @@
                     <!--begin: Datatable -->
                     <form @submit.prevent="saveFormData">
                         <div class="form-group row">
+                            <label class="col-12 col-form-label">Sub Category Icon:</label>
+                            <div class="col-12">
+                                <h3>Upload Product Images</h3>
+                                <vueDropzone ref="myVueDropzone" id="dropzone"
+                                             :options="dropzoneOptions"></vueDropzone>
+                                <br>
+
+
+                                <img v-if="formData.icon" :src="`/images/icons/${formData.icon}`" alt="icon"
+                                     width="100">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-12 col-form-label">Sub Category Name:</label>
                             <div class="col-12">
                                 <input required v-model="formData.name" class="form-control" for="category_name"
@@ -44,7 +58,6 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label class="col-12 col-form-label">Sub Category Priority:</label>
                             <div class="col-12">
@@ -52,8 +65,6 @@
                                        type="number">
                             </div>
                         </div>
-
-
                         <div class="form-group row">
                             <div class="col-12">
                                 <input class="btn btn-block"
@@ -96,6 +107,10 @@
                                         :columns="columns"
                                         :options="options">
 
+                            <span slot="icon" slot-scope="{row}">
+                              <img v-if="row.icon" :src="`/images/icons/${row.icon}`" width="40" alt="ICON">
+                            </span>
+
                             <span slot="actions" slot-scope="{row}">
                                 <button class="btn btn-sm btn-primary" v-on:click="edit(row.id)">Edit</button>
                                 <button class="btn btn-sm btn-danger"
@@ -112,19 +127,23 @@
 </template>
 
 <script>
-
+    import vue2Dropzone from 'vue2-dropzone'
+    import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
     export default {
         name: "SubCategoryIndex",
-
+        components: {
+            vueDropzone: vue2Dropzone
+        },
         data() {
             return {
 
-                columns: ['id', 'name', 'categoryName', 'priority', 'user', 'created_at', 'actions'],
+                columns: ['id', 'name', 'icon', 'categoryName', 'priority', 'user', 'created_at', 'actions'],
                 options: {
                     headings: {
                         id: 'ID',
                         name: 'Name',
+                        icon: 'Icon',
                         categoryName: 'Category',
                         priority: 'Priority',
                         user: 'Added By',
@@ -157,9 +176,30 @@
                     name: null,
                     category_id: null,
                     priority: 0,
+                    icon: null,
                 },
                 errors_exist: false,
-                formErrors: []
+                formErrors: [],
+                dropzoneOptions: {
+                    component: this,
+                    url: `/api/admin/image/upload`, // Set the url for your upload script location
+                    method: 'POST',
+                    paramName: "file", // The name that will be used to transfer the file
+                    maxFiles: 1,
+                    maxFilesize: 2,
+                    headers: {"Authorization": `Bearer ${localStorage.getItem('token')}`},
+                    accept: function (file, done) {
+                        done();
+                    },
+                    init: function () {
+                        var $this = this;
+                        this.on("success", function (file, response) {
+                            $this.options.component.formData.icon = response;
+                            // $this.removeAllFiles(true);
+                        })
+                    }
+                },
+
             }
         },
         created() {
@@ -168,6 +208,7 @@
         methods: {
             resetFormAction() {
                 this.formData.name = null;
+                this.formData.icon = null;
                 this.formData.category_id = null;
                 this.formData.priority = 0;
                 this.formAction.editId = null;
@@ -186,7 +227,6 @@
             // to add a new category
             saveFormData() {
                 if (this.formAction.isUpdate) {
-                    console.log(this.formData)
                     // update existing category
                     axios.patch(`${APP_URL}/api/admin/sub-category/${this.formAction.editId}`, this.formData)
                         .then(res => {
@@ -198,7 +238,6 @@
                         console.error(error)
                     })
                 } else {
-                    console.log(this.formData)
                     // add new category
                     axios.post(`${APP_URL}/api/admin/sub-category`, this.formData)
                         .then(res => {
@@ -225,6 +264,7 @@
                     .then(res => {
                         this.formAction.editId = res.data.subCategory.id;
                         this.formData.name = res.data.subCategory.name;
+                        this.formData.icon = res.data.subCategory.icon;
                         this.formData.category_id = res.data.subCategory.categoryId;
                         this.formData.priority = res.data.subCategory.priority;
                     }).catch(error => {
@@ -258,6 +298,10 @@
             }
         },
         computed: {
+            getIconUploadUrl() {
+                if (this.formAction.editId)
+                    return `${APP_URL}/api/admin/sub-category/${this.formAction.editId}/upload/icons`;
+            },
             validationErrors() {
                 let errors = Object.values(this.formErrors);
                 errors = errors.flat();

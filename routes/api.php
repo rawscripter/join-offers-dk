@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
 
 
     Route::resource('/category', 'CategoryController');
+    Route::get('/requests', 'ProductRequestController@requests');
     Route::get('/category/{category}/sub-categories', 'CategoryController@subCategories');
 
     Route::resource('/product', 'ProductController');
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
 
 
     Route::post('/product/{product}/upload/images', 'ProductController@uploadProductImages');
+    Route::post('/image/upload', 'ImageController@uploadRawImage');
     Route::post('/product-image/{imageId}/delete', 'ProductController@deleteProductImage');
     Route::resource('/sub-category', 'SubCategoryController');
 
@@ -64,6 +66,9 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'customer'], function ()
     Route::get('/dashboard/data', 'CustomerDashboardController@adminDashboardData');
 
 });
+
+Route::get('/user/total/favourites', 'ProductController@userFavourites');
+
 
 // apis for site
 Route::get('/categories', 'CategoryController@index');
@@ -80,6 +85,7 @@ Route::get('/product/{slug}', 'ProductController@showProductForSite');
 Route::get('/product/{slug}/like/add', 'ProductController@addToLike');
 Route::get('/product/{slug}/favourite/add', 'ProductController@addToFavourite');
 Route::get('/product/{slug}/favourite/remove', 'ProductController@removeFromFavourite');
+Route::post('/product/{slug}/make/request', 'ProductRequestController@store');
 Route::get('/max/product/price', 'ProductController@maxProductPrice');
 
 

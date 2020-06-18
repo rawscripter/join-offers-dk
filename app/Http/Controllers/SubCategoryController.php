@@ -73,6 +73,7 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $data['name'] = $request->name;
+        $data['icon'] = $request->icon;
         $data['slug'] = Str::slug($request->name);
         $data['user_id'] = auth()->user()->id;
         $data['category_id'] = $request->category_id;
@@ -130,6 +131,7 @@ class SubCategoryController extends Controller
     public function update(Request $request, SubCategory $subCategory)
     {
         $data['name'] = $request->name;
+        $data['icon'] = $request->icon ?? $subCategory->icon;
         $data['slug'] = Str::slug($request->name);
         $data['user_id'] = auth()->user()->id;
         $data['category_id'] = $request->category_id ?? $subCategory->category_id;
