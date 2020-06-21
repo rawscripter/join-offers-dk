@@ -75,7 +75,10 @@ class ProductRequestController extends Controller
     {
         $product = Product::whereSlug($slug)->first();
         if ($product) {
-            $isAlreadyRequested = ProductRequest::where('product_id', $product->id)->where('email', $request->email)->first();
+            $isAlreadyRequested = ProductRequest::where('product_id', $product->id)
+                ->where('email', $request->email)
+                ->where('type', $request->type)
+                ->first();
 
             if ($isAlreadyRequested) {
                 $res['status'] = 200;

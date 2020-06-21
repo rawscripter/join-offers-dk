@@ -186,16 +186,16 @@
                         title: 'Manage Requests',
                         menus: [
                             {
-                                name: 'All Orders',
+                                name: 'All Requests',
                                 link: '/admin/requests?status=all'
                             },
                             {
                                 name: 'Expired Offer',
-                                link: '/admin/requests?status=running'
+                                link: '/admin/requests?status=expired'
                             },
                             {
                                 name: 'Favourite Offer',
-                                link: '/admin/requests?status=complete'
+                                link: '/admin/requests?status=favourite'
                             },
                         ]
                     },

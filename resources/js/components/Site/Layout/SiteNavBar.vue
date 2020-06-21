@@ -64,5 +64,8 @@
         color: rgb(255, 100, 45);
     }
 
+    nav {
+        box-shadow: unset;
+    }
 
 </style>

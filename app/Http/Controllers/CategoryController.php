@@ -56,21 +56,17 @@ class CategoryController extends Controller
                 $subCategory = $_GET['subCategory'] ?? null;
                 $products = Product::query();
 
-//                if ($request['short'] == 'coming_soon') {
-//                    $products->where('offer_start_date', '>', Carbon::now());
-//                } else {
-//                    $products->where('offer_start_date', '<', Carbon::now());
-//                }
-//
-                $products->where('expire_date', '>', Carbon::now());
+                $products->where('category_id', $category->id);
 
-                // only coming soon products
-                if ($short === 'coming_soon') {
+
+                if ($short === 'expired') {
+                    $products->where('expire_date', '<', Carbon::now());
+                } else if ($short === 'coming_soon') {
                     $products->where('offer_start_date', '>', Carbon::now());
+                } else {
+                    $products->where('expire_date', '>', Carbon::now());
                 }
 
-
-                $products->where('category_id', $category->id);
 
                 if (!empty($subCategory)) {
                     $products->where('sub_category_id', $subCategory);
@@ -78,10 +74,12 @@ class CategoryController extends Controller
 
                 // to filter the gender
                 if (strtolower($gender) != 'all') {
-                    $products->where('product_type', $gender);
+                    $products->where('product_type', 'like', "%\"{$gender}\"%");
                 }
+
                 // to filter the price
                 $products->whereBetween('offer_price', [$minPrice, $maxPrice]);
+
                 // to order the product
                 if (strtolower($short) === 'new') {
                     $products->orderByDesc('created_at');

@@ -1,9 +1,11 @@
 <template>
     <div>
-        <SiteTopHeader></SiteTopHeader>
-        <hr class="m-0 p-0">
-        <HeaderVideoSection></HeaderVideoSection>
-        <SiteNavBar></SiteNavBar>
+        <div id="sticky-header">
+            <SiteTopHeader></SiteTopHeader>
+            <hr class="m-0 p-0">
+            <HeaderVideoSection></HeaderVideoSection>
+            <SiteNavBar></SiteNavBar>
+        </div>
         <!--to load body-->
         <slot></slot>
     </div>

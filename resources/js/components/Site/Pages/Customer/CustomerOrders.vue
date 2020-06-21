@@ -41,7 +41,8 @@
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
                                             <div class="text-center mb-2"><strong>First Payment
                                                 ({{order.first_payment.amount}} dkk)</strong></div>
-                                            <button style="width: 120px" class="btn btn-info btn-sm">Paid</button>
+                                            <button style="width: 120px" class="btn non-hover btn-info btn-sm">Paid
+                                            </button>
                                         </td>
                                         <td style="width:15%" rowspan="4" v-else>
                                             <button style="width: 120px" class="btn btn-danger btn-sm">Canceled</button>
@@ -107,7 +108,7 @@
                                                                    style="width: 120px"
                                                                    class="btn btn-success btn-sm">Pay now
                                             </button>
-                                            <button v-else style="width: 120px" class="btn btn-info btn-sm">Paid
+                                            <button v-else style="width: 120px" class="btn  non-hover btn-info btn-sm">Paid
                                             </button>
                                                     </span>
                                                 </vac>
@@ -251,5 +252,9 @@
 
     .table td, .table th {
         vertical-align: middle;
+    }
+
+    .non-hover {
+        cursor: text !important;
     }
 </style>

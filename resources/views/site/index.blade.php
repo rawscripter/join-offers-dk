@@ -44,6 +44,7 @@
 <script src="https://test.checkout.dibspayment.eu/v1/checkout.js?v=1"></script>
 <script !src="">
     new WOW().init();
+
 </script>
 
 </html>

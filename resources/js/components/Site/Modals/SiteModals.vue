@@ -62,7 +62,6 @@
                             Alert.showSuccessAlert(res.data.message);
                             this.productRequest.email = null;
                             this.productRequest.note = null;
-                            this.productRequest.type = null;
                         } else {
                             alert(res.data.message);
                         }

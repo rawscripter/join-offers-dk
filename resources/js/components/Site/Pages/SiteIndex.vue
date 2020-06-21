@@ -22,6 +22,15 @@
                                         <SingleProduct :product="product"></SingleProduct>
                                         <!-- end of product single  -->
                                     </div>
+                                    <div class="col-12 text-center mt-3">
+                                        <a href="" class="btn btn-default"></a>
+                                        <router-link :to="{name: 'filter', query: {
+                                                                gender: 'all',
+                                                                short: 'running_product'
+                                                            }}" tag="a">
+                                            Show All
+                                        </router-link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -40,6 +49,17 @@
                                         <SingleProduct :product="product"></SingleProduct>
                                         <!-- end of product single  -->
                                     </div>
+
+                                    <div class="col-12 text-center mt-3">
+                                        <a href="" class="btn btn-default"></a>
+                                        <router-link :to="{name: 'filter', query: {
+                                                                gender: 'all',
+                                                                short: 'coming_soon'
+                                                            }}" tag="a">
+                                            Show All
+                                        </router-link>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -58,6 +78,16 @@
                                         <SingleProduct :product="product"></SingleProduct>
                                         <!-- end of product single  -->
                                     </div>
+                                    <div class="col-12 text-center mt-3">
+                                        <a href="" class="btn btn-default"></a>
+                                        <router-link :to="{name: 'filter', query: {
+                                                                gender: 'all',
+                                                                short: 'expired'
+                                                            }}" tag="a">
+                                            Show All
+                                        </router-link>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

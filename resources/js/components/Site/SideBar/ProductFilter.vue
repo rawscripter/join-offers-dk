@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!isLoading" :class="showFilterMenuOnMobile ? 'show-filter-on-mobile' : '' " class="main-sidebar shadow"
+    <div v-if="!isLoading" :class="showFilterMenuOnMobile ? 'show-filter-on-mobile' : '' " class="main-sidebar  shadow"
          id="main_sidebar">
         <div class="filter-title text-center">
             <h5><strong>Filter</strong></h5>
@@ -122,16 +122,18 @@
             }
         },
         created() {
-            this.isLoading = true,
-                this.getMaxProductPrice()
+            this.isLoading = true;
+            this.getMaxProductPrice()
         },
         methods: {
             resetFilter() {
+                this.getMaxProductPrice();
+
                 this.filter.gender = 'All';
                 this.filter.short = 'new';
                 this.filter.priceRange = null;
-                this.range = [0, 10000];
                 this.signalChange();
+
 
             },
             signalChange() {

@@ -1,5 +1,5 @@
 <template>
-    <header class="header-area bg-white shadow-sm">
+    <header class="header-area bg-white  ">
         <div class="header-top">
             <div class="header-top-nav text-center">
                 <div class="row">
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="header-searcha-area shadow-sm bg-light">
+        <div class="header-searcha-area bg-light">
             <div class="header_top">
                 <div class="container">
                     <div class="row">

@@ -104,6 +104,7 @@
                                 <label for="minus_price_user_price" class="col-form-label">Minus Per User:</label>
                                 <input required v-model="formData.minus_price_user_price" class="form-control"
                                        id="minus_price_user_price"
+                                       readonly
                                        type="text">
                             </div>
 

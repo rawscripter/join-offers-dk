@@ -118,8 +118,8 @@
         },
         created() {
             this.isLoading = true;
-            if (this.$route.query.filter) {
-               let data = this.$route.query.filter;
+            if (this.$route.query.gender) {
+                let data = this.$route.query;
                 this.query.gender = data.gender;
                 this.query.short = data.short;
                 this.query.minPrice = data.minPrice;

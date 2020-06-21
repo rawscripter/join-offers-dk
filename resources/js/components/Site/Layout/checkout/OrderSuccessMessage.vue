@@ -17,10 +17,16 @@
                     <br>
                     <p>Visit Dashboard to get more information.</p>
                     <div class="text-center m-auto">
-                        <router-link :to="{name:'customer-completed-orders',query:{type:'completed'}}"
+                        <!--                        <router-link :to="{name:'customer-completed-orders',query:{type:'completed'}}"-->
+                        <!--                                     class="btn btn-theme ">-->
+                        <!--                            Go to Orders-->
+                        <!--                        </router-link>-->
+                        <router-link :to="{name:'customer-dashboard'}"
                                      class="btn btn-theme ">
-                            Go to Orders
+                            Visit Dashboard
                         </router-link>
+
+
                     </div>
 
                     <div class="mt-5 text-center">

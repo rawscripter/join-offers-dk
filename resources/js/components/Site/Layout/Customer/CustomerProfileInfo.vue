@@ -4,6 +4,10 @@
         <hr>
         <form action="#" @submit.prevent="updateUserInfo">
             <div class="form-group">
+                <label for="f_name">Email</label>
+                <input required v-model="userInfo.email" readonly id="email" type="text" class="form-control" name="name">
+            </div>
+            <div class="form-group">
                 <label for="f_name">Name</label>
                 <input required v-model="userInfo.name" id="f_name" type="text" class="form-control" name="name">
             </div>

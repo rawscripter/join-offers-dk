@@ -9,7 +9,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.APP_URL = 'http://laravu.test';
-// window.APP_URL = 'http://offer.danpanel.dk';
+// window.APP_URL = 'https://joinoffers.dk';
 window.CURRENCY = 'dkk';
 
 var SocialSharing = require('vue-social-sharing');

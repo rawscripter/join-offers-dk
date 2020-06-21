@@ -98,21 +98,31 @@ class ProductController extends Controller
         if ($request['gender'] || $request['short'] || $request['minPrice'] || $request['maxPrice']) {
             $gender = $_GET['gender'];
             $short = $_GET['short'];
-            $minPrice = $_GET['minPrice'];
-            $maxPrice = $_GET['maxPrice'];
+            $minPrice = $_GET['minPrice'] ?? '';
+            $maxPrice = $_GET['maxPrice'] ?? '';
             $products = Product::query();
+
+
             // only coming soon products
             if ($short === 'coming_soon') {
                 $products->where('offer_start_date', '>', Carbon::now());
+            }        // only coming soon products
+            if ($short === 'running_product') {
+                $products->where('offer_start_date', '<', Carbon::now());
+                $products->where('expire_date', '>', Carbon::now());
             }
+
 
 
             // to filter the gender
             if (strtolower($gender) != 'all') {
                 $products->where('product_type', 'like', "%\"{$gender}\"%");
             }
-            // to filter the price
-            $products->whereBetween('offer_price', [$minPrice, $maxPrice]);
+            if (!empty($minPrice) && !empty($maxPrice)) {
+                // to filter the price
+                $products->whereBetween('offer_price', [$minPrice, $maxPrice]);
+            }
+
             // to order the product
             if (strtolower($short) === 'new') {
                 $products->orderByDesc('created_at');
@@ -556,7 +566,7 @@ class ProductController extends Controller
     public function convertRequestProductDataToArray($request)
     {
         $data['name'] = $request->name;
-        $data['slug'] = Str::slug($request->name);
+        $data['slug'] = date('d-m-Y') . '-' . Str::slug($request->name);
         $data['short_des'] = $request->short_des;
         $data['full_des'] = $request->full_des;
         $data['order_note'] = $request->order_note;

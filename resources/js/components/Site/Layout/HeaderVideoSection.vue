@@ -25,6 +25,7 @@
     }
 </script>
 
+
 <style scoped>
     .pointer-cursor {
         cursor: pointer !important;
@@ -33,5 +34,9 @@
     .p-2.text-center.pointer-cursor {
         max-width: 450px !important;
         margin: 0 auto;
+    }
+
+    #header_video {
+        margin-top: -2px;
     }
 </style>

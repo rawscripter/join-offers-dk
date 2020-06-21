@@ -34,9 +34,9 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    {{ product.join_price}} <br>
+                                    {{ product.join_price}} dkk<br>
                                     {{ product.join_payment_percentage }} % of
-                                    {{product.offer_price}}
+                                    {{product.offer_price}} dkk
                                 </td>
                                 <td>
                                     <button type="button" @click="decreaseOrderQuantity"
@@ -53,8 +53,8 @@
                                     <p class="m-0 p-0" v-html="product.order_note"></p>
                                 </td>
                                 <td>
-                                    {{orderDetails.totalPrice}} <br>
-                                    Heraf moms : xxs
+                                    {{orderDetails.totalPrice}} dkk<br>
+                                    Heraf moms : {{orderDetails.totalPrice * 0.2 }} dkk
                                 </td>
                             </tr>
 
@@ -84,17 +84,17 @@
                                         <table class="checkout-table table table-hover" style="width:100%">
                                             <tr>
                                                 <td><strong>Product Name:</strong></td>
-                                                <td>{{product.name}} dk</td>
+                                                <td>{{product.name}} dkk</td>
                                             </tr>
 
                                             <tr>
                                                 <td><strong>Product Price:</strong></td>
-                                                <td>{{product.offer_price}} dk</td>
+                                                <td>{{product.offer_price}} dkk</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Your Payment:</strong></td>
-                                                <td> {{ product.join_price}} ({{ product.join_payment_percentage }} % of
-                                                    {{product.offer_price}})
+                                                <td> {{ product.join_price}} dkk ({{ product.join_payment_percentage }} % of
+                                                    {{product.offer_price}} dkk)
                                                 </td>
                                             </tr>
                                             <tr>
@@ -103,7 +103,7 @@
                                             </tr>
                                             <tr>
                                                 <td><strong>Total</strong>:</td>
-                                                <td>{{orderDetails.totalPrice}} dk</td>
+                                                <td>{{orderDetails.totalPrice}} dkk</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
