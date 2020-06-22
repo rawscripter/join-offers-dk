@@ -143,6 +143,7 @@ class CategoryController extends Controller
         ]);
 
         $data['name'] = $request->name;
+        $data['icon'] = $request->icon;
         $data['slug'] = Str::slug($request->name);
         $data['user_id'] = auth()->user()->id;
         $category = Category::create($data);
@@ -202,6 +203,8 @@ class CategoryController extends Controller
         ]);
 
         $data['name'] = $request->name;
+        $data['icon'] = $request->icon;
+
         $data['slug'] = Str::slug($request->name);
 
         if ($category->update($data)) {

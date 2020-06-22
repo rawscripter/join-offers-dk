@@ -23,6 +23,20 @@
                     <!--begin: Datatable -->
                     <form @submit.prevent="saveFormData">
                         <div class="form-group row">
+                            <label class="col-12 col-form-label">Sub Category Icon:</label>
+                            <div class="col-12">
+                                <h3>Upload Product Images</h3>
+                                <vueDropzone ref="myVueDropzone" id="dropzone"
+                                             :options="dropzoneOptions"></vueDropzone>
+                                <br>
+
+
+                                <img v-if="formData.icon" :src="`/images/icons/${formData.icon}`" alt="icon"
+                                     width="100">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-12 col-form-label">Category Name:</label>
                             <div class="col-12">
                                 <input required v-model="formData.name" class="form-control" for="category_name"
@@ -71,6 +85,10 @@
                                         :columns="columns"
                                         :options="options">
 
+                              <span slot="icon" slot-scope="{row}">
+                              <img v-if="row.icon" :src="`/images/icons/${row.icon}`" width="40" alt="ICON">
+                            </span>
+
                             <span slot="actions" slot-scope="{row}">
                                 <button class="btn btn-sm btn-primary" v-on:click="edit(row.id)">Edit</button>
                                 <button class="btn btn-sm btn-danger"
@@ -89,17 +107,40 @@
 <script>
 
 
+    import vue2Dropzone from 'vue2-dropzone'
+
     export default {
         name: "CategoryIndex",
-
+        components: {
+            vueDropzone: vue2Dropzone
+        },
         data() {
             return {
-
-                columns: ['id', 'name', 'user', 'created_at', 'actions'],
+                dropzoneOptions: {
+                    component: this,
+                    url: `/api/admin/image/upload`, // Set the url for your upload script location
+                    method: 'POST',
+                    paramName: "file", // The name that will be used to transfer the file
+                    maxFiles: 1,
+                    maxFilesize: 2,
+                    headers: {"Authorization": `Bearer ${localStorage.getItem('token')}`},
+                    accept: function (file, done) {
+                        done();
+                    },
+                    init: function () {
+                        var $this = this;
+                        this.on("success", function (file, response) {
+                            $this.options.component.formData.icon = response;
+                            // $this.removeAllFiles(true);
+                        })
+                    }
+                },
+                columns: ['id', 'name', 'icon', 'user', 'created_at', 'actions'],
                 options: {
                     headings: {
                         id: 'ID',
                         name: 'Name',
+                        icon: 'Icon',
                         user: 'Added By',
                         created_at: 'Created At',
                         actions: 'Actions'
@@ -126,7 +167,8 @@
                     categoryId: null,
                 },
                 formData: {
-                    name: null
+                    name: null,
+                    icon: null
                 },
                 errors_exist: false,
                 formErrors: []
@@ -225,12 +267,15 @@
     .VueTables__search-field {
         display: flex !important;
     }
+
     .VueTables__search-field label, .VueTables__limit-field label {
         margin-right: 10px;
     }
+
     .VueTables__limit-field {
         display: flex !important;
     }
+
     .toggle-to-create-mode {
         position: absolute;
         right: 15px;

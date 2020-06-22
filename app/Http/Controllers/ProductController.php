@@ -35,6 +35,7 @@ class ProductController extends Controller
 
         if (isset($request->status) && $request->status == 'running') {
             $products->where('offer_start_date', '<', Carbon::now());
+            $products->where('expire_date', '>', Carbon::now());
         }
         if (isset($request->status) && $request->status == 'coming_soon') {
             $products->where('offer_start_date', '>', Carbon::now());
@@ -111,7 +112,6 @@ class ProductController extends Controller
                 $products->where('offer_start_date', '<', Carbon::now());
                 $products->where('expire_date', '>', Carbon::now());
             }
-
 
 
             // to filter the gender
@@ -320,7 +320,7 @@ class ProductController extends Controller
             ->where('expire_date', '>', Carbon::now())
             ->where('offer_start_date', '<', Carbon::now())
             ->where('category_id', $product->category->id)
-            ->where('id', '!=', $product->id)->limit(3)->get();
+            ->where('id', '!=', $product->id)->limit(9)->get();
         if (!empty($products)) {
             $res['status'] = 200;
             $res['message'] = 'Product Found Successfully.';
@@ -369,6 +369,7 @@ class ProductController extends Controller
         $this->validateRequest($request);
 
         $data = $this->convertRequestProductDataToArray($request);
+
         // to upload product image
         if ($request->product_image)
             $data['image'] = ImageController::uploadImage($request->product_image);
@@ -567,6 +568,7 @@ class ProductController extends Controller
     {
         $data['name'] = $request->name;
         $data['slug'] = date('d-m-Y') . '-' . Str::slug($request->name);
+        $data['variations'] = json_encode($request->product_variation);
         $data['short_des'] = $request->short_des;
         $data['full_des'] = $request->full_des;
         $data['order_note'] = $request->order_note;

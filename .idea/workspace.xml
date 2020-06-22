@@ -2,35 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="774c47f0-8ec8-4536-a84d-bf5b35e4d6b1" name="Default Changelist" comment="bug fixed">
-      <change afterPath="$PROJECT_DIR$/public/js/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductReminderController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ProductReminder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_22_060214_create_product_reminders_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/icons/1592803269_image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/icons/price-fall.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/Customer/PrroductGraph.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Category.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductRequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductRequestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/UserInfoResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/UserInfoResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/UserInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UserInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/skins/aside/raw-custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/skins/aside/raw-custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/assets/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/assets/css/responsive.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/CategoryResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/CategoryResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/zoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/zoom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Router/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Category/CategoryIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Category/CategoryIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Order/OrdersIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Order/OrdersIndex.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductCreate.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductEdit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/BodyComponents/BodyParts/Product/ProductEdit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/SideBar/AppNavSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/SideBar/AppNavSideBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/Customer/CustomerProfileInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/Customer/CustomerProfileInfo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/HeaderVideoSection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/HeaderVideoSection.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteLayout.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteNavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteNavBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteTopHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/SiteTopHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Layout/checkout/OrderSuccessMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Layout/checkout/OrderSuccessMessage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Modals/SiteModals.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Modals/SiteModals.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/CheckoutPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/CheckoutPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/Customer/CustomerOrders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/Customer/CustomerOrders.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/FilterPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/FilterPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/Pages/SiteIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductFilter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductFilter.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductOfferInfoSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Site/SideBar/ProductOfferInfoSidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/email/payment-reminder-beofre-deadline.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/email/payment-reminder-beofre-deadline.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +183,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/icons" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -194,19 +195,19 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.3.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\laravu.dev\app\Http\Resources" />
-      <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Request" />
-      <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Order" />
-      <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
-      <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Site\Layout" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Request" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\js" />
       <recent name="C:\xampp\htdocs\laravu.dev\public\icons" />
       <recent name="C:\xampp\htdocs\laravu.dev\resources\views\layouts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravu.dev\public\images\icons" />
+      <recent name="C:\xampp\htdocs\laravu.dev\app\Http\Resources" />
+      <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Request" />
+      <recent name="C:\xampp\htdocs\laravu.dev\resources\js\components\Admin\BodyComponents\BodyParts\Order" />
+      <recent name="C:\xampp\htdocs\laravu.dev\public\images" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -372,6 +373,9 @@
       <workItem from="1592747606921" duration="610000" />
       <workItem from="1592749922725" duration="61000" />
       <workItem from="1592768248736" duration="7516000" />
+      <workItem from="1592802572364" duration="5114000" />
+      <workItem from="1592807984418" duration="2119000" />
+      <workItem from="1592810847484" duration="1884000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1587947426387</created>
@@ -430,10 +434,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584735574781" />
-    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592465771987">
+    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592806091722">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592465771987" />
+    <state x="690" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592806091722" />
     <state x="2610" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589490618134" />
     <state x="2564" y="195" width="650" height="690" key="#phpunit.xml" timestamp="1588693703873">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -486,11 +490,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592466782270" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1592777375049">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1592812668778">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587376623973" />
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592777375049" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592812668778" />
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592237629145" />
     <state x="433" y="125" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1591086277362">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -529,11 +533,11 @@
     <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587982435089" />
     <state x="616" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592573075320" />
     <state x="2536" y="250" width="672" height="677" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591613658131" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1592777292042">
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1592812429847">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1587982440660" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592777292042" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592812429847" />
     <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592771560220" />
   </component>
 </project>

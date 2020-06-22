@@ -68,7 +68,7 @@ class OrderController extends Controller
 
         if ($request->newsletter) {
 
-            if (!$user->isSubscribed()){
+            if (!$user->isSubscribed()) {
                 Subscriber::create([
                     'user_id' => $user->id,
                     'email' => $user->email
@@ -150,6 +150,18 @@ class OrderController extends Controller
             $res['status'] = 201;
             $res['payment']['isPaid'] = false;
             $res['message'] = 'No Record Found.';
+        }
+        return response()->json($res);
+    }
+
+    public function resendPaymentOrderMail(Order $order)
+    {
+        $mail = MailController::paymentReminderBeforeDeadline($order);
+        if ($mail) {
+            $res['status'] = 200;
+            $res['message'] = 'Reminder mail sent.';
+        } else {
+            $res['status'] = 201;
         }
         return response()->json($res);
     }

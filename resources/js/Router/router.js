@@ -28,6 +28,7 @@ import UserResetPassword from "../components/Site/Pages/Auth/UserResetPassword";
 import UserChangePassword from "../components/Site/Pages/Auth/UserChangePassword";
 import FilterPage from "../components/Site/Pages/FilterPage";
 import RequestsIndex from "../components/Admin/BodyComponents/BodyParts/Request/RequestsIndex";
+import PrroductGraph from "../components/Site/Pages/Customer/PrroductGraph";
 //importing components
 Vue.use(VueRouter);
 const routes = [
@@ -277,6 +278,15 @@ const routes = [
         component: CustomerOrders,
         meta: {
             title: 'Customer Orders! ',
+            requireAuth: true,
+            requireAdmin: false,
+        }
+    }, {
+        path: '/product/:product/graph',
+        name: 'product.graph',
+        component: PrroductGraph,
+        meta: {
+            title: 'Price fall graph.',
             requireAuth: true,
             requireAdmin: false,
         }

@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="col-12 text-center mt-3">
                                         <a href="" class="btn btn-default"></a>
-                                        <router-link :to="{name: 'filter', query: {
+                                        <router-link class="btn btn-default" :to="{name: 'filter', query: {
                                                                 gender: 'all',
                                                                 short: 'running_product'
                                                             }}" tag="a">
@@ -52,7 +52,7 @@
 
                                     <div class="col-12 text-center mt-3">
                                         <a href="" class="btn btn-default"></a>
-                                        <router-link :to="{name: 'filter', query: {
+                                        <router-link   class="btn btn-default" :to="{name: 'filter', query: {
                                                                 gender: 'all',
                                                                 short: 'coming_soon'
                                                             }}" tag="a">
@@ -80,14 +80,13 @@
                                     </div>
                                     <div class="col-12 text-center mt-3">
                                         <a href="" class="btn btn-default"></a>
-                                        <router-link :to="{name: 'filter', query: {
+                                        <router-link  class="btn btn-default" :to="{name: 'filter', query: {
                                                                 gender: 'all',
                                                                 short: 'expired'
                                                             }}" tag="a">
                                             Show All
                                         </router-link>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

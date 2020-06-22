@@ -12,7 +12,7 @@
 
 <h2>Hello {{$order->user->name}}</h2>
 <p>
-    We are writing to you again, to remind you of the 2nd payment for <strong> #{{$order->user->name}}</strong>.
+    We are writing to you again, to remind you of the 2nd payment for <strong> #{{$order->product->event_id}}</strong>.
     The payment deadline expires {{\Carbon\Carbon::parse($order->product->expire_date)->format('d F Y H:s:i')}}. Your
     participation is still valid until the deadline. Don't miss your participation in the event.
     <br><br><br>

@@ -20,6 +20,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'event_id' => $this->event_id,
             'slug' => $this->slug,
+            'product_variation' => $this->variations == null ? [] : json_decode($this->variations, true),
             'product_type' => json_decode($this->product_type, true),
             'thumbImage' => $this->thumbImage(),
             'featureImage' => $this->featureImage(),

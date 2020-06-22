@@ -8,7 +8,6 @@
                 <div class="col-md-9 col-lg-10" style="background:#fff">
 
                     <div id="dibs-complete-checkout"></div>
-
                     <div class="main-content" v-if="!hideOrderDetailsForm">
                         <loading :active.sync="isPaymentBoxLoading"
                                  :is-full-page="false"></loading>
@@ -66,7 +65,13 @@
                                             Current Price:
                                             <strong>{{order.product.current_price}} dkk</strong>
                                         </td>
-                                        <td style="width:15%;" rowspan="2">graph</td>
+                                        <td style="width:15%;" rowspan="2">
+                                            <router-link
+                                                :to="{name:'product.graph',params:{product:order.product.event_id}}">
+                                                <img src="/images/icons/price-fall.gif" width="150px" alt="">
+                                                <span class="d-block btn btn-default btn-sm">Show Graph</span>
+                                            </router-link>
+                                        </td>
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
                                             <div class="text-center mb-2"><strong>Second Payment
                                                 ({{(order.product.current_price * order.quantity) -
@@ -133,15 +138,20 @@
 </template>
 
 <script>
+
+
     import CustomerLeftSidebar from "../../Layout/Customer/CustomerLeftSidebar";
 
     export default {
         name: "CustomerOrders",
         components: {
-            CustomerLeftSidebar
+            CustomerLeftSidebar,
         },
+
         data() {
             return {
+                showChartModal: true,
+
                 orderType: 'running',
                 orders: [],
                 isLoading: false,
@@ -256,5 +266,9 @@
 
     .non-hover {
         cursor: text !important;
+    }
+
+    .show-graph {
+        display: block;
     }
 </style>

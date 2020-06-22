@@ -21,6 +21,7 @@
 
                     <li class="nav-item" v-for="category in categories">
                         <router-link :to="{name:'category-product',params:{category:category.slug}}" class="nav-link">
+                            <img v-if="category.icon" :src="`/images/icons/${category.icon}`" width="24" alt="ICON">
                             {{category.name}}
                         </router-link>
                     </li>

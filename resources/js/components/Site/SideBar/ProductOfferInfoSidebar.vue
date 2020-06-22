@@ -38,7 +38,7 @@
             <p @click="addProductToFavouriteList(product.slug)" v-if="!isUserFavourite"><img
                 src="/images/icons/favorite.png" height="20" alt=""> Gem till favouriter</p>
             <br>
-            <p><i class="fas fa-sync  mr-2"></i> Pamind mig</p>
+            <p @click="addProductToReminderList(product.slug)"><i class="fas fa-sync  mr-2"></i> Pamind mig</p>
             <br>
             <p @click="showModal=true">
                 <img src="/images/icons/share.png" height="20" width="20" alt="">
@@ -217,6 +217,16 @@
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
                             Alert.showSuccessAlert('Event added to favourite list.')
+                        } else {
+                            alert(res.data.message);
+                        }
+                    }).catch(err => console.log(err));
+            },
+            addProductToReminderList(slug) {
+                axios.get(`/api/product/${slug}/reminder/add`)
+                    .then(res => {
+                        if (res.data.status === 200) {
+                            Alert.showSuccessAlert('Event added to reminder list.')
                         } else {
                             alert(res.data.message);
                         }

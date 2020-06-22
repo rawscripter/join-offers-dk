@@ -36,7 +36,12 @@ class MailController extends Controller
     public static function paymentReminderBeforeDeadline($order)
     {
         $sendToMail = $order->user->email;
-        $mail = Mail::to($sendToMail)->send(new PaymentReminderMailBeforeExpire($order));
-        return $mail ? true : false;
+
+        try {
+            Mail::to($sendToMail)->send(new PaymentReminderMailBeforeExpire($order));
+        } catch (\Exception $exception) {
+            return false;
+        }
+        return true;
     }
 }

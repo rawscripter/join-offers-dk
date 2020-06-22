@@ -8,7 +8,7 @@
 				<i class="kt-font-brand flaticon2-line-chart"></i>
 			</span>
                         <h3 class="kt-portlet__head-title">
-                            {{orderStatus.toUpperCase()}} ORDERS
+                            {{orderStatus.toUpperCase()}} ORDERS <span v-if="isSending">| Sending mail...</span>
                         </h3>
                     </div>
                 </div>
@@ -41,10 +41,17 @@
                                                         </span>
                             <span slot="actions" slot-scope="{row}">
 
+
                                 <router-link :to="{name:'admin-order-details',params:{order:row.custom_order_id}}"
                                              class="btn btn-sm btn-primary">
                                             Order Details
                                 </router-link>
+
+                             <button @click="resendMail(row.id)" v-if="!row.is_full_price_paid" class="btn btn-warning">
+                                        Resend Mail
+                                </button>
+
+
 
 
                             </span>
@@ -61,6 +68,7 @@
         name: "ProductIndex",
         data() {
             return {
+                isSending: false,
                 orderStatus: 'all',
                 product: null,
                 columns: ['id',
@@ -113,6 +121,18 @@
         methods: {
             orderDetails(categoryID) {
             },
+            resendMail(orderId) {
+                this.isSending = true;
+                axios.post(`${APP_URL}/api/admin/order/${orderId}/resend-mail`)
+                    .then(res => {
+                        if (res.data.status == 200) {
+                            Alert.showSuccessAlert(res.data.message)
+                        } else {
+                            Alert.showErrorAlert('Request Failed.')
+                        }
+                        this.isSending = false;
+                    })
+            }
         },
         computed: {
             serverRequestUrl() {

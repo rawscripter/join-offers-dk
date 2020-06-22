@@ -10,6 +10,13 @@
                         <h3 class="kt-portlet__head-title">
                             Add New Product
                         </h3>
+
+
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-info btn-sm mt-3" @click="showProductVariationModal = true">
+                            Add Product Variation
+                        </button>
                     </div>
                 </div>
                 <div class="kt-portlet__body">
@@ -166,6 +173,53 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade show" id="kt_select_modal" role="dialog" aria-modal="true"
+             style="padding-right: 17px;" :class="showProductVariationModal?'active':''">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Product Variation</h5>
+                        <button @click="showProductVariationModal = !showProductVariationModal" type="button"
+                                class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-lg-10 col-md-10 col-sm-12">
+                                <input v-model="newProductVariation" placeholder="Add new Size" type="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <button @click="addProductVariation" class="btn btn-primary btn-block">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <h5>Colors</h5>
+                                <ul>
+                                    <li v-for="filter in formData.product_variation">{{filter}}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button @click="showProductVariationModal = !showProductVariationModal" type="button"
+                                class="btn btn-primary mr-2" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </template>
 
@@ -177,6 +231,7 @@
 
         data() {
             return {
+                showProductVariationModal: false,
                 productTypes: [
                     'All',
                     'Men',
@@ -189,6 +244,7 @@
                 },
                 categories: [],
                 subCategories: [],
+                newProductVariation: null,
                 formData: {
                     name: null,
                     category_id: null,
@@ -206,7 +262,8 @@
                     expire_date: null,
                     offer_start_date: null,
                     product_image: null,
-                    product_type: []
+                    product_type: [],
+                    product_variation: []
                 },
                 errors_exist: false,
                 formErrors: []
@@ -216,6 +273,10 @@
             this.getCategories();
         },
         methods: {
+            addProductVariation() {
+                this.formData.product_variation.push(this.newProductVariation);
+                this.newProductVariation = null;
+            },
             getCategories() {
                 axios.get(`${APP_URL}/api/admin/category`)
                     .then(res => {
@@ -292,4 +353,10 @@
         }
     }
 </script>
+
+<style>
+    .active {
+        display: block;
+    }
+</style>
 
