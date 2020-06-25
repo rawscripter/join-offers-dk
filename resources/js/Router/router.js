@@ -29,6 +29,7 @@ import UserChangePassword from "../components/Site/Pages/Auth/UserChangePassword
 import FilterPage from "../components/Site/Pages/FilterPage";
 import RequestsIndex from "../components/Admin/BodyComponents/BodyParts/Request/RequestsIndex";
 import PrroductGraph from "../components/Site/Pages/Customer/PrroductGraph";
+import FinalCheckoutPage from "../components/Site/Pages/FinalCheckoutPage";
 //importing components
 Vue.use(VueRouter);
 const routes = [
@@ -210,6 +211,13 @@ const routes = [
         component: CheckoutPage,
         meta: {
             title: 'Checkout Now!'
+        }
+    }, {
+        path: '/final/checkout/:order',
+        name: 'final-checkout',
+        component: FinalCheckoutPage,
+        meta: {
+            title: 'Final Checkout Now!'
         }
     },
     {

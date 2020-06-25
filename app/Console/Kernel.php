@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\PaymentReminder;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,19 +14,21 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
 //        PaymentReminder::class
-        '\App\Console\Commands\PaymentReminder'
+        '\App\Console\Commands\PaymentReminder',
+        '\App\Console\Commands\ProductReminderMail'
     ];
 
     /**
      * Define the applicatioon's command schedule.
      *
-     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     * @param Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
 //        $schedule->command('payment:reminderMail')->daily();
-        $schedule->exec('php artisan payment:reminderMail')->everyMinute();
+        $schedule->command('payment:reminderMail')->daily();
+        $schedule->command('mail:ProductReminderMail')->hourly();
 
 
     }

@@ -3,11 +3,10 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="43d3082d-e8c7-409c-bc87-27d2f7530dd0" name="DanPanel Server" url="http://81.16.28.27">
-        <fileTransfer host="81.16.28.27" port="21" rootFolder="/domains/danpanel.dk/public_html/offer">
+        <fileTransfer rootFolder="/domains/joinoffers.dk/public_html" host="81.16.28.27" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
-          <option name="port" value="21" />
         </fileTransfer>
       </webServer>
     </option>

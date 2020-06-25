@@ -44,7 +44,7 @@
                                         class="fas fa-minus"></i></button>
                                     <input :max="product.max_unit_per_user" type="number" id="oqty" min="1"
                                            v-model="orderDetails.quantity"
-                                           style="width:70px;text-align:center">
+                                           style="width:60px;text-align:center">
                                     <button type="button" @click="increaseOrderQuantity" class="btn btn-success btn-sm">
                                         <i class="fas fa-plus"></i>
                                     </button>

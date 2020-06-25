@@ -567,7 +567,7 @@ class ProductController extends Controller
     public function convertRequestProductDataToArray($request)
     {
         $data['name'] = $request->name;
-        $data['slug'] = date('d-m-Y') . '-' . Str::slug($request->name);
+        $data['slug'] = date('d-m-Y') . '-' . time() .'-' . Str::slug($request->name);
         $data['variations'] = json_encode($request->product_variation);
         $data['short_des'] = $request->short_des;
         $data['full_des'] = $request->full_des;
