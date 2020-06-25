@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MailController;
 use App\Order;
+use App\Product;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +26,20 @@ Route::get('/admin', function () {
 
 // to load admin dashboard
 Route::get('/test/mail', function () {
-    return env('MAIL_FROM_ADDRESS');
-    $order = Order::find(152);
-    MailController::sendMailToUserAtOrderFirstPayment($order);
+    $products = Product::whereBetween('offer_start_date',
+        [Carbon::now(),
+            Carbon::now()->addHour()])->get();
+
+    foreach ($products as $product) {
+        $reminders = $product->reminders->where('mail_status', 0);
+
+        return $product;
+//        foreach ($reminders as $reminder) {
+//            MailController::sendProductReminderMail($reminder);
+//            $reminder->mail_status = 1;
+//            $reminder->save();
+//        }
+    }
 });
 
 // to load main site

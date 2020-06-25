@@ -108,11 +108,21 @@
                                                         </div>
                                                     </div>
                                                     <span slot="finish" class="expired">
-                                                           <button v-if="!order.is_full_price_paid"
-                                                                   @click="payOrderFullPrice(index)"
-                                                                   style="width: 120px"
-                                                                   class="btn btn-success btn-sm">Pay now
-                                            </button>
+<!--                                                           <button v-if="!order.is_full_price_paid"-->
+                                                        <!--                                                                   @click="payOrderFullPrice(index)"-->
+                                                        <!--                                                                   style="width: 120px"-->
+                                                        <!--                                                                   class="btn btn-success btn-sm">-->
+                                                        <!--                                                               Pay now-->
+                                                        <!--                                            </button>-->
+
+                                                        <div v-if="!order.is_full_price_paid"
+                                                             style="width: 120px;margin: 0 auto;">
+                                                            <router-link
+                                                                :to="{name:'final-checkout',params:{order:order.custom_order_id}}"
+                                                                class="btn btn-block btn-success btn-sm">
+                                                                Pay now
+                                                            </router-link>
+                                                        </div>
                                             <button v-else style="width: 120px" class="btn  non-hover btn-info btn-sm">Paid
                                             </button>
                                                     </span>

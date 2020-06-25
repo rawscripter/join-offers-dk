@@ -66,6 +66,11 @@ class Product extends Model
         return $this->hasMany(ProductReminder::class);
     }
 
+    public function requests()
+    {
+        return $this->hasMany(ProductRequest::class);
+    }
+
     public function savingPercentage()
     {
 //        return ceil(100 - (($this->current_price / $this->offer_price) * 100));

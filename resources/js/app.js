@@ -8,8 +8,13 @@ require('./bootstrap');
 
 
 window.Vue = require('vue');
+<<<<<<< HEAD
 window.APP_URL = 'http://joinoffers.dan:8081';
 // window.APP_URL = 'http://joinoffers.dk';
+=======
+window.APP_URL = 'http://laravu.test';
+// window.APP_URL = 'https://joinoffers.dk';
+>>>>>>> b8e43d4c7fce43e8625bb53d90fe35d031ae6a97
 window.CURRENCY = 'dkk';
 
 var SocialSharing = require('vue-social-sharing');
