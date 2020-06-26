@@ -39,7 +39,7 @@
                                                  @click="showUserMenuMobile = !showUserMenuMobile">
                                                 <i class="fas fa-user"></i>
                                                 <br>
-                                                Profile
+                                                Profil
                                             </div>
                                             <div class="dropdown-menu wow bounceIn" v-if="showUserMenuMobile">
 
@@ -53,7 +53,7 @@
                                                 </router-link>
                                                 <router-link tag="a" class="dropdown-item"
                                                              :to="{name:'customer-profile'}">
-                                                    Profile
+                                                    Profil
                                                 </router-link>
                                                 <router-link tag="a" class="dropdown-item"
                                                              :to="{name:'customer-orders'}">

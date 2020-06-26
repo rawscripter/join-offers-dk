@@ -10,7 +10,7 @@
 
 <script>
     import SiteLayout from "./Layout/SiteLayout";
-import SiteModals from "./Modals/SiteModals";
+    import SiteModals from "./Modals/SiteModals";
 
     export default {
         name: "AppHomeForSite",

@@ -21,7 +21,7 @@
         components: {
             SiteNavBar,
             SiteTopHeader,
-            HeaderVideoSection
+            HeaderVideoSection,
         }
     }
 </script>
