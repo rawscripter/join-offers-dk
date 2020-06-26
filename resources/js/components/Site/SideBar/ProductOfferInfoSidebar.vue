@@ -3,16 +3,16 @@
         <div class="pricing-left">
             <h6>Gennemsnitlig markedsprice</h6>
             <h5>
-                <del>{{product.market_price}} dkk,-</del>
+                <del>{{product.market_price}} Kr-</del>
             </h5>
             <h6>Strtpris </h6>
-            <h5>
-                <del>{{product.offer_price}} dkk,-</del>
-            </h5>
+            <h6>
+                <del>{{product.offer_price}} Kr-</del>
+            </h6>
             <h6>Deltagend</h6>
             <h5>{{product.totalOrders}}</h5>
-            <h6>Din Pris</h6>
-            <h5>{{product.current_price}} dkk</h5>
+            <h6>Din pris</h6>
+            <h5>{{product.current_price}} Kr</h5>
             <!--            total save-->
             <br>
             <div class="love-section">
@@ -27,10 +27,10 @@
         <div class="checkout mt-3 mb-3" v-if="isOfferTimeStarted">
             <router-link v-if="!isExpired" class="btn btn-theme btn-block" tag="div"
                          :to="{name: 'checkout', params:{slug:product.slug}}">
-                Order Now
+                Ordre nu
             </router-link>
             <div v-if="isExpired" @click="productRequestModal=true" class="btn btn-theme btn-block">
-                Make a Request
+                Fremsætte en anmodning
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             <br>
             <p @click="showModal=true">
                 <img src="/images/icons/share.png" height="20" width="20" alt="">
-                Share</p>
+                Del</p>
             <div class="sidebar-social mt-2 d-flex justify-content-around">
             </div>
         </div>
@@ -55,7 +55,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="mySmallModalLabel">Share Event</h5>
+                        <h5 class="modal-title" id="mySmallModalLabel">Del begivenhed</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span @click="showModal=false" aria-hidden="true">×</span>
                         </button>
@@ -131,7 +131,7 @@
             <div class="modal-dialog" style="margin-top: 100px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="productRequestModal">Submit Offer Request</h5>
+                        <h5 class="modal-title" id="productRequestModal">Indsend tilbudsanmodning</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span @click="productRequestModal=false" aria-hidden="true">×</span>
                         </button>
@@ -139,13 +139,13 @@
                     <div class="modal-body">
                         <form @submit.prevent="submitProductRequest">
                             <div class="form-group">
-                                <label for="product">Email:</label>
+                                <label for="product">E-mail:</label>
                                 <input type="email" required v-model="productRequest.email" class="form-control"
                                        id="product">
                             </div>
 
                             <div class="form-group">
-                                <label for="note">Note:</label>
+                                <label for="note">Bemærk:</label>
                                 <textarea v-model="productRequest.note" class="form-control" id="note" cols="10"
                                           rows="5"></textarea>
                             </div>

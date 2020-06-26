@@ -5,16 +5,16 @@
                 <div class="checkout-customer-info">
                     <div class="cards shadow">
                         <div class="card-header-title">
-                            <h5 class="text-center"><strong>Please login or Register to continue the order.</strong>
+                            <h5 class="text-center"><strong>Log ind eller Tilmeld for at fortsætte ordren.</strong>
                             </h5>
                         </div>
                         <div class="card-body">
                             <div>
                                 <button @click="goToLogin" class="btn btn-block btn-theme">
-                                    Login Now
+                                    Logind nu
                                 </button>
                                 <button @click="goToRegister" class="btn btn-block btn-theme">
-                                    Register Now
+                                    Registrer nu
                                 </button>
                             </div>
                         </div>

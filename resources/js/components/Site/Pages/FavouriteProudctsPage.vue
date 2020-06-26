@@ -22,11 +22,11 @@
                             <div class="text-center m-100 mt-5">
                                 <h3 class="mt-6 big-error-font">
                                     <strong>
-                                        No Search Result
+                                       Ingen resultater fundet
                                     </strong>
                                     <br>
                                     <router-link class="back-to-home" tag="a" to="/">
-                                        Back To Home
+                                        Tilbage til forsiden
                                     </router-link>
 
                                 </h3>

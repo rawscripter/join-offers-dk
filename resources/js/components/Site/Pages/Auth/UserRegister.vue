@@ -21,16 +21,16 @@
                         <form action="#" id="login" @submit.prevent="submitLoginForm">
                             <div class="form-group">
                                 <input required type="text" v-model="form.name" name="name" class="form-control"
-                                       placeholder="Your name">
+                                       placeholder="Fuldenavn">
                             </div>
                             <div class="form-group">
                                 <input required type="email" v-model="form.username" name="email" class="form-control"
-                                       placeholder="Enter your email">
+                                       placeholder="Indtast din e-mail">
                             </div>
                             <div class="form-group">
                                 <input required type="password" v-model="form.password"
                                        name="password" class="form-control"
-                                       placeholder="Enter your password"
+                                       placeholder="Skriv dit kodeord"
                                        minlength="6"
                                        id="password">
                             </div>
@@ -38,8 +38,8 @@
                                 <button type="submit" class="btn btn-success btn-block rounded-0">Register</button>
                             </div>
                             <div class="register text-left">
-                                <p>Already have an account?
-                                    <a href="javascript:void(0)" class="theme-color" @click="goToLogin"> Login Now</a>
+                                <p>Har du allerede en bruger??
+                                    <a href="javascript:void(0)" class="theme-color" @click="goToLogin"> Logind nu</a>
                                 </p>
                             </div>
                         </form>

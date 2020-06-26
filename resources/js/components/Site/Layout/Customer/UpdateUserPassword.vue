@@ -3,26 +3,26 @@
         <loading :active.sync="isLoading"
                  :is-full-page="false"></loading>
 
-        <h5>Update your Password</h5>
+        <h5>Opdater adgangskode</h5>
         <div v-if="hasError">
             <div>Has Error</div>
         </div>
         <form action="#" class="mt-5" @submit.prevent="updateUserPassword">
             <div class="form-group">
-                <label for="new_password">New password</label>
+                <label for="new_password">Ny adgangskode</label>
                 <input required minlength="5" id="new_password" type="password" class="form-control"
                        v-model="userPassword.newPassword"
-                       placeholder="New password">
+                       placeholder="Ny adgangskode">
             </div>
             <div class="form-group">
-                <label for="conform_password">Confirm password</label>
+                <label for="conform_password">Bekræft adgangskode</label>
                 <input required id="conform_password" type="password" class="form-control"
                        v-model="userPassword.confirmPassword"
-                       placeholder="Conform password">
+                       placeholder="Bekræft adgangskode">
             </div>
             <div class="form-group text-right">
                 <input type="submit" class="btn btn-block btn-success rounded-0"
-                       value="Change password">
+                       value="Ændre adgangskode">
             </div>
         </form>
     </div>

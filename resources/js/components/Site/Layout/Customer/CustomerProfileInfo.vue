@@ -1,52 +1,53 @@
 <template>
     <div class="main-profile-update shadow p-4">
-        <h5>Update your profile information</h5>
+        <h5>Opdater profiloplysninger</h5>
         <hr>
         <form action="#" @submit.prevent="updateUserInfo">
             <div class="form-group">
-                <label for="f_name">Email</label>
+                <label for="f_name">E-mail</label>
                 <input required v-model="userInfo.email" readonly id="email" type="text" class="form-control" name="name">
             </div>
             <div class="form-group">
-                <label for="f_name">Name</label>
+                <label for="f_name">Fuldenavn</label>
                 <input required v-model="userInfo.name" id="f_name" type="text" class="form-control" name="name">
             </div>
             <div class="form-group">
-                <label for="phone">Phone number</label>
+                <label for="phone">Telefonnummer</label>
                 <input required v-model="userInfo.phone" id="phone" type="text" class="form-control" name="phone">
             </div>
-
             <div class="form-group">
-                <label for="city">City</label>
-                <input v-model="userInfo.city" id="city" type="text" class="form-control" name="city">
-            </div>
-            <div class="form-group">
-                <label for="zip_code">Zip</label>
-                <input v-model="userInfo.zip_code" id="zip_code" type="text" class="form-control" name="zip">
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label>
+                <label for="address">Adresse</label>
                 <textarea required v-model="userInfo.address" name="address" id="address"
                           class="form-control"></textarea>
             </div>
+             <div class="form-group">
+                <label for="zip_code">Postnummer</label>
+                <input v-model="userInfo.zip_code" id="zip_code" type="text" class="form-control" name="zip">
+            </div>
 
             <div class="form-group">
-                <label for="companyName">Company Name (Only for companies)</label>
+                <label for="city">By</label>
+                <input v-model="userInfo.city" id="city" type="text" class="form-control" name="city">
+            </div>
+           
+            
+            <div class="form-group">
+                <label for="companyName">Firmavan (Kun for virksomheder)</label>
                 <input id="companyName" v-model="userInfo.company_name" type="text" class="form-control" name="company">
             </div>
 
             <div class="form-group">
-                <label for="cvrNum">CVR number (Only for companies)</label>
+                <label for="cvrNum">CVR nummer (Kun for virksomheder)</label>
                 <input id="cvrNum" v-model="userInfo.cvr_number" type="text" class="form-control" name="cvr">
             </div>
             <div class="form-group">
-                <label for="eanNum">EAN number (Only for institutions)</label>
+                <label for="eanNum">CVR nummer (Kun for virksomheder)</label>
                 <input id="eanNum" v-model="userInfo.ean_number" type="text" class="form-control" name="ean">
             </div>
 
             <div class="form-group text-right">
                 <input type="submit" class="btn btn-block btn-success rounded-0"
-                       value="Update">
+                       value="Opdater">
             </div>
         </form>
     </div>

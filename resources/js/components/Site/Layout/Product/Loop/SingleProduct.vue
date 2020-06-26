@@ -60,7 +60,7 @@
                             <div id="days" class="num">{{timeObj.d}}</div>
                         </div>
                         <div class="well top-pane">
-                            <div class="text"><strong>Day</strong></div>
+                            <div class="text"><strong>Dag</strong></div>
                         </div>
 
                     </div>
@@ -70,7 +70,7 @@
                             <div id="hours" class="num">{{timeObj.h}}</div>
                         </div>
                         <div class="well top-pane">
-                            <div class="text"><strong>Hour</strong></div>
+                            <div class="text"><strong>Time</strong></div>
                         </div>
 
                     </div>
@@ -89,15 +89,15 @@
                             <div id="secs" class="num">{{timeObj.s}}</div>
                         </div>
                         <div class="well top-pane">
-                            <div id="days-text" class="text"><strong>Sec</strong></div>
+                            <div id="days-text" class="text"><strong>Sek</strong></div>
                         </div>
 
                     </div>
                 </div>
-                <span slot="finish" class="expired">Offer Expired!</span>
+                <span slot="finish" class="expired">Tilbuddet er udløbet!</span>
             </vac>
             <span v-else class="expired">
-                Coming Soon
+                Kommer snart
             </span>
         </div>
 
@@ -120,14 +120,14 @@
             </div>
             <div class="pricing-right">
                 <h6><small>Deltagend</small></h6>
-                <h5>{{product.totalOrders}}</h5>
+                <h6>{{product.totalOrders}}</h6>
                 <h6><small>Din Pris</small></h6>
-                <h5>{{product.current_price}} dkk</h5>
+                <h5>{{product.current_price}} Kr</h5>
             </div>
         </div>
         <router-link class="btn btn-success btn-block mt-3" tag="button"
                      :to="{name: 'product-details', params:{slug:product.slug}}">
-            Laes mere
+            Læs mere
         </router-link>
 
 
@@ -139,7 +139,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="mySmallModalLabel">Share Event</h5>
+                        <h5 class="modal-title" id="mySmallModalLabel">Del begivenhed</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span @click="showModal=false" aria-hidden="true">×</span>
                         </button>

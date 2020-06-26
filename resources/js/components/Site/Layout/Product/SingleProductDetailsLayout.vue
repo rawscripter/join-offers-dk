@@ -59,10 +59,10 @@
                         </div>
                     </div>
                 </div>
-                <span slot="finish" class="expired">Offer Expired!</span>
+                <span slot="finish" class="expired">Tilbuddet er udløbet</span>
             </vac>
             <span v-else class="expired">
-                Coming Soon
+                Kommer snart
             </span>
         </div>
 
@@ -73,7 +73,7 @@
         <div class="discription" v-html="product.full_des">
         </div>
         <br>
-        <h5 class="mt-2"><strong>Order Note:</strong></h5>
+        <h5 class="mt-2"><strong>Ordrenotat:</strong></h5>
         <div class="orderNote" v-html="product.order_note">
         </div>
     </div>

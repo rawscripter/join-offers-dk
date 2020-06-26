@@ -22,31 +22,31 @@
                         <form action="#" id="login" @submit.prevent="submitLoginForm">
                             <div class="form-group">
                                 <input required type="text" v-model="form.username" name="email" class="form-control"
-                                       placeholder="Enter your email" id="Email or username">
+                                       placeholder="Indtast din e-mail" id="Email or username">
                             </div>
                             <div class="form-group">
                                 <input required type="password" v-model="form.password"
                                        name="password" class="form-control"
-                                       placeholder="Enter your password"
+                                       placeholder="Skriv dit kodeord"
                                        id="password">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-block rounded-0">Login</button>
+                                <button type="submit" class="btn btn-success btn-block rounded-0">Log ind</button>
                             </div>
                             <div class="remember_forger_pass_option d-flex justify-content-between">
-                                <label class="checkbox_container">Remember me
+                                <label class="checkbox_container">Husk mig
                                     <input type="checkbox">
                                     <span class="checkmark"></span>
                                 </label>
                                 <router-link :to="{name:'reset-password'}" class="theme-color">
-                                    Forget password ?
+                                    Glem adgangskode ?
                                 </router-link>
                             </div>
                             <br>
                             <div class="register text-left">
-                                <p>Don't have an account?
+                                <p>Har ikke en konto?
                                     <a href="javascript:void(0)" class="theme-color" @click="goToRegister">
-                                        Register Now
+                                        Registrer nu
                                     </a>
                                 </p>
                             </div>

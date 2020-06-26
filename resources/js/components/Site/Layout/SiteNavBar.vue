@@ -15,7 +15,7 @@
                 <ul class="navbar-nav m-auto text-center">
                     <li class="nav-item">
                         <router-link to="/" class="nav-link">
-                            Home
+                            Hjem
                         </router-link>
                     </li>
 

@@ -26,7 +26,7 @@
                                     </strong>
                                     <br>
                                     <router-link class="back-to-home" tag="a" to="/">
-                                        Back To Home
+                                        Tilbage til forsiden
                                     </router-link>
 
                                 </h3>

@@ -10,13 +10,13 @@
                         <table class="table text-center">
                             <thead>
                             <tr>
-                                <th>si</th>
-                                <th>photo</th>
+                                <th>Id</th>
+                                <th>Produkt image</th>
                                 <th>Begivenheds</th>
-                                <th>Current Price</th>
+                                <th>Nuværende pris</th>
                                 <th>Antal</th>
-                                <th>First Paid Amount</th>
-                                <th>Second payment Amount</th>
+                                <th>Første betalte beløb</th>
+                                <th>Anden betaling Beløb</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -32,17 +32,17 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    {{product.current_price}} dkk
+                                    {{product.current_price}} Kr
                                 </td>
                                 <td>
                                     {{order.quantity}}
                                 </td>
                                 <td>
-                                    {{order.first_payment.amount}} dkk
+                                    {{order.first_payment.amount}} Kr
                                 </td>
                                 <td>
                                     {{(order.product.current_price * order.quantity) -
-                                    order.first_payment.amount}} dkk
+                                    order.first_payment.amount}} Kr
                                 </td>
                             </tr>
 
@@ -66,33 +66,33 @@
                             <div class="checkout-customer-info">
                                 <div class="cards shadow">
                                     <div class="card-header-title">
-                                        <h5 class="text-center"><strong>Order Details</strong></h5>
+                                        <h5 class="text-center"><strong>Ordre detaljer</strong></h5>
                                     </div>
                                     <div class="card-body">
                                         <table class="checkout-table table table-hover" style="width:100%">
                                             <tr>
-                                                <td><strong>Product Name:</strong></td>
-                                                <td>{{product.name}} dkk</td>
+                                                <td><strong>Produkt titel:</strong></td>
+                                                <td>{{product.name}}</td>
                                             </tr>
 
                                             <tr>
-                                                <td><strong>Product Price:</strong></td>
-                                                <td>{{product.offer_price}} dkk</td>
+                                                <td><strong>Produkt pris:</strong></td>
+                                                <td>{{product.offer_price}} Kr</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Your Payment:</strong></td>
-                                                <td> {{ product.join_price}} dkk ({{ product.join_payment_percentage }}
+                                                <td><strong>Din betaling:</strong></td>
+                                                <td> {{ product.join_price}} Kr ({{ product.join_payment_percentage }}
                                                     % of
-                                                    {{product.offer_price}} dkk)
+                                                    {{product.offer_price}} Kr)
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Quantity</strong>:</td>
+                                                <td><strong>Antal</strong>:</td>
                                                 <td>{{orderDetails.quantity}}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Total</strong>:</td>
-                                                <td>{{orderDetails.totalPrice}} dkk</td>
+                                                <td>{{orderDetails.totalPrice}} Kr</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
@@ -104,7 +104,7 @@
                                             <tr>
                                                 <td rowspan="2" colspan="2">
                                                     <button @click="createOrder"
-                                                            class="btn btn-block mt-3 btn-success">Order Now
+                                                            class="btn btn-block mt-3 btn-success">Ordre Nu
                                                     </button>
                                                 </td>
                                             </tr>

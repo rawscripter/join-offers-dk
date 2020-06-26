@@ -94,11 +94,11 @@
     </div>
  
 </footer>
-<footer class="footer-area mt-5">
+<!-- <footer class="footer-area mt-5">
     <div class="copyright-section">
         <p>Copyright &copy; Joinoffers</p>
     </div>
-</footer>
+</footer> -->
 <style>
     /* footer section start  */
 .footer-section{

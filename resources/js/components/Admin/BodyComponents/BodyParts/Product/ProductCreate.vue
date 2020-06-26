@@ -68,7 +68,7 @@
 
 
                             <div class="col-md-12">
-                                <label class="col-form-label">Order Note:</label>
+                                <label class="col-form-label">Ordrenotat:</label>
                                 <ckeditor :editor="editor" v-model="formData.order_note"
                                           :config="editorConfig"></ckeditor>
                             </div>

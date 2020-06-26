@@ -10,7 +10,7 @@
                         <div class="product-area" v-if="runningProducts.length > 0">
                             <div class="running-products">
                                 <div class="alert alert-secondary text-center">
-                                    <strong>Running Offers</strong>
+                                    <strong>Kørere Tilbud</strong>
                                 </div>
                                 <div class="row">
                                     <div
@@ -28,7 +28,7 @@
                                                                 gender: 'all',
                                                                 short: 'running_product'
                                                             }}" tag="a">
-                                            Show All
+                                            Vis alle
                                         </router-link>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                         <div class="product-area mt-5" v-if="comingSoonProducts.length > 0">
                             <div class="running-products">
                                 <div class="alert alert-secondary text-center">
-                                    <strong>Upcoming Offers</strong>
+                                    <strong>Kommende tilbud</strong>
                                 </div>
                                 <div class="row">
                                     <div
@@ -56,7 +56,7 @@
                                                                 gender: 'all',
                                                                 short: 'coming_soon'
                                                             }}" tag="a">
-                                            Show All
+                                            Vis alle
                                         </router-link>
                                     </div>
 
@@ -66,7 +66,7 @@
                         <div class="product-area mt-5" v-if="expiredProducts.length > 0">
                             <div class="running-products">
                                 <div class="alert alert-secondary text-center">
-                                    <strong>Recently Expired Offers</strong>
+                                    <strong>For nylig udløbne tilbud</strong>
                                 </div>
                                 <div class="row">
                                     <div
@@ -84,7 +84,7 @@
                                                                 gender: 'all',
                                                                 short: 'expired'
                                                             }}" tag="a">
-                                            Show All
+                                            Vis alle
                                         </router-link>
                                     </div>
                                 </div>

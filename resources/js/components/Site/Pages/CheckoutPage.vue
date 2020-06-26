@@ -10,15 +10,15 @@
                         <table class="table text-center">
                             <thead>
                             <tr>
-                                <th>si</th>
-                                <th>photo</th>
+                                <th>Id</th>
+                                <th>Product image</th>
                                 <th>Begivenheds</th>
                                 <th>Deltagelsespris <br>
                                     (del 1 of two betalinger)
                                 </th>
                                 <th>Antal</th>
-                                <th>Note</th>
-                                <th>| alt</th>
+                                <th>Bemærk</th>
+                                <th>Alt</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -53,8 +53,8 @@
                                     <p class="m-0 p-0" v-html="product.order_note"></p>
                                 </td>
                                 <td>
-                                    {{orderDetails.totalPrice}} dkk<br>
-                                    Heraf moms : {{orderDetails.totalPrice * 0.2 }} dkk
+                                    {{orderDetails.totalPrice}} Kr<br>
+                                    Heraf moms : {{orderDetails.totalPrice * 0.2 }} Kr
                                 </td>
                             </tr>
 
@@ -83,32 +83,32 @@
                                     <div class="card-body">
                                         <table class="checkout-table table table-hover" style="width:100%">
                                             <tr>
-                                                <td><strong>Product Name:</strong></td>
-                                                <td>{{product.name}} dkk</td>
+                                                <td><strong>Produkt titel:</strong></td>
+                                                <td>{{product.name}}</td>
                                             </tr>
 
                                             <tr>
-                                                <td><strong>Product Price:</strong></td>
-                                                <td>{{product.offer_price}} dkk</td>
+                                                <td><strong>Produkt pris:</strong></td>
+                                                <td>{{product.offer_price}} Kr</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Your Payment:</strong></td>
-                                                <td> {{ product.join_price}} dkk ({{ product.join_payment_percentage }} % of
-                                                    {{product.offer_price}} dkk)
+                                                <td><strong>Din betaling:</strong></td>
+                                                <td> {{ product.join_price}} Kr ({{ product.join_payment_percentage }} % of
+                                                    {{product.offer_price}} Kr)
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Quantity</strong>:</td>
+                                                <td><strong>Antal</strong>:</td>
                                                 <td>{{orderDetails.quantity}}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Total</strong>:</td>
-                                                <td>{{orderDetails.totalPrice}} dkk</td>
+                                                <td>{{orderDetails.totalPrice}} Kr</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <div>
-                                                        <label class="checkbox_container">Subscribe to news letter.
+                                                        <label class="checkbox_container">Abonner på nyhedsbrev.
                                                             <input v-model="orderDetails.newsletter" value="1"
                                                                    type="checkbox"> <span
                                                                 class="checkmark"></span></label>
@@ -118,7 +118,7 @@
                                             <tr>
                                                 <td rowspan="2" colspan="2">
                                                     <button @click="createOrder"
-                                                            class="btn btn-block mt-3 btn-success">Order Now
+                                                            class="btn btn-block mt-3 btn-success">Ordre Nu
                                                     </button>
                                                 </td>
                                             </tr>

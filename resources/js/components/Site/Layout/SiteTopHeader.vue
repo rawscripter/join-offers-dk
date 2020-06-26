@@ -5,10 +5,10 @@
                 <div class="row">
                     <div class="col-md-6  col-lg-6 offset-md-3 offset-lg-3">
                         <ul class="top-heading">
-                            <li><a href="#"><i class="fas fa-eye"></i> <span>Certiceret</span></a></li>
-                            <li><a href="#"><i class="fas fa-check"></i> <span>Contrary to popula</span></a></li>
-                            <li><a href="#"><i class="fas fa-check"></i> <span>Contrary popula</span></a></li>
-                            <li><a href="#"><i class="fas fa-check"></i> <span>Contrary popula</span></a></li>
+                            <li><a href="#"><i class="fas fa-eye"></i> <span>Certificeret webshop</span></a></li>
+                            <li><a href="#"><i class="fas fa-check"></i> <span>Nem og gennemskuelig handel</span></a></li>
+                            <li><a href="#"><i class="fas fa-check"></i> <span>Sikker betaling</span></a></li>
+                            <li><a href="#"><i class="fas fa-check"></i> <span>Køberbeskyttelse på op til 10.000 kr</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -23,13 +23,13 @@
                             <div class="row">
                                 <div class="col-md-6 col-lg-4 d-flex justify-content-between">
                                     <router-link tag="a" to="/favourites" class="wishlist hide-desktop text-center">
-                                        <img src="/images/icons/favorite.png" height="30" alt="">
+                                        <img src="/images/icons/favorite.png" height="30" alt="favourites">
                                     </router-link>
                                     <div class="header-logo" style="margin-top:0px ">
                                         <h4>
                                             <router-link to="/">
                                                 <img src="/frontend/assets/img/site.png"
-                                                     id="logo" alt="">
+                                                     id="logo" alt="logo">
                                             </router-link>
                                         </h4>
                                     </div>
@@ -44,12 +44,12 @@
                                             <div class="dropdown-menu wow bounceIn" v-if="showUserMenuMobile">
 
                                                 <router-link tag="a" class="dropdown-item" :to="{name:'favourites'}">
-                                                    Favourites
+                                                    Favoritter
                                                 </router-link>
 
                                                 <router-link tag="a" class="dropdown-item"
                                                              :to="{name:'customer-dashboard'}">
-                                                    Dashboard
+                                                    Oversigt
                                                 </router-link>
                                                 <router-link tag="a" class="dropdown-item"
                                                              :to="{name:'customer-profile'}">
@@ -57,11 +57,11 @@
                                                 </router-link>
                                                 <router-link tag="a" class="dropdown-item"
                                                              :to="{name:'customer-orders'}">
-                                                    Orders
+                                                    Ordres
                                                 </router-link>
                                                 <div class="dropdown-divider"></div>
                                                 <router-link class="dropdown-item" to="/logout">
-                                                    Logout
+                                                    Log ud
                                                 </router-link>
 
                                             </div>
@@ -70,7 +70,7 @@
                                             <router-link to="/login">
                                                 <i class="fas fa-sign-out-alt"></i>
                                                 <br>
-                                                Login
+                                                Log ind
                                             </router-link>
                                         </div>
                                     </div>
@@ -85,10 +85,10 @@
                                                 <input type="text" v-model="search" class="form-control rounded-0"
                                                        id="searchForm"
                                                        style="border: 1px solid transparent; !important"
-                                                       placeholder="Busca algo..." value="">
+                                                       placeholder="Søg efter event" value="">
                                                 <span class="input-group-btn">
                                             <button type="submit" class="btn btn-success rounded-0"
-                                                    style="background-color: #078223;border-color:#078223">Go !</button>
+                                                    style="background-color: #078223;border-color:#078223">Søg</button>
                                             </span>
                                             </div>
                                         </form>
@@ -100,9 +100,9 @@
                             <div class="header_top_button d-flex justify-content-center">
                                 <router-link tag="div" to="/favourites" class="wishlist favourite-box text-center">
                                     <a href="#">
-                                        <img src="/images/icons/favorite.png" height="30" alt="">
+                                        <img src="/images/icons/favorite.png" height="30" alt="favourite">
                                         <br>
-                                        <label>Favourites({{totalFavourites}})</label>
+                                        <label>Favoritter({{totalFavourites}})</label>
                                     </a>
                                 </router-link>
                                 <div class="login ml-4 text-center">
@@ -111,27 +111,27 @@
                                              @click="showUserMenu = !showUserMenu">
                                             <i class="fas fa-user"></i>
                                             <br>
-                                            Profile
+                                            Profil
                                         </div>
                                         <div class="dropdown-menu wow bounceIn" v-if="showUserMenu">
 
                                             <router-link tag="a" class="dropdown-item" :to="{name:'favourites'}">
-                                                Favourites
+                                                Favoritter
                                             </router-link>
 
                                             <router-link tag="a" class="dropdown-item"
                                                          :to="{name:'customer-dashboard'}">
-                                                Dashboard
+                                                Oversigt
                                             </router-link>
                                             <router-link tag="a" class="dropdown-item" :to="{name:'customer-profile'}">
-                                                Profile
+                                                Profil
                                             </router-link>
                                             <router-link tag="a" class="dropdown-item" :to="{name:'customer-orders'}">
-                                                Orders
+                                                Ordres
                                             </router-link>
                                             <div class="dropdown-divider"></div>
                                             <router-link class="dropdown-item" to="/logout">
-                                                Logout
+                                                Log ud
                                             </router-link>
 
                                         </div>
@@ -140,7 +140,7 @@
                                         <router-link to="/login">
                                             <i class="fas fa-sign-out-alt"></i>
                                             <br>
-                                            Login
+                                            Log ind
                                         </router-link>
                                     </div>
                                 </div>

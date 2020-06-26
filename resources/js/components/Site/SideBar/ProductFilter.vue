@@ -10,15 +10,15 @@
         </div>
         <form>
             <div class="till_filter">
-                <h5><b>Till :</b></h5>
+                <h5><b>Til :</b></h5>
                 <!-- checkbox single  -->
-                <label class="checkbox_container">alle
+                <label class="checkbox_container">Alle
                     <input v-model="filter.gender" value="All" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
-                <label class="checkbox_container">Maend
+                <label class="checkbox_container">Mænd
                     <input v-model="filter.gender" value="Men" type="radio">
                     <span class="checkmark"></span>
                 </label>
@@ -30,7 +30,7 @@
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
-                <label class="checkbox_container">Born
+                <label class="checkbox_container">Børn
                     <input v-model="filter.gender" value="kids" type="radio">
                     <span class="checkmark"></span>
                 </label>
@@ -45,24 +45,24 @@
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
-                <label class="checkbox_container">Popular
+                <label class="checkbox_container">Populær
                     <input v-model="filter.short" value="popular" type="radio">
                     <span class="checkmark"></span>
                 </label>
                 <!-- end of checkbox single  -->
                 <!-- checkbox single  -->
                 <!-- checkbox single  -->
-                <label class="checkbox_container">sidste chance
+                <label class="checkbox_container">Sidste chance
                     <input v-model="filter.short" value="old" type="radio">
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="checkbox_container">Coming Soon
+                <label class="checkbox_container">Kommer snart
                     <input v-model="filter.short" value="coming_soon" type="radio">
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="checkbox_container">Recently Expired
+                <label class="checkbox_container">For nylig udløbet
                     <input v-model="filter.short" value="expired" type="radio">
                     <span class="checkmark"></span>
                 </label>
@@ -85,11 +85,11 @@
             </div>
             <br>
             <div class="submit">
-                <input type="button" @click="signalChange" value="Filter Product" class="btn btn-block btn-theme">
+                <input type="button" @click="signalChange" value="Filtrer" class="btn btn-block btn-theme">
             </div>
             <br>
             <p class="small reset-btn text-center" @click="resetFilter">
-                Reset Filter
+                Nulstil filter
             </p>
         </form>
     </div>

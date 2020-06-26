@@ -1,7 +1,7 @@
 /**
  * by MonsterDuang
  */
-(function($) {
+;(function($) {
     /**
      * 1, 缩略图大小和父容器大小一致
      * 2, 父容器 href 属性为高清图片路径

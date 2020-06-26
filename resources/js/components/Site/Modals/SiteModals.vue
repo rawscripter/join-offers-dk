@@ -8,7 +8,7 @@
             <div class="modal-dialog" style="margin-top: 100px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="productRequestModals">Request For Favourite</h5>
+                        <h5 class="modal-title" id="productRequestModals">Anmodning om favorit</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span @click="productRequestModal=false" aria-hidden="true">×</span>
                         </button>
@@ -16,19 +16,19 @@
                     <div class="modal-body">
                         <form @submit.prevent="submitProductRequest">
                             <div class="form-group">
-                                <label for="product">Email:</label>
+                                <label for="product">E-mail:</label>
                                 <input type="email" required v-model="productRequest.email" class="form-control"
                                        id="product">
                             </div>
 
                             <div class="form-group">
-                                <label for="note">Note:</label>
+                                <label for="note">Bemærk:</label>
                                 <textarea v-model="productRequest.note" class="form-control" id="note" cols="10"
                                           rows="5"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-theme btn-block">Submit Request</button>
+                                <button type="submit" class="btn btn-theme btn-block">Indsend anmodning</button>
                             </div>
 
                         </form>

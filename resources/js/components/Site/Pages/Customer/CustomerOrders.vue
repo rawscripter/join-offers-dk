@@ -26,56 +26,56 @@
                                             </router-link>
                                         </td>
                                         <td style="width:35%">
-                                            Product Name:
+                                            Produkt titel:
                                             <router-link
                                                 :to="{name: 'product-details', params:{slug:order.product.slug}}">
                                                 <strong>{{order.product.name}}</strong>
                                             </router-link>
                                         </td>
-                                        <td style="width:15%">Average Prince:
-                                            <strong>{{order.product.market_price}} dkk</strong></td>
+                                        <td style="width:15%">Gennemsnitlig pris:
+                                            <strong>{{order.product.market_price}} Kr</strong></td>
                                         <td style="width:15%">
-                                            Order Quantity: <strong>{{order.quantity}}</strong>
+                                            Antal: <strong>{{order.quantity}}</strong>
                                         </td>
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
-                                            <div class="text-center mb-2"><strong>First Payment
-                                                ({{order.first_payment.amount}} dkk)</strong></div>
-                                            <button style="width: 120px" class="btn non-hover btn-info btn-sm">Paid
+                                            <div class="text-center mb-2"><strong>Første betaling 
+                                                ({{order.first_payment.amount}} Kr)</strong></div>
+                                            <button style="width: 120px" class="btn non-hover btn-info btn-sm">Betalt
                                             </button>
                                         </td>
                                         <td style="width:15%" rowspan="4" v-else>
-                                            <button style="width: 120px" class="btn btn-danger btn-sm">Canceled</button>
+                                            <button style="width: 120px" class="btn btn-danger btn-sm">Annulleret</button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width:35%">Event ID: <strong> #{{order.product.event_id}}</strong>
+                                        <td style="width:35%">Begivenheds ID: <strong> #{{order.product.event_id}}</strong>
                                         </td>
                                         <td style="width:15%">
-                                            Start Prince:
+                                            Start pris:
                                             <strong>{{order.product.offer_price}} dkk</strong>
                                         </td>
-                                        <td style="width:15%">Participants:
+                                        <td style="width:15%">Deltagende:
                                             <strong>{{order.product.totalOrders}}</strong></td>
                                     </tr>
                                     <tr>
                                         <td style="width:35%">
-                                            Offer Start Date: <strong> {{order.product.created_at}}</strong>
+                                            Startdato: <strong> {{order.product.created_at}}</strong>
                                         </td>
                                         <td style="width:15%">
-                                            Current Price:
-                                            <strong>{{order.product.current_price}} dkk</strong>
+                                            Nuværende pris:
+                                            <strong>{{order.product.current_price}} Kr</strong>
                                         </td>
                                         <td style="width:15%;" rowspan="2">
                                             <router-link
                                                 :to="{name:'product.graph',params:{product:order.product.event_id}}">
                                                 <img src="/images/icons/price-fall.gif" width="150px" alt="">
-                                                <span class="d-block btn btn-default btn-sm">Show Graph</span>
+                                                <span class="d-block btn btn-default btn-sm">Graf</span>
                                             </router-link>
                                         </td>
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
-                                            <div class="text-center mb-2"><strong>Second Payment
+                                            <div class="text-center mb-2"><strong>Anden betaling
                                                 ({{(order.product.current_price * order.quantity) -
-                                                order.first_payment.amount}} dkk)</strong></div>
+                                                order.first_payment.amount}} Kr)</strong></div>
                                             <div class="timer text-center mt-2 mb-2">
                                                 <vac :end-time="new Date(order.product.expire_date)">
                                                     <div
@@ -120,10 +120,10 @@
                                                             <router-link
                                                                 :to="{name:'final-checkout',params:{order:order.custom_order_id}}"
                                                                 class="btn btn-block btn-success btn-sm">
-                                                                Pay now
+                                                                Betal nu
                                                             </router-link>
                                                         </div>
-                                            <button v-else style="width: 120px" class="btn  non-hover btn-info btn-sm">Paid
+                                            <button v-else style="width: 120px" class="btn  non-hover btn-info btn-sm">Betalt
                                             </button>
                                                     </span>
                                                 </vac>
@@ -132,9 +132,9 @@
                                     </tr>
                                     <tr>
                                         <td style="width:35%">
-                                            Offer End Date: <strong>{{order.product.expire_date}}</strong>
+                                            Slutdato: <strong>{{order.product.expire_date}}</strong>
                                         </td>
-                                        <td style="width:15%">Saving Percentage:
+                                        <td style="width:15%">Besparelse i procent:
                                             <strong>{{order.product.saving_percentage}}%</strong></td>
                                     </tr>
                                 </table>

@@ -4,28 +4,28 @@
             <ul>
 
                 <router-link tag="a" class="dropdown-item" :to="{name:'customer-dashboard'}">
-                    Dashboard
+                    Oversigt
                 </router-link>
                 <router-link tag="a" class="dropdown-item" :to="{name:'customer-profile'}">
-                    Profile
+                    Profil
                 </router-link>
                 <router-link tag="a" class="dropdown-item" exact :to="{name:'customer-orders',query:{type:'running'}}">
-                    Running Events
+                    Aktive begivenheder
                 </router-link>
 
                 <router-link tag="a" class="dropdown-item" exact
                              :to="{name:'customer-completed-orders',query:{type:'completed'}}">
-                    Completed Events
+                    Fuldførte begivenheder
                 </router-link>
 
                 <router-link tag="a" class="dropdown-item" exact
                              :to="{name:'customer-canceled-orders',query:{type:'canceled'}}">
-                    Canceled Events
+                    Annullerede begivenheder
                 </router-link>
 
                 <div class="dropdown-divider"></div>
                 <router-link class="dropdown-item" to="/logout">
-                    Logout
+                    Log ud
                 </router-link>
 
             </ul>
