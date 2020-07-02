@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
 
 
     Route::get('/orders', 'OrderController@orders');
-    Route::get('/order/{order}/details', 'OrderController@orders');
+    Route::get('/order/{order}/details', 'OrderController@orderDetails');
 
     Route::get('/customers', 'CustomerController@customers');
 

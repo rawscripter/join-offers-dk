@@ -14,8 +14,8 @@ window.APP_URL = 'https://joinoffers.dk';
 window.CURRENCY = 'dkk';
 
 import VueCookies from 'vue-cookies'
-Vue.use(VueCookies)
 
+Vue.use(VueCookies)
 
 
 var SocialSharing = require('vue-social-sharing');

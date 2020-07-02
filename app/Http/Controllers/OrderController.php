@@ -160,8 +160,8 @@ class OrderController extends Controller
 
     public function updateShippingDetails(Order $order, Request $request)
     {
-
-        if ($order->shippingInfo()->update($request->all())) {
+        $shippingInfo = OrderShippingInfo::where('order_id', $order->id);
+        if ($shippingInfo->update($request->except('id'))) {
             $res['status'] = 200;
             $res['message'] = 'Update Successful';
         } else {

@@ -84,6 +84,23 @@
                                         <span
                                             class="kt-widget1__number kt-font-info">{{order.product.join_price}}</span>
                                     </div>
+                                    <br>
+
+                                    <div v-if="order.variations.length > 0">
+                                        <h5>Variations</h5>
+                                        <br>
+                                        <div class="kt-widget1__item" v-for="variationOption in order.variations">
+                                            <div class="kt-widget1__info">
+                                                <h3 class="kt-widget1__title">
+                                                    <strong>{{variationOption.variation.product_variation.name}}</strong>
+                                                    - {{variationOption.variation.name}} </h3>
+                                            </div>
+                                            <span
+                                                class="kt-widget1__number">{{variationOption.variation.price}}</span>
+                                        </div>
+                                    </div>
+
+                                    <br>
 
                                 </div>
                                 <!--end:: Widgets/Stats2-2 -->            </div>
@@ -220,14 +237,23 @@
                                         <div class="kt-widget1__info">
                                             <h3 class="kt-widget1__title">Name:</h3>
                                         </div>
-                                        <span class="kt-widget1__number kt-font-success">#{{order.customer.name}}</span>
+                                        <span
+                                            class="kt-widget1__number kt-font-success">#{{order.shipping_info.name}}</span>
                                     </div>
 
                                     <div class="kt-widget1__item">
                                         <div class="kt-widget1__info">
                                             <h3 class="kt-widget1__title">Email</h3>
                                         </div>
-                                        <span class="kt-widget1__number kt-font-success">{{order.customer.email}}</span>
+                                        <span
+                                            class="kt-widget1__number kt-font-success">{{order.shipping_info.email}}</span>
+                                    </div>
+                                    <div class="kt-widget1__item">
+                                        <div class="kt-widget1__info">
+                                            <h3 class="kt-widget1__title">Address</h3>
+                                        </div>
+                                        <span
+                                            class="kt-widget1__number kt-font-success">{{order.shipping_info.address}}</span>
                                     </div>
 
                                     <div class="kt-widget1__item">
@@ -235,7 +261,7 @@
                                             <h3 class="kt-widget1__title">Phone</h3>
                                         </div>
                                         <span
-                                            class="kt-widget1__number kt-font-success">{{order.customer.info.phone}}</span>
+                                            class="kt-widget1__number kt-font-success">{{order.shipping_info.phone}}</span>
                                     </div>
 
                                     <div class="kt-widget1__item">
@@ -243,7 +269,7 @@
                                             <h3 class="kt-widget1__title">City</h3>
                                         </div>
                                         <span
-                                            class="kt-widget1__number kt-font-success">{{order.customer.info.city}}</span>
+                                            class="kt-widget1__number kt-font-success">{{order.shipping_info.city}}</span>
                                     </div>
 
                                     <div class="kt-widget1__item">
@@ -251,32 +277,57 @@
                                             <h3 class="kt-widget1__title">Zip Code</h3>
                                         </div>
                                         <span
-                                            class="kt-widget1__number kt-font-success">{{order.customer.info.zip_code}}</span>
+                                            class="kt-widget1__number kt-font-success">{{order.shipping_info.zip_code}}</span>
                                     </div>
 
-
-                                    <div class="kt-widget1__item">
-                                        <div class="kt-widget1__info">
-                                            <h3 class="kt-widget1__title">Company Name</h3>
+                                    <div class="shipping_method" v-if="order.shipping_info.shipping_method_details">
+                                        <h3 class="mt-4 mb-3">Shipping Method</h3>
+                                        <div class="kt-widget1__item">
+                                            <div class="kt-widget1__info">
+                                                <h3 class="kt-widget1__title">Company Name</h3>
+                                            </div>
+                                            <span
+                                                class="kt-widget1__number kt-font-success">{{order.shipping_info.shipping_method_details.CompanyName}}</span>
                                         </div>
-                                        <span
-                                            class="kt-widget1__number kt-font-success">{{order.customer.info.company_name}}</span>
-                                    </div>
 
-                                    <div class="kt-widget1__item">
-                                        <div class="kt-widget1__info">
-                                            <h3 class="kt-widget1__title">CVR Number</h3>
+                                        <div class="kt-widget1__item">
+                                            <div class="kt-widget1__info">
+                                                <h3 class="kt-widget1__title">Company Number</h3>
+                                            </div>
+                                            <span
+                                                class="kt-widget1__number kt-font-success">{{order.shipping_info.shipping_method_details.Number}}</span>
                                         </div>
-                                        <span
-                                            class="kt-widget1__number kt-font-success">{{order.customer.info.cvr_number}}</span>
-                                    </div>
+                                        <div class="kt-widget1__item">
+                                            <div class="kt-widget1__info">
+                                                <h3 class="kt-widget1__title">City Name</h3>
+                                            </div>
+                                            <span
+                                                class="kt-widget1__number kt-font-success">{{order.shipping_info.shipping_method_details.CityName}}</span>
+                                        </div>
+                                        <div class="kt-widget1__item">
+                                            <div class="kt-widget1__info">
+                                                <h3 class="kt-widget1__title">Streetname</h3>
+                                            </div>
+                                            <span
+                                                class="kt-widget1__number kt-font-success">{{order.shipping_info.shipping_method_details.Streetname}}</span>
+                                        </div>
 
-                                    <div class="kt-widget1__item">
-                                        <div class="kt-widget1__info">
-                                            <h3 class="kt-widget1__title">EAN Number</h3>
+                                        <div class="kt-widget1__item">
+                                            <div class="kt-widget1__info">
+                                                <h3 class="kt-widget1__title">Streetname2</h3>
+                                            </div>
+                                            <span
+                                                class="kt-widget1__number kt-font-success">{{order.shipping_info.shipping_method_details.Streetname2}}</span>
                                         </div>
-                                        <span
-                                            class="kt-widget1__number kt-font-success">{{order.customer.info.ean_number}}</span>
+
+                                        <div class="kt-widget1__item">
+                                            <div class="kt-widget1__info">
+                                                <h3 class="kt-widget1__title">ZipCode</h3>
+                                            </div>
+                                            <span
+                                                class="kt-widget1__number kt-font-success">{{order.shipping_info.shipping_method_details.ZipCode}}</span>
+                                        </div>
+
                                     </div>
 
 

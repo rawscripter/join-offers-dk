@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\OrderShippingInfo;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -22,10 +23,12 @@ class OrderResource extends JsonResource
             'quantity' => $this->quantity,
             'join_price' => $this->join_price,
             'total_price' => $this->total_price,
+            'variations' => $this->orderVariations(),// $this->variations ? json_decode($this->variations, true) : [],
             'is_join_payment_enable' => $this->is_join_payment_enable,
             'is_join_price_paid' => $this->is_join_price_paid,
             'first_payment' => new OrderPaymentResource($this->firstPayment()),
             'customer' => (new CustomerResource($this->user)),
+            'shipping_info' => (new OrderShippingInfoResource($this->shippingInfo)),
             'is_full_price_paid' => $this->is_full_price_paid ? true : false,
             'second_payment' => new OrderPaymentResource($this->secondPayment()),
             'order_status' => $this->order_status ? true : false,

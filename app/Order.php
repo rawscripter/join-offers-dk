@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Resources\OrderVariationResource;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -32,6 +33,14 @@ class Order extends Model
     public function shippingInfo()
     {
         return $this->hasOne(OrderShippingInfo::class);
+    }
+
+    public function orderVariations()
+    {
+        if (empty($this->variations)) return [];
+        $variations = json_decode($this->variations, true);
+
+        return OrderVariationResource::collection($variations);
     }
 
 }

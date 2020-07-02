@@ -84,8 +84,9 @@
                                         <table class="checkout-table table table-hover" style="width:100%">
 
                                             <tr v-for="(variation,variationIndex) in product.product_variation">
-                                                <td><strong>{{variation.name}}:</strong></td>
-                                                <td class="variations">
+                                                <!--                                                <td></td>-->
+                                                <td class="variations" colspan="2">
+                                                    <div class="text-center"><strong>{{variation.name}}</strong></div>
                                                     <div class="variation"
                                                          v-for="(option,optionIndex) in variation.options">
                                                         <input class="hidden radio-label" :id="`radio-btn-${option.id}`"
@@ -97,7 +98,7 @@
                                                         <label
                                                             @click="changeProductPriceOnVariationChange(variation.id,option.id,option.price)"
                                                             class="button-label" :for="`radio-btn-${option.id}`">
-                                                            <span> {{option.name}}</span>
+                                                            <span> {{option.name}} +{{option.price}}kr</span>
                                                         </label>
                                                     </div>
 
@@ -203,7 +204,7 @@
         methods: {
             changeProductPriceOnVariationChange(variationID, optionID, price) {
 
-                let selectedIndex = this.selectedVariations.findIndex(x => x.variationID === variationID);
+                let selectedIndex = this.selectedVariations.findIndex(x => x.variationID === parseInt(variationID));
 
                 // already selected
                 if (selectedIndex !== -1) {
@@ -212,9 +213,10 @@
                     let optionVariationOptionId = this.selectedVariations[selectedIndex].optionID;
 
                     let productVariations = this.product.product_variation[selectedIndex];
-                    let optionVariationOptionIndex = productVariations.options.findIndex(x => x.id === optionVariationOptionId);
+                    let optionVariationOptionIndex = productVariations.options.findIndex(x => x.id === parseInt(optionVariationOptionId));
 
                     let optionVariationOption = productVariations.options[optionVariationOptionIndex];
+
                     this.product.offer_price -= optionVariationOption.price;
                     this.product.join_price -= optionVariationOption.price;
                     this.orderDetails.totalPrice -= optionVariationOption.price * this.orderDetails.quantity;
