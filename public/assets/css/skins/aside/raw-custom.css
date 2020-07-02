@@ -1,0 +1,23 @@
+
+.glyphicon.glyphicon-sort, .glyphicon.glyphicon-chevron-up,.glyphicon-chevron-down {
+    width: 10px !important;
+    /* background: red !important; */
+    height: 15px !important;;
+    font-family: Flaticon2;
+
+
+    font-size: 10px !important;
+    color: #898989;
+}
+
+.glyphicon.glyphicon-sort::before, .glyphicon-chevron-down::before {
+    content: "\f1a6" !important;
+}
+
+.glyphicon.glyphicon-chevron-up::before {
+    content: "\f1a7" !important;
+}
+
+
+
+
