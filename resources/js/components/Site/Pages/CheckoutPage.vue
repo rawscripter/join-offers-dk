@@ -41,7 +41,7 @@
                                 <td>
                                     <button type="button" @click="decreaseOrderQuantity"
                                             class="btn btn-success btn-sm rounded mr-0"><i
-                                        class="fas fa-minus"></i></button>
+                                            class="fas fa-minus"></i></button>
                                     <input :max="product.max_unit_per_user" type="number" id="oqty" min="1"
                                            v-model="orderDetails.quantity"
                                            style="width:60px;text-align:center">
@@ -96,8 +96,8 @@
                                                                :checked="isOptionAlreadySelected(option.id)"
                                                         />
                                                         <label
-                                                            @click="changeProductPriceOnVariationChange(variation.id,option.id,option.price)"
-                                                            class="button-label" :for="`radio-btn-${option.id}`">
+                                                                @click="changeProductPriceOnVariationChange(variation.id,option.id,option.price)"
+                                                                class="button-label" :for="`radio-btn-${option.id}`">
                                                             <span> {{option.name}} +{{option.price}}kr</span>
                                                         </label>
                                                     </div>
@@ -138,7 +138,7 @@
                                                         <label class="checkbox_container">Abonner på nyhedsbrev.
                                                             <input v-model="orderDetails.newsletter" value="1"
                                                                    type="checkbox"> <span
-                                                                class="checkmark"></span></label>
+                                                                    class="checkmark"></span></label>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -184,6 +184,7 @@
                     quantity: 1,
                     totalPrice: 0,
                     unitPrice: 0,
+                    variantTotal:0
                 },
                 selectedVariations: []
             }
@@ -218,10 +219,11 @@
                     let optionVariationOption = productVariations.options[optionVariationOptionIndex];
 
                     this.product.offer_price -= optionVariationOption.price;
-                    this.product.join_price -= optionVariationOption.price;
-                    this.orderDetails.totalPrice -= optionVariationOption.price * this.orderDetails.quantity;
+                    this.product.join_price -= (optionVariationOption.price / this.product.join_payment_percentage);
+                    this.orderDetails.totalPrice -= (optionVariationOption.price / this.product.join_payment_percentage) * this.orderDetails.quantity;
 
 
+                    this.orderDetails.variantTotal -= optionVariationOption.price;
                     this.selectedVariations[selectedIndex].optionID = optionID;
 
 
@@ -232,11 +234,12 @@
                     }
                     this.selectedVariations.push(newObject)
                 }
-
+                this.orderDetails.variantTotal += price;
                 this.product.offer_price += price;
-                this.product.join_price += price;
+                this.product.join_price += (price / this.product.join_payment_percentage);
 
-                this.orderDetails.totalPrice += price * this.orderDetails.quantity;
+
+                this.orderDetails.totalPrice += (price / this.product.join_payment_percentage) * this.orderDetails.quantity;
             },
 
             isOptionAlreadySelected(optionID) {
@@ -281,8 +284,9 @@
                                 let selectedVariationOptionIndex = variationOptions.findIndex(x => x.id === variation.optionID);
                                 let needToAddPrice = variationOptions[selectedVariationOptionIndex].price;
                                 vm.product.offer_price += needToAddPrice;
-                                vm.product.join_price += needToAddPrice;
-                                vm.orderDetails.totalPrice += needToAddPrice;
+                                vm.product.join_price += (needToAddPrice / vm.product.join_payment_percentage);
+                                vm.orderDetails.totalPrice += (needToAddPrice / vm.product.join_payment_percentage);
+                                vm.orderDetails.variantTotal += needToAddPrice;
                             })
                         }
 

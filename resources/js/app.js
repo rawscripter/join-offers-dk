@@ -7,9 +7,9 @@
 require("./bootstrap");
 
 window.Vue = require("vue");
-// window.APP_URL = 'http://joinoffers.dan:8081';
-window.APP_URL = "http://laravu.test";
-// window.APP_URL = "https://joinoffers.dk";
+window.APP_URL = 'http://joinoffers.dan:8081';
+// window.APP_URL = "http://laravu.test";
+window.APP_URL = "https://joinoffers.dk";
 window.CURRENCY = "dkk";
 
 import VueCookies from "vue-cookies";
@@ -47,7 +47,7 @@ Vue.use(VueSocialauth, {
 import User from "./Helpers/User";
 import Notification from "./Helpers/Notification";
 
-import { ServerTable } from "vue-tables-2";
+import {ServerTable} from "vue-tables-2";
 import VueSweetalert2 from "vue-sweetalert2";
 import vueAwesomeCountdown from "vue-awesome-countdown";
 

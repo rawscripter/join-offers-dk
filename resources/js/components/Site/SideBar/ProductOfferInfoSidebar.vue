@@ -221,9 +221,6 @@
 
                 this.$cookies.set(`product-variation-${this.product.id}`, JSON.stringify(this.selectedVariations), 60 * 5)
 
-
-
-
                 this.product.current_price += price;
             },
             submitProductRequest() {
@@ -245,6 +242,7 @@
                         if (res.data.status === 200) {
                             this.isUserLiked = res.data.product.isLikedByCurrentUser;
                             this.total_likes++;
+
                         } else {
                             alert(res.data.message);
                         }
@@ -259,7 +257,8 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event added to favourite list.')
+                            Alert.showSuccessAlert('Event added to favourite list.');
+                            this.$root.$emit('updateFavouriteProductList', true);
                         } else {
                             alert(res.data.message);
                         }
@@ -269,7 +268,8 @@
                 axios.get(`/api/product/${slug}/reminder/add`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            Alert.showSuccessAlert('Event added to reminder list.')
+                            Alert.showSuccessAlert('Event added to reminder list.');                            this.$root.$emit('updateFavouriteProductList', true);
+                            this.$root.$emit('updateFavouriteProductList', true);
                         } else {
                             alert(res.data.message);
                         }

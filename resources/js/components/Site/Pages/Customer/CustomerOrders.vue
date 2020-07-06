@@ -20,7 +20,7 @@
                                     <tr>
                                         <td rowspan="4" style="width:15%">
                                             <router-link
-                                                :to="{name: 'product-details', params:{slug:order.product.slug}}">
+                                                    :to="{name: 'product-details', params:{slug:order.product.slug}}">
                                                 <img :src="order.product.featureImage" alt="Product image"
                                                      style="width:100%;">
                                             </router-link>
@@ -28,7 +28,7 @@
                                         <td style="width:35%">
                                             Produkt titel:
                                             <router-link
-                                                :to="{name: 'product-details', params:{slug:order.product.slug}}">
+                                                    :to="{name: 'product-details', params:{slug:order.product.slug}}">
                                                 <strong>{{order.product.name}}</strong>
                                             </router-link>
                                         </td>
@@ -38,17 +38,19 @@
                                             Antal: <strong>{{order.quantity}}</strong>
                                         </td>
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
-                                            <div class="text-center mb-2"><strong>Første betaling 
+                                            <div class="text-center mb-2"><strong>Første betaling
                                                 ({{order.first_payment.amount}} Kr)</strong></div>
                                             <button style="width: 120px" class="btn non-hover btn-info btn-sm">Betalt
                                             </button>
                                         </td>
                                         <td style="width:15%" rowspan="4" v-else>
-                                            <button style="width: 120px" class="btn btn-danger btn-sm">Annulleret</button>
+                                            <button style="width: 120px" class="btn btn-danger btn-sm">Annulleret
+                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width:35%">Begivenheds ID: <strong> #{{order.product.event_id}}</strong>
+                                        <td style="width:35%">Begivenheds ID: <strong>
+                                            #{{order.product.event_id}}</strong>
                                         </td>
                                         <td style="width:15%">
                                             Start pris:
@@ -67,21 +69,22 @@
                                         </td>
                                         <td style="width:15%;" rowspan="2">
                                             <router-link
-                                                :to="{name:'product.graph',params:{product:order.product.event_id}}">
+                                                    :to="{name:'product.graph',params:{product:order.product.event_id}}">
                                                 <img src="/images/icons/price-fall.gif" width="150px" alt="">
                                                 <span class="d-block btn btn-default btn-sm">Graf</span>
                                             </router-link>
                                         </td>
                                         <td style="width:15%" rowspan="2" v-if="!order.is_canceled">
                                             <div class="text-center mb-2"><strong>Anden betaling
-                                                ({{(order.product.current_price * order.quantity) -
-                                                order.first_payment.amount}} Kr)</strong></div>
+                                                ({{((order.second_payment_amount)) }} Kr)
+
+                                            </strong></div>
                                             <div class="timer text-center mt-2 mb-2">
                                                 <vac :end-time="new Date(order.product.expire_date)">
                                                     <div
-                                                        class="timer-area d-flex justify-content-center mt-3 mb-3"
-                                                        slot="process"
-                                                        slot-scope="{ timeObj }">
+                                                            class="timer-area d-flex justify-content-center mt-3 mb-3"
+                                                            slot="process"
+                                                            slot-scope="{ timeObj }">
                                                         <div class="clock">
                                                             <div class="well bottom-pane">
                                                                 <div id="days" class="num">{{timeObj.d}}</div>
@@ -108,18 +111,11 @@
                                                         </div>
                                                     </div>
                                                     <span slot="finish" class="expired">
-<!--                                                           <button v-if="!order.is_full_price_paid"-->
-                                                        <!--                                                                   @click="payOrderFullPrice(index)"-->
-                                                        <!--                                                                   style="width: 120px"-->
-                                                        <!--                                                                   class="btn btn-success btn-sm">-->
-                                                        <!--                                                               Pay now-->
-                                                        <!--                                            </button>-->
-
                                                         <div v-if="!order.is_full_price_paid"
                                                              style="width: 120px;margin: 0 auto;">
                                                             <router-link
-                                                                :to="{name:'final-checkout',params:{order:order.custom_order_id}}"
-                                                                class="btn btn-block btn-success btn-sm">
+                                                                    :to="{name:'final-checkout',params:{order:order.custom_order_id}}"
+                                                                    class="btn btn-block btn-success btn-sm">
                                                                 Betal nu
                                                             </router-link>
                                                         </div>
@@ -185,55 +181,6 @@
                     console.error(error)
                 })
             },
-            payOrderFullPrice(orderIndex) {
-                this.isPaymentBoxLoading = true;
-                this.makeFullPaymentRequest(orderIndex);
-            },
-            makeFullPaymentRequest(orderIndex) {
-                this.isPaymentLoading = true;
-                axios.post(`${APP_URL}/api/payment/${this.orders[orderIndex].id}/full-payment`)
-                    .then(res => {
-                        this.initCheckout(res.data.paymentId)
-                        this.hideOrderDetailsForm = true;
-                        this.isPaymentLoading = false;
-                    }).catch(error => {
-                    console.error(error)
-                })
-            },
-            initCheckout(paymentID) {
-                this.isPaymentLoading = false;
-                var checkoutOptions = {
-                    checkoutKey: "test-checkout-key-500b92cc5d264cf88f5653ddc7a362d0", // for live [Required] Test or Live GUID with dashes
-                    paymentId: paymentID, //[required] GUID without dashes
-                    partnerMerchantNumber: "123456789", //[optional] Number
-                    containerId: "dibs-complete-checkout", //[optional] defaultValue: dibs-checkout-content
-                    language: "da-DK", //[optional] defaultValue: en-GB
-                    theme: { // [optional] - will change defaults in the checkout
-                        textColor: "blue", // any valid css color
-                        linkColor: "#bada55", // any valid css color
-                        panelTextColor: "rgb(125, 125, 125)", // any valid css color
-                        panelLinkColor: "#0094cf", // any valid css color
-                        primaryColor: "#0094cf", // any valid css color
-                        buttonRadius: "50px", // pixel or percentage value
-                        buttonTextColor: "#fff", // any valid css color
-                        backgroundColor: "#fafafa", // any valid css color
-                        panelColor: "#fff", // any valid css color
-                        outlineColor: "#444", // any valid css color
-                        primaryOutlineColor: "#444", // any valid css color   }
-                    }
-                }
-                var checkout = new Dibs.Checkout(checkoutOptions);
-
-                //this is the event that the merchant should listen to redirect to the “payment-is-ok” page
-
-                checkout.on('payment-completed', function (response) {
-                    /*
-                                Response:
-                                paymentId: string (GUID without dashes)
-                                */
-                    window.location = '/checkout?paymentId=' + response.paymentId;
-                });
-            }
         },
         created() {
             this.isLoadin = true;

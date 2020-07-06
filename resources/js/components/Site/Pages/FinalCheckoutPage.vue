@@ -21,7 +21,8 @@
                             <tr>
                                 <td>1</td>
                                 <td>
-                                    <img :src="product.thumbImage" :alt="product.name" style="width:50px">
+                                    <img :src="product.thumbImage" v-if="product.thumbImage != null" :alt="product.name"
+                                         style="width:50px">
                                 </td>
                                 <td>
                                     <router-link class="text-default"
@@ -39,8 +40,7 @@
                                     {{order.first_payment.amount}} Kr
                                 </td>
                                 <td>
-                                    {{(order.product.current_price * order.quantity) -
-                                    order.first_payment.amount}} Kr
+                                    {{((order.second_payment_amount)) }} Kr
                                 </td>
                             </tr>
 
@@ -175,30 +175,24 @@
 
                                             <tr>
                                                 <td><strong>Produkt pris:</strong></td>
-                                                <td>{{product.offer_price}} Kr</td>
+                                                <td>{{product.offer_price + order.variant_total}} Kr</td>
                                             </tr>
-                                            <tr>
-                                                <td><strong>Din betaling:</strong></td>
-                                                <td> {{ product.join_price}} Kr ({{ product.join_payment_percentage }}
-                                                    % of
-                                                    {{product.offer_price}} Kr)
-                                                </td>
-                                            </tr>
+
+
+                                            <!--                                            <tr>-->
+                                            <!--                                                <td><strong>Din betaling:</strong></td>-->
+                                            <!--                                                <td> {{ product.join_price}} Kr ({{ product.join_payment_percentage }}-->
+                                            <!--                                                    % of-->
+                                            <!--                                                    {{product.offer_price}} Kr)-->
+                                            <!--                                                </td>-->
+                                            <!--                                            </tr>-->
                                             <tr>
                                                 <td><strong>Antal</strong>:</td>
                                                 <td>{{orderDetails.quantity}}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Total:</strong></td>
-                                                <td> {{(order.product.current_price * order.quantity) -
-                                                    order.first_payment.amount}} dkk
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div>
-                                                        {{order.quantity}}
-                                                    </div>
+                                                <td> {{((order.second_payment_amount)) }} dkk
                                                 </td>
                                             </tr>
                                             <tr>

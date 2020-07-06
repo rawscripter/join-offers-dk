@@ -52,6 +52,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3 col-lg-3 mt-4 wow bounceIn">
+                                <div class="shadow border-bottom border-pink">
+                                    <div class="card-body text-center">
+                                        <h2 class="text-muted"><strong>{{dashboardData.totalFavourites}}</strong></h2>
+                                        <h5 class="text-muted"><strong>Total Favourites Events</strong></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3 mt-4 wow bounceIn">
+                                <div class="shadow border-bottom border-pink">
+                                    <div class="card-body text-center">
+                                        <h2 class="text-muted"><strong>{{dashboardData.totalReminders}}</strong></h2>
+                                        <h5 class="text-muted"><strong>Total Reminder Events</strong></h5>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

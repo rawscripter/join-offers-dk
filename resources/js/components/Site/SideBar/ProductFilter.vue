@@ -1,5 +1,6 @@
 <template>
-    <div v-if="!isLoading" :class="showFilterMenuOnMobile ? 'show-filter-on-mobile' : '' " class="main-sidebar mt-2 shadow"
+    <div v-if="!isLoading" :class="showFilterMenuOnMobile ? 'show-filter-on-mobile' : '' "
+         class="main-sidebar mt-2 shadow"
          id="main_sidebar">
         <div class="filter-title text-center">
             <h5><strong>Filter</strong></h5>
@@ -168,13 +169,13 @@
 
 <style>
 
-.filterSticky{
-    position:sticky;
-    top:150px;
-    cursor: pointer;
-    z-index: 11;
-    pointer-events: all;
-}
+    .filterSticky {
+        position: sticky;
+        top: 150px;
+        cursor: pointer;
+        z-index: 11;
+        pointer-events: all;
+    }
 
     .price-range-text {
         text-align: center;
@@ -223,5 +224,16 @@
     div#main_sidebar {
         min-width: 280px;
         max-width: 300px;
+    }
+
+    @media (max-width: 900px) {
+        div#main_sidebar {
+            z-index: 99999 !important;
+        }
+
+
+        .main-sidebar{
+            transform: translate(-306px);
+        }
     }
 </style>

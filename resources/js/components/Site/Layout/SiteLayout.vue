@@ -43,4 +43,17 @@
         margin-top: 200px;
     }
 
+    @media (max-width: 1200px){
+.mt-200{
+    margin-top: 280px;
+}
+    }
+
+
+    @media (max-width: 900px){
+        .mt-200{
+            margin-top: 300px;
+        }
+    }
+
 </style>
