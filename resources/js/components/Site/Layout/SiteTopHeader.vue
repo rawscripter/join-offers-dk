@@ -85,7 +85,7 @@
                                                 <input type="text" v-model="search" class="form-control rounded-0"
                                                        id="searchForm"
                                                        style="border: 1px solid transparent; !important"
-                                                       placeholder="Søg efter event" value="">
+                                                       placeholder="Søg efter begivenhed" value="">
                                                 <span class="input-group-btn">
                                             <button type="submit" class="btn btn-success rounded-0"
                                                     style="background-color: #078223;border-color:#078223">Søg</button>

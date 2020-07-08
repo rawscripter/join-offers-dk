@@ -15,7 +15,7 @@
                             <h5 class="text-center">My JoinOffers</h5>
                             <hr>
                             <div v-for="(order,index) in orders" class="table-responsive shadow wow bounceInUp">
-                                <div class="text-center mb-2"><strong>Order #{{order.custom_order_id}}</strong></div>
+                                <div class="text-center mb-2"><strong>Ordrer #{{order.custom_order_id}}</strong></div>
                                 <table class="table table-bordered text-center">
                                     <tr>
                                         <td rowspan="4" style="width:15%">
@@ -54,9 +54,9 @@
                                         </td>
                                         <td style="width:15%">
                                             Start pris:
-                                            <strong>{{order.product.offer_price}} dkk</strong>
+                                            <strong>{{order.product.offer_price}} Kr</strong>
                                         </td>
-                                        <td style="width:15%">Deltagende:
+                                        <td style="width:15%">Deltagere:
                                             <strong>{{order.product.totalOrders}}</strong></td>
                                     </tr>
                                     <tr>

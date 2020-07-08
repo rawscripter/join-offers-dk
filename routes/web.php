@@ -43,12 +43,12 @@ Route::get('/login', function () {
 })->name('login');
 
 // to load main site
-Route::get(' / register', function () {
+Route::get('/register', function () {
     return view('site.index');
 });
 
 //// to load main site
-Route::get(' / password / reset /{
+Route::get('/password/reset/{
         token}', function () {
     return view('site.index');
 })->name('password.reset');
@@ -59,10 +59,10 @@ Route::get('/checkout/payment/status', 'PaymentController@storePaymentDetails');
 
 
 Route::post('sociallogin/{provider}', 'AuthController@SocialSignup');
-Route::get('auth /{provider}/callback', 'OutController@index')->where('provider', ' .*');
+Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', ' .*');
 
 
-Route::get(' /{any}', function (\Illuminate\Http\Request $request) {
+Route::get('/{any}', function (\Illuminate\Http\Request $request) {
     if ($request->is('admin/*')) {
         return view('admin.index');
     }

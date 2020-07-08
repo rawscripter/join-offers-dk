@@ -1,17 +1,17 @@
 <template>
     <div class="product_view_sidebar shadow  ">
         <div class="pricing-left">
-            <h6>Gennemsnitlig markedsprice</h6>
+            <h6>Gennemsnitlig markedspris</h6>
             <h5>
                 <del>{{product.market_price}} Kr-</del>
             </h5>
-            <h6>Strtpris </h6>
+            <h6>Startpris </h6>
             <h6>
                 <del>{{product.offer_price}} Kr-</del>
             </h6>
-            <h6>Deltagend</h6>
+            <h6>Deltagere</h6>
             <h5>{{product.totalOrders}}</h5>
-            <h6>Din pris</h6>
+            <h6>Den nuværende pris</h6>
             <h5>{{product.current_price}} Kr</h5>
             <!--            total save-->
             <div class="product-variations mt-3 mb-3" v-if="product.product_variation.length > 0">
@@ -42,7 +42,7 @@
                 <button v-else @click="addProductToFavouriteList(product.slug)" class="btn btn-success">
                     {{product.total_favourites}} <i class="far fa-heart"></i></button>
             </div>
-            <button class="btn mt-1 btn-success">Du sprarer {{product.saving_percentage}}%</button>
+            <button class="btn mt-1 btn-success">Du sparer {{product.saving_percentage}}%</button>
         </div>
         <div class="checkout mt-3 mb-3" v-if="isOfferTimeStarted">
             <router-link v-if="!isExpired" class="btn btn-theme btn-block" tag="div"
