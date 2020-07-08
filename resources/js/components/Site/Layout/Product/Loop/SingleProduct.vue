@@ -292,7 +292,7 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event added to favourite list.');
+                            Alert.showSuccessAlert('Begivenhed føjet til favoritlisten.');
                             this.$root.$emit('updateFavouriteProductList', true);
 
                         } else {
@@ -305,7 +305,7 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event removed from favourite list.');
+                            Alert.showSuccessAlert('Begivenhed fjernet fra favoritlisten.');
                             this.$root.$emit('updateFavouriteProductList', true);
 
                         } else {
