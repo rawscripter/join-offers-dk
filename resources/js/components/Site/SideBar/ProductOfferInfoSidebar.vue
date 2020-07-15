@@ -220,9 +220,9 @@
 
                     let optionVariationOption = productVariations.options[optionVariationOptionIndex];
 
-                    let newPrice = ((this.product.join_payment_percentage / 100) * optionVariationOption.price);
+                    //let newPrice = ((this.product.join_payment_percentage / 100) * price);
 
-                    this.product.current_price -= newPrice;
+                    this.product.current_price -= optionVariationOption.price;
 
 
                     this.selectedVariations[selectedIndex].optionID = optionID;
@@ -236,9 +236,7 @@
 
                 this.$cookies.set(`product-variation-${this.product.id}`, JSON.stringify(this.selectedVariations), 60 * 5)
 
-                let newPrice = ((this.product.join_payment_percentage / 100) * price);
-
-                this.product.current_price += newPrice;
+                this.product.current_price += price;
             },
             submitProductRequest() {
                 axios.post(`/api/product/${this.product.slug}/make/request`, this.productRequest)

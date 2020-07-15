@@ -729,3 +729,8 @@ div#main_sidebar {
 
     /* footer section end for mobile*/
 }
+img#mainImage {
+    border: 1px solid #dedede;
+    padding: 15px;
+    max-width: 550px !important;
+}
