@@ -60,7 +60,7 @@
                             <div id="days" class="num">{{timeObj.d}}</div>
                         </div>
                         <div class="well top-pane">
-                            <div class="text"><strong>Dag</strong></div>
+                            <div class="text"><strong>Dage</strong></div>
                         </div>
 
                     </div>
@@ -70,7 +70,7 @@
                             <div id="hours" class="num">{{timeObj.h}}</div>
                         </div>
                         <div class="well top-pane">
-                            <div class="text"><strong>Time</strong></div>
+                            <div class="text"><strong>Timer</strong></div>
                         </div>
 
                     </div>
@@ -94,7 +94,7 @@
 
                     </div>
                 </div>
-                <span slot="finish" class="expired">Tilbuddet er udløbet!</span>
+                <span slot="finish" class="expired">Begivenheden er endt</span>
             </vac>
             <span v-else class="expired">
                 Kommer snart
@@ -109,7 +109,7 @@
                             <div id="days" class="num">{{timeObj.d}}</div>
                         </div>
                         <div class="well top-pane">
-                            <div class="text"><strong>Dag</strong></div>
+                            <div class="text"><strong>Dage</strong></div>
                         </div>
 
                     </div>
@@ -119,7 +119,7 @@
                             <div id="hours" class="num">{{timeObj.h}}</div>
                         </div>
                         <div class="well top-pane">
-                            <div class="text"><strong>Time</strong></div>
+                            <div class="text"><strong>Timer</strong></div>
                         </div>
 
                     </div>
@@ -143,7 +143,7 @@
 
                     </div>
                 </div>
-                <span slot="finish" class="expired">Tilbuddet er udløbet!</span>
+                <span slot="finish" class="expired">Begivenheden er endt</span>
             </vac>
 
             </span>
@@ -155,21 +155,21 @@
         </div>
         <div class="pricing-section d-flex justify-content-start">
             <div class="pricing-left">
-                <h6><small>Gennemsnitlig markedsprice</small></h6>
+                <h6><small>Gennemsnitlig markedspris</small></h6>
                 <h5>
                     <del>{{product.market_price}} Kr</del>
                 </h5>
-                <h6>Strtpris </h6>
+                <h6>Startpris </h6>
                 <h5>
                     <del>{{product.offer_price}} Kr</del>
                 </h5>
-                <h6>Du sprarer </h6>
+                <h6>Du sparer </h6>
                 <button class="btn btn-success btn-sm">{{product.saving_percentage}}%</button>
             </div>
             <div class="pricing-right">
-                <h6><small>Deltagend</small></h6>
+                <h6><small>Deltagere</small></h6>
                 <h6>{{product.totalOrders}}</h6>
-                <h6><small>Din Pris</small></h6>
+                <h6><small>Den nuværende pris</small></h6>
                 <h5>{{product.current_price}} Kr</h5>
             </div>
         </div>
@@ -292,7 +292,7 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event added to favourite list.');
+                            Alert.showSuccessAlert('Begivenhed føjet til favoritlisten.');
                             this.$root.$emit('updateFavouriteProductList', true);
 
                         } else {
@@ -305,7 +305,7 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event removed from favourite list.');
+                            Alert.showSuccessAlert('Begivenhed fjernet fra favoritlisten.');
                             this.$root.$emit('updateFavouriteProductList', true);
 
                         } else {

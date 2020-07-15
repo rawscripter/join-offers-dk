@@ -63,7 +63,7 @@
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="checkbox_container">For nylig udløbet
+                <label class="checkbox_container">Udløbne begivenheder
                     <input v-model="filter.short" value="expired" type="radio">
                     <span class="checkmark"></span>
                 </label>

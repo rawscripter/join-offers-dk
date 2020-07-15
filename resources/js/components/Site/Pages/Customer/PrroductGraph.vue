@@ -6,7 +6,7 @@
                     <CustomerLeftSidebar></CustomerLeftSidebar>
                 </div>
                 <div class="col-md-9 col-lg-10" style="background:#fff">
-                    <button class="btn btn-info" @click="$router.go(-1)">Go Back</button>
+                    <button class="btn btn-info" @click="$router.go(-1)">Tilbage</button>
                     <br>
                     <br>
                     <div id="chart">
