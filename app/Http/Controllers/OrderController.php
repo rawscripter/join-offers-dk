@@ -88,10 +88,12 @@ class OrderController extends Controller
                 'current_price' => $product->current_price,
                 'is_join_payment_enable' => $product->join_price > 0 ? 1 : 0,
                 'total_price' => $request->orderDetails['totalPrice'],
-                'variations' => $variations
+                'variant_total' => $request->orderDetails['variantTotal'],
+                'variations' => $variations,
+
             ]
         );
-
+//return $newOrder;
         echo PaymentController::createPaymentId($newOrder);
 
     }
@@ -109,6 +111,7 @@ class OrderController extends Controller
                 'is_join_payment_enable' => $order->is_join_payment_enable,
                 'total_price' => $order->total_price,
                 'variations' => $order->variations,
+                'variant_total' => $order->variant_total,
                 'payment_deadline' => Carbon::parse($order->product->expire_date)->addDays(7),
             ]
         );

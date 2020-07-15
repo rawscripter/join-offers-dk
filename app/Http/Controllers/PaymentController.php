@@ -25,7 +25,7 @@ class PaymentController extends Controller
             "taxRate": 0,
             "taxAmount": 0,
             "grossTotalAmount": ' . $order->total_price * 100 . ',
-            "netTotalAmount": ' . $order->total_price * 100  . '
+            "netTotalAmount": ' . $order->total_price * 100 . '
         }
         ],
         "amount": ' . $order->total_price * 100 . ',
@@ -60,9 +60,7 @@ class PaymentController extends Controller
 
     public static function createFullPaymentId(Order $order)
     {
-        $productCurrentPrice = $order->product->current_price;
-        $payAmount = $productCurrentPrice - $order->join_price;
-        $total = $payAmount * $order->quantity;
+        $total = $order->finalPaymentAmount();
         $datastring = '{"order": {
         "items": [{
             "reference": "' . $order->custom_order_id . '",
@@ -110,7 +108,6 @@ class PaymentController extends Controller
     {
         $paymentFailed = $request->paymentFailed;
         $paymentId = $request->paymentId;
-
         $ch = curl_init('https://test.api.dibspayment.eu/v1/payments/' . $paymentId . '');
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -124,8 +121,6 @@ class PaymentController extends Controller
         $OrderData = $paymentDetails['payment']['orderDetails'];
         $orderId = $OrderData['reference'];
         $receivedAmount = $paymentData['summary']['reservedAmount'] ?? '';
-
-
         // if failed then return with error message
         if ($paymentFailed) {
             //delete temporary table data
@@ -133,15 +128,11 @@ class PaymentController extends Controller
             if ($temporaryOrder) {
                 $temporaryOrder->delete();
             }
-
             // if payment failed delete the order
             return redirect('/order/payment?status=failed');
         }
-
         // payment complete
         $order = Order::where('custom_order_id', $orderId)->first();
-
-
         if (empty($order)) {
             // now store payment data to order Table
             $temporaryOrder = TemporaryOrder::where('custom_order_id', $orderId)->orderBy('created_at', 'desc')->first();
@@ -172,8 +163,6 @@ class PaymentController extends Controller
             'status' => 'paid',
             'amount' => $receivedAmount / 100,
         ]);
-
         return redirect('/order/payment?status=success&order=' . $order->custom_order_id . '&type=' . $type);
-
     }
 }

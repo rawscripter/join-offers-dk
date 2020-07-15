@@ -24,6 +24,8 @@ class OrderResource extends JsonResource
             'join_price' => $this->join_price,
             'total_price' => $this->total_price,
             'variations' => $this->orderVariations(),// $this->variations ? json_decode($this->variations, true) : [],
+            'variant_total' => $this->variant_total,
+            'second_payment_amount' => $this->finalPaymentAmount(),
             'is_join_payment_enable' => $this->is_join_payment_enable,
             'is_join_price_paid' => $this->is_join_price_paid,
             'first_payment' => new OrderPaymentResource($this->firstPayment()),
@@ -36,6 +38,4 @@ class OrderResource extends JsonResource
             'created_at' => Carbon::parse($this->created_at)->format('d F Y'),
         ];
     }
-
-
 }

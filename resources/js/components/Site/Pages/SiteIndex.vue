@@ -13,7 +13,7 @@
                         <div class="product-area" v-if="runningProducts.length > 0">
                             <div class="running-products">
                                 <div class="alert alert-secondary text-center">
-                                    <strong>Kørere Tilbud</strong>
+                                    <strong>Igangværende begivenheder</strong>
                                 </div>
                                 <div class="row">
                                     <div
@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="col-12 text-center mt-3">
                                         <a href="" class="btn btn-default"></a>
-                                        <router-link class="btn btn-default" :to="{name: 'filter', query: {
+                                        <router-link class="btn btn-secondary" :to="{name: 'filter', query: {
                                                                 gender: 'all',
                                                                 short: 'running_product'
                                                             }}" tag="a">
@@ -54,8 +54,8 @@
                                     </div>
 
                                     <div class="col-12 text-center mt-3">
-                                        <a href="" class="btn btn-default"></a>
-                                        <router-link class="btn btn-default" :to="{name: 'filter', query: {
+                                        <a href="" class="btn btn-default btn-paimary"></a>
+                                        <router-link class="btn btn-secondary" :to="{name: 'filter', query: {
                                                                 gender: 'all',
                                                                 short: 'coming_soon'
                                                             }}" tag="a">
@@ -69,7 +69,7 @@
                         <div class="product-area mt-5" v-if="expiredProducts.length > 0">
                             <div class="running-products">
                                 <div class="alert alert-secondary text-center">
-                                    <strong>For nylig udløbne tilbud</strong>
+                                    <strong>Udløbne begivenheder</strong>
                                 </div>
                                 <div class="row">
                                     <div
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="col-12 text-center mt-3">
                                         <a href="" class="btn btn-default"></a>
-                                        <router-link class="btn btn-default" :to="{name: 'filter', query: {
+                                        <router-link class="btn btn-secondary" :to="{name: 'filter', query: {
                                                                 gender: 'all',
                                                                 short: 'expired'
                                                             }}" tag="a">
@@ -117,7 +117,7 @@
         },
         data() {
             return {
-                errorText: "Loading...",
+                errorText: "Loader...",
                 isLoading: false,
                 products: [],
                 runningProducts: [],

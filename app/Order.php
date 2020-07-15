@@ -14,7 +14,6 @@ class Order extends Model
         return $this->belongsTo(Product::class);
     }
 
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -39,8 +38,19 @@ class Order extends Model
     {
         if (empty($this->variations)) return [];
         $variations = json_decode($this->variations, true);
-
         return OrderVariationResource::collection($variations);
     }
 
+    public function finalPaymentAmount()
+    {
+        $payAmount = $this->product->current_price;
+        $total = $payAmount * $this->quantity;
+        $total = $total - $this->join_price;
+        if ($this->variant_total > 0) {
+            $previousPaid = $this->variant_total / $this->product->paymentPercentage();
+            $needToPay = $this->variant_total - $previousPaid;
+            $total += $needToPay;
+        }
+        return $total;
+    }
 }

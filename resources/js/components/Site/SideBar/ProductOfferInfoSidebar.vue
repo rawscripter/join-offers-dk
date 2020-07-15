@@ -1,17 +1,17 @@
 <template>
     <div class="product_view_sidebar shadow  ">
         <div class="pricing-left">
-            <h6>Gennemsnitlig markedsprice</h6>
+            <h6>Gennemsnitlig markedspris</h6>
             <h5>
                 <del>{{product.market_price}} Kr-</del>
             </h5>
-            <h6>Strtpris </h6>
+            <h6>Startpris </h6>
             <h6>
                 <del>{{product.offer_price}} Kr-</del>
             </h6>
-            <h6>Deltagend</h6>
+            <h6>Deltagere</h6>
             <h5>{{product.totalOrders}}</h5>
-            <h6>Din pris</h6>
+            <h6>Den nuværende pris</h6>
             <h5>{{product.current_price}} Kr</h5>
             <!--            total save-->
             <div class="product-variations mt-3 mb-3" v-if="product.product_variation.length > 0">
@@ -28,7 +28,7 @@
                             <label
                                 @click="changeProductPriceOnVariationChange(variation.id,option.id,option.price)"
                                 class="button-label" :for="`radio-btn-${option.id}`">
-                                <span> {{option.name}}</span>
+                                <span> {{option.name}} +{{option.price}}kr</span>
                             </label>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                 <button v-else @click="addProductToFavouriteList(product.slug)" class="btn btn-success">
                     {{product.total_favourites}} <i class="far fa-heart"></i></button>
             </div>
-            <button class="btn mt-1 btn-success">Du sprarer {{product.saving_percentage}}%</button>
+            <button class="btn mt-1 btn-success">Du sparer {{product.saving_percentage}}%</button>
         </div>
         <div class="checkout mt-3 mb-3" v-if="isOfferTimeStarted">
             <router-link v-if="!isExpired" class="btn btn-theme btn-block" tag="div"
@@ -210,6 +210,21 @@
 
                 // already selected
                 if (selectedIndex !== -1) {
+
+                    if (this.selectedVariations[selectedIndex].optionID === optionID) return;
+
+                    let optionVariationOptionId = this.selectedVariations[selectedIndex].optionID;
+
+                    let productVariations = this.product.product_variation[selectedIndex];
+                    let optionVariationOptionIndex = productVariations.options.findIndex(x => x.id === parseInt(optionVariationOptionId));
+
+                    let optionVariationOption = productVariations.options[optionVariationOptionIndex];
+
+                    let newPrice = ((this.product.join_payment_percentage / 100) * optionVariationOption.price);
+
+                    this.product.current_price -= newPrice;
+
+
                     this.selectedVariations[selectedIndex].optionID = optionID;
                 } else {
                     let newObject = {
@@ -221,10 +236,9 @@
 
                 this.$cookies.set(`product-variation-${this.product.id}`, JSON.stringify(this.selectedVariations), 60 * 5)
 
+                let newPrice = ((this.product.join_payment_percentage / 100) * price);
 
-
-
-                this.product.current_price += price;
+                this.product.current_price += newPrice;
             },
             submitProductRequest() {
                 axios.post(`/api/product/${this.product.slug}/make/request`, this.productRequest)
@@ -245,6 +259,7 @@
                         if (res.data.status === 200) {
                             this.isUserLiked = res.data.product.isLikedByCurrentUser;
                             this.total_likes++;
+
                         } else {
                             alert(res.data.message);
                         }
@@ -259,7 +274,8 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserFavourite = res.data.product.isFavouriteByCurrentUser;
-                            Alert.showSuccessAlert('Event added to favourite list.')
+                            Alert.showSuccessAlert('Event added to favourite list.');
+                            this.$root.$emit('updateFavouriteProductList', true);
                         } else {
                             alert(res.data.message);
                         }
@@ -269,7 +285,8 @@
                 axios.get(`/api/product/${slug}/reminder/add`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            Alert.showSuccessAlert('Event added to reminder list.')
+                            Alert.showSuccessAlert('Event added to reminder list.');                            this.$root.$emit('updateFavouriteProductList', true);
+                            this.$root.$emit('updateFavouriteProductList', true);
                         } else {
                             alert(res.data.message);
                         }

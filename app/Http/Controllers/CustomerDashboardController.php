@@ -14,6 +14,8 @@ class CustomerDashboardController extends Controller
         $data['activeOrders'] = $user->runningOrders->count();
         $data['completedOrders'] = $user->completedOrders->count();
         $data['canceledOrders'] = $user->canceledOrders->count();
+        $data['totalFavourites'] = $user->favouriteProducts->count();
+        $data['totalReminders'] = $user->reminders->count();
         $res['status'] = 200;
         $res['data'] = $data;
         // json call back

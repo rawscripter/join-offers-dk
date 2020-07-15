@@ -26,8 +26,8 @@
                             <div v-for="(image,index) in formData.productImages" class="image"
                                  @click="removeProductImage(index)">
                                 <img
-                                    :src="image.thumbImage"
-                                    width="60px" class="imag" alt="img-thumbnail">
+                                        :src="image.thumbImage"
+                                        width="60px" class="imag" alt="img-thumbnail">
                             </div>
 
                         </div>
@@ -187,7 +187,8 @@
                                                         <div class="action">
                                                             <span class="btn btn-sm btn-success"
                                                                   @click="addVariationOption(variationIndex)">+</span>
-                                                            <span @click="deleteProductVariation(variationIndex)" class="btn btn-sm btn-danger">
+                                                            <span @click="deleteProductVariation(variationIndex)"
+                                                                  class="btn btn-sm btn-danger">
                                                                 <i style="position: unset"
                                                                    class="la la-trash"></i>
                                                             </span>
@@ -208,8 +209,8 @@
                                                                 <td>
                                                                     <div class="action">
                                                                          <span
-                                                                             @click="deleteProductVariationOption(variationIndex,optionIndex)"
-                                                                             class="btn btn-sm btn-danger p-1">
+                                                                                 @click="deleteProductVariationOption(variationIndex,optionIndex)"
+                                                                                 class="btn btn-sm btn-danger p-1">
                                                                 <i style="position: unset"
                                                                    class="la la-trash"></i>
                                                             </span>
@@ -570,7 +571,7 @@
                 this.formData.join_price = joinPrice.toFixed(2);
 
                 // to set the price
-                let minusPrice = price / this.formData.total_offer_spots;
+                let minusPrice = ( price - this.formData.last_price ) / this.formData.total_offer_spots;
                 this.formData.minus_price_user_price = minusPrice.toFixed(2);
             },
             'formData.join_price_percentage'(percentage) {
@@ -578,7 +579,7 @@
                 this.formData.join_price = joinPrice.toFixed(2);
             },
             'formData.total_offer_spots'(spot) {
-                let minusPrice = this.formData.offer_price / spot;
+                let minusPrice = (this.formData.offer_price - this.formData.last_price) / spot;
                 this.formData.minus_price_user_price = minusPrice.toFixed(2);
             }
         }

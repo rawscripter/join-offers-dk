@@ -3,8 +3,7 @@
         <!-- Primary carousel image -->
 
         <div class="show">
-            <img :src="displayProductImage" id="mainImage">
-
+            <img :src="displayProductImage" id="mainImage" style="display:block; width:80%; height:80%; margin:auto;">
         </div>
         <!-- Secondary carousel image thumbnail gallery -->
         <div v-if="hasImages" class="small-img">
@@ -42,7 +41,7 @@
                     </div>
                     <div class="clock">
                         <div class="well top-pane">
-                            <div id="mins-text" class="text">Min.</div>
+                            <div id="mins-text" class="text">Min</div>
 
                         </div>
                         <div class="well bottom-pane">

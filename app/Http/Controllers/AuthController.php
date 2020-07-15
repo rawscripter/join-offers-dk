@@ -55,7 +55,6 @@ class AuthController extends Controller
             $res['message'] = 'Invalid Request.';
         }
         return response()->json($res);
-
     }
 
     public function updateInfo(Request $request)
@@ -83,7 +82,6 @@ class AuthController extends Controller
                 ]
             ]);
             return $response->getBody();
-
         } catch (\GuzzleHttp\Exception\BadResponseException $e) {
             if ($e->getCode() == 400) {
                 return response()->json('Invalid Request. Please Enter a username or password.', $e->getCode());
@@ -134,7 +132,6 @@ class AuthController extends Controller
         } else {
             return response()->json('This email already in use.', 400);
         }
-
     }
 
     public function logout()

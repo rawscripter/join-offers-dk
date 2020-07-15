@@ -73,7 +73,7 @@
 
 <script>
     export default {
-        name: "SiteFooter"
+        name: "SiteFooter",
     }
 </script>
 

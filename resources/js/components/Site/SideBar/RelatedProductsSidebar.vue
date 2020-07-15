@@ -2,12 +2,12 @@
     <div class="product_view_right_widget ">
         <div class="related-prodcut-widget">
             <div class="row">
-                <!-- prodcut single  -->
-                <div v-for="product in products" class="col-md-12 col-lg-12 p-0 m-0 shadow" :key="product.id">
+                <!-- product single  -->
+                <div v-for="product in products" class="col-md-4 col-lg-3 p-0 m-0 shadow" :key="product.id">
                     <SingleProduct :product="product"></SingleProduct>
                 </div>
                 <!-- end of product single  -->
-                <!-- prodcut single  -->
+                <!-- product single  -->
             </div>
         </div>
     </div>

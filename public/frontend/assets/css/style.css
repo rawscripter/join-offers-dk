@@ -635,7 +635,6 @@ span.social {
 
 .related-prodcut-widget {
     max-height: 1200px;
-    overflow-y: scroll;
 }
 
 
@@ -704,24 +703,29 @@ div#main_sidebar {
         max-height: 750px;
         overflow-y: scroll;
     }
-    #header_video{
-        margin-top:3rem;
+
+    #header_video {
+        margin-top: 3rem;
     }
 
     /* footer section start for mobile*/
-.footer-row-contianer{
-    padding:.5rem 0rem 0rem 0rem;;
-  }
-  .FooterSectionGap{
-    margin-bottom:2rem;
-  }
-  .footer-arrow-up-mobile{
-    display:flex;
-    justify-content: center;
-    text-align: center;
-  }
-  .footer-arrow-up{
-    display: none;
-  }
-  /* footer section end for mobile*/
+    .footer-row-contianer {
+        padding: .5rem 0rem 0rem 0rem;;
+    }
+
+    .FooterSectionGap {
+        margin-bottom: 2rem;
+    }
+
+    .footer-arrow-up-mobile {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-arrow-up {
+        display: none;
+    }
+
+    /* footer section end for mobile*/
 }

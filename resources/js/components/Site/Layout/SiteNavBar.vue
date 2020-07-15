@@ -6,8 +6,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <button class="navbar-toggler"  @click="showFilterOnMobile"  type="button" data-toggle="collapse" data-target="#openSidebar"
-                    aria-controls="openSidebar" aria-expanded="false" aria-label="Toggle navigation" id="openSidebar"
+            <button class="navbar-toggler"  @click="showFilterOnMobile"  type="button"  id="openSidebar"
                 >
                 <img src="/images/icons/filter.png" width="24" alt="">
             </button>

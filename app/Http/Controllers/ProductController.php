@@ -320,7 +320,7 @@ class ProductController extends Controller
             ->where('expire_date', '>', Carbon::now())
             ->where('offer_start_date', '<', Carbon::now())
             ->where('category_id', $product->category->id)
-            ->where('id', '!=', $product->id)->limit(9)->get();
+            ->where('id', '!=', $product->id)->limit(4)->get();
         if (!empty($products)) {
             $res['status'] = 200;
             $res['message'] = 'Product Found Successfully.';

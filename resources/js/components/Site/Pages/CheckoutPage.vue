@@ -184,6 +184,7 @@
                     quantity: 1,
                     totalPrice: 0,
                     unitPrice: 0,
+                    variantTotal: 0
                 },
                 selectedVariations: []
             }
@@ -218,10 +219,13 @@
                     let optionVariationOption = productVariations.options[optionVariationOptionIndex];
 
                     this.product.offer_price -= optionVariationOption.price;
-                    this.product.join_price -= optionVariationOption.price;
-                    this.orderDetails.totalPrice -= optionVariationOption.price * this.orderDetails.quantity;
+                    let newPrice = ((this.product.join_payment_percentage / 100) * optionVariationOption.price);
+
+                    this.product.join_price -= newPrice;
+                    this.orderDetails.totalPrice -= newPrice * this.orderDetails.quantity;
 
 
+                    this.orderDetails.variantTotal -= optionVariationOption.price;
                     this.selectedVariations[selectedIndex].optionID = optionID;
 
 
@@ -233,10 +237,13 @@
                     this.selectedVariations.push(newObject)
                 }
 
-                this.product.offer_price += price;
-                this.product.join_price += price;
+                let newPrice = ((this.product.join_payment_percentage / 100) * price);
 
-                this.orderDetails.totalPrice += price * this.orderDetails.quantity;
+                this.orderDetails.variantTotal += price;
+                this.product.offer_price += price;
+
+                this.product.join_price += newPrice;
+                this.orderDetails.totalPrice += newPrice * this.orderDetails.quantity;
             },
 
             isOptionAlreadySelected(optionID) {
@@ -281,8 +288,9 @@
                                 let selectedVariationOptionIndex = variationOptions.findIndex(x => x.id === variation.optionID);
                                 let needToAddPrice = variationOptions[selectedVariationOptionIndex].price;
                                 vm.product.offer_price += needToAddPrice;
-                                vm.product.join_price += needToAddPrice;
-                                vm.orderDetails.totalPrice += needToAddPrice;
+                                vm.product.join_price += ((vm.product.join_payment_percentage / 100) * needToAddPrice);
+                                vm.orderDetails.totalPrice += ((vm.product.join_payment_percentage / 100) * needToAddPrice);
+                                vm.orderDetails.variantTotal += needToAddPrice;
                             })
                         }
 

@@ -15,7 +15,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        MailController::sendMailToAdminOnNewUserRegister($user);
+     //   MailController::sendMailToAdminOnNewUserRegister($user);
     }
 
     /**

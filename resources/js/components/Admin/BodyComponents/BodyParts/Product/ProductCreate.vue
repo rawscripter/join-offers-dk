@@ -285,7 +285,7 @@
                 this.formData.join_price = joinPrice.toFixed(2);
 
                 // to set the price
-                let minusPrice = price / this.formData.total_offer_spots;
+                let minusPrice = ( price - this.formData.last_price ) / this.formData.total_offer_spots;
                 this.formData.minus_price_user_price = minusPrice.toFixed(2);
             },
             'formData.join_price_percentage'(percentage) {
@@ -293,7 +293,7 @@
                 this.formData.join_price = joinPrice.toFixed(2);
             },
             'formData.total_offer_spots'(spot) {
-                let minusPrice = this.formData.offer_price / spot;
+                let minusPrice = (this.formData.offer_price - this.formData.last_price) / spot;
                 this.formData.minus_price_user_price = minusPrice.toFixed(2);
             }
         }

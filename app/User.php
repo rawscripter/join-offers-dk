@@ -88,6 +88,10 @@ class User extends Authenticatable
     public function isSubscribed()
     {
         return Subscriber::where('user_id', $this->id)->where('email', $this->email)->first();
+    }
 
+    public function reminders()
+    {
+        return $this->hasMany(ProductReminder::class);
     }
 }
