@@ -47,7 +47,7 @@ class Order extends Model
         $total = $payAmount * $this->quantity;
         $total = $total - $this->join_price;
         if ($this->variant_total > 0) {
-            $previousPaid = $this->variant_total / $this->product->paymentPercentage();
+            $previousPaid = ($this->product->paymentPercentage() / 100) * $this->variant_total;
             $needToPay = $this->variant_total - $previousPaid;
             $total += $needToPay;
         }
