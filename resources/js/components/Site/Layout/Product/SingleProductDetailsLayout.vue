@@ -7,6 +7,7 @@
         </div>
         <!-- Secondary carousel image thumbnail gallery -->
         <div v-if="hasImages" class="small-img">
+            <img @click="previousSliderImage" src="/images/icons/next-icon.png" class="icon-left" alt="" id="prev-img">
             <div class="image-container">
                 <img v-for="(image,index) in product.productImages"
                      :src="image.thumbImage"
@@ -14,14 +15,15 @@
                      :class="{active : active_img === index}"
                      class="show-small-img" alt="">
             </div>
+            <img @click="nextSliderImage" src="/images/icons/next-icon.png" class="icon-right" alt="" id="next-img">
         </div>
 
         <div class="timer text-center mt-2 mb-2">
             <vac v-if="isOfferTimeStarted" :end-time="new Date(product.expire_date)">
                 <div
-                    class="timer-area d-flex justify-content-center mt-3 mb-3"
-                    slot="process"
-                    slot-scope="{ timeObj }">
+                        class="timer-area d-flex justify-content-center mt-3 mb-3"
+                        slot="process"
+                        slot-scope="{ timeObj }">
                     <div class="clock">
                         <div class="well top-pane">
                             <div id="days-text" class="text">Dage</div>
@@ -94,6 +96,22 @@
             changeMainImage(index) {
                 this.active_img = index;
                 this.displayProductImage = this.product.productImages[index].featureImage;
+            },
+            nextSliderImage() {
+                if (this.product.productImages.length > this.active_img + 1) {
+                    this.active_img++;
+                } else {
+                    this.active_img = 0;
+                }
+                this.displayProductImage = this.product.productImages[this.active_img].featureImage;
+            },
+            previousSliderImage() {
+                if (this.active_img === 0 || this.active_img == null) {
+                    this.active_img = this.product.productImages.length - 1;
+                } else {
+                    this.active_img--;
+                }
+                this.displayProductImage = this.product.productImages[this.active_img].featureImage;
             },
         },
         computed: {
