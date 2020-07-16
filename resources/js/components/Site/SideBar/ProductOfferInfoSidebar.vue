@@ -7,7 +7,8 @@
             </h5>
             <h6>Startpris </h6>
             <h6>
-                <del>{{product.offer_price}} Kr-</del>
+                <span v-if="product.current_price != product.offer_price"> <del>{{product.offer_price}} Kr-</del></span>
+                <span v-else><h5>{{product.offer_price}} Kr</h5></span>
             </h6>
             <h6>Deltagere</h6>
             <h5>{{product.totalOrders}}</h5>
@@ -28,7 +29,7 @@
                             <label
                                 @click="changeProductPriceOnVariationChange(variation.id,option.id,option.price)"
                                 class="button-label" :for="`radio-btn-${option.id}`">
-                                <span> {{option.name}} +{{option.price}}kr</span>
+                                <span> {{option.name}} <span v-if="option.price >0">+{{option.price}}kr</span></span>
                             </label>
                         </div>
                     </div>
@@ -36,11 +37,11 @@
             </div>
 
             <div class="love-section clearfix">
-                <button v-if="product.isLikedByCurrentUser" class="btn btn-success"> {{product.total_favourites}} <i
+                <button v-if="product.isLikedByCurrentUser" class="btn btn-success"> {{product.totalLikes}} <i
                     class="fas fa-heart"
                     style="color:red"></i></button>
-                <button v-else @click="addProductToFavouriteList(product.slug)" class="btn btn-success">
-                    {{product.total_favourites}} <i class="far fa-heart"></i></button>
+                <button v-else @click="addProductToLikeList(product.slug)" class="btn btn-success">
+                    {{product.totalLikes}} <i class="far fa-heart"></i></button>
             </div>
             <button class="btn mt-1 btn-success">Du sparer {{product.saving_percentage}}%</button>
         </div>
@@ -189,7 +190,7 @@
         props: ['product'],
         data() {
             return {
-                selectedVariations:[],
+                selectedVariations: [],
                 showModal: false,
                 productRequestModal: false,
                 isUserLiked: false,
@@ -256,7 +257,7 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.isUserLiked = res.data.product.isLikedByCurrentUser;
-                            this.total_likes++;
+                            this.totalLikes++;
 
                         } else {
                             alert(res.data.message);
@@ -283,7 +284,8 @@
                 axios.get(`/api/product/${slug}/reminder/add`)
                     .then(res => {
                         if (res.data.status === 200) {
-                            Alert.showSuccessAlert('Event added to reminder list.');                            this.$root.$emit('updateFavouriteProductList', true);
+                            Alert.showSuccessAlert('Event added to reminder list.');
+                            this.$root.$emit('updateFavouriteProductList', true);
                             this.$root.$emit('updateFavouriteProductList', true);
                         } else {
                             alert(res.data.message);
@@ -325,7 +327,7 @@
         mounted() {
             this.isUserLiked = this.product.isLikedByCurrentUser;
             this.isUserFavourite = this.product.isFavouriteByCurrentUser;
-            this.totalLikes = this.product.total_favourites;
+            this.totalLikes = this.product.total_likes;
         },
 
     }

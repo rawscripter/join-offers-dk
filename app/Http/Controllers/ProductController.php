@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Favourite;
-use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Like;
 use App\Product;
 use App\ProductImage;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -23,7 +20,7 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index(Request $request)
     {
@@ -66,7 +63,7 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function archiveProducts(Request $request)
     {
@@ -102,7 +99,7 @@ class ProductController extends Controller
             $minPrice = $_GET['minPrice'] ?? '';
             $maxPrice = $_GET['maxPrice'] ?? '';
             $products = Product::query();
-
+            $products->where('is_archive', 0);
 
             // only coming soon products
             if ($short === 'coming_soon') {
@@ -145,12 +142,12 @@ class ProductController extends Controller
             }
 
 
-            $products = $products->paginate(6);
+            $products = $products->paginate(600);
 
         } else if (isset($request['query']) && !empty($request['query'])) {
-            $products = Product::where('name', 'like', '%' . $request['query'] . '%')->orderBy('created_at', 'desc')->paginate(6);
+            $products = Product::where('name', 'like', '%' . $request['query'] . '%')->orderBy('created_at', 'desc')->paginate(600);
         } else {
-            $products = Product::orderBy('created_at', 'desc')->paginate(6);
+            $products = Product::orderBy('created_at', 'desc')->paginate(600);
         }
         $res['products'] = ProductResource::collection($products);
         $res['lastPage'] = $res['products']->lastPage();
@@ -162,6 +159,7 @@ class ProductController extends Controller
         $res['status'] = 200;
         $res['message'] = 'All Categories';
         $products = Product::inRandomOrder()
+            ->where('is_archive', 0)
             ->where('offer_start_date', '<', Carbon::now())
             ->where('expire_date', '>', Carbon::now())
             ->limit(3)
@@ -175,6 +173,7 @@ class ProductController extends Controller
         $res['status'] = 200;
         $res['message'] = 'All Categories';
         $products = Product::inRandomOrder()
+            ->where('is_archive', 0)
             ->where('offer_start_date', '>', Carbon::now())
             ->limit(3)
             ->get();
@@ -187,6 +186,7 @@ class ProductController extends Controller
         $res['status'] = 200;
         $res['message'] = 'All Categories';
         $products = Product::inRandomOrder()
+            ->where('is_archive', 0)
             ->where('expire_date', '<', Carbon::now())
             ->limit(3)
             ->get();
@@ -217,7 +217,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
@@ -227,8 +227,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -267,8 +267,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Product $product
-     * @return \Illuminate\Http\JsonResponse
+     * @param Product $product
+     * @return JsonResponse
      */
     public function show(Product $product)
     {
@@ -287,7 +287,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param $slug
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function showProductForSite($slug)
     {
@@ -310,7 +310,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param $slug
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function showRelatedForSite($slug)
     {
@@ -349,8 +349,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return void
      */
     public function edit(Product $product)
     {
@@ -360,9 +360,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Product $product
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @param Product $product
+     * @return JsonResponse
      */
     public function update(Request $request, Product $product)
     {
@@ -399,8 +399,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Product $product
-     * @return \Illuminate\Http\JsonResponse
+     * @param Product $product
+     * @return JsonResponse
      */
     public function destroy(Product $product)
     {
@@ -567,7 +567,7 @@ class ProductController extends Controller
     public function convertRequestProductDataToArray($request)
     {
         $data['name'] = $request->name;
-        $data['slug'] = date('d-m-Y') . '-' . time() .'-' . Str::slug($request->name);
+        $data['slug'] = date('d-m-Y') . '-' . time() . '-' . Str::slug($request->name);
         $data['short_des'] = $request->short_des;
         $data['full_des'] = $request->full_des;
         $data['order_note'] = $request->order_note;

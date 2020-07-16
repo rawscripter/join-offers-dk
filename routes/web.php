@@ -25,9 +25,20 @@ Route::get('/admin', function () {
 
 
 // to load admin dashboard
-Route::get('/test/order', function () {
-    $order = Order::latest()->first();
-    return  $order->orderVariations();
+Route::get('/test/graph', function () {
+//    $order = Order::latest()->first();
+//    return  $order->orderVariations();
+    $product = Product::where('event_id', '848ZNOAI')->first();
+//    return$product;
+    $data = [];
+    foreach ($product->orders as $ket => $order) {
+        $temp['price'] = $order->current_price;
+        $temp['order'] = $ket;
+        array_push($data, $temp);
+        $temp = [];
+    }
+    return $data;
+
 
 });
 

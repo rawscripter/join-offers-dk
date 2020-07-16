@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'customer'], function () {
     Route::get('/orders', 'OrderController@customerOrders');
     Route::get('/dashboard/data', 'CustomerDashboardController@adminDashboardData');
-
+    Route::get('/product/{eventID}/graph', 'GraphController@priceFallGraph');
 });
 
 Route::get('/user/total/favourites', 'ProductController@userFavourites');

@@ -39,17 +39,17 @@
                         height: 350,
                         type: 'line',
                         zoom: {
-                            enabled: false
+                            enabled: true
                         }
                     },
                     dataLabels: {
-                        enabled: false
+                        enabled: true
                     },
                     stroke: {
                         curve: 'straight'
                     },
                     title: {
-                        text: 'Product Trends by Month',
+                        text: 'Product Price fall by Order',
                         align: 'left'
                     },
                     grid: {
@@ -59,14 +59,37 @@
                         },
                     },
                     xaxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                        categories: [],
                     }
                 },
                 series: [{
-                    name: "Desktops",
-                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                    name: "Price",
+                    data: []
                 }],
             }
+        },
+        methods: {
+            getGraphValues(eventID) {
+                axios.get(`${APP_URL}/api/customer/product/${eventID}/graph`)
+                    .then(res => {
+
+
+                        this.chartOptions = {
+                            ...this.chartOptions, ...{
+                                xaxis: {
+                                    categories: [...res.data.order]
+                                }
+                            }
+                        }
+
+                        this.series = [{
+                            data: res.data.price
+                        }]
+                    }).catch(err => console.log(err))
+            }
+        },
+        created() {
+            this.getGraphValues(this.$route.params.product)
         }
     }
 </script>

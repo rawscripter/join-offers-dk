@@ -98,11 +98,9 @@
                                                         <label
                                                             @click="changeProductPriceOnVariationChange(variation.id,option.id,option.price)"
                                                             class="button-label" :for="`radio-btn-${option.id}`">
-                                                            <span> {{option.name}} +{{option.price}}kr</span>
+                                                            <span> {{option.name}}  <span v-if="option.price >0">+{{option.price}}kr</span></span>
                                                         </label>
                                                     </div>
-
-
                                                 </td>
                                             </tr>
 

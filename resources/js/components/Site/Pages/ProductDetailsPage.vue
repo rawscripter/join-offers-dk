@@ -78,6 +78,7 @@
             this.isLoading = true;
             this.getProduct(this.$route.params.slug);
             this.getRelatedProducts(this.$route.params.slug);
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
 
         },
     }

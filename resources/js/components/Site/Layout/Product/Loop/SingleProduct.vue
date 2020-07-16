@@ -161,7 +161,9 @@
                 </h5>
                 <h6>Startpris </h6>
                 <h5>
-                    <del>{{product.offer_price}} Kr</del>
+                    <span v-if="product.current_price != product.offer_price"> <del>{{product.offer_price}} Kr-</del></span>
+                    <span v-else><h5>{{product.offer_price}} Kr</h5></span>
+
                 </h5>
                 <h6>Du sparer </h6>
                 <button class="btn btn-success btn-sm">{{product.saving_percentage}}%</button>
@@ -427,7 +429,8 @@
         flex: 1 1;
         font-weight: 500;
     }
-    .product_name_hight{
+
+    .product_name_hight {
         height: 2.5rem;
     }
 

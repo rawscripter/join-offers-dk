@@ -32,6 +32,8 @@ import PrroductGraph from "../components/Site/Pages/Customer/PrroductGraph";
 import FinalCheckoutPage from "../components/Site/Pages/FinalCheckoutPage";
 //importing components
 Vue.use(VueRouter);
+
+
 const routes = [
     // routes for admin dashboard
     {
@@ -322,11 +324,16 @@ const routes = [
 
 ];
 const router = new VueRouter({
-    routes,
+    scrollBehavior(to, from, savedPosition) {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        return {x: 0, y: 0};
+    },
     mode: 'history',
-    hashbang: true
+    hashbang: true,
+    routes,
 });
 router.beforeEach((to, from, next) => {
+
     if (to.matched.some(record => record.meta.requireAuth)) {
         // this route requires auth, check if logged in
         // if not, redirect to login page.
@@ -356,5 +363,6 @@ router.beforeEach((to, from, next) => {
         next(); // make sure to always call next()!
     }
 })
+
 
 export default router;
