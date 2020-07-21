@@ -3,7 +3,9 @@
         <!-- Primary carousel image -->
 
         <div class="show">
-            <img :src="displayProductImage" id="mainImage" style="display:block; width:80%; height:80%; margin:auto;">
+            <img :src="displayProductImage" id="mainImage" alt="Product Image"
+                 style="display:block; width:80%; height:80%; margin:auto;">
+
         </div>
         <!-- Secondary carousel image thumbnail gallery -->
         <div v-if="hasImages" class="small-img">
@@ -21,9 +23,9 @@
         <div class="timer text-center mt-2 mb-2">
             <vac v-if="isOfferTimeStarted" :end-time="new Date(product.expire_date)">
                 <div
-                        class="timer-area d-flex justify-content-center mt-3 mb-3"
-                        slot="process"
-                        slot-scope="{ timeObj }">
+                    class="timer-area d-flex justify-content-center mt-3 mb-3"
+                    slot="process"
+                    slot-scope="{ timeObj }">
                     <div class="clock">
                         <div class="well top-pane">
                             <div id="days-text" class="text">Dage</div>
