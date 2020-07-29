@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -21,5 +22,12 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function runningProducts()
+    {
+        return $this->hasMany(Product::class)
+            ->where('is_archive', 0)
+            ->where('expire_date', '>', Carbon::now());
     }
 }

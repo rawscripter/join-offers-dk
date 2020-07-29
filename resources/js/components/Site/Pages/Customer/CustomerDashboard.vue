@@ -17,33 +17,57 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-lg-3 wow bounceIn">
+                            <router-link tag="div" to="/customer/orders?type=running"
+                                         class="col-md-3 col-lg-3 wow bounceIn cp">
                                 <div class="shadow  border-bottom border-active">
                                     <div class="card-body text-center">
                                         <h2 class="text-muted"><strong>{{dashboardData.activeOrders}}</strong></h2>
                                         <h5 class="text-muted"><strong>Aktive begivenheder</strong></h5>
                                     </div>
                                 </div>
-                            </div>
+                            </router-link>
 
-                            <div class="col-md-3 col-lg-3 wow bounceIn">
+                            <router-link tag="div" to="/customer/complete/orders?type=completed"
+                                         class="col-md-3 col-lg-3 wow bounceIn cp">
                                 <div class="shadow  border-bottom border-green">
                                     <div class="card-body text-center">
                                         <h2 class="text-muted"><strong>{{dashboardData.completedOrders}}</strong></h2>
                                         <h5 class="text-muted"><strong>Fuldførte begivenheder</strong></h5>
                                     </div>
                                 </div>
-                            </div>
+                            </router-link>
 
-                            <div class="col-md-3 col-lg-3 wow bounceIn">
+                            <router-link tag="div" to="/customer/canceled/orders?type=canceled"
+                                         class="col-md-3 col-lg-3 wow bounceIn cp">
                                 <div class="shadow  border-bottom border-red">
                                     <div class="card-body text-center">
                                         <h2 class="text-muted"><strong>{{dashboardData.canceledOrders}}</strong></h2>
                                         <h5 class="text-muted"><strong>Annullerede begivenheder</strong></h5>
                                     </div>
                                 </div>
-                            </div>
-            
+                            </router-link>
+
+                            <router-link tag="div" to="/favourites"
+                                         class="col-md-3 col-lg-3 wow bounceIn cp">
+                                <div class="shadow border-bottom border-pink">
+                                    <div class="card-body text-center">
+                                        <h2 class="text-muted"><strong>{{dashboardData.totalFavourites}}</strong></h2>
+                                        <h5 class="text-muted"><strong>Total Favourites Events</strong></h5>
+                                    </div>
+                                </div>
+                            </router-link>
+
+                            <router-link tag="div" to="/reminder-events"
+                                         class="col-md-3 col-lg-3 wow bounceIn cp">
+                                <div class="shadow border-bottom border-pink">
+                                    <div class="card-body text-center">
+                                        <h2 class="text-muted"><strong>{{dashboardData.totalReminders}}</strong></h2>
+                                        <h5 class="text-muted"><strong>Total Reminder Events</strong></h5>
+                                    </div>
+                                </div>
+                            </router-link>
+
+
                             <div class="col-md-3 col-lg-3 mt-4 wow bounceIn">
                                 <div class="shadow border-bottom border-pink">
                                     <div class="card-body text-center">
@@ -52,22 +76,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-lg-3 mt-4 wow bounceIn">
-                                <div class="shadow border-bottom border-pink">
-                                    <div class="card-body text-center">
-                                        <h2 class="text-muted"><strong>{{dashboardData.totalFavourites}}</strong></h2>
-                                        <h5 class="text-muted"><strong>Total Favourites Events</strong></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3 mt-4 wow bounceIn">
-                                <div class="shadow border-bottom border-pink">
-                                    <div class="card-body text-center">
-                                        <h2 class="text-muted"><strong>{{dashboardData.totalReminders}}</strong></h2>
-                                        <h5 class="text-muted"><strong>Total Reminder Events</strong></h5>
-                                    </div>
-                                </div>
-                            </div>
+
 
                         </div>
                     </div>
@@ -124,7 +133,6 @@
     .border-bottom {
         border-bottom: 4px solid #dee2e6 !important;
         opacity: .6;
-        cursor: pointer;
     }
 
     .border-theme {
@@ -145,5 +153,9 @@
 
     .border-green {
         border-color: green !important;
+    }
+
+    .cp {
+        cursor: pointer;
     }
 </style>

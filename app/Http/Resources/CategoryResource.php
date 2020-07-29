@@ -21,6 +21,7 @@ class CategoryResource extends JsonResource
             'slug' => $this->slug,
             'created_at' => $this->created_at->format('d F Y'),
             'userId' => $this->user->id,
+            'total_products' => $this->runningProducts->count(),
             'user' => $this->user->name
         ];
     }

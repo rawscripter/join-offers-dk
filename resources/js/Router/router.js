@@ -30,6 +30,7 @@ import FilterPage from "../components/Site/Pages/FilterPage";
 import RequestsIndex from "../components/Admin/BodyComponents/BodyParts/Request/RequestsIndex";
 import PrroductGraph from "../components/Site/Pages/Customer/PrroductGraph";
 import FinalCheckoutPage from "../components/Site/Pages/FinalCheckoutPage";
+import CustomerReminderProductPage from "../components/Site/Pages/CustomerReminderProductPage";
 //importing components
 Vue.use(VueRouter);
 
@@ -238,6 +239,13 @@ const routes = [
         component: FavouriteProudctsPage,
         meta: {
             title: 'Favourite Products'
+        }
+    }, {
+        path: '/reminder-events',
+        name: 'reminder-events',
+        component: CustomerReminderProductPage,
+        meta: {
+            title: 'Reminder Products'
         }
     },
     {

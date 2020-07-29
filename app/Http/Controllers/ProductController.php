@@ -214,6 +214,26 @@ class ProductController extends Controller
         return response()->json($res);
     }
 
+    public function userReminderProductsForSite(Request $request)
+    {
+
+        $user = Auth::guard('api')->user();
+
+        if ($user) {
+            $res['status'] = 200;
+            $res['message'] = 'All Categories';
+            $products = $user->reminderProducts;
+            $res['products'] = ProductResource::collection($products);
+            $res['lastPage'] = 1;
+        } else {
+            $res['status'] = 201;
+            $res['message'] = 'Please login first.';
+        }
+
+
+        return response()->json($res);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

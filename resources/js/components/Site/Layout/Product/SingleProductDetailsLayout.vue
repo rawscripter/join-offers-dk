@@ -2,14 +2,20 @@
     <div class="product_view_main ">
         <!-- Primary carousel image -->
 
-        <div class="show">
+        <div class="show full-product-image">
+            <img v-if="hasImages" @click="previousSliderImage" src="/images/icons/next-icon.png" class="icon-left"
+                 alt="" id="prev-img">
+
             <img :src="displayProductImage" id="mainImage" alt="Product Image"
                  style="display:block; width:80%; height:80%; margin:auto;">
 
+            <img v-if="hasImages" @click="nextSliderImage" src="/images/icons/next-icon.png" class="icon-right" alt=""
+                 id="next-img">
         </div>
+
+
         <!-- Secondary carousel image thumbnail gallery -->
         <div v-if="hasImages" class="small-img">
-            <img @click="previousSliderImage" src="/images/icons/next-icon.png" class="icon-left" alt="" id="prev-img">
             <div class="image-container">
                 <img v-for="(image,index) in product.productImages"
                      :src="image.thumbImage"
@@ -17,7 +23,6 @@
                      :class="{active : active_img === index}"
                      class="show-small-img" alt="">
             </div>
-            <img @click="nextSliderImage" src="/images/icons/next-icon.png" class="icon-right" alt="" id="next-img">
         </div>
 
         <div class="timer text-center mt-2 mb-2">
@@ -178,4 +183,34 @@
         border: 2px solid #ff500d;
     }
 
+    img#prev-img {
+        position: absolute;
+        top: 50%;
+        left: 50px;
+        transform: translate(0, -50%) rotate(180deg);
+        cursor: pointer;
+    }
+
+    img#next-img {
+        position: absolute;
+        top: 50%;
+        right: 50px;
+        transform: translate(0, -50%);
+        cursor: pointer;
+
+    }
+
+    @media (max-width: 800px) {
+        img#prev-img {
+            left: 0;
+        }
+
+        img#next-img {
+            right: 0;
+        }
+    }
+
+    .full-product-image {
+        position: relative;
+    }
 </style>

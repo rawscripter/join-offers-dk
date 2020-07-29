@@ -6,8 +6,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <button class="navbar-toggler"  @click="showFilterOnMobile"  type="button"  id="openSidebar"
-                >
+            <button class="navbar-toggler" @click="showFilterOnMobile" type="button" id="openSidebar"
+            >
                 <img src="/images/icons/filter.png" width="24" alt="">
             </button>
 
@@ -20,7 +20,8 @@
                     </li>
 
                     <li class="nav-item" v-for="category in categories">
-                        <router-link :to="{name:'category-product',params:{category:category.slug}}" class="nav-link">
+                        <router-link v-if="category.total_products > 0"
+                                     :to="{name:'category-product',params:{category:category.slug}}" class="nav-link">
                             <img v-if="category.icon" :src="`/images/icons/${category.icon}`" width="24" alt="ICON">
                             {{category.name}}
                         </router-link>
@@ -32,7 +33,8 @@
 </template>
 
 <script>
-import ProductFilter from "../SideBar/ProductFilter";
+    import ProductFilter from "../SideBar/ProductFilter";
+
     export default {
         name: "SiteNavBar",
         data() {

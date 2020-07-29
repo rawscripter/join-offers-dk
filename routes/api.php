@@ -87,6 +87,7 @@ Route::get('/expired/products', 'ProductController@expiredProducts');
 
 
 Route::get('/favourites', 'ProductController@userFavouriteProductsForSite');
+Route::get('/reminders-events', 'ProductController@userReminderProductsForSite');
 Route::get('/product/{slug}', 'ProductController@showProductForSite');
 
 // favourite list

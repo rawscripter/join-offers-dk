@@ -8,8 +8,8 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 // window.APP_URL = 'http://joinoffers.dan:8081';
-// window.APP_URL = "http://laravu.test";
-window.APP_URL = "https://joinoffers.dk";
+window.APP_URL = "http://laravu.test";
+// window.APP_URL = "https://joinoffers.dk";
 window.CURRENCY = "dkk";
 
 import VueCookies from "vue-cookies";

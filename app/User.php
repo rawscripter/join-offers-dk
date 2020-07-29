@@ -94,4 +94,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProductReminder::class);
     }
+
+
+    public function reminderProducts()
+    {
+        return $this->belongsToMany(Product::class,'product_reminders');
+    }
 }
